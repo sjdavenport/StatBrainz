@@ -1,1 +1,1 @@
-# BrainStat
+# MyBrainStats
