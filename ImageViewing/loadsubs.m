@@ -1,4 +1,4 @@
-function data = loadsubs( subjsubset, directory, usenif, as3D, subfilenames  )
+function [ data, bounded_mask ] = loadsubs( subjsubset, directory, usenif, mask, as3D, subfilenames  )
 % LOADSUBS( subjsubset, directory, usenif, subfilenames, as3D )
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -16,7 +16,12 @@ function data = loadsubs( subjsubset, directory, usenif, as3D, subfilenames  )
 % data          a 
 %--------------------------------------------------------------------------
 % EXAMPLES
-% exsubs = loadsubs( 3:5,'C:/Users/12Sda/davenpor/data/RestingStateData/Oulu/', 0, 1);
+% exsubs = loadsubs( 3:5,'C:/Users/12Sda/davenpor/data/RestingStateData/Oulu/', 0 );
+%
+% %As 3D
+% MNImask = imgload('MNImask');
+% exsubs = loadsubs( 3:5,'C:/Users/12Sda/davenpor/data/RestingStateData/Oulu/', 0, MNImask, 1 );
+% imagesc(exsubs(:,:,50,1))
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
@@ -29,32 +34,45 @@ end
 if ~exist('as3D', 'var')
     as3D = 0;
 end
+if ~exist('mask', 'var')
+    mask = imgload('MNImask');
+end
 
-std_size = [91,109,91];
+% Obtain the bounded mask
+bounds = mask_bounds( mask );
+bounded_mask = mask(bounds{:});
+
+% Obtain the size of the bounded mask
+Dim = size(bounded_mask);
+
+% Obtain the number of subjects
 nsubj = length(subjsubset);
 
 if as3D == 1
-    data = zeros([std_size, nsubj]);
+    data = zeros([Dim, nsubj]);
     if usenif == 1
         for I = 1:length(subjsubset)
             nif = nifti([directory,subfilenames{subjsubset(I)}]);
-            data(:,:,:,I) = nif.dat(:,:,:);
-        end
-    else
-        for I = 1:length(subjsubset)
-            data(:,:,:,I) = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
-        end
-    end
-else
-    data = zeros([prod(std_size), nsubj]);
-    if usenif == 1
-        for I = 1:length(subjsubset)
-            nif = nifti([directory,subfilenames{subjsubset(I)}]);
-            data(:,I) = nif.dat(:);
+            data(:,:,:,I) = nif.dat(bounds{:});
         end
     else
         for I = 1:length(subjsubset)
             img = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
+            data(:,:,:,I) = img(bounds{:});
+        end
+    end
+else
+    data = zeros([prod(Dim), nsubj]);
+    if usenif == 1
+        for I = 1:length(subjsubset)
+            nif = nifti([directory,subfilenames{subjsubset(I)}]);
+            bounded_nif = nif.dat(bounds{:});
+            data(:,I) = bounded_nif(:);
+        end
+    else
+        for I = 1:length(subjsubset)
+            img = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
+            img = img(bounds{:});
             data(:,I) = img(:);
         end
     end

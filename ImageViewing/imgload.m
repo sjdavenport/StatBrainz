@@ -13,8 +13,8 @@ function img = imgload( filename, use_nif )
 %--------------------------------------------------------------------------
 % SEE ALSO
 % spm_read_vols, spm_vol
-global CSI mbsloc
-mbs_img_loc = [mbsloc, 'BrainImages/'];
+global CSI bsloc
+mbs_img_loc = [bsloc, 'BrainImages/'];
 
 if strcmp(filename(end-2:end), '.gz')
     use_nif = 0;
