@@ -1,4 +1,4 @@
-function [ data, bounded_mask ] = loadsubs( subjsubset, directory, usenif, mask, as3D, subfilenames  )
+ function [ data, bounded_mask ] = loadsubs( subjsubset, directory, usenif, mask, as3D, subfilenames  )
 % LOADSUBS( subjsubset, directory, usenif, subfilenames, as3D )
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -22,6 +22,8 @@ function [ data, bounded_mask ] = loadsubs( subjsubset, directory, usenif, mask,
 % MNImask = imgload('MNImask');
 % exsubs = loadsubs( 3:5,'C:/Users/12Sda/davenpor/data/RestingStateData/Oulu/', 0, MNImask, 1 );
 % imagesc(exsubs(:,:,50,1))
+%
+% loadsubs( 1:2, '/vols/Scratch/ukbiobank/nichols/SelectiveInf/feat_runs/RS_2Block_warped/', 0, MNImask, 1 )
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
