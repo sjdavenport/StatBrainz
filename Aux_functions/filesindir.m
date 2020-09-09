@@ -18,6 +18,9 @@ function listfiles = filesindir( directory, pattern, hiddenfiles )
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
+if ~exist( 'directory', 'var')
+    directory = './';
+end
 if nargin < 2
     pattern = NaN;
 end
