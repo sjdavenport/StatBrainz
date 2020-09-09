@@ -45,5 +45,10 @@ rejection_ind(rejection_locs) = 1;
 % Reshape sig_loc_ind so that it has the same size as pvalues
 rejection_ind = reshape(rejection_ind, Dim);
 
+% Set the number of rejections to be zero if none are found!
+if isempty(nrejections)
+    nrejections = 0;
+end
+
 end
 
