@@ -10,8 +10,14 @@ nvals = 100;
 normal_rvs = normrnd(0,1,1,nvals);
 normal_rvs(1:20) = normal_rvs(1:20) + 2;
 
-pvalues = 1 - normcdf(normal_rvs);
+pvalues = 1 - normcdf(normal_rvs, 0.5);
 [ sig_locs, nrejections ] = fdrBH(pvalues)
+
+
+%%
+normal_rvs = normal_rvs(:);
+pvalues = 1 - normcdf(normal_rvs);
+[ sig_ind, nrejections, sig_locs ] = fdrBH(pvalues, 0.5)
 
 %% Checking FDR control
 niters = 10000;

@@ -1,5 +1,5 @@
 function listfiles = filesindir( directory, pattern, hiddenfiles )
-% FILESINDIR( directory pattern, hiddenfiles ) saves all of the names of 
+% FILESINDIR( directory, pattern, hiddenfiles ) saves all of the names of 
 % the files in a given directory in an array.
 %--------------------------------------------------------------------------
 % ARGUMENTS

@@ -23,6 +23,18 @@ elseif nargin < 2
     use_nif = 1;
 end
 
+if iscell(filename)
+    nsubj = length(filename);
+    first_subject = imgload(filename{1}, use_nif );
+    mask_size = size(first_subject);
+    img = zeros([mask_size, nsubj]);
+    img(:,:,:,1) = first_subject;
+    for I = 2:nsubj
+        img(:,:,:,I) = imgload(filename{I}, use_nif );
+    end
+    return
+end
+
 if strcmp(filename(end-3:end), '.nii')
     filename = filename(1:end-4);
 end
