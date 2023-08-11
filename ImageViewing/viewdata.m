@@ -13,7 +13,6 @@ function viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, a
 %               color to be applied on the region_mask
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
 % % Brain imaging example
 % MNImask = imgload('MNImask');
 % mask2D = MNImask(:,:,50);
