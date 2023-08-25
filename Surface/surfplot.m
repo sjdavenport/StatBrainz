@@ -1,5 +1,5 @@
-function [ out ] = vec_data( data, mask )
-% NEWFUN
+function surfplot( path4gifti, surface_data, view_vec )
+% SURFPLOT
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
@@ -9,10 +9,7 @@ function [ out ] = vec_data( data, mask )
 % 
 %--------------------------------------------------------------------------
 % EXAMPLES
-% a = randn(10,10,50);
-% vec_data(a, ones(10,10))
-% a = randn(100,50);
-% vec_data(a, ones(1,100))
+% See test_surfplot.m
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
@@ -22,25 +19,24 @@ function [ out ] = vec_data( data, mask )
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'opt1', 'var' )
+if ~exist( 'view_vec', 'var' )
    % Default value
-   opt1 = 0;
+   view_vec = [-89, 16];
 end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-s_data = size(data);
-D = length(s_data) - 1;
-nsubj = s_data(end);
-out = zeros(sum(mask(:)), nsubj);
-
-variable_index = repmat( {':'}, 1, D );
-
-for I = 1:nsubj
-    variable_index{D+1} = I;
-    img = data(variable_index{:});
-    out(:,I) = img(mask>0);
-end
+g = gifti(path4gifti);
+vertices = double(g.vertices);
+X = vertices(:,1);
+Y = vertices(:,2);
+Z = vertices(:,3);
+trisurf(double(g.faces), X, Y, Z,'EdgeAlpha', 0.05);
+view(view_vec)
+xlim([min(X)-1, max(X)+1])
+ylim([min(Y)-1, max(Y)+1])
+zlim([min(Z)-1, max(Z)+1])
+axis off
 
 end
 
