@@ -1,4 +1,4 @@
-function [rejection_ind, n_rejections] = imBH( data, mask )
+function [rejection_ind, n_rejections] = imBH_data( data, mask )
 % imBH(data, mask) performs two sided multiple hypothesis correction using
 % the Benjamini-Hochberg (BH) procedure on the data and mask provided.
 % 
@@ -15,7 +15,7 @@ function [rejection_ind, n_rejections] = imBH( data, mask )
 % EXAMPLES
 % data = wfield([10,10,20]).field;
 % mask = peakgen( 1, 5, 3, [10,10]) > 0.5;
-% rejection_ind = imBH( data, mask )
+% rejection_ind = imBH_data( data, mask )
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
