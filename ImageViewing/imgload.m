@@ -54,7 +54,9 @@ if use_nif == 1
             nif = nifti( [filename,'.nii'] ) ;
         end
     end
-    img = nif.dat(:,:,:);
+    variable_index = repmat({':'}, 1, length(size(nif.dat)));
+%     img = nif.dat(:,:,:,:);
+    img = nif.dat(variable_index{:});
 else
     try
         img  = spm_read_vols(spm_vol(strcat(mbs_img_loc, filename, '.nii.gz')));
