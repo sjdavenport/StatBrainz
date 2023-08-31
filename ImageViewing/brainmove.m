@@ -1,4 +1,4 @@
-function [ plane, clim ] = viewbrain( brain, plane, mask, padding, color_bar, clim )
+function [ plane, clim ] = brainmove( brain, plane, mask, padding, color_bar, clim )
 % NEWFUN serves as a function template.
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -22,8 +22,8 @@ function [ plane, clim ] = viewbrain( brain, plane, mask, padding, color_bar, cl
 % EXAMPLES
 % brain = imgload('fullmean');
 % mask = imgload('MNImask')
-% [plane, clim] = viewbrain(brain, [0,0,20], mask)
-% [plane, clim] = viewbrain(brain, [0,0,20], mask, 10, 1, [0,1])
+% [plane, clim] = brainmove(brain, [0,0,20], mask)
+% [plane, clim] = brainmove(brain, [0,0,20], mask, 10, 1, [0,1])
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
@@ -93,10 +93,10 @@ value = double(get(gcf,'CurrentCharacter'));
 
 if value == 30
     plane = plane - padding*plane_addition;
-    [plane, clim] = viewbrain( brain, plane + plane_addition, mask, 0, color_bar, clim );
+    [plane, clim] = brainmove( brain, plane + plane_addition, mask, 0, color_bar, clim );
 elseif value == 31
     plane = plane - padding*plane_addition;
-    [plane, clim] = viewbrain( brain, plane - plane_addition, mask, 0, color_bar, clim );
+    [plane, clim] = brainmove( brain, plane - plane_addition, mask, 0, color_bar, clim );
 end
 
 end

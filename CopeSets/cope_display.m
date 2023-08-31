@@ -109,7 +109,7 @@ if ~isnan(truth)
 %     im4 = imagesc(whiteset);
 %     set(im4,'AlphaData',true_boundary);
 end
-
+axis off
 % set(gcf, 'position', [0,0,1500,1500])
 
 end

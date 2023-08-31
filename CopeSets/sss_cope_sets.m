@@ -182,4 +182,6 @@ diff_val = std_multipler*observed_std;
 lower_set  = observed_mean >= thr - diff_val;
 upper_set  = observed_mean >= thr + diff_val;
 
+lower_set  = lower_set.*mask;
+upper_set = upper_set.*mask;
 end

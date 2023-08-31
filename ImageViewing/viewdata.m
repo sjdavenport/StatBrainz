@@ -1,4 +1,4 @@
-function viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, alpha )
+function viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, alpha_val )
 % VIEWDATA - function to visualize a data matrix with a binary brain mask 
 % and a binary region mask overlayed on top
 %
@@ -36,15 +36,19 @@ else
     useregionmasks = 1;
 end
 
-if ~exist('alpha', 'var')
-    alpha = ones(1, length(region_masks));
+if ~exist('alpha_val', 'var') || isempty(alpha_val)
+    alpha_val = ones(1, length(region_masks));
+end
+
+if length(alpha_val) == 1
+    alpha_val =  repmat(alpha_val, 1, length(region_masks));
 end
 
 if ~iscell(region_masks)
     region_masks = {region_masks};
 end
 
-if ~exist('colors2use', 'var')
+if ~exist('colors2use', 'var') || isempty(colors2use)
     colors2use = repmat({'white'}, 1, length(region_masks));
 end
 
@@ -64,8 +68,10 @@ if exist('bounds', 'var')
     if ~isempty(bounds)
         data = data(bounds{:});
         brain_mask = brain_mask(bounds{:});
-        for I = 1:length(region_masks)
-            region_masks{I} = region_masks{I}(bounds{:});
+        if ~isnan(region_masks{1})
+            for I = 1:length(region_masks)
+                region_masks{I} = region_masks{I}(bounds{:});
+            end
         end
     end
 end
@@ -99,7 +105,7 @@ if useregionmasks
     for I = 1:length(region_masks)
         colored_region_mask = colorRegion(region_masks{I}, colors2use{I});
         im2 = imagesc(colored_region_mask);
-        set(im2,'AlphaData',alpha(I)*region_masks{I});
+        set(im2,'AlphaData',alpha_val(I)*region_masks{I});
         hold on
     end
 end
