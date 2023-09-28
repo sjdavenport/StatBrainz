@@ -62,6 +62,7 @@ brain_mask2D = squeeze(brain_mask(index{:}));
 
 viewdata(brain_im2D, brain_mask2D, region_masks, colors2use, rotate, bounds, alpha_val); 
 colormap('gray')
+axis image
 
 end
 

@@ -77,6 +77,7 @@ end
 imagesc(slice, clim)
 hold on
 im2 = imagesc(color);
+
 set(im2,'AlphaData',1-slice_mask);
 
 if color_bar
@@ -98,6 +99,7 @@ elseif value == 31
     plane = plane - padding*plane_addition;
     [plane, clim] = brainmove( brain, plane - plane_addition, mask, 0, color_bar, clim );
 end
+
 
 end
 

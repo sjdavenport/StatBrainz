@@ -1,4 +1,4 @@
-function [ y ] = apower( x, power )
+function [ out ] = expand2MNI( im, mask, padding )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -9,11 +9,7 @@ function [ y ] = apower( x, power )
 % 
 %--------------------------------------------------------------------------
 % EXAMPLES
-% x = -50:0.1:50;
-% y = apower(x);
-% plot(x,y)
-% x = randn(1,10000);
-% histogram(apower(x));
+% 
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
@@ -23,19 +19,21 @@ function [ y ] = apower( x, power )
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'power', 'var' )
+if ~exist( 'padding', 'var' )
    % Default value
-   power = 1/2;
+   padding = 0;
 end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-xposlocs = x >= 0;
-xneglocs = x < 0;
+bounds = mask_bounds(mask,padding);
+D = length(size(im));
+if length(bounds) == 3 && D == 2
+    bounds = bounds(1:2);
+end
 
-y = zeros(size(x));
-y(xposlocs) = x(xposlocs).^power;
-y(xneglocs) = -(-x(xneglocs)).^power;
+out = zeros([91,109]);
+out(bounds{:}) = im;
 
 end
 
