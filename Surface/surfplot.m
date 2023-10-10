@@ -1,4 +1,4 @@
-function surfplot( path4gifti, surface_data, seeback, edgealpha, view_vec )
+function surfplot( path4gifti, surface_data, seeback, edgealpha, docamlight, view_vec )
 % SURFPLOT
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -38,6 +38,11 @@ if ~exist( 'edgealpha', 'var' )
    edgealpha = 0.05;
 end
 
+if ~exist( 'docamlight', 'var' )
+   % Default value
+   docamlight = 1;
+end
+
 if nargin < 2
    % Default value
    use_surface_data = 0;
@@ -54,10 +59,10 @@ X = vertices(:,1);
 Y = vertices(:,2);
 Z = vertices(:,3);
 if use_surface_data == 1
-    trisurf(double(g.faces), X, Y, Z,'FaceColor', 'interp', ...
+    ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'interp', ...
         'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
 else
-    trisurf(double(g.faces), X, Y, Z,'FaceColor', 'None', 'EdgeAlpha', edgealpha);
+    ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'None', 'EdgeAlpha', edgealpha);
 end
 xlim([min(X)-1, max(X)+1])
 ylim([min(Y)-1, max(Y)+1])
@@ -65,6 +70,18 @@ zlim([min(Z)-1, max(Z)+1])
 axis off
 
 view(view_vec)
+
+if docamlight
+    lighting gouraud;
+    material dull;
+    shading flat;
+%     camlight('headlight')
+%     camlight('headlight')
+    camlight('headlight')
+% %     camlight('right')
+%     light
+end
+set(ptru,'AmbientStrength',0.5)
 
 end
 

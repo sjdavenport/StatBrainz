@@ -3,6 +3,8 @@ function [ lower_band, upper_band ] = scopes( data, mask, nboot, alpha, show_loa
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+% data: a dim by nsubj 
+% mask: a 0/1 array of size dim
 % Optional
 %--------------------------------------------------------------------------
 % OUTPUT

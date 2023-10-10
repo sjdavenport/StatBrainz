@@ -1,4 +1,4 @@
-function viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, alpha_val )
+function viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, alpha_val)
 % VIEWDATA - function to visualize a data matrix with a binary brain mask 
 % and a binary region mask overlayed on top
 %
@@ -98,7 +98,9 @@ elseif rotate == 4
     end
 end
 
-imagesc(data);
+data_mask = isnan(data);
+im1 = imagesc(nan2zero(data), [0, 0.1849]);
+set(im1,'AlphaData',1-data_mask);
 hold on
 
 if useregionmasks
