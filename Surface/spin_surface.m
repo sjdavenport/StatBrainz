@@ -13,6 +13,7 @@ function [ left_rotations,  right_rotations] = ...
 %   rightdata - Data from the right hemisphere.
 %
 % Optional:
+%   spherepathloc  -  a string giving the location of a gifti sphere object
 %   nperm - Number of permutations (default is 1000).
 %   show_loader - Flag for displaying progress (default is 1).
 %--------------------------------------------------------------------------
@@ -95,6 +96,9 @@ for j = 2:nperm
     left_rotations = [left_rotations; leftdata(rotation_idx)'];
     right_rotations = [right_rotations; rightdata(rotation_idx)'];
 end
+
+left_rotations = left_rotations';
+right_rotations = right_rotations';
 
 end
 
