@@ -1,6 +1,5 @@
-function rho_store = spin_test( X, Y, spherepathloc, nperm, show_loader )
-% NEWFUN
-% Need to pre-multiply by the medial wall beforehand basically
+function surfscreen
+% fullscreen makes the plot fullscreen
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
@@ -27,14 +26,8 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-% Generate spins of the first image
-[ left_rotations,  right_rotations] = ...
-             spin_surface( X{1}, X{2}, spherepathloc, nperm, show_loader );
-         
-rho_store = zeros(1, nperm);
-for I = 1:nperm
-    rho_store(I) = corr([left_rotations(:,I);right_rotations(:,I)],[Y{1};Y{2}], 'rows','complete');
-end
+% set(gcf, 'position', [0,0,1500,642])
+set(gcf, 'position', [ 186.3333   41.6667  837.3333  599.3333])
 
 end
 

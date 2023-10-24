@@ -59,6 +59,7 @@ rng(0);
 %Use rng to initialize the random generator for reproducible results.
 
 % Initialize matrices to store the rotated data
+% left_rotations = zeros(length(leftdata), nperm);
 left_rotations = leftdata';
 right_rotations = rightdata';
 

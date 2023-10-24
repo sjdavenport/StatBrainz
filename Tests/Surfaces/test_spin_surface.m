@@ -31,6 +31,7 @@ surfscreen
 surfplot(spherepathloc, smoothX_left)
 spherescreen
 saveim('spherenoise')
+
 %%
 spherepathloc = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_sphere.surf.gii';
 [ left_rotations,  right_rotations] = spin_surface( smoothX_left, smoothX_right, spherepathloc, 20 );

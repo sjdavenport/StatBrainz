@@ -49,6 +49,7 @@ if nargin < 2
    warning('surface_data not included - plotting the empty mesh')
 else
    use_surface_data = 1;
+   surface_data = double(surface_data);
 end
 
 %%  Main Function Loop
@@ -59,7 +60,9 @@ X = vertices(:,1);
 Y = vertices(:,2);
 Z = vertices(:,3);
 if use_surface_data == 1
-    ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'interp', ...
+%     ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'interp', ...
+%         'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);    
+    ptru = trisurf(double(g.faces), X, Y, Z,...
         'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
 else
     ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'None', 'EdgeAlpha', edgealpha);

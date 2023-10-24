@@ -1,6 +1,5 @@
-function rho_store = spin_test( X, Y, spherepathloc, nperm, show_loader )
+function face_areas = surf_face_area( path4gifti )
 % NEWFUN
-% Need to pre-multiply by the medial wall beforehand basically
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
@@ -20,20 +19,32 @@ function rho_store = spin_test( X, Y, spherepathloc, nperm, show_loader )
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'opt1', 'var' )
-   % Default value
-   opt1 = 0;
-end
+g = gifti(path4gifti);
+vertices = g.vertices;
+faces = g.faces;
+
+% Initialize an array to store the areas of each face
+face_areas = zeros(size(faces, 1), 1);
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-% Generate spins of the first image
-[ left_rotations,  right_rotations] = ...
-             spin_surface( X{1}, X{2}, spherepathloc, nperm, show_loader );
-         
-rho_store = zeros(1, nperm);
-for I = 1:nperm
-    rho_store(I) = corr([left_rotations(:,I);right_rotations(:,I)],[Y{1};Y{2}], 'rows','complete');
+for i = 1:size(faces, 1)
+    % Get the vertices of the current face
+    vertex_indices = faces(i, :);
+    vertices_face = vertices(vertex_indices, :);
+    
+    % Calculate the vectors representing two sides of the triangle
+    side1 = vertices_face(2, :) - vertices_face(1, :);
+    side2 = vertices_face(3, :) - vertices_face(1, :);
+    
+    % Calculate the cross product of the two sides
+    cross_product = cross(side1, side2);
+    
+    % Calculate the area of the triangle
+    area = 0.5 * norm(cross_product);
+    
+    % Store the area in the array
+    face_areas(i) = area;
 end
 
 end

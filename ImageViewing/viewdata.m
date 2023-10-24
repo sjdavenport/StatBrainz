@@ -99,7 +99,8 @@ elseif rotate == 4
 end
 
 data_mask = isnan(data);
-im1 = imagesc(nan2zero(data), [0, 0.1849]);
+% im1 = imagesc(nan2zero(data), [0, 0.1849]);
+im1 = imagesc(nan2zero(data));
 set(im1,'AlphaData',1-data_mask);
 hold on
 

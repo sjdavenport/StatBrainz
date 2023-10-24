@@ -4,6 +4,7 @@ function [ out ] = unwrap( data, mask )
 % ARGUMENTS
 % Mandatory
 %  data is nvox by nsubj
+%  mask is a 3D array
 %--------------------------------------------------------------------------
 % OUTPUT
 % 
