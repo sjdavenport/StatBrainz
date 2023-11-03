@@ -1,4 +1,4 @@
-function viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, alpha_val)
+function viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, alpha_val, outside_color)
 % VIEWDATA - function to visualize a data matrix with a binary brain mask 
 % and a binary region mask overlayed on top
 %
@@ -38,6 +38,10 @@ end
 
 if ~exist('alpha_val', 'var') || isempty(alpha_val)
     alpha_val = ones(1, length(region_masks));
+end
+
+if ~exist('outside_color', 'var')
+    outside_color = 0;
 end
 
 if length(alpha_val) == 1
@@ -124,7 +128,7 @@ end
 % end
 
 % Set the area outside the brain to be black
-color = zeros([size(brain_mask), 3]);
+color = ones([size(brain_mask), 3]).*outside_color;
 im2 = imagesc(color);
 set(im2,'AlphaData',1-brain_mask);
 

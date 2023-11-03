@@ -1,5 +1,5 @@
-function spherescreen(docolorbar)
-% fullscreen makes the plot fullscreen
+function converted_indices = convindall( indices2convert )
+% NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
@@ -9,7 +9,8 @@ function spherescreen(docolorbar)
 % 
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+% convindall({[358390, 358389], 358380})
+% disp(ans{1})
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
@@ -19,19 +20,22 @@ function spherescreen(docolorbar)
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'docolorbar', 'var' )
+if ~iscell(indices2convert)
    % Default value
-   docolorbar = 0;
+   indices2convert = {indices2convert};
 end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-% set(gcf, 'position', [0,0,1500,642])
-if docolorbar
-    set(gcf, 'position', [ 250  41.6667  600  600])
-    colorbar
-else
-    set(gcf, 'position', [ 360.0000   41.6667  533.6667  599.3333])
+
+converted_indices = cell(1, length(indices2convert));
+for I = 1:length(indices2convert)
+    changed = zeros(length(indices2convert{I}), 3);
+    for J = 1:length(indices2convert{I})
+        changed(J,:) = convind(indices2convert{I}(J));
+    end
+    converted_indices{I} = changed;
 end
+
 end
 

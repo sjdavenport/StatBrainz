@@ -1,4 +1,4 @@
-function overlay_brain( slice, padding, region_masks, colors2use, alpha_val, underim, rotate)
+function overlay_brain( slice, padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask)
 % overlay_brain - Overlay region masks on a brain slice image.
 %
 %   overlay_brain(slice, padding, region_masks, colors2use, alpha_val, rotate)
@@ -30,7 +30,10 @@ function overlay_brain( slice, padding, region_masks, colors2use, alpha_val, und
 %   [0, 0, slice] with a padding of 10, red color, transparency of 0.75, and
 %   rotation of 4, you can use the following command:
 %
-%   overlay_brain([0, 0, slice], 10, {WMsurviving_cluster_im(:,:,slice)}, 'red', 0.75, 4)
+%   MNIbrain = imgload('MNIbrain.nii.gz');
+%   MNIbrain = MNIbrain/max(MNIbrain(:));
+%   slice = 45;
+%   overlay_brain([0, 0, slice], 10, {MNIbrain(:,:,slice)> 0.8}, 'red', 0.6, 4)
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
@@ -66,6 +69,10 @@ if ~exist('rotate', 'var')
     rotate = 4;
 end
 
+if ~exist('applybrainmask', 'var')
+    applybrainmask = 1;
+end
+
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 index = repmat({':'}, 1, 3);
@@ -79,8 +86,11 @@ other_indices = setdiff(1:3,index_loc);
 bounds = bounds(other_indices);
 
 brain_im2D = squeeze(brain_im(index{:}));
-brain_mask2D = squeeze(brain_mask(index{:}));
-
+if applybrainmask
+    brain_mask2D = squeeze(brain_mask(index{:}));
+else
+    brain_mask2D = ones(size(squeeze(brain_mask(index{:}))));
+end
 
 % if rotate == 2
 %     imagesc(brain_im_bw')
@@ -110,13 +120,15 @@ if any(isnan(underim(:)))
     hold on
     underim2D = squeeze(underim(index{:}));
     viewdata(underim2D, brain_mask2D, region_masks, colors2use, rotate, bounds, alpha_val);
-    caxis([min(underim2D(:)), max(underim2D(:))])
+    if max(underim2D(:)) > min(underim2D(:))
+        caxis([min(underim2D(:)), max(underim2D(:))])
+    end
 else
     viewdata(brain_im2D, brain_mask2D, region_masks, colors2use, rotate, bounds, alpha_val);
     colormap('gray')
 end
 
 axis image
-
+fullscreen
 end
 

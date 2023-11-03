@@ -1,5 +1,5 @@
-function spherescreen(docolorbar)
-% fullscreen makes the plot fullscreen
+function [ out ] = pan3( img, point, rotate )
+% NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
@@ -19,19 +19,19 @@ function spherescreen(docolorbar)
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'docolorbar', 'var' )
+if ~exist( 'rotate', 'var' )
    % Default value
-   docolorbar = 0;
+   rotate = 4;
 end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-% set(gcf, 'position', [0,0,1500,642])
-if docolorbar
-    set(gcf, 'position', [ 250  41.6667  600  600])
-    colorbar
-else
-    set(gcf, 'position', [ 360.0000   41.6667  533.6667  599.3333])
-end
+subplot(1,3,1)
+overlay_brain([point(1), 0, 0], 10, {squeeze(img(point(1), :,:))}, 'red', 0.6, 0, rotate, 0)
+subplot(1,3,2)
+overlay_brain([0, point(2), 0], 10, {squeeze(img(:,point(2),:))}, 'red', 0.6, 0, rotate, 0)
+subplot(1,3,3)
+overlay_brain([0, 0, point(3)], 10, {squeeze(img(:,:,point(3)))}, 'red', 0.6, 0, rotate, 0)
+fullscreen
 end
 

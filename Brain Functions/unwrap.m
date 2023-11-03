@@ -25,6 +25,13 @@ function [ out ] = unwrap( data, mask )
 
 %%  Check mandatory input and get important constants
 %--------------------------------------------------------------------------
+if iscell(data)
+    out = cell(1,length(data));
+    for I = 1:length(data)
+        out{I} = unwrap(data{I},mask);
+    end
+    return
+end
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
