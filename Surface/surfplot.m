@@ -11,7 +11,7 @@ function surfplot( path4surf, surface_data, seeback, edgealpha, docamlight, view
 % EXAMPLES
 % See test_surfplot.m
 %--------------------------------------------------------------------------
-% AUTHOR: Samuel Davenport
+% Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
 %%  Check mandatory input and get important constants

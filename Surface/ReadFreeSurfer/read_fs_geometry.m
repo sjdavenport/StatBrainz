@@ -1,4 +1,16 @@
 function [vertices, faces, volume_info, create_stamp] = read_fs_geometry(filepath, read_metadata)
+% This code is a modified version of the read_geometry function from the 
+% NiBabel python package which was licensed under the MIT License.
+% Copyright (c) 2009-2019 Matthew Brett <matthew.brett@gmail.com>
+% Copyright (C) 2010-2013 Stephan Gerhard <git@unidesign.ch>
+% Copyright (C) 2006-2014 Michael Hanke <michael.hanke@gmail.com>
+% Copyright (C) 2011 Christian Haselgrove <christian.haselgrove@umassmed.edu>
+% Copyright (C) 2010-2011 Jarrod Millman <jarrod.millman@gmail.com>
+% Copyright (C) 2011-2019 Yaroslav Halchenko <debian@onerussian.com>
+% Copyright (C) 2015-2019 Chris Markiewicz <effigies@gmail.com>
+% Copyright (C) - 2023 - Samuel Davenport <12sdavenport@gmail.com>
+% See [link to MIT License] for more details.
+
     % Read a triangular format Freesurfer surface mesh.
 
     % Default values for optional arguments
