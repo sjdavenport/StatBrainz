@@ -16,7 +16,7 @@ function [vertices, faces, volume_info, create_stamp] = read_fs_geometry(filepat
     magic = fread3(fid);
     
     if isequal(magic, [QUAD_MAGIC; NEW_QUAD_MAGIC; 0]) % Quad file
-        error('I haven''t yet made sure the quad version works yet')
+        error('The quad version doesn''t work yet')
         nvert = fread(fid, 1, 'int32');
         nquad = fread(fid, 1, 'int32');
         if magic(1) == QUAD_MAGIC

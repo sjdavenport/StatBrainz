@@ -59,8 +59,7 @@ if isstruct(path4surf)
 else
     if strcmp(path4surf(end-3:end), '.gii')
         if isempty(which(path4surf))
-            error('You need to install the gifti matlab package, available here: https://github.com/gllmflndn/gifti in order to read gifti surface files. Once installed you must make sure its contents are available on the matlab path.')
-        end
+            error('You need to install 
         g = gifti(path4surf);
     else
         [vertices, faces] = read_fs_geometry(path4surf);
