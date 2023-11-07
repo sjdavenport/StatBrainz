@@ -1,4 +1,4 @@
-function overlay_brain( slice, padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask)
+function overlay_brain( slice, padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
 % overlay_brain - Overlay region masks on a brain slice image.
 %
 %   overlay_brain(slice, padding, region_masks, colors2use, alpha_val, rotate)
@@ -38,10 +38,6 @@ function overlay_brain( slice, padding, region_masks, colors2use, alpha_val, und
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
 
-
-%%  Check mandatory input and get important constants
-%--------------------------------------------------------------------------
-
 %%  Add/check optional values
 %--------------------------------------------------------------------------
 if ~exist('region_masks', 'var')
@@ -73,13 +69,27 @@ if ~exist('applybrainmask', 'var')
     applybrainmask = 1;
 end
 
+if ~exist('upsample', 'var')
+    upsample = 0;
+end
+
+if upsample
+    slice = slice*2;
+    underim = doubleim(underim);
+    brain_im = imgload('MNIbrain1mm.nii.gz');
+    brain_mask = imgload('MNImask1mm.nii.gz') > 0;
+%     brain_mask_orig = imgload('MNImask');
+%     brain_im = brain_im.*doubleim(brain_mask_orig);
+%     brain_im = brain_im.*brain_mask;
+else
+    brain_im = imgload('MNIbrain.nii.gz');
+    brain_mask = imgload('MNImask') > 0;
+    brain_im = brain_im.*brain_mask;
+end
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 index = repmat({':'}, 1, 3);
 index{index_loc} = slice(index_loc);
-brain_im = imgload('MNIbrain.nii.gz');
-
-brain_mask = imgload('MNImask') > 0;
 
 bounds = mask_bounds( brain_mask, padding );
 other_indices = setdiff(1:3,index_loc);

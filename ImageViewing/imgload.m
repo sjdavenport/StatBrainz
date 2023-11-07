@@ -1,73 +1,45 @@
-function img = imgload( filename, use_nif )
-% IMGLOAD( filename, use_nif ) allows you to load in a .nii or a .nii.gz
-% image
+function img = imgload( filename )
+% IMGLOAD( filename ) loads in a .nii or a .nii.gz using niftiread
+% which requires MATLAB version >= 2017. It can be used to read in files
+% from the BrainImages folder in the StatBrainz repository.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% filename  is the name of the file to load.
+% filename  is the name of the file to load
 %--------------------------------------------------------------------------
 % OUTPUT
 % img       an array of the numbers in the image
 %--------------------------------------------------------------------------
 % EXAMPLES
-% imgload('MNImask')
+% im = imgload('MNImask');
+% pan3(im, [30,40,50])
 %--------------------------------------------------------------------------
-% SEE ALSO
-% spm_read_vols, spm_vol
-global CSI bsloc
-mbs_img_loc = [bsloc, 'BrainImages/'];
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
+bs_img_loc = which('fullmos.nii');
+bs_img_loc = bs_img_loc(1:end-11);
 
-if strcmp(filename(end-2:end), '.gz')
-    use_nif = 0;
-    filename = filename(1:end-7);
-elseif nargin < 2
-    use_nif = 1;
-end
-
-if iscell(filename)
-    nsubj = length(filename);
-    first_subject = imgload(filename{1}, use_nif );
-    mask_size = size(first_subject);
-    img = zeros([mask_size, nsubj]);
-    img(:,:,:,1) = first_subject;
-    for I = 2:nsubj
-        img(:,:,:,I) = imgload(filename{I}, use_nif );
-    end
-    return
-end
-
-if strcmp(filename(end-3:end), '.nii')
-    filename = filename(1:end-4);
-end
-
-% if ~isnan( str2double(filename(1)) )  || ~isnan( str2double(filename(1:2)) )
-%     filename = strcat(CSI,'Samples/',filename, '.nii');
-% end
-
-if use_nif == 1
+if strcmp(filename(end-2:end), '.gz') || strcmp(filename(end-3:end), '.nii')
     try
-        nif = nifti(strcat(mbs_img_loc, filename,'.nii'));
+        img = niftiread([bs_img_loc, filename]);
     catch
         try
-            nif = nifti(strcat(CSI, filename,'.nii'));
+            img = niftiread(filename);
         catch
-            warning('imgload has used your input as a filename it didn''t match a prespecified input.')
-            nif = nifti( [filename,'.nii'] ) ;
+            error('This file is not available\n')
         end
     end
-    variable_index = repmat({':'}, 1, length(size(nif.dat)));
-%     img = nif.dat(:,:,:,:);
-    img = nif.dat(variable_index{:});
 else
     try
-        img  = spm_read_vols(spm_vol(strcat(mbs_img_loc, filename, '.nii.gz')));
+        img = niftiread([bs_img_loc, filename, '.nii']);
     catch
         try
-            img  = spm_read_vols(spm_vol(strcat(CSI, filename, '.nii.gz')));
+            img = niftiread([bs_img_loc, filename, '.nii.gz']);
         catch
-            warning('imgload has used your input as a filename it didn''t match a prespecified input.')
-            img = spm_read_vols(spm_vol( [filename,'.nii.gz'] ) );
+            error('This file is not available\n')
         end
     end
 end
+
+img = double(img);
 
 end

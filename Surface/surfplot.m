@@ -1,4 +1,4 @@
-function surfplot( path4gifti, surface_data, seeback, edgealpha, docamlight, view_vec )
+function surfplot( path4surf, surface_data, seeback, edgealpha, docamlight, view_vec )
 % SURFPLOT
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -54,7 +54,17 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-g = gifti(path4gifti);
+if isstruct(path4surf)
+    g = path4surf;
+else
+    if strcmp(path4surf(end-3:end), '.gii')
+        g = gifti(path4surf);
+    else
+        [vertices, faces] = read_fs_geometry(path4surf);
+        g.vertices = vertices;
+        g.faces = faces;
+    end
+end
 vertices = double(g.vertices);
 X = vertices(:,1);
 Y = vertices(:,2);
@@ -85,6 +95,6 @@ if docamlight
 %     light
 end
 set(ptru,'AmbientStrength',0.5)
-
+axis image
 end
 

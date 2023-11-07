@@ -1,12 +1,14 @@
-function face_areas = surf_face_area( path4gifti )
-% NEWFUN
+function face_areas = surf_face_area( path4surf )
+% surf_face_area computes the area of each face on a given surface
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+% path4surf   a path to a file storing the geometry information, gifti and
+%             freesurfer paths are accepted. A structure g containing
+%             g.faces and a g.vertices entries can also be used here.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% face_areas    a vector giving the area of each face
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 
@@ -19,9 +21,17 @@ function face_areas = surf_face_area( path4gifti )
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-g = gifti(path4gifti);
-vertices = g.vertices;
-faces = g.faces;
+if isstruct(path4surf)
+    vertices = path4surf.vertices;
+    faces = path4surf.faces;
+elseif strcmp(path4surf(end-3:end), '.gii')
+    g = gifti(path4surf);
+    vertices = g.vertices;
+    faces = g.faces;
+else
+    [vertices, faces] = read_fs_geometry(path4surf);
+end
+
 
 % Initialize an array to store the areas of each face
 face_areas = zeros(size(faces, 1), 1);
@@ -33,7 +43,7 @@ for i = 1:size(faces, 1)
     vertex_indices = faces(i, :);
     vertices_face = vertices(vertex_indices, :);
     
-    % Calculate the vectors representing two sides of the triangle
+    % Calculate vectors representing two sides of the triangle
     side1 = vertices_face(2, :) - vertices_face(1, :);
     side2 = vertices_face(3, :) - vertices_face(1, :);
     
