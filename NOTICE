@@ -2,9 +2,11 @@ NOTICE
 
 This project includes software components from third-party sources. Below is a list of these components, their respective licenses, and copyright notices:
 
-1. The function 
-   License: MIT License
-  Copyright (c) [Year] [Author Name]
+1. The function read_fs_geometry is a modified version of the read_geometry function from the 
+    NiBabel python package which was licensed under the MIT License as follows.
+  
+  The MIT License
+  
   Copyright (c) 2009-2019 Matthew Brett <matthew.brett@gmail.com>
   Copyright (c) 2010-2013 Stephan Gerhard <git@unidesign.ch>
   Copyright (c) 2006-2014 Michael Hanke <michael.hanke@gmail.com>
