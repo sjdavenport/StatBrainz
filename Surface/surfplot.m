@@ -99,6 +99,10 @@ if docamlight
 end
 set(ptru,'AmbientStrength',0.5)
 axis image
-fullscreen
+screen_size = get(0, 'ScreenSize');
+
+% Set the figure position to cover the entire screen
+set(gcf, 'Position', screen_size);
+% fullscreen
 end
 

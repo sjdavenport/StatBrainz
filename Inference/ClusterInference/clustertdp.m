@@ -11,7 +11,8 @@ function [ tdp_bounds, tp_bounds ] = clustertdp( clusters, cluster_threshold )
 % EXAMPLES
 % 
 %--------------------------------------------------------------------------
-% AUTHOR: Samuel Davenport
+% Copyright (C) - 2023 - Jelle Goeman, Wouter Weeda, Xu Chen
+% Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
 %%  Check mandatory input and get important constants

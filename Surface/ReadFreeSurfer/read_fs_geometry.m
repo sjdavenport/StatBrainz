@@ -9,7 +9,8 @@ function [vertices, faces, volume_info, create_stamp] = read_fs_geometry(filepat
 % Copyright (C) 2011-2019 Yaroslav Halchenko <debian@onerussian.com>
 % Copyright (C) 2015-2019 Chris Markiewicz <effigies@gmail.com>
 % Copyright (C) - 2023 - Samuel Davenport <12sdavenport@gmail.com>
-% See [link to MIT License] for more details.
+% See the NOTICE file in the root directory for details on the MIT license
+% that this file is under.
 
     % Read a triangular format Freesurfer surface mesh.
 

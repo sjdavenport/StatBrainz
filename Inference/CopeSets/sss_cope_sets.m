@@ -40,7 +40,8 @@ function [lower_set, upper_set, std_multipler] = sss_cope_sets(data, mask, ...
 % [lower_set, upper_set] = sss_cope_sets(data, mask, c, 1000);
 % cope_display(lower_set, upper_set)
 %--------------------------------------------------------------------------
-% AUTHORs: Alex Bowring and Samuel Davenport
+% Copyright (C) - 2018 - Alex Bowring
+% Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 if ~exist('nBoot')
     nBoot = 1000;

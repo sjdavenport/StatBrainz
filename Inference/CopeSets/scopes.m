@@ -41,7 +41,7 @@ function [ lower_band, upper_band ] = scopes( data, mask, nboot, alpha, show_loa
 % end
 % fullscreen
 %--------------------------------------------------------------------------
-% AUTHOR: Samuel Davenport
+% Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
 %%  Check mandatory input and get important constants
