@@ -35,9 +35,10 @@ This project includes software components from third-party sources. Below is a l
    THE SOFTWARE.
 
 
-2. The @gifti matlab package is included in the Surface/ReadSurfaceFiles/ folder.
-   The source code is included and is identical to the form it is in the original 
-   repository: https://github.com/gllmflndn/gifti which was licensed under the 
+2. The @gifti matlab package is included in the Surface/ReadSurfaceFiles/ folder 
+   to facilitate the reading of gifti surface files. The source code is included
+   and is identical to the form it is in the original repository: 
+   https://github.com/gllmflndn/gifti which was licensed under the 
    MIT license on 08/11/2023. The license is reproduced as follows.
 
    MIT License
@@ -62,7 +63,11 @@ This project includes software components from third-party sources. Below is a l
    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
    SOFTWARE.
 
-3. The TDPclusters C package 
+3. The files in the Inference/ClusterInference/ClusterTDPccode/ folder 
+   are from the TDPclusters C package. This code is provided identical to the form
+   it is in the original repository which on 04/12/2023 was licensed under the MIT
+   License shown below. The license is reproduced as follows.
+
    MIT License
 
    Copyright (c) 2023 Paweł Górecki
