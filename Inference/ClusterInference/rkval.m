@@ -1,4 +1,4 @@
-function rk = rk(k, d)
+function rk = rkval(k, d)
 % Example: rk(81,3)
 if nargin < 2
     d = 3;  % Default value for d

@@ -1,4 +1,19 @@
 function lower_bound = clustertp_lowerbound(CL, cluster_threshold, D)
+% NEWFUN
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+% Optional
+%--------------------------------------------------------------------------
+% OUTPUT
+% 
+%--------------------------------------------------------------------------
+% EXAMPLES
+% 
+%--------------------------------------------------------------------------
+% Copyright (C) - 2023 - Jelle Goeman, Wouter Weeda, Xu Chen 
+% Copyright (C) - 2023 - Samuel Davenport
+%--------------------------------------------------------------------------
     rk = rkval(cluster_threshold, D);
     
     % Calculate the range in x, y, and z
