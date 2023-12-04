@@ -1,5 +1,6 @@
-The files in this folder  are from the TDPclusters C package. This code is provided 
-identical to the form it is in the original repository which on 04/12/2023 was 
+The files in this folder are compiled from the TDPclusters C package. The functions 
+are identical to the form they arm in the original repository available at
+https://github.com/ppgorecki/TDPClusters/. On 04/12/2023 that repository was
 licensed under the MIT License. The license is reproduced as follows.
 
    MIT License
