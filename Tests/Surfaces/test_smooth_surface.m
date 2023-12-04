@@ -14,3 +14,4 @@ FWHM = 8;
 smoothX_left = smooth_surface(X_left, FWHM, path4gifti_left);
 
 surfplot(path4gifti_left, smoothX_left)
+saveim('SurfStat')
