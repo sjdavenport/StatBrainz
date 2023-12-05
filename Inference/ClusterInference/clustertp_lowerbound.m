@@ -1,15 +1,20 @@
 function lower_bound = clustertp_lowerbound(CL, cluster_threshold, D)
-% NEWFUN
+% CLUSTERTP_LOWERBOUND(CL, cluster_threshold, D)
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% Mandatory
-% Optional
+% Mandatory:
+% - CL: The point cloud represented as a struct with fields 'x', 'y', and
+%       'z', corresponding to the coordinates in three-dimensional space.
+% - cluster_threshold: The clustering threshold used for defining
+%                      neighboring clusters.
+% - D: The metric space used for clustering.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% - lower_bound: The calculated lower bound on the proportion of true
+%                positives within each cluster.
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+% See test_clustertp_lowerbound.m
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Jelle Goeman, Wouter Weeda, Xu Chen 
 % Copyright (C) - 2023 - Samuel Davenport

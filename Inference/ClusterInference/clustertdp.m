@@ -28,27 +28,42 @@ if ~exist( 'savedir', 'var' )
    savedir = './';
 end
 
+if ~exist('savedir', 'var')
+    savedir = './';
+end
+
+if ~exist('method', 'var')
+    method = 'lowerbound';
+end
+
 %%  Main Function Loop
 %--------------------------------------------------------------------------
+if strcmp(method, 'lowerbound')
 tp_bounds = zeros(1, length(clusters));
 tdp_bounds = zeros(1, length(clusters));
+else
+    tp_bounds = NaN;
+    tdp_bounds = NaN;
+end
 
 if strcmp(method, 'heuristic')
-    mkdir('ClusterTDP_logs')
+    if ~exist('savedir', 'dir')
+        mkdir(savedir)
+    end
 end
 
 for I = 1:length(clusters)
-    clear CL
-    CL.x = clusters{I}(:,1);
-    CL.y = clusters{I}(:,2);
-    CL.z = clusters{I}(:,3);
     if strcmp(method, 'lowerbound')
+        clear CL
+        CL.x = clusters{I}(:,1);
+        CL.y = clusters{I}(:,2);
+        CL.z = clusters{I}(:,3);
         tp_bounds(I) = clustertp_lowerbound(CL, cluster_threshold, 3);
         tdp_bounds(I) = tp_bounds(I)/length( CL.x );
     elseif strcmp(method, 'heuristic')
-        cluster_log_dir = [savedir, 'ClusterTDP_logs/cluster_', num2str(I), '/'];
+        cluster_log_dir = [savedir, 'CTDP_heuristic_logs/cluster_', num2str(I), '/'];
         mkdir(cluster_log_dir);
-        cluster2csv(clusters{I}, cluster_log_dir, ['cluster_', num2str(I)]);
+        cluster2csv(clusters{I}, ['cluster_', num2str(I)], cluster_log_dir);
         fgreedy([cluster_log_dir, 'cluster_', num2str(I), '.csv'], cluster_threshold, 1, 1)
         fprintf('Jobs running the heuristic lower bound have been dispatched,\nyou can monitor the progress using the monitor_cTDP function\n') 
     else
@@ -57,4 +72,3 @@ for I = 1:length(clusters)
 end
 
 end
-

@@ -40,7 +40,7 @@ if usewsl == 0
         system([fgreedy_loc, 'fgreedy ', cluster_csv_loc,' -x ', fgreedy_loc, 'batch7.cnf -k',num2str(cluster_threshold)]);
     end
 else
-    cd(fileparts(cluster_csv_loc)); %fileparts extracts the folder name!
+    cd(fileparts(cluster_csv_loc)); %fileparts 
     fgreedy_loc = strrep(fgreedy_loc, '\', '\\');
     fgreedy_loc = strrep(fgreedy_loc, '/', '\\');
     cluster_csv_loc = strrep(cluster_csv_loc, '\', '\\');
@@ -50,7 +50,7 @@ else
     fgreedy_loc = strtrim(fgreedy_loc);
     cluster_csv_loc = strtrim(cluster_csv_loc);
     if runinbackground == 1
-        system(['wsl ', fgreedy_loc, 'fgreedy ', cluster_csv_loc,' -x ', fgreedy_loc, 'batch7.cnf -k',num2str(cluster_threshold),'&& exit &']);
+        system(['wsl ', fgreedy_loc, 'fgreedy ', cluster_csv_loc,' -x ', fgreedy_loc, 'batch7.cnf -k',num2str(cluster_threshold),', &']);
     else
         system(['wsl ', fgreedy_loc, 'fgreedy ', cluster_csv_loc,' -x ', fgreedy_loc, 'batch7.cnf -k',num2str(cluster_threshold)]);
     end
