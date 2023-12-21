@@ -3,7 +3,7 @@ function [ left_rotations,  right_rotations] = ...
 % spin_surface implements the Spin Test from Bloch (2018). The function is 
 % an adaption of the original code used in Bloch (2018). It uses knnsearch 
 % instead of the Nearest Neighbours function used in the original code. 
-% This results in a 200x speed up in the code. We also includes the 
+% This results in a 200x speed up in the code. We also include the 
 % original permutation among the permutations which is necessary for valid 
 % inference.
 %--------------------------------------------------------------------------

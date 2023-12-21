@@ -1,4 +1,4 @@
-function tp_bounds = ctp_scores( logdir )
+function [ out ] = regional_tfce( tfce_tstat, tfce_threshold, atlas )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -26,14 +26,7 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-cluster_names = filesindir(logdir);
-tp_bounds = zeros(1, length(cluster_names));
-for I = 1:length(cluster_names)
-    [tp_bounds(I), timetaken, hasfinished] = ctp_extract_score([logdir,cluster_names{I},'/fgreedy.log']);
-    if ~hasfinished
-        fprintf(['The computation for ',num2str(cluster_names{I}),' is still in progress\n'])
-    end
-end
+
 
 end
 

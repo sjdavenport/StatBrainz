@@ -1,4 +1,4 @@
-function [minscore_min, time_taken] = ctp_extract_score(filename)
+function [minscore_min, time_taken, has_finished] = ctp_extract_score(filename)
 % CTP_EXTRACT_SCORE Extracts minscore and time from a CTP log file.
 %
 % [minscore_min, time_taken] = CTP_EXTRACT_SCORE(filename)
@@ -36,6 +36,7 @@ function [minscore_min, time_taken] = ctp_extract_score(filename)
     minscores = [];
     times = [];
 
+    has_finished = 0;
     for i = 1:numel(lines{1})
         minscoreMatch = regexp(lines{1}{i}, minscorePattern, 'tokens');
         if isempty(minscoreMatch)
@@ -44,6 +45,9 @@ function [minscore_min, time_taken] = ctp_extract_score(filename)
         timeMatch = regexp(lines{1}{i}, timePattern, 'tokens');
         if isempty(timeMatch)
             timeMatch = regexp(lines{1}{i}, timePattern2, 'tokens');
+            if ~isempty(timeMatch)
+               has_finished = 1; 
+            end
         end
 
         if ~isempty(minscoreMatch)
