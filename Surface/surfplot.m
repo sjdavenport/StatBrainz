@@ -73,10 +73,13 @@ X = vertices(:,1);
 Y = vertices(:,2);
 Z = vertices(:,3);
 if use_surface_data == 1
-%     ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'interp', ...
-%         'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);    
-    ptru = trisurf(double(g.faces), X, Y, Z,...
-        'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
+    if docamlight
+        ptru = trisurf(double(g.faces), X, Y, Z, ...
+            'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
+    else
+        ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'interp', ...
+            'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
+    end
 else
     ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'None', 'EdgeAlpha', edgealpha);
 end

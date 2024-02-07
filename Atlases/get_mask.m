@@ -31,15 +31,15 @@ if ~exist('together', 'var')
 end
 
 if strcmp(atlas_name, 'HOc')
-    atlas_loc = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\BrainStat\Atlases\HarvardOxford\';
+    atlas_loc = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\StatBrainz\Atlases\HarvardOxford\';
     names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Cortical.xml']);
     atlas_filename = 'HarvardOxford-cort-maxprob-thr25-2mm.nii.gz';
 elseif strcmp(atlas_name, '15')
-    atlas_loc = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\BrainStat\Atlases\Derived_HarvardOxford\';
+    atlas_loc = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\StatBrainz\Atlases\Derived_HarvardOxford\';
     names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Cortical.xml']);
     atlas_filename = 'HarvardOxford-cort-maxprob-thr25-115_nearest.nii.gz';
 elseif strcmp(atlas_name, 'HOsc')
-    atlas_loc = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\BrainStat\Atlases\HarvardOxford\';
+    atlas_loc = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\StatBrainz\Atlases\HarvardOxford\';
     names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Subcortical.xml']);
     atlas_filename = 'HarvardOxford-sub-maxprob-thr25-2mm.nii.gz';
 end

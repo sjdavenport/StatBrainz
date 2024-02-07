@@ -17,7 +17,7 @@ function names = getBrainRegionNames(xml_file)
 %       for name = names
 %           disp(name)
 %       end
-%       getBrainRegionNames('C:\Users\12SDa\davenpor\davenpor\Toolboxes\BrainStat\Atlases\HarvardOxford\HarvardOxford-Cortical.xml');
+%       getBrainRegionNames('C:\Users\12SDa\davenpor\davenpor\Toolboxes\StatBrainz\Atlases\HarvardOxford\HarvardOxford-Cortical.xml');
 %   See also PARSEXML, REGEXP
 
     % Read in the XML file as a cell array of strings

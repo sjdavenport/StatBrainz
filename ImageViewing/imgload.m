@@ -41,5 +41,10 @@ else
 end
 
 img = double(img);
+% Set masks to be True/False
+if isequal(unique(img), [0;1])
+    img = img > 0;
+end
+% img = img > 0;
 
 end
