@@ -38,27 +38,26 @@ if ~exist( 'edgealpha', 'var' )
    edgealpha = 0.05;
 end
 
+if ~exist( 'surface_data', 'var' )
+   % Default value
+   surface_data = [];
+end
+
 if ~exist( 'docamlight', 'var' )
    % Default value
    docamlight = 1;
-end
-
-if nargin < 2
-   % Default value
-   use_surface_data = 0;
-   warning('surface_data not included - plotting the empty mesh')
-else
-   use_surface_data = 1;
-   surface_data = double(surface_data);
 end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 if isstruct(path4surf)
     g = path4surf;
+    if isfield(g, 'data')
+        surface_data = g.data;
+    end
 else
     if strcmp(path4surf(end-3:end), '.gii')
-        if isempty(which(path4surf))
+        if ~exist('gifti', 'file')
             error('You need to install the gifti matlab package, available here: https://github.com/gllmflndn/gifti in order to read gifti surface files. Once installed you must make sure its contents are available on the matlab path.')
         end
         g = gifti(path4surf);
@@ -68,6 +67,17 @@ else
         g.faces = faces;
     end
 end
+
+if isempty(surface_data)
+   % Default value
+   use_surface_data = 0;
+   warning('surface_data not included - plotting the empty mesh')
+else
+   use_surface_data = 1;
+   surface_data = double(surface_data);
+end
+
+
 vertices = double(g.vertices);
 X = vertices(:,1);
 Y = vertices(:,2);

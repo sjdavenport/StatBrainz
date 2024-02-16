@@ -10,8 +10,8 @@ function edg = SurfStatEdge( surf )
 %
 % edg = e x 2 matrix of edge indices, 1-based, e=#edges.
 
-if isfield(surf,'tri')
-    tri=sort(surf.tri,2);
+if isfield(surf,'faces')
+    tri=sort(surf.faces,2);
     edg=unique([tri(:,[1 2]); tri(:,[1 3]); tri(:,[2 3])],'rows');
 end
 if isfield(surf,'lat')

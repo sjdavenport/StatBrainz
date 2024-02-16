@@ -1,13 +1,10 @@
-function surface = smooth_surface( surface, FWHM, data )
-% smooth_surface( surface, FWHM, data ) smoothes data on the surface using
-% nearest neighbour smoothing which corresponds to the FWHM.
+function [ surviving_cluster_im, surviving_clusters, surviving_clusters_vec] = ...
+                             cluster_im( dim, index_locations, threshold )
+% CLUSTER_IM( dim, index_locations, threshold )
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-%  surface  a
-%  FWHM     the FWHM with which to smooth
 % Optional
-%  data
 %--------------------------------------------------------------------------
 % OUTPUT
 % 
@@ -30,31 +27,16 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-lhrh = 0;
-if ~isstruct(surface)
-    g = gifti(surface);
-    clear surface
-    surface.faces = g.faces;
-    surface.vertices = g.vertices;
-    surface.data = data;
-else
-    if isfield(surface, 'lh')
-        surface.lh = smooth_surface(surface.lh, FWHM);
-        lhrh = 1;
-    end
-    if isfield(surface, 'rh')
-        surface.rh = smooth_surface(surface.rh, FWHM);
-        lhrh = 1;
-    end
+surviving_cluster_im = zeros(dim);
+surviving_clusters_vec = {};
+nsurvivors = 0;
+for I = 1:length(index_locations)
+  if length(index_locations{I}) > threshold
+      nsurvivors = nsurvivors + 1;
+      surviving_cluster_im(index_locations{I}) = 1;
+      surviving_clusters_vec{nsurvivors} = index_locations{I};
+  end
 end
-
-
-if lhrh == 0
-    if ~isfield(surface, 'data') && (nargin == 3)
-        surface.data = data;
-    end
-    surface.data = SurfStatSmooth( surface.data', surface, FWHM )';
-end
-
+surviving_clusters = convindall(surviving_clusters_vec);
 end
 

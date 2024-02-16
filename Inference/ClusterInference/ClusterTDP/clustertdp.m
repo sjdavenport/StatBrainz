@@ -60,7 +60,7 @@ for I = 1:length(clusters)
         CL.z = clusters{I}(:,3);
         tp_bounds(I) = clustertp_lowerbound(CL, cluster_threshold, 3);
         tdp_bounds(I) = tp_bounds(I)/length( CL.x );
-    elseif strcmp(method, 'heuristic')
+    elseif strcmp(method, 'heuristic') || strcmp(method, 'greedy')
         cluster_log_dir = [savedir, '/cluster_', num2str(I), '/'];
         mkdir(cluster_log_dir);
         cluster2csv(clusters{I}, ['cluster_', num2str(I)], cluster_log_dir);

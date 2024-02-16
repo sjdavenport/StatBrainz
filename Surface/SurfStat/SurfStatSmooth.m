@@ -6,7 +6,7 @@ function Y = SurfStatSmooth( Y, surf, FWHM )
 % 
 % Y        = n x v or n x v x k matrix of surface data, v=#vertices;
 %            n=#observations; k=#variates, or memory map of same.
-% surf.tri = t x 3 matrix of triangle indices, 1-based, t=#triangles.
+% surf.faces = t x 3 matrix of triangle indices, 1-based, t=#triangles.
 % or
 % surf.lat = nx x ny x nz matrix, 1=in, 0=out, [nx,ny,nz]=size(volume). 
 % FWHM     = approximate FWHM of Gaussian smoothing filter, in mesh units.
