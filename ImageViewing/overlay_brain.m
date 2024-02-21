@@ -1,4 +1,4 @@
-function overlay_brain( slice, padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
+function ax = overlay_brain( slice, padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
 % overlay_brain - Overlay region masks on a brain slice image.
 %
 %   overlay_brain(slice, padding, region_masks, colors2use, alpha_val, rotate)
@@ -129,16 +129,17 @@ if any(isnan(underim(:)))
     imagesc(brain_im_bw);
     hold on
     underim2D = squeeze(underim(index{:}));
-    viewdata(underim2D, brain_mask2D, region_masks, colors2use, rotate, bounds, alpha_val);
+    im1 = viewdata(underim2D, brain_mask2D, region_masks, colors2use, rotate, bounds, alpha_val);
     if max(underim2D(:)) > min(underim2D(:))
         caxis([min(underim2D(:)), max(underim2D(:))])
     end
 else
-    viewdata(brain_im2D, brain_mask2D, region_masks, colors2use, rotate, bounds, alpha_val);
+    im1 = viewdata(brain_im2D, brain_mask2D, region_masks, colors2use, rotate, bounds, alpha_val);
     colormap('gray')
 end
 
 axis image
 fullscreen
+ax = gca;
 end
 

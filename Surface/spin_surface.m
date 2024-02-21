@@ -1,15 +1,16 @@
 function [ left_rotations,  right_rotations] = ...
-   spin_surface( srf, sphere, nperm, include_orig, show_loader )
-% spin_surface implements the Spin Test from Bloch (2018). The function is 
-% an adaption of the original code used in Bloch (2018). It uses knnsearch 
+   spin_surface( surface_data, sphere, nperm, include_orig, show_loader )
+% spin_surface spins the data along the surface given by the sphere. The function is 
+% an adaption of the code used in the spin test Bloch (2018). It uses knnsearch 
 % instead of the Nearest Neighbours function used in the original code. 
 % This results in a ~200x speed up. We also include an option to include the
 % original permutation among the permutations which is necessary for valid inference.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory:
-%   srf   a surface structure such that srf.lh.data is the data for the left
-%         hemisphere and srf.rh.data is the data for the right hemisphere.
+%   surface_data   a surface data structure such that surface_data.lh is 
+%         the data for the left hemisphere and surface_data.rh is the data 
+%         for the right hemisphere.
 %   sphere   a surface structure such that sphere.lh.vertices and sphere.lh.faces
 %            are the vertices and faces of the sphere for the left
 %            hemisphere and similarly for the right hemisphere.
@@ -56,14 +57,14 @@ else
     vertices_right = sphere.rh.vertices;
 end
 
-rng(0);
+% rng(0);
 %Use rng to initialize the random generator for reproducible results.
 
 % Initialize matrices to store the rotated data
 % left_rotations = zeros(length(leftdata), nperm);
 if include_orig
-    left_rotations = srf.lh.data';
-    right_rotations = srf.rh.data';
+    left_rotations = surface_data.lh';
+    right_rotations = surface_data.rh';
 else
     left_rotations = [];
     right_rotations = [];
@@ -100,8 +101,8 @@ for j = 2:nperm
     rotation_idx = knnsearch(bl, vertices_left);
     
     % Store the rotated data
-    left_rotations = [left_rotations; srf.lh.data(rotation_idx)'];
-    right_rotations = [right_rotations; srf.rh.data(rotation_idx)'];
+    left_rotations = [left_rotations; surface_data.lh(rotation_idx)'];
+    right_rotations = [right_rotations; surface_data.rh(rotation_idx)'];
 end
 
 left_rotations = left_rotations';

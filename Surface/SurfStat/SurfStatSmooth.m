@@ -1,4 +1,4 @@
-function Y = SurfStatSmooth( Y, surf, FWHM )
+function Y = SurfStatSmooth( srf, Y, FWHM, metric )
 
 %Smooths surface data by repeatedly averaging over edges.
 %
@@ -13,6 +13,10 @@ function Y = SurfStatSmooth( Y, surf, FWHM )
 %
 % Note that if the data is memory mapped, then the data is overwriten by
 % the smoothed data.
+
+if ~exist('metric', 'var')
+    metric = 'ones';
+end
 
 niter=ceil(FWHM^2/(2*log(2)));
 
@@ -34,9 +38,24 @@ else
     isnum=false;
 end
 
-edg=SurfStatEdg(surf);
+edg = SurfStatEdg(srf);
+if strcmp(metric, 'dist')
+    first_set = srf.vertices(edg(:,1),:);
+    second_set = srf.vertices(edg(:,2),:);
+    dist = double(sqrt(sum((first_set - second_set).^2,2)));
+    dist = 1./dist;
+end
 
-Y1=accumarray(edg(:,1),2,[v 1])'+accumarray(edg(:,2),2,[v 1])';
+% This counts the number of occurences of each vertex of each edge and
+% multiplies that by 2!
+if strcmp(metric, 'ones')
+    Y1 = accumarray(edg(:,1),2,[v 1])'+accumarray(edg(:,2),2,[v 1])';
+elseif strcmp(metric, 'dist')
+    % Ensure that the weights scale to 1
+    Y1=accumarray(edg(:,1),dist,[v 1])'+accumarray(edg(:,2),dist,[v 1])';
+    % Multiply by a factor of 2 to ensure you're averaging!
+    Y1 = 2*Y1;
+end
 
 if n>1
     fprintf(1,'%s',[num2str(n) ' x ' num2str(k) ' surfaces to smooth, % remaining: 100 ']);
@@ -50,7 +69,15 @@ for i=1:n
         if isnum
             Ys=squeeze(Y(i,:,j));
             for iter=1:niter
-                Yedg=Ys(edg(:,1))+Ys(edg(:,2));
+                % To change to an arbitrary distance metric need to
+                % multiply this step by some distance measure dist.
+                Yedg=Ys(edg(:,1))+Ys(edg(:,2)); 
+                if strcmp(metric, 'dist')
+                    Yedg=Yedg.*dist'; 
+                end
+                % The thing to add an accumlate ...
+                % at each round! Note that it doesn't average here which is why
+                % line 41 includes a multiple of 2 so that it can be divided by it here
                 Ys=(accumarray(edg(:,1),Yedg',[v 1]) + ...
                     accumarray(edg(:,2),Yedg',[v 1]))'./Y1;
             end

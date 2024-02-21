@@ -1,4 +1,4 @@
-function viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, alpha_val, outside_color)
+function im2 = viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, alpha_val, outside_color)
 % VIEWDATA - function to visualize a data matrix with a binary brain mask 
 % and a binary region mask overlayed on top
 %

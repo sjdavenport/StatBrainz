@@ -1,6 +1,5 @@
-function rho_store = spin_test( X, Y, spherepathloc, nperm, show_loader )
+function data = surf_noise( srf, FWHM, metric )
 % NEWFUN
-% Need to pre-multiply by the medial wall beforehand basically
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
@@ -12,7 +11,7 @@ function rho_store = spin_test( X, Y, spherepathloc, nperm, show_loader )
 % EXAMPLES
 % 
 %--------------------------------------------------------------------------
-% AUTHOR: Samuel Davenport
+% Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
 %%  Check mandatory input and get important constants
@@ -20,20 +19,34 @@ function rho_store = spin_test( X, Y, spherepathloc, nperm, show_loader )
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'opt1', 'var' )
+if ~exist( 'metric', 'var' )
    % Default value
-   opt1 = 0;
+   metric = 'ones';
+end
+
+if ~exist( 'FWHM', 'var' )
+   % Default value
+   FWHM = 0;
 end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-% Generate spins of the first image
-[ left_rotations,  right_rotations] = ...
-             spin_surface( X{1}, X{2}, spherepathloc, nperm, show_loader );
-         
-rho_store = zeros(1, nperm);
-for I = 1:nperm
-    rho_store(I) = corr([left_rotations(:,I);right_rotations(:,I)],[Y{1};Y{2}], 'rows','complete');
+lrh = 0;
+clear data
+if isfield(srf, 'lh')
+    data.lh = surf_noise( srf.lh, FWHM, metric );
+    lrh = 1;
+end
+if isfield(srf, 'rh')
+    data.rh = surf_noise( srf.rh, FWHM, metric );
+    lrh = 1;
+end
+
+if lrh == 0     
+    data = randn(srf.nvertices, 1);
+    if FWHM > 0 
+        data = smooth_surface(srf, data, FWHM, metric);
+    end
 end
 
 end

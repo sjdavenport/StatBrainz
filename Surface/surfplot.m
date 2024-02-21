@@ -33,14 +33,18 @@ if ~exist( 'view_vec', 'var' )
    end
 end
 
-if ~exist( 'edgealpha', 'var' )
-   % Default value
-   edgealpha = 0.05;
-end
-
 if ~exist( 'surface_data', 'var' )
    % Default value
    surface_data = [];
+end
+
+if ~exist( 'edgealpha', 'var' )
+   % Default value
+   if isempty(surface_data)
+        edgealpha = 0.2;
+   else
+       edgealpha = 0.05;
+   end
 end
 
 if ~exist( 'docamlight', 'var' )
@@ -84,7 +88,7 @@ Y = vertices(:,2);
 Z = vertices(:,3);
 if use_surface_data == 1
     if docamlight
-        ptru = trisurf(double(g.faces), X, Y, Z, ...
+        ptru = trisurf(double(g.faces), X, Y, Z, ...w
             'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
     else
         ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'interp', ...

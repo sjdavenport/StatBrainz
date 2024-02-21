@@ -6,15 +6,26 @@
 
 %%
 path4gifti_left = which('tpl-fsaverage_den-10k_hemi-L_white.surf.gii');
-
-X_left = randn(10242, 1);
-X_right = randn(10242, 1);
+srf = gifti2surf(path4gifti_left);
+X_left = randn(srf.nvertices,1);
 
 FWHM = 8;
-smoothX_left = smooth_surface(path4gifti_left, FWHM, X_left);
 
-surfplot(path4gifti_left, smoothX_left)
+%%
+X_left_smooth = smooth_surface(srf, X_left, FWHM );
+X_left_smooth_dist = smooth_surface(srf, X_left, FWHM, 'dist' );
+
+subplot(1,2,1)
+surfplot(srf, X_left_smooth)
+subplot(1,2,2)
+surfplot(srf, X_left_smooth_dist)
 % saveim('SurfStat')
+
+plot(X_left_smooth, X_left_smooth_dist, '*')
+
+%%
+adj_matrix = adjacency_matrix(smoothX_left, 'ones');
+
 
 %%
 clear srf

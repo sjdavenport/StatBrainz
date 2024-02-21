@@ -1,4 +1,4 @@
-function edg = SurfStatEdge( surf )
+function edg = SurfStatEdg( surf )
 
 %Finds edges of a triangular mesh or a lattice.
 %
@@ -9,6 +9,8 @@ function edg = SurfStatEdge( surf )
 % surf.lat = 3D logical array, 1=in, 0=out.
 %
 % edg = e x 2 matrix of edge indices, 1-based, e=#edges.
+%
+% srf = gifti2surf(
 
 if isfield(surf,'faces')
     tri=sort(surf.faces,2);

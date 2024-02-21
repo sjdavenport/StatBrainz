@@ -1,5 +1,5 @@
-function surface = smooth_surface( surface, FWHM, data )
-% smooth_surface( surface, FWHM, data ) smoothes data on the surface using
+function smooth_data = smooth_surface(srf, data, FWHM, metric )
+% smooth_surface( srf, FWHM, data ) smoothes data on the surface using
 % nearest neighbour smoothing which corresponds to the FWHM.
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -23,37 +23,38 @@ function surface = smooth_surface( surface, FWHM, data )
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'opt1', 'var' )
-   % Default value
-   opt1 = 0;
+if ~exist('metric', 'var')
+    metric = 'ones';
 end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 lhrh = 0;
-if ~isstruct(surface)
-    g = gifti(surface);
-    clear surface
-    surface.faces = g.faces;
-    surface.vertices = g.vertices;
-    surface.data = data;
+clear smooth_data
+if ~isstruct(srf)
+    g = gifti(srf);
+    clear srf
+    srf.faces = g.faces;
+    srf.vertices = g.vertices;
+    srf.data = data;
 else
-    if isfield(surface, 'lh')
-        surface.lh = smooth_surface(surface.lh, FWHM);
+    if isfield(srf, 'lh')
+        smooth_data.lh = smooth_surface(srf.lh, data.lh, FWHM);
         lhrh = 1;
     end
-    if isfield(surface, 'rh')
-        surface.rh = smooth_surface(surface.rh, FWHM);
+    if isfield(srf, 'rh')
+        smooth_data.rh = smooth_surface(srf.rh, data.rh, FWHM);
         lhrh = 1;
     end
 end
 
 
 if lhrh == 0
-    if ~isfield(surface, 'data') && (nargin == 3)
-        surface.data = data;
-    end
-    surface.data = SurfStatSmooth( surface.data', surface, FWHM )';
+    % if ~isfield(surface, 'data') && (nargin == 4)
+    %     surface.data = data;
+    % end
+    % surface.data = SurfStatSmooth( surface.data', surface, FWHM )';
+    smooth_data = SurfStatSmooth( srf, data', FWHM, metric )';
 end
 
 end

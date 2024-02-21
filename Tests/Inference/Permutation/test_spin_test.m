@@ -20,22 +20,24 @@ nomedwall_right = g.cdata;
 path4gifti_left = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_white.surf.gii';
 path4gifti_right = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-R_white.surf.gii';
 
-X_left = randn(10242, 1);
-X_right = randn(10242, 1);
-Y_left = randn(10242, 1);
-Y_right = randn(10242, 1);
-
-FWHM = 2;
-smoothX_left = smooth_surface(X_left, FWHM, path4gifti_left);
-smoothX_right = smooth_surface(X_right, FWHM, path4gifti_right);
-X = {smoothX_left, smoothX_right};
-
-smoothY_left = smooth_surface(Y_left, FWHM, path4gifti_left);
-smoothY_right = smooth_surface(Y_right, FWHM, path4gifti_right);
-Y = {smoothY_left, smoothY_right};
+srf = gifti2surf(path4gifti_left, path4gifti_right);
+X = surf_noise(srf, FWHM);
+Y = X;
+Y.lh = X.lh + randn(10242, 1);
+Y.rh = X.rh + randn(10242, 1);
+subplot(1,2,1)
+surfplot(srf.lh,X.lh)
+subplot(1,2,2)
+surfplot(srf.lh,Y.lh)
 
 %%
 spherepathloc = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_sphere.surf.gii';
+srf_sphere = gifti2surf(spherepathloc, spherepathloc);
 tic
-rho_store = spin_test( X, Y, spherepathloc, 1000, 1 )
+rho_store = spintest( X, Y, srf_sphere, 1000, 1 );
 toc
+
+%%
+alpha = 0.05;
+threshold = prctile(rho_store, 100*(1-alpha) )
+rho_store(1)
