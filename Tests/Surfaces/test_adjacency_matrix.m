@@ -8,8 +8,19 @@
 path4gifti = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_white.surf.gii';
 srf = gifti2surf(path4gifti);
 adj_matrix = adjacency_matrix(srf, 'ones');
-disp(adj_matrix)
+
+g = graph(adj_matrix);
+cc = conncomp(g)
 
 %%
 adj_matrix = adjacency_matrix(srf, 'dist');
 disp(adj_matrix)
+
+%%
+srf = loadsrf('fs5', 'white');
+data = surf_noise(srf, 20);
+survived = data.lh > 0.02;
+surfplot(srf.lh, survived)
+
+% histogram(data.lh(:))
+% surfplot(srf.lh, data.lh)

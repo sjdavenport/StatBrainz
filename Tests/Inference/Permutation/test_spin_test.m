@@ -21,6 +21,7 @@ path4gifti_left = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage
 path4gifti_right = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-R_white.surf.gii';
 
 srf = gifti2surf(path4gifti_left, path4gifti_right);
+FWHM = 4;
 X = surf_noise(srf, FWHM);
 Y = X;
 Y.lh = X.lh + randn(10242, 1);
@@ -38,6 +39,26 @@ rho_store = spintest( X, Y, srf_sphere, 1000, 1 );
 toc
 
 %%
+alpha = 0.05;
+threshold = prctile(rho_store, 100*(1-alpha) )
+rho_store(1)
+
+
+%%
+path4gifti_left = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_white.surf.gii';
+path4gifti_right = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-R_white.surf.gii';
+
+srf = gifti2surf(path4gifti_left, path4gifti_right);
+FWHM = 4;
+X = surf_noise(srf, FWHM);
+Y = surf_noise(srf, FWHM);
+
+spherepathloc = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_sphere.surf.gii';
+srf_sphere = gifti2surf(spherepathloc, spherepathloc);
+tic
+rho_store = spintest( X, Y, srf_sphere, 1000, 1 );
+toc
+
 alpha = 0.05;
 threshold = prctile(rho_store, 100*(1-alpha) )
 rho_store(1)

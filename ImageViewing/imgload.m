@@ -15,8 +15,8 @@ function img = imgload( filename )
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
-bs_img_loc = which('fullmos.nii');
-bs_img_loc = bs_img_loc(1:end-11);
+sb_dir = statbrainz_maindir;
+bs_img_loc = [sb_dir, 'BrainImages/Volume/'];
 
 if strcmp(filename(end-2:end), '.gz') || strcmp(filename(end-3:end), '.nii')
     try

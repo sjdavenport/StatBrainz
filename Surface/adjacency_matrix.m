@@ -34,7 +34,7 @@ elseif strcmp(metric, 'dist') || strcmp(metric, 'distance')
     second_set = srf.vertices(edg(:,2),:);
     dist = double(sqrt(sum((first_set - second_set).^2,2))); 
 end
-adj_matrix = sparse(edg(:,1), edg(:,2), dist);
+adj_matrix = sparse(edg(:,1), edg(:,2), dist, srf.nvertices, srf.nvertices) + sparse(edg(:,2), edg(:,1), dist, srf.nvertices, srf.nvertices);
 
 end
 
