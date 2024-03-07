@@ -1,4 +1,4 @@
-function resampled_data = resample_srf( surface_data, srfin, srfout, intertype )
+function nnindices = resample_srf_nn( srfin, srfout )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -19,31 +19,23 @@ function resampled_data = resample_srf( surface_data, srfin, srfout, intertype )
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'intertype', 'var' )
-   % Default value
-   intertype = 'nn';
-end
+
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 
 lrh = 0;
-nnindices = resample_srf_nn(srfin, srfout);
-clear resampled_data
-if isfield(surface_data, 'lh')
-    resampled_data.lh = surface_data.lh(nnindices.lh);
+if isfield(srfin, 'lh')
+    nnindices.lh = resample_srf_nn( srfin.lh, srfout.lh);
     lrh = 1;
 end
-if isfield(surface_data, 'lh')
-    resampled_data.rh = surface_data.lh(nnindices.rh);
+if isfield(srfin, 'lh')
+    nnindices.rh = resample_srf_nn( srfin.rh, srfout.rh );
     lrh = 1;
 end
 
 if lrh == 0
-    if strcmp(intertype, 'nn') || strcmp(intertype, 'nearestneighbour')
-        nn_indices = dsearchn(srfin.vertices,srfout.vertices);
-        resampled_data = surface_data(nn_indices);
-    end
+    nnindices = dsearchn(srfin.vertices,srfout.vertices);
 end
 
 end

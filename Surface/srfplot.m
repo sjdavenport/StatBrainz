@@ -1,4 +1,4 @@
-function srfplot( path4surf, surface_data, seeback, edgealpha, docamlight, view_vec )
+function srfplot( path4surf, surface_data, seeback, edgealpha, dointerp, view_vec )
 % SURFPLOT
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -49,9 +49,9 @@ if ~exist( 'edgealpha', 'var' )
    end
 end
 
-if ~exist( 'docamlight', 'var' )
+if ~exist( 'dointerp', 'var' )
    % Default value
-   docamlight = 1;
+   dointerp = 0;
 end
 
 %%  Main Function Loop
@@ -96,13 +96,15 @@ X = vertices(:,1);
 Y = vertices(:,2);
 Z = vertices(:,3);
 if use_surface_data == 1
-    if docamlight
-        ptru = trisurf(double(g.faces), X, Y, Z, ...w
+    ptru = trisurf(double(g.faces), X, Y, Z, ...
             'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
-    else
-        ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'interp', ...
-            'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
-    end
+    % if dointerp == 0
+    %      ptru = trisurf(double(g.faces), X, Y, Z, ...
+    %         'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
+    % else
+    %     ptru = trisurf(double(g.faces), X, Y, Z, 'FaceColor', 'interp', ...
+    %         'FaceVertexCData', surface_data, 'EdgeAlpha', edgealpha);
+    % end
 else
     ptru = trisurf(double(g.faces), X, Y, Z,'FaceColor', 'None', 'EdgeAlpha', edgealpha);
 end
@@ -113,16 +115,20 @@ axis off
 
 view(view_vec)
 
-if docamlight
-    lighting gouraud;
-    material dull;
+camlight('headlight')
+lighting gouraud;
+material dull;
+
+%     camlight('right')
+% light
+
+% Do interpolation or not
+if dointerp
+    shading interp
+else
     shading flat;
-%     camlight('headlight')
-%     camlight('headlight')
-    camlight('headlight')
-% %     camlight('right')
-%     light
 end
+
 set(ptru,'AmbientStrength',0.5)
 axis image
 screen_size = get(0, 'ScreenSize');
