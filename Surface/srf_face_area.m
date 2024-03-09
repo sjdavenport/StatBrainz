@@ -1,4 +1,4 @@
-function face_areas = surf_face_area( path4surf )
+function face_areas = srf_face_area( srf )
 % surf_face_area computes the area of each face on a given surface
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -21,15 +21,15 @@ function face_areas = surf_face_area( path4surf )
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if isstruct(path4surf)
-    vertices = path4surf.vertices;
-    faces = path4surf.faces;
-elseif strcmp(path4surf(end-3:end), '.gii')
-    g = gifti(path4surf);
+if isstruct(srf)
+    vertices = srf.vertices;
+    faces = srf.faces;
+elseif strcmp(srf(end-3:end), '.gii')
+    g = gifti(srf);
     vertices = g.vertices;
     faces = g.faces;
 else
-    [vertices, faces] = read_fs_geometry(path4surf);
+    [vertices, faces] = read_fs_geometry(srf);
 end
 
 

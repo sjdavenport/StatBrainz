@@ -1,4 +1,4 @@
-function smooth_data = smooth_surface(srf, data, FWHM, metric )
+function smooth_data = smooth_surface(srf, data, FWHM, metric, niters )
 % smooth_surface( srf, FWHM, data ) smoothes data on the surface using
 % nearest neighbour smoothing which corresponds to the FWHM.
 %--------------------------------------------------------------------------
@@ -54,7 +54,10 @@ if lhrh == 0
     %     surface.data = data;
     % end
     % surface.data = SurfStatSmooth( surface.data', surface, FWHM )';
-    smooth_data = SurfStatSmooth( srf, data', FWHM, metric )';
+    if ~exist('niters', 'var')
+        niters = srf_fwhm2niters(FWHM, srf);
+    end
+    smooth_data = SurfStatSmooth( srf, data', FWHM, metric, niters)';
 end
 
 end

@@ -2,8 +2,8 @@ function srf = loadsrf( surface_id, surface_type )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% Mandatory
-% Optional
+%  surface_id: one of 'fs3', 'fs4', 'fs5', 'fs6', 'fs7'
+%  surface_type: one of 'white', 'pial', 'sphere', 'inflated'
 %--------------------------------------------------------------------------
 % OUTPUT
 % 
@@ -27,6 +27,12 @@ end
 if ~exist( 'surface_type', 'var' )
    % Default value
    surface_type = 'white';
+end
+
+if strcmp(surface_id, 'bert')
+    srf_dir = 'C:\Users\12SDa\davenpor\Data\Surface\freesurfer_files\bert\surf\';
+    srf = fs2surf([srf_dir, 'lh.', surface_type], [srf_dir, 'rh.', surface_type]);
+    return
 end
 
 %%  Main Function Loop

@@ -1,4 +1,4 @@
-function Y = SurfStatSmooth( srf, Y, FWHM, metric )
+function Y = SurfStatSmooth( srf, Y, FWHM, metric, niters )
 
 %Smooths surface data by repeatedly averaging over edges.
 %
@@ -17,8 +17,14 @@ function Y = SurfStatSmooth( srf, Y, FWHM, metric )
 if ~exist('metric', 'var')
     metric = 'ones';
 end
+if ~exist('usearea', 'var')
+    usearea = 0;
+end
 
-niter=ceil(FWHM^2/(2*log(2)));
+if ~exist('niters', 'var')
+    warning('using default niters')
+    niters = ceil(FWHM^2/(2*log(2)));
+end
 
 if isnumeric(Y)
     [n,v,k]=size(Y);
@@ -68,7 +74,7 @@ for i=1:n
     for j=1:k
         if isnum
             Ys=squeeze(Y(i,:,j));
-            for iter=1:niter
+            for iter=1:niters
                 % To change to an arbitrary distance metric need to
                 % multiply this step by some distance measure dist.
                 Yedg=Ys(edg(:,1))+Ys(edg(:,2)); 
@@ -88,7 +94,7 @@ for i=1:n
             else
                 Y=Ym.Data(1).Data(:,j,i);
             end            
-            for iter=1:niter
+            for iter=1:niters
                 Yedg=Y(edg(:,1))+Y(edg(:,2));
                 Y=(accumarray(edg(:,1),Yedg',[v 1]) + ...
                     accumarray(edg(:,2),Yedg',[v 1]))'./Y1;
