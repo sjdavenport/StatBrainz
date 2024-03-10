@@ -1,14 +1,19 @@
 function [ lower_band, upper_band ] = scopes( data, mask, nboot, alpha, show_loader )
-% NEWFUN
+% SCOPES Computes confidence intervals for a data field using the SCOPES method.
+%
+%   [lower_band, upper_band] = SCOPES(data, mask, nboot, alpha, show_loader)
+%   computes simultaneous confidence bands using the bootstrap.
 %--------------------------------------------------------------------------
-% ARGUMENTS
-% Mandatory
-% data: a dim by nsubj 
-% mask: a 0/1 array of size dim
-% Optional
+% ARGUMENTS:
+%   - data: Data field of size dim by nsubj.
+%   - mask: Binary array (0/1) indicating the region of interest.
+%   - nboot: Number of bootstrap samples.
+%   - alpha: Significance level for confidence intervals.
+%   - show_loader: Flag to display progress loader during computation.
 %--------------------------------------------------------------------------
-% OUTPUT
-% 
+% OUTPUT:
+%   - lower_band: Lower confidence band for the data field.
+%   - upper_band: Upper confidence band for the data field.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % %%

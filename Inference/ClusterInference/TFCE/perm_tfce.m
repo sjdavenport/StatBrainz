@@ -1,17 +1,28 @@
 function [ threshold, vec_of_maxima, permuted_tstat_store ] = ... 
     perm_tfce( data, mask, H, E, connectivity, dh, alpha, nperm, show_loader, store_perms )
-% NEWFUN
+% PERM_TFCE Calculates threshold, maxima vector, and permuted t-statistics for TFCE.
+%
+%   [threshold, vec_of_maxima, permuted_tstat_store] = ...
+%       PERM_TFCE(data, mask, H, E, connectivity, dh, alpha, nperm, show_loader, store_perms)
+%   calculates the threshold, vector of maxima, and permuted t-statistics for 
+%   Threshold-Free Cluster Enhancement (TFCE) based on input data and parameters.
 %--------------------------------------------------------------------------
-% ARGUMENTS
-% Mandatory
-%  data: 
-%  H: height exponent (default is 2)
-%  E: extent exponent (default is 0.5)
-%  connectivity: connectivity used to compute the connected components
-%  dh: size of steps for cluster formation
+% ARGUMENTS:
+%   - data: Input data matrix.
+%   - mask: Binary mask specifying the region of interest.
+%   - H: Height exponent (default is 2).
+%   - E: Extent exponent (default is 0.5).
+%   - connectivity: Connectivity used to compute connected components.
+%   - dh: Size of steps for cluster formation.
+%   - alpha: Significance level (default is 0.05).
+%   - nperm: Number of permutations for randomization (default is 1000).
+%   - show_loader: Flag to display progress loader (default is 1).
+%   - store_perms: Flag to store permuted t-statistics (default is 0).
 %--------------------------------------------------------------------------
-% OUTPUT
-% 
+% OUTPUT:
+%   - threshold: Threshold value based on the specified alpha level.
+%   - vec_of_maxima: Vector of maxima obtained from TFCE calculations.
+%   - permuted_tstat_store: Matrix storing permuted t-statistics (if enabled).
 %--------------------------------------------------------------------------
 % EXAMPLES
 % dim = [50,50]; nsubj = 50; FWHM = 0;

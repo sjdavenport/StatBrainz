@@ -1,28 +1,21 @@
 function [ tdp_bounds ] = cluster_tp2tdp( tp_bounds, clusters )
-% NEWFUN
+% CLUSTER_TP2TDP Converts true positives to true discovery proportion.
+%
+%   tdp_bounds = CLUSTER_TP2TDP(tp_bounds, clusters) converts true positive bounds
+%   to true discovery proportion based on the given cluster sizes.
 %--------------------------------------------------------------------------
-% ARGUMENTS
-% Mandatory
-% Optional
-%--------------------------------------------------------------------------
-% OUTPUT
-% 
+% ARGUMENTS:
+%   - tp_bounds: True positive bounds.
+%   - clusters: Cell array containing cluster indices.
+%
+% OUTPUT:
+%   - tdp_bounds: True discovery proportion bounds.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
-
-%%  Check mandatory input and get important constants
-%--------------------------------------------------------------------------
-
-%%  Add/check optional values
-%--------------------------------------------------------------------------
-if ~exist( 'opt1', 'var' )
-   % Default value
-   opt1 = 0;
-end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------

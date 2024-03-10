@@ -9,6 +9,8 @@ function [tfced] = tfce(image,H,E,connectivity,dh)
 %  dh: size of steps for cluster formation. Default is 0.1.
 %--------------------------------------------------------------------------
 % OUTPUT
+%  tfced: an array with the same size as image giving the TFCE transformed
+%           image
 %--------------------------------------------------------------------------
 % EXAMPLES
 % dim = [50,50]; nsubj = 50; FWHM = 2;

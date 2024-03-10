@@ -1,12 +1,16 @@
 function [maxsumlocs, totalinslice] = bestclusterslice( slice_no, surviving_cluster_im )
-% NEWFUN
-%--------------------------------------------------------------------------
-% ARGUMENTS
-% Mandatory
-% Optional
-%--------------------------------------------------------------------------
-% OUTPUT
-% 
+%   [maxsumlocs, totalinslice] = BESTCLUSTERSLICE(slice_no, surviving_cluster_im) computes
+%   the maximum sum locations and total values within a specified slice (given by slice_no)
+%   in the surviving_cluster_im.
+%
+% ARGUMENTS:
+%   - slice_no: The slice number for which the computation is performed.
+%   - surviving_cluster_im: Either a 3D binary array representing the surviving cluster or
+%                           a cell array of such 3D binary arrays.
+%
+% OUTPUT:
+%   - maxsumlocs: Indices of the maximum sum locations within the slice.
+%   - totalinslice: Total values for each position in the specified slice.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 
