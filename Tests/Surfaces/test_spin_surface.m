@@ -51,7 +51,9 @@ clear nomedwall
 medialwall_leftpath = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_desc-nomedialwall_dparc.label.gii';
 g = gifti(medialwall_leftpath);
 nomedwall.lh.data = g.cdata;
+srfplot(g,  g.cdata)
 
+%%
 medialwall_rightpath = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-R_desc-nomedialwall_dparc.label.gii';
 g = gifti(medialwall_rightpath);
 nomedwall.rh.data = g.cdata;
@@ -70,9 +72,10 @@ for I = 1:20
 end
 
 %%
-surfplot(path4gifti_left, nomedwall_left, 1)
+path4gifti_left = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_white.surf.gii';
+srfplot(path4gifti_left, 1-nomedwall_left, 1)
 surfscreen
-saveim('medialwall')
+% saveim('medialwall')
 
 %%
 for I = 2:4

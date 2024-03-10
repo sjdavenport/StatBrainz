@@ -1,16 +1,22 @@
 function smooth_data = smooth_surface(srf, data, FWHM, metric, niters )
-% smooth_surface( srf, FWHM, data ) smoothes data on the surface using
-% nearest neighbour smoothing which corresponds to the FWHM.
+% SMOOTH_SURFACE Smooths data on the surface using nearest neighbor smoothing.
+%
+%   smooth_data = smooth_surface(srf, data, FWHM, metric, niters) smoothes
+%   data on the surface 'srf' using nearest neighbor smoothing with the
+%   specified full width at half maximum (FWHM), data, metric, and number
+%   of iterations (niters).
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% Mandatory
-%  surface  a
-%  FWHM     the FWHM with which to smooth
-% Optional
-%  data
+%   Mandatory
+%       srf       - Surface structure.
+%       data      - Input surface data to be smoothed.
+%       FWHM      - Full width at half maximum for smoothing.
+%   Optional
+%       metric    - Metric for smoothing (default: 'ones').
+%       niters    - Number of iterations for smoothing (default: determined by FWHM).
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%   smooth_data - Smoothed surface data.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

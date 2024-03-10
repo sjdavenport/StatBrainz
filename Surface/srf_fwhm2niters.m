@@ -1,21 +1,24 @@
 function niters = srf_fwhm2niters( FWHM, srf, fudge_factor )
-% NEWFUN
+% SRF_FWHM2NITERS Converts FWHM to the number of smoothing iterations.
+%
+%   niters = srf_fwhm2niters(FWHM, srf, fudge_factor) converts the full
+%   width at half maximum (FWHM) to the number of smoothing iterations
+%   based on the surface structure 'srf' and an optional fudge factor.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% Mandatory
-% Optional
-%  srf
+%   Mandatory
+%       FWHM          - Full width at half maximum for smoothing.
+%       srf           - Surface structure.
+%   Optional
+%       fudge_factor  - Fudge factor (default: 1.478*(69/40) - chosen to 
+%                       match the freesurfer smoothing).
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%   niters           - Number of smoothing iterations.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % srf = loadsrf('fs5', 'sphere')
 % niters = srf_fwhm2niters( 8, srf )
-%
-% path4bert ='C:\Users\12SDa\davenpor\Data\Surface\freesurfer_files\bert\surf\';
-% bert_srf = fs2surf([path4bert, 'lh.sphere.reg'], [path4bert,'rh.sphere.reg'])
-% niters = srf_fwhm2niters( 8, bert_srf )
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------

@@ -16,11 +16,5 @@ cc = conncomp(g)
 adj_matrix = adjacency_matrix(srf, 'dist');
 disp(adj_matrix)
 
-%%
-srf = loadsrf('fs5', 'white');
-data = surf_noise(srf, 20);
-survived = data.lh > 0.02;
-surfplot(srf.lh, survived)
-
 % histogram(data.lh(:))
 % surfplot(srf.lh, data.lh)

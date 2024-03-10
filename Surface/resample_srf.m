@@ -1,12 +1,21 @@
 function resampled_data = resample_srf( surface_data, srfin, srfout, intertype )
-% NEWFUN
+% RESAMPLE_SRF Resamples surface data from one surface to another.
+%
+%   resampled_data = resample_srf(surface_data, srfin, srfout, intertype)
+%   resamples surface data from the input surface 'srfin' to the output
+%   surface 'srfout' using the specified interpolation type 'intertype'.
+%
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% Mandatory
-% Optional
+%   Mandatory
+%       surface_data  - Input surface data to be resampled.
+%       srfin         - Input surface structure.
+%       srfout        - Output surface structure.
+%       intertype     - Interpolation type (default: 'nn' or 'nearestneighbour').
+%   Optional
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%   resampled_data   - Resampled surface data on the output surface.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

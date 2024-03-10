@@ -1,20 +1,22 @@
 function adj_matrix = adjacency_matrix( srf, metric )
-% NEWFUN
+% ADJACENCY_MATRIX Computes the adjacency matrix for a given surface.
+%
+%   adj_matrix = adjacency_matrix(srf, metric) computes the adjacency matrix
+%   for the surface structure 'srf' with the specified metric.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% Mandatory
-% Optional
+%   Mandatory
+%       srf         - Surface structure.
+%   Optional
+%       metric      - Metric for adjacency (default: 'ones').
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%   adj_matrix      - Computed adjacency matrix. 
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+% See test_adjacency_matrix.m
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
-%--------------------------------------------------------------------------
-
-%%  Check mandatory input and get important constants
 %--------------------------------------------------------------------------
 
 %%  Add/check optional values

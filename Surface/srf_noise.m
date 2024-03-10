@@ -1,12 +1,19 @@
 function data = srf_noise( srf, FWHM, metric )
-% NEWFUN
+% SRF_NOISE Generates surface noise data.
+%   data = srf_noise(srf, FWHM, metric) generates surface noise data on the
+%   given surface structure 'srf' with specified full width at half maximum
+%   (FWHM) and metric.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% Mandatory
-% Optional
+%   Mandatory
+%       srf       - Surface structure.
+%   Optional
+%       FWHM      - Full width at half maximum for smoothing (default: 0).
+%       metric    - Metric for smoothing (default: 'ones').
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%   data         - Generated surface noise data containing fields for the
+%                   left and right hemisphere if they are provided in srf.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

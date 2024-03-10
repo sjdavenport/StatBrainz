@@ -1,25 +1,21 @@
 function nnindices = resample_srf_nn( srfin, srfout )
-% NEWFUN
+%   nnindices = resample_srf_nn(srfin, srfout) computes nearest neighbor
+%   indices for resampling surface data from the input surface 'srfin' to
+%   the output surface 'srfout' using nearest neighbor interpolation.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% Mandatory
-% Optional
+%   Mandatory
+%       srfin         - Input surface structure.
+%       srfout        - Output surface structure.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%   nnindices - A vector giving the nearest neighbor indices for resampling.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
-
-%%  Check mandatory input and get important constants
-%--------------------------------------------------------------------------
-
-%%  Add/check optional values
-%--------------------------------------------------------------------------
-
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------

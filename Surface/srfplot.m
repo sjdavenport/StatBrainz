@@ -1,12 +1,22 @@
-function srfplot( path4surf, surface_data, seeback, edgealpha, dointerp, view_vec )
-% SURFPLOT
+function srfplot( srf, surface_data, seeback, edgealpha, dointerp, view_vec )
+% SRFPLOT Plots surface data on a given surface.
+%
+%   srfplot(path4surf, surface_data, seeback, edgealpha, dointerp, view_vec)
+%   plots the surface defined by 'path4surf' with optional surface data
+%   'surface_data'. Various optional parameters can be specified.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% Mandatory
-% Optional
+%   Mandatory
+%       path4surf   - Path to the surface file or surface structure.
+%   Optional
+%       surface_data- Surface data to be plotted.
+%       seeback     - Flag for viewing from the back (default: 0).
+%       edgealpha   - Transparency of surface edges (default: 0.2).
+%       dointerp    - Flag for surface interpolation (default: 0).
+%       view_vec    - View vector for plotting (default: [-89, 16]).
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%   Plots the surface with optional surface data.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % See test_surfplot.m
@@ -56,9 +66,17 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-if isstruct(path4surf)
-    g = path4surf;
-    if isfield(path4surf, 'lh') && isfield(path4surf, 'rh')
+if seeback == 2
+    subplot(1,2,1)
+    srfplot( srf, surface_data, 0, edgealpha, dointerp, view_vec )
+    subplot(1,2,2)
+    srfplot( srf, surface_data, 1, edgealpha, dointerp, view_vec )
+    return
+end
+
+if isstruct(srf)
+    g = srf;
+    if isfield(srf, 'lh') && isfield(srf, 'rh')
         subplot(1,2,1)
         srfplot(g.lh, surface_data, seeback, edgealpha, docamlight, view_vec )
         subplot(1,2,2)
@@ -69,13 +87,13 @@ if isstruct(path4surf)
         return
     end
 else
-    if strcmp(path4surf(end-3:end), '.gii')
+    if strcmp(srf(end-3:end), '.gii')
         if ~exist('gifti', 'file')
             error('You need to install the gifti matlab package, available here: https://github.com/gllmflndn/gifti in order to read gifti surface files. Once installed you must make sure its contents are available on the matlab path.')
         end
-        g = gifti(path4surf);
+        g = gifti(srf);
     else
-        [vertices, faces] = read_fs_geometry(path4surf);
+        [vertices, faces] = read_fs_geometry(srf);
         g.vertices = vertices;
         g.faces = faces;
     end

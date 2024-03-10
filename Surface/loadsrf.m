@@ -1,12 +1,15 @@
 function srf = loadsrf( surface_id, surface_type )
-% NEWFUN
+% LOADSRF Loads surface data based on specified surface ID and type.
+%
+%   srf = loadsrf(surface_id, surface_type) loads surface data using the
+%   specified surface ID and type.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 %  surface_id: one of 'fs3', 'fs4', 'fs5', 'fs6', 'fs7'
 %  surface_type: one of 'white', 'pial', 'sphere', 'inflated'
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%   srf             - Loaded surface data structure.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 
