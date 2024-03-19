@@ -1,22 +1,13 @@
-function [ smoothed_data, ss ] = fconv( data, sep_kern, D, truncation, dx,...
-                                         adjust_kernel )
-% FCONV( data, sep_kern, D, truncation, dx, adjust_kernel ) provides a fast
+function [ smoothed_data, ss ] = fast_conv( data, FWHM, D, truncation, dx, adjust_kernel )
+% fast_conv( data, sep_kern, D, truncation, dx, adjust_kernel ) provides a fast
 % implementation for smoothing data using a separable kernel (e.g. an
 % isotropic Gaussian kernel).
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
 %  data        a Dim by nsubj array of data
-%  sep_kern    possible options are
-%               - a function handle giving a univariate kernel. This kernel
-%                 is used for smoothing in all dimensions.
-%               - a 1 by D cell array containing in each component the
-%                 function handle for the univariate kernel to smooth the
-%                 d-th dimension.
-%               - a numeric or 1 by D vector, in which case fconv smoothes
-%                 with a multivariate Gaussian kernel of FWHM = sep_kernel
-%               - a SepKernel object, in which case the 'kernel' field is
-%                 used for smoothing.
+%  FWHM        a numerical value or a vector of length D giving the full
+%              width at half maximum with which to smooth the data
 % Optional
 %  D           the dimension of the input data, if not specified then the
 %              data is smoothed assuming that there is only one realisation
@@ -32,6 +23,7 @@ function [ smoothed_data, ss ] = fconv( data, sep_kern, D, truncation, dx,...
 %              description. Default is 1.
 %  adjust_kernel  1 by D numeric vector computing the smoothing kernel at
 %                 an offset, i.e. K( x + adjust_kernel ) instead of K( x ).
+%                 Default is all zeros, i.e. no offset.
 %--------------------------------------------------------------------------
 % OUTPUT
 % smoothed_data     the smoothed data
@@ -46,36 +38,36 @@ function [ smoothed_data, ss ] = fconv( data, sep_kern, D, truncation, dx,...
 % %% %% 1D Examples
 % %% Simple 1D example
 % lat_data = normrnd(0,1,1,100); FWHM = 3;
-% smoothed_fconv = fconv(lat_data, FWHM);
+% smoothed_fast_conv = fast_conv(lat_data, FWHM);
 % smoothed_spm = spm_conv(lat_data,FWHM);
 % figure, clf,
-% plot(smoothed_spm); hold on; plot(smoothed_fconv, '--')
-% legend('spm\_conv', 'fconv') 
+% plot(smoothed_spm); hold on; plot(smoothed_fast_conv, '--')
+% legend('spm\_conv', 'fast_conv') 
 % %% Using SepKernel object
 % sepK = SepKernel(1, 3);
 % lat_data = normrnd(0,1,1,100);
-% smoothed_fconv = fconv(lat_data, sepK);
+% smoothed_fast_conv = fast_conv(lat_data, sepK);
 % %% 1D multiple subjects
 % nvox = 100; nsubj = 2; FWHM = 3; D = 1;
 % lat_data = normrnd( 0, 1, nvox, nsubj );
-% smoothed_fconv = fconv( lat_data, FWHM, D );
+% smoothed_fast_conv = fast_conv( lat_data, FWHM, D );
 % smoothed_spm = zeros( nvox, nsubj );
 % for n = 1:nsubj
 %     smoothed_spm(:,n) = spm_conv( lat_data(:,n), FWHM );
 % end
 % plot( smoothed_spm, 'color',  [ 0 0.447 0.7410 ] ); hold on;
-% plot( smoothed_fconv, '--', 'color', [ 0.85 0.325 0.0980 ] );
+% plot( smoothed_fast_conv, '--', 'color', [ 0.85 0.325 0.0980 ] );
 % 
 % %% %% 2D Examples
 % %% % Simple 2D example using numeric FWHM input
 % lat_data = normrnd( 0, 1, 25, 25 ); FWHM = 5;
-% smoothed_fconv = fconv( lat_data, FWHM ); 
+% smoothed_fast_conv = fast_conv( lat_data, FWHM ); 
 % smoothed_spm = spm_conv( lat_data, FWHM );
 % subplot(2,1,1)
-% surf(smoothed_fconv)
-% title('fconv')
+% surf(smoothed_fast_conv)
+% title('fast_conv')
 % subplot(2,1,2)
-% surf(smoothed_fconv)
+% surf(smoothed_fast_conv)
 % title('SPM\_conv')
 % 
 % %% % Simple 2D example using numeric vector FWHM input
@@ -87,46 +79,46 @@ function [ smoothed_data, ss ] = fconv( data, sep_kern, D, truncation, dx,...
 % % dx units away
 % dx = 0.5;
 % % Smooth the data
-% smoothed_fconv = fconv( lat_data, FWHM ); 
+% smoothed_fast_conv = fast_conv( lat_data, FWHM ); 
 % figure, clf,
-% surf(smoothed_fconv)
-% title('fconv defaults')
+% surf(smoothed_fast_conv)
+% title('fast_conv defaults')
 % 
 % %% % Same result but filling the arguments manually
 % % Create a Sep_Kernel objcet representing the Gaussian kernel
 % K = SepKernel( 2, FWHM )
 % % Smooth the data
-% smoothed_fconv = fconv( lat_data, K.kernel, 2, K.truncation, 1, K.adjust );
+% smoothed_fast_conv = fast_conv( lat_data, K.kernel, 2, K.truncation, 1, K.adjust );
 % figure, clf,
-% surf(smoothed_fconv)
-% title('fconv manually filled')
+% surf(smoothed_fast_conv)
+% title('fast_conv manually filled')
 % 
 % %% % Change of size of voxels
 % % change the frequency where the kernel is evaluated. Voxels are considered
 % % dx units away
 % dx = 0.5;
 % % Smooth the data
-% smoothed_fconv = fconv( lat_data, K.kernel, 2, K.truncation, dx, K.adjust );
+% smoothed_fast_conv = fast_conv( lat_data, K.kernel, 2, K.truncation, dx, K.adjust );
 % figure, clf,
-% surf(smoothed_fconv)
-% title('fconv voxels changed to one half')
+% surf(smoothed_fast_conv)
+% title('fast_conv voxels changed to one half')
 % 
 % %% %% 3D Examples
 % Dim = [50,50,50]; lat_data = normrnd(0,1,Dim); halfDim = Dim(1)/2;
 % FWHM = 3; D = 3;
 % smoothed_spm = zeros(Dim);
 % spm_smooth(lat_data, smoothed_spm, FWHM);
-% smoothed_fconv = fconv(lat_data, FWHM);
+% smoothed_fast_conv = fast_conv(lat_data, FWHM);
 % sigma = FWHM2sigma(FWHM); truncation = ceil(6*sigma);
-% smoothed_fconv_spmkern = fconv(lat_data, @(x) spm_smoothkern(FWHM, x), D, truncation );
+% smoothed_fast_conv_spmkern = fast_conv(lat_data, @(x) spm_smoothkern(FWHM, x), D, truncation );
 % smoothed_cfield = convfield( lat_data, FWHM, 0, D );
 % figure, clf,
-% plot(1:Dim(1),smoothed_fconv(:,halfDim,halfDim))
+% plot(1:Dim(1),smoothed_fast_conv(:,halfDim,halfDim))
 % hold on 
 % plot(1:Dim(1),smoothed_spm(:,halfDim,halfDim))
 % plot(1:Dim(1),smoothed_cfield(:,halfDim,halfDim), '--')
-% plot(1:Dim(1),smoothed_fconv_spmkern(:,halfDim,halfDim), '--')
-% legend('fconv', 'SPM', 'convfield', 'fconv_smoothkern')
+% plot(1:Dim(1),smoothed_fast_conv_spmkern(:,halfDim,halfDim), '--')
+% legend('fast_conv', 'SPM', 'convfield', 'fast_conv_smoothkern')
 % 
 % figure, clf,
 % plot(-truncation:truncation, spm_smoothkern(FWHM, -truncation:truncation))
@@ -136,12 +128,12 @@ function [ smoothed_data, ss ] = fconv( data, sep_kern, D, truncation, dx,...
 % 
 % % Compare speed to spm_smooth (much faster)
 % Dim = [50,50,50]; lat_data = normrnd(0,1,Dim);
-% tic; fconv(lat_data, FWHM); toc
+% tic; fast_conv(lat_data, FWHM); toc
 % tic; smoothed_spm = zeros(Dim);
 % tt = spm_smooth_mod(lat_data, smoothed_spm, FWHM); toc
 % 
 %--------------------------------------------------------------------------
-% AUTHOR: Samuel Davenport, Fabian Telschow
+% Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
 
@@ -166,6 +158,23 @@ if ~exist( 'D', 'var' )
     end
 end
 
+if length(FWHM) == 1
+    FWHM = repmat(FWHM, 1, D);
+end
+
+if ~exist('dx', 'var')
+    dx = 1;
+end
+
+if ~exist( 'adjust_kernel', 'var' ) || isnan( sum( adjust_kernel(:) ) )
+    % set default value
+    adjust_kernel = zeros( 1, D );
+end
+
+if ~exist('truncation', 'var')
+    truncation = ceil(FWHM2sigma(FWHM)*4);
+end
+
 % Set horizontal to vertical switch
 if D == 1 && s_data(1) == 1
     horz2vert = 1;
@@ -175,76 +184,7 @@ end
 
 % Reject if D is to large.
 if D > 3
-    error( 'fconv not coded for dimension > 3' );
-end
-
-%%% Check sep_kernel input
-% Make Kernel a cell with equal kernel functions
-Kernel = cell( [ 1 D ] );
-
-if isnumeric( sep_kern )
-    if length(sep_kern) == 1
-        if sep_kern == 0 
-            smoothed_data = data;
-            ss = NaN;
-            return
-        end
-    end
-    
-    % Numeric sep_kernel defines the FWHM
-    sep_kern = SepKernel( D, sep_kern );
-
-    for d = 1:D
-        Kernel{d} = sep_kern.kernel{d};
-    end
-    
-    % Get the standard truncation for the Gaussian kernel
-    truncation = sep_kern.truncation;
-    
-elseif isa( sep_kern, 'SepKernel' )
-    if length( sep_kern.kernel ) == D
-        for d = 1:D
-            Kernel{d} = sep_kern.kernel{d};
-        end
-        
-        % Define the truncation and adjust_kernel, if not provided
-        if ~exist( 'truncation', 'var' )
-            if ~any( isnan( sep_kern.truncation ) )
-                truncation = sep_kern.truncation;
-            else
-                error( "You need to provide a valid truncation." )
-            end
-        end
-        
-        if ~exist( 'adjust_kernel', 'var' )
-            adjust_kernel = sep_kern.adjust;
-        end
-        
-    else
-        error( 'Your SepKernel object needs to have the same dimension as your data.' )
-    end
-else
-    if iscell( sep_kern ) 
-        if length( sep_kern ) == 1
-            for d = 1:D
-                Kernel{d} = sep_kern{1};
-            end
-        elseif length( sep_kern ) == D
-            Kernel = sep_kern;
-        else
-            error( strcat( 'A Kernel must be specified for each ',...
-                       'direction or 1 that will be the same for all' ) )
-        end
-    else
-        for d = 1:D
-            Kernel{d} = sep_kern;
-        end
-    end
-    
-    % If kernel is specified manually a truncation is mandatory
-    if ~exist( 'truncation', 'var' )
-        error( 'Need to specify truncation' )
-    end
+    error( 'fast_conv not coded for dimension > 3' );
 end
 
 %% Check/add optional input
@@ -292,7 +232,7 @@ end
 %% Main function
 %--------------------------------------------------------------------------
 
-%%% If there are multiple subjects run fconv on each of them
+%%% If there are multiple subjects run fast_conv on each of them
 if ( D < length( s_data ) && D > 1 ) ...
                                   || ( D == 1 && all( s_data > [ 1, 1 ] ) )
 
@@ -303,8 +243,8 @@ if ( D < length( s_data ) && D > 1 ) ...
     
     % Loop over subjects
     for J = 1:s_data( end )
-        [tmp, ss] = fconv( squeeze( data( index{:}, J ) ),...
-                                            Kernel, D, truncation, dx,...
+        [tmp, ss] = fast_conv( squeeze( data( index{:}, J ) ),...
+                                            FWHM, D, truncation, dx,...
                                             adjust_kernel );
         smoothed_data( index{:}, J ) = tmp;
     end
@@ -312,7 +252,7 @@ if ( D < length( s_data ) && D > 1 ) ...
     return
 end
 
-%%% fconv for a single subject
+%%% fast_conv for a single subject
 % Preallocate a cell array for the truncation vectors
 truncation_vecs = cell( [ 1 D ] );
 
@@ -328,7 +268,7 @@ end
 kernel_in_direction = cell( [ 1 D ] );
 for d = 1:D
     % Get the kernel in the dth direction evaluate on truncation
-    kernel_in_direction{d} = Kernel{d}( truncation_vecs{d} );
+    kernel_in_direction{d} = Gker( truncation_vecs{d}, FWHM(d) );
 end
 
 
@@ -388,7 +328,7 @@ elseif D == 3
     ss = sum(ss(:)) * dx(1)*dx(2)*dx(3);
     
 else
-    error('fconv not coded for dimension > 3')
+    error('fast_conv not coded for dimension > 3')
 end
 
 end

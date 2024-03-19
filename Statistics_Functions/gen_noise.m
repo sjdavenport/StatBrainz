@@ -47,7 +47,7 @@ end
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 noise = randn([size(mask), nsubj]);
-[smooth_noise, ss] = fconv(noise, FWHM, length(size(mask)));
+[smooth_noise, ss] = fast_conv(noise, FWHM, length(size(mask)));
 smooth_noise = smooth_noise./sqrt(ss);
 smooth_noise = smooth_noise.*mask.*std_img + mean_img;
 
