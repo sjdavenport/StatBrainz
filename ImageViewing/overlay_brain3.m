@@ -26,8 +26,11 @@ function overlay_brain3( slice, padding, region_masks, colors2use, alpha_val, un
 %   - out: The output of the overlay operation (not specified in detail).
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
-%--------------------------------------------------------------------------
+% MNIbrain = imgload('MNIbrain.nii.gz');
+% MNIbrain = MNIbrain/max(MNIbrain(:));
+% slice = 45;
+% overlay_brain3([30,40,50], 10, {MNIbrain > 0.8}, 'red', 0.6, 4)
+% %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
@@ -45,8 +48,8 @@ if ~exist('colors2use', 'var')
     colors2use = [];
 end
 
-if ~exist('padding', 'var')
-    padding = 2;
+if ~exist('padding', 'var') || isempty(padding)
+    padding = [10,10,5];
 end
 
 if ~exist('underim', 'var')
@@ -67,12 +70,35 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-subplot(1,3,1)
-overlay_brain( [0,0,slice(3)], padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
-subplot(1,3,2)
-overlay_brain( [0,slice(2),0], 6, padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
-subplot(1,3,3)
-overlay_brain( [slice(1),0,0], 6, padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
+% subplot(1,3,1)
+t = tiledlayout(1,3,'TileSpacing','None');
+nexttile
+region_masks_2D = cell(1,length(region_masks));
+for I = 1:length(region_masks)
+    region_masks_2D{I} = region_masks{I}(:,:,slice(3));
+end
+overlay_brain( [0,0,slice(3)], padding(1), region_masks_2D, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
+% A = get(gca,'position');          % gca points at the second one
+% A(1,4) = A(1,4)/3;
+% A(1,1) = A(1,1);
+% set(gca,'position',A);  
 
+% subplot(1,3,2)
+nexttile
+region_masks_2D = cell(1,length(region_masks));
+for I = 1:length(region_masks)
+    region_masks_2D{I} = squeeze(region_masks{I}(:,slice(2),:));
+end
+overlay_brain( [0,slice(2),0], padding(2), region_masks_2D, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
+
+% subplot(1,3,3)
+nexttile
+region_masks_2D = cell(1,length(region_masks));
+for I = 1:length(region_masks)
+    region_masks_2D{I} = squeeze(region_masks{I}(slice(1),:,:));
+end
+overlay_brain( [slice(1),0,0], padding(3), region_masks_2D, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
+
+set(gcf, 'Color', 'black');
 end
 
