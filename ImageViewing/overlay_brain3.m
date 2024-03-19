@@ -29,7 +29,7 @@ function overlay_brain3( slice, padding, region_masks, colors2use, alpha_val, un
 % MNIbrain = imgload('MNIbrain.nii.gz');
 % MNIbrain = MNIbrain/max(MNIbrain(:));
 % slice = 45;
-% overlay_brain3([30,40,50], 10, {MNIbrain > 0.8}, 'red', 0.6, 4)
+% overlay_brain3([30,40,50], [], {MNIbrain > 0.8}, 'red', 0.6, 4)
 % %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
@@ -49,7 +49,11 @@ if ~exist('colors2use', 'var')
 end
 
 if ~exist('padding', 'var') || isempty(padding)
-    padding = [10,10,5];
+    padding = [10,6,2];
+end
+
+if length(padding) == 1
+    padding = repmat(padding, 1, 3);
 end
 
 if ~exist('underim', 'var')
