@@ -7,7 +7,7 @@ function ax = overlay_brain( slice, padding, region_masks, colors2use, alpha_val
 %
 % Mandatory Inputs:
 %   - slice: A 3-element numeric array specifying the slice coordinates
-%            [x, y, z] where the overlay will be applied.
+%            either [x,0,0] or [0,y,0] or [0,0,z]
 %
 % Optional Inputs:
 %   - padding: An optional numeric value specifying the padding around
