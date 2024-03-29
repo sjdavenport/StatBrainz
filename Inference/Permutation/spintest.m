@@ -31,9 +31,14 @@ function [threshold, rho_store] = spintest( X, Y, spherepathloc, nperm, alpha, s
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'opt1', 'var' )
+if ~exist( 'show_loader', 'var' )
    % Default value
-   opt1 = 0;
+   show_loader = 1;
+end
+
+if ~exist( 'alpha', 'var' )
+   % Default value
+   alpha = 0.05;
 end
 
 %%  Main Function Loop

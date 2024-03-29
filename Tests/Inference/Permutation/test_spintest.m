@@ -50,15 +50,14 @@ path4gifti_right = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverag
 
 srf = gifti2surf(path4gifti_left, path4gifti_right);
 FWHM = 4;
-X = surf_noise(srf, FWHM);
-Y = surf_noise(srf, FWHM);
+X = srf_noise(srf, FWHM);
+Y = srf_noise(srf, FWHM);
 
 spherepathloc = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_sphere.surf.gii';
 srf_sphere = gifti2surf(spherepathloc, spherepathloc);
 tic
-rho_store = spintest( X, Y, srf_sphere, 1000, 1 );
+[threshold, rho_store] = spintest( X, Y, srf_sphere, 1000 );
 toc
 
-alpha = 0.05;
-threshold = prctile(rho_store, 100*(1-alpha) )
+threshold
 rho_store(1)
