@@ -15,7 +15,7 @@ If you have installed the package in the directory: dir, then to do so you need 
 ![alt text](https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/clustersizevsCIs2.png)
 
 ### Surface confidence sets
-![alt text](https://github.com/sjdavenport/StatBrainz/BrainImages/Other/surface_crs.png)
+![alt text](https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/surface_crs.png)
 
 ### Bounds on the true discovery proportion within a given cluster
-![alt text](https://github.com/sjdavenport/StatBrainz/BrainImages/Other/ctdp.png)
+![alt text](https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/ctdp.png)
