@@ -12,7 +12,7 @@ If you have installed the package in the directory: dir, then to do so you need 
 
 ## Illustrations
 ### Simultaneous bounds on excursion sets
-![alt text](https://github.com/sjdavenport/StatBrainz/BrainImages/Other/clustersizevsCIs2.png)
+![alt text](https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/clustersizevsCIs2.png)
 
 ### Surface confidence sets
 ![alt text](https://github.com/sjdavenport/StatBrainz/BrainImages/Other/surface_crs.png)
