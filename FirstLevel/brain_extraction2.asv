@@ -1,4 +1,4 @@
-function [ mask ] = brain_extraction3( brain_im, threshold, skull_erosion )
+function [ mask ] = brain_extraction2( brain_im )
 %BRAIN_THRESH Threshold a brain image to create a mask
 %
 %   [mask] = brain_thresh(brain_im, threshold)
@@ -18,19 +18,16 @@ function [ mask ] = brain_extraction3( brain_im, threshold, skull_erosion )
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
+lower_thresh = 0.2;
+upper_thresh = 0.85;
+
+brain_im = brain_im/max(brain_im(:));
+bin_locs = h.BinEdges;
+bin_vals = h.Values;
+min_loc = find(bin_vals == min(bin_vals));
+
+threshold = bin_vals(min_loc);
+
 mask = brain_im > threshold;
-
-mask = dilate_mask(mask, -skull_erosion);
-
-[~,~, cluster_sizes,index_locations] = numOfConComps(mask, 0.5, 6);
-max_cluster_size = max(cluster_sizes);
-for I = 1:length(index_locations)
-    if length(index_locations{I}) == max_cluster_size
-        mask = cluster_im( size(mask), index_locations(I), 1 );
-    end
-end
-
-mask = dilate_mask(mask, 2*skull_erosion);
-mask = dilate_mask(mask, -skull_erosion);
 
 end

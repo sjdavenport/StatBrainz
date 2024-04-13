@@ -1,4 +1,4 @@
-function [ mask ] = brain_extraction3( brain_im, threshold, skull_erosion )
+function [ mask, filled_mask ] = brain_extraction( brain_im, threshold, skull_erosion )
 %BRAIN_THRESH Threshold a brain image to create a mask
 %
 %   [mask] = brain_thresh(brain_im, threshold)
@@ -18,10 +18,19 @@ function [ mask ] = brain_extraction3( brain_im, threshold, skull_erosion )
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
+if ~exist('skull_erosion', 'var')
+    skull_erosion = 3;
+end
 mask = brain_im > threshold;
+lowerthreshmask = brain_im > 25;
 
-mask = dilate_mask(mask, -skull_erosion);
+filled_mask = zeros(size(mask));
+for I = 1:size(mask,3)
+    filled_mask(:,:,I) = imfill(lowerthreshmask(:,:,I), 'holes');
+end
+filled_mask_eroded = dilate_mask(filled_mask, -skull_erosion);
 
+mask = mask.*filled_mask_eroded;
 [~,~, cluster_sizes,index_locations] = numOfConComps(mask, 0.5, 6);
 max_cluster_size = max(cluster_sizes);
 for I = 1:length(index_locations)
@@ -30,7 +39,5 @@ for I = 1:length(index_locations)
     end
 end
 
-mask = dilate_mask(mask, 2*skull_erosion);
-mask = dilate_mask(mask, -skull_erosion);
-
 end
+
