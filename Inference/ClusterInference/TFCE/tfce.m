@@ -1,4 +1,4 @@
-function [tfced] = tfce(image,H,E,connectivity,dh)
+function [tfced] = tfce(image,H,E,connectivity,dh,h0)
 % tfce(image,H,E,connectivity,dh) performs TFCE
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -42,6 +42,11 @@ if ~exist( 'H', 'var' )
    H = 2;
 end
 
+if ~exist( 'h0', 'var' )
+   % Default value
+   h0 = 0;
+end
+
 if ~exist( 'E', 'var' )
    % Default value
    E = 0.5;
@@ -53,7 +58,7 @@ if ~exist( 'dh', 'var' )
 end
 
 % set cluster thresholds
-threshs = 0:dh:max(image(:));
+threshs = h0:dh:max(image(:));
 threshs = threshs(2:end);
 nthreshs = length(threshs);
 

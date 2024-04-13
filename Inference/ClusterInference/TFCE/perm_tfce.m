@@ -1,5 +1,5 @@
 function [ threshold, vec_of_maxima, permuted_tstat_store ] = ... 
-    perm_tfce( data, mask, H, E, connectivity, dh, alpha, nperm, show_loader, store_perms )
+    perm_tfce( data, mask, H, E, connectivity, dh, h0, alpha, nperm, show_loader, store_perms )
 % PERM_TFCE Calculates threshold, maxima vector, and permuted t-statistics for TFCE.
 %
 %   [threshold, vec_of_maxima, permuted_tstat_store] = ...
@@ -51,6 +51,11 @@ if ~exist( 'connectivity', 'var' )
    end
 end
 
+if ~exist( 'h0', 'var' )
+   % Default value
+   h0 = 0;
+end
+
 if ~exist( 'H', 'var' )
    % Default value
    H = 2;
@@ -92,7 +97,7 @@ nsubj = size(data_vectorized,2);
 mask = logical(mask);
 
 tstat = unwrap(nan2zero(mvtstat(data_vectorized)), mask);
-tstat_tfce =  tfce(tstat.*mask,H,E,connectivity,dh);
+tstat_tfce =  tfce(tstat.*mask,H,E,connectivity,dh,h0);
     
 vec_of_maxima = zeros(1,nperm);
 vec_of_maxima(1) = max(tstat_tfce(:));
@@ -119,7 +124,7 @@ for I = 2:nperm
     data_perm(:,random_sample_negative) = -data_vectorized(:,random_sample_negative);
     
     tstat_perm = unwrap(nan2zero(mvtstat(data_perm)), mask);
-    tstat_tfce_perm =  tfce(tstat_perm.*mask,H,E,connectivity,dh);
+    tstat_tfce_perm =  tfce(tstat_perm.*mask,H,E,connectivity,dh,h0);
     
     if store_perms == 1
         permuted_tstat_store(:,I) = tstat_tfce_perm(mask);
