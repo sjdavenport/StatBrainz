@@ -5,10 +5,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Illustration
-path4gifti = which('tpl-fsaverage_den-10k_hemi-L_white.surf.gii');
-% path4gifti = 'C:\Users\12SDa\Documents\R\win-library\4.1\ciftiTools\extdata\S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii';
-data = randn(20480, 1);
-srfplot(path4gifti, data)
+srf = loadsrf( 'fs5');
+data = randn(srf.lh.nvertices, 1);
+smooth_data = smooth_surface(srf.lh, data, 20);
+srfplot(srf.lh, smooth_data)
+
+%%
+srf = loadsrf( 'hcp');
+data = randn(64980, 1);
+smooth_data = smooth_surface(srf.lh, data, 1, 'ones', 1);
+srfplot(srf.lh, smooth_data)
 
 %%
 path4gifti_left = which('tpl-fsaverage_den-10k_hemi-L_white.surf.gii');

@@ -39,7 +39,8 @@ if strcmp(surface_id, 'bert')
 end
 
 if strcmp(surface_id, 'hcp')
-    srf_dir = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\StatBrainz\BrainImages\Gifti_files\';
+    sb_dir = statbrainz_maindir;
+    srf_dir = [sb_dir, 'BrainImages\Gifti_files\'];
     srf = gifti2surf([srf_dir, 'S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii'], [srf_dir, 'S1200.R.inflated_MSMAll.32k_fs_LR.surf.gii']);
     return
 end
