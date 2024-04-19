@@ -9,7 +9,7 @@ srf = loadsrf;
 clear data
 data.lh = randn(srf.lh.nvertices, 1);
 data.rh = randn(srf.rh.nvertices, 1);
-FWHM = 15;
+FWHM = 5;
 smooth_data = smooth_surface(srf, data, FWHM);
 srfplot(srf.lh, smooth_data.lh)
 
@@ -20,7 +20,6 @@ X_left = randn(srf.nvertices,1);
 
 FWHM = 8;
 X_left_smooth = smooth_surface(srf, X_left, FWHM );
-
 
 %%
 FWHM = 20;

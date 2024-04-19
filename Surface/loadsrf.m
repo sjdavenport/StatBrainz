@@ -6,7 +6,9 @@ function srf = loadsrf( surface_id, surface_type )
 %--------------------------------------------------------------------------
 % ARGUMENTS
 %  surface_id: one of 'fs3', 'fs4', 'fs5', 'fs6', 'fs7'
+%              default is 'fs5'
 %  surface_type: one of 'white', 'pial', 'sphere', 'inflated'
+%              default is 'white'
 %--------------------------------------------------------------------------
 % OUTPUT
 %   srf             - Loaded surface data structure.
