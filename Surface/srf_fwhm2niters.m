@@ -1,5 +1,6 @@
 function niters = srf_fwhm2niters( FWHM, srf, fudge_factor )
-% SRF_FWHM2NITERS Converts FWHM to the number of smoothing iterations.
+% SRF_FWHM2NITERS Converts FWHM to the number of smoothing iterations in
+% the same way that free surfer does.
 %
 %   niters = srf_fwhm2niters(FWHM, srf, fudge_factor) converts the full
 %   width at half maximum (FWHM) to the number of smoothing iterations

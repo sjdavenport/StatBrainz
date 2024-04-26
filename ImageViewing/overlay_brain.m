@@ -30,10 +30,10 @@ function ax = overlay_brain( slice, padding, region_masks, colors2use, alpha_val
 %   [0, 0, slice] with a padding of 10, red color, transparency of 0.75, and
 %   rotation of 4, you can use the following command:
 %
-  % MNIbrain = imgload('MNIbrain.nii.gz');
-  % MNIbrain = MNIbrain/max(MNIbrain(:));
-  % slice = 45;
-  % overlay_brain([0, 0, slice], 10, {MNIbrain(:,:,slice)> 0.8}, 'red', 0.6, 4)
+% MNIbrain = imgload('MNIbrain.nii.gz');
+% MNIbrain = MNIbrain/max(MNIbrain(:));
+% slice = 45;
+% overlay_brain([0, 0, slice], 10, {MNIbrain(:,:,slice)> 0.8}, 'red', 0.6, 4)
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
