@@ -18,11 +18,11 @@ function img = imgload( filename )
 sb_dir = statbrainz_maindir;
 bs_img_loc = [sb_dir, 'BrainImages/Volume/'];
 
-try
-    a = load([bs_img_loc, filename, '.mat']);
-    img = a.data;
-    return
-end
+% try
+%     a = load([bs_img_loc, filename, '.mat']);
+%     img = a.data;
+%     return
+% end
 
 if strcmp(filename(end-2:end), '.gz') || strcmp(filename(end-3:end), '.nii')
     try

@@ -32,11 +32,19 @@ end
 % pause(0.00001);
 % frame_h = get(handle(gcf),'JavaFrame');
 % set(frame_h,'Maximized',1);
-if ~isempty(strfind(pwd, '12SDa'))
-    set(gcf, 'position', [0,35,1500,607])
-else
-    set(get(groot, 'Children'), 'WindowState', 'maximized');
-end
+% global TYPE
+
 % set(groot, 'defaultFigureWindowState', 'maximized');
+
+monitorPositions = get(0, 'MonitorPositions');
+set(gcf, 'position', [0,0,monitorPositions(3:4)])
+
 end
 
+% if ~isempty(strfind(pwd, '12SDa'))
+%     set(gcf, 'position', [0,35,1500,607])
+% elseif strcmp(TYPE, 'sdavenport')
+%     set(gcf, 'position', [0,0,1512, 982])
+% else
+%     set(get(groot, 'Children'), 'WindowState', 'maximized');
+% end
