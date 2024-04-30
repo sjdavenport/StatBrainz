@@ -86,3 +86,6 @@ end
 
 %%
 surfplot(path4gifti_left, left_rotations(:,I), 1, 0.05, 1 )
+
+%%
+srf = loadsrf('')
