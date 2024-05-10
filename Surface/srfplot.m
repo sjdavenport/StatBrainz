@@ -1,4 +1,4 @@
-function srfplot( srf, surface_data, seeback, edgealpha, dointerp, view_vec, dofullscreen )
+function srfplot( srf, surface_data, seeback, edgealpha, dointerp, view_vec, dofullscreen, dolighting )
 % SRFPLOT Plots surface data on a given surface.
 %
 %   srfplot(path4surf, surface_data, seeback, edgealpha, dointerp, view_vec)
@@ -39,19 +39,20 @@ if ~exist( 'dofullscreen', 'var' )
    dofullscreen = 1;
 end
 
+
+default_frontview = [-90, 0];
+% default_backview = [89,-16];
+default_backview = [90,0];
 if isfield(srf, 'hemi')
-    if strcmp(srf.hemi, 'lh')
-        default_frontview = [-89, 16];
-        default_backview = [89,-16];
-    else
+    if strcmp(srf.hemi, 'rh')
         seeback = 1 - seeback;
-        default_backview = [95, 13]; % Actually front but see back is back to front
-        default_frontview = [273, -4];
+        default_backview = [90, 0]; % Actually front but see back is back to front
+        default_frontview = [270, 0];
     end
 end
 
 using_default_view = 0;
-if ~exist( 'view_vec', 'var' ) || isnan(view_vec)
+if ~exist( 'view_vec', 'var' ) || any(isnan(view_vec))
    % Default value
    if seeback == 0
        view_vec = default_frontview;
@@ -61,9 +62,30 @@ if ~exist( 'view_vec', 'var' ) || isnan(view_vec)
    end
 end
 
+if ischar(view_vec)
+    if strcmp(view_vec, 'top')
+        view_vec = [0,90];
+    elseif strcmp(view_vec, 'back')
+        view_vec = [0,0];
+    elseif strcmp(view_vec, 'front')
+        view_vec = [-180, 0];
+    elseif strcmp(view_vec, 'bottom')
+        view_vec = [-180, -90];
+    elseif strcmp(view_vec, 'left')
+        view_vec = [-90, 0];
+    elseif strcmp(view_vec, 'right')
+        view_vec = [270, 0];
+    end 
+end
+
 if ~exist( 'surface_data', 'var' )
    % Default value
    surface_data = [];
+end
+
+if ~exist( 'dolighting', 'var' )
+   % Default value
+   dolighting = 1;
 end
 
 if ~exist( 'edgealpha', 'var' )
@@ -84,34 +106,26 @@ end
 %--------------------------------------------------------------------------
 if seeback == 2
     subplot(1,2,1)
-    srfplot( srf, surface_data, 0, edgealpha, dointerp, view_vec )
+    srfplot( srf, surface_data, 0, edgealpha, dointerp, view_vec, dofullscreen )
     subplot(1,2,2)
-    srfplot( srf, surface_data, 1, edgealpha, dointerp, view_vec )
+    srfplot( srf, surface_data, 1, edgealpha, dointerp, view_vec, dofullscreen )
     return
 end
 
 if isstruct(srf)
     g = srf;
     if isfield(srf, 'lh') && isfield(srf, 'rh')
-        subplot(1,2,1)
-        srfplot(g.lh, surface_data, seeback, edgealpha, docamlight, view_vec )
-        subplot(1,2,2)
-        if using_default_view == 1
-            view_vec = [-84,-12];
-        end
-        srfplot(g.rh, surface_data, seeback, edgealpha, docamlight, view_vec )
+        clear jointsrf
+        jointsrf.vertices = [srf.lh.vertices; srf.rh.vertices];
+        jointsrf.faces = [srf.lh.faces; (srf.rh.faces + srf.lh.nvertices) ];
+        jointsrf.nfaces = size(jointsrf.faces, 1);
+        jointsrf.nvertices = size(jointsrf.vertices, 1);
+
+        srfplot(jointsrf, [surface_data.lh; surface_data.rh], seeback, edgealpha, dointerp, view_vec, dofullscreen )
+        % srfplot(g.lh, surface_data.lh, seeback, edgealpha, dointerp, view_vec, dofullscreen, 1 )
+        % hold on
+        % srfplot(g.rh, surface_data.rh, seeback, edgealpha, dointerp, view_vec, dofullscreen, 0 )
         return
-    end
-else
-    if strcmp(srf(end-3:end), '.gii')
-        if ~exist('gifti', 'file')
-            error('You need to install the gifti matlab package, available here: https://github.com/gllmflndn/gifti in order to read gifti surface files. Once installed you must make sure its contents are available on the matlab path.')
-        end
-        g = gifti(srf);
-    else
-        [vertices, faces] = read_fs_geometry(srf);
-        g.vertices = vertices;
-        g.faces = faces;
     end
 end
 
@@ -149,8 +163,10 @@ axis off
 
 view(view_vec)
 
-camlight('headlight')
-lighting gouraud;
+if dolighting
+    camlight('headlight')
+    lighting gouraud;
+end
 material dull;
 
 %     camlight('right')
@@ -175,4 +191,15 @@ if dofullscreen
 end
 
 end
+% 
+% if strcmp(srf(end-3:end), '.gii')
+%     if ~exist('gifti', 'file')
+%         error('You need to install the gifti matlab package, available here: https://github.com/gllmflndn/gifti in order to read gifti surface files. Once installed you must make sure its contents are available on the matlab path.')
+%     end
+%     g = gifti(srf);
+% else
+%     [vertices, faces] = read_fs_geometry(srf);
+%     g.vertices = vertices;
+%     g.faces = faces;
+% end
 

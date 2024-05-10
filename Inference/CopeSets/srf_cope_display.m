@@ -1,4 +1,4 @@
-function [ out ] = srf_cope_display( srf, lower_set, upper_set, muhat, c, seeback )
+function [ out ] = srf_cope_display( srf, lower_set, upper_set, muhat, c, seeback, use_contour, redblue, dointerp )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -24,15 +24,38 @@ if ~exist( 'seeback', 'var' )
    seeback = 0;
 end
 
+if ~exist( 'use_contour', 'var' )
+   % Default value
+   use_contour = 0;
+end
+
+if ~exist('dointerp','var')
+    dointerp = 1;
+end
+
+if ~exist('redblue','var')
+    redblue = 1;
+end
+
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 %lower_set = upper_cb > c;
 %upper_set = lower_cb > c;
 yellow_set = muhat > c;
+if use_contour
+    yellow_set = srf_contour(srf, yellow_set);
+end
+
 color_map = zeros(length(muhat), 3); % Generates random RGB colors
-color_map(logical(lower_set.*(1-upper_set)), 3) = 1;
-color_map(upper_set, 1) = 1;
-color_map(logical(1-lower_set), :) = ones(sum((1-lower_set)),3)*0.7;
+color_map(upper_set, 1) = 1; %Red
+
+if redblue
+    color_map(logical(lower_set.*(1-upper_set)), 3) = 1; %Blue
+    color_map(logical(1-lower_set), :) = ones(sum((1-lower_set)),3)*0.7; %Grey
+else
+    color_map(logical(lower_set.*(1-upper_set)), :) = ones(sum(lower_set.*(1-upper_set)),3)*0.7; %Grey
+    color_map(logical(1-lower_set), 3) = 1; %Blue
+end
 
 color_map(logical(yellow_set.*(1-upper_set)),1) = 1;
 color_map(logical(yellow_set.*(1-upper_set)),2) = 1;
@@ -40,7 +63,11 @@ color_map(logical(yellow_set.*(1-upper_set)),3) = 0;
 
 color_map(isnan(muhat), :) = ones(sum(isnan(muhat)),3);
 
-srfplot(srf, color_map, seeback, 0.05, 1, NaN, 0)
+srfplot(srf, color_map, seeback, 0.05, dointerp, NaN, 0)
+% axis image
 
 end
 
+% color_map = get_color_map(lower_set, upper_set, muhat, c)
+% 
+% end
