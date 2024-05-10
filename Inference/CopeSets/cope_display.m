@@ -110,6 +110,8 @@ if ~isnan(truth)
 %     set(im4,'AlphaData',true_boundary);
 end
 axis off
+axis image;
+
 % set(gcf, 'position', [0,0,1500,1500])
 
 end

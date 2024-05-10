@@ -1,4 +1,4 @@
-function [ lower_band, upper_band, threshold ] = scopes( data, nboot, alpha, show_loader, sigmahat )
+function [ lower_band, upper_band ] = scopes_lm( data, design_matrix, contrast_matrix, nboot, alpha, show_loader )
 % SCOPES Computes confidence intervals for a data field using the SCOPES method.
 %
 %   [lower_band, upper_band] = SCOPES(data, mask, nboot, alpha, show_loader)
@@ -49,30 +49,34 @@ function [ lower_band, upper_band, threshold ] = scopes( data, nboot, alpha, sho
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
+if ~exist('nboot', 'var')
+    nboot = 5000;
+end
+
+if ~exist('alpha', 'var')
+    alpha = 0.05;
+end
+
+if ~exist('show_loader', 'var')
+    show_loader = 1;
+end
+
 %%  Check mandatory input and get important constants
 %--------------------------------------------------------------------------
 s_data = size(data);
 nsubj = s_data(end);
-D = length(s_data) - 1;
-data_mean = mean(data, D+1);
 
-if ~exist('sigmahat', 'var')
-    sigmahat = std(data, 0, D+1);
-    demeaned_data = data - data_mean;
-    threshold = fastperm( demeaned_data, nsubj, alpha/2, nboot, show_loader);
-else
-    demeaned_data = data - data_mean;
-    threshold = fastperm_mean( demeaned_data, nsubj, alpha/2, nboot, 0, show_loader,...
-                                                0, 0, sigmahat);
-end
+% demeaned_data = data - data_mean;
+% threshold = fastperm( demeaned_data, nsubj, alpha/2, nboot, show_loader); 
+do_abs = 1;
+[ threshold, ~, cqs] = ... 
+      fastlmperm( data, design_matrix, contrast_matrix, 100, do_abs, alpha, 1000, 0, show_loader);
 
-% bootstrap_samples = bootstrap( vec_data( data, mask ), nboot, 1, 1, show_loader );
-% threshold = prctile(bootstrap_samples, 100*(1-alpha));
-% threshold = prctile(bootstrap_samples, 100*(1-alpha/2));
-% Need to change to a two sample test when I have the chance
+[lower_band, upper_band] = lmthresh2scb(threshold, cqs.Cbetahat, cqs.sigmahat, cqs.scaling_constants);
 
-upper_band = data_mean + threshold*sigmahat/sqrt(nsubj);
-lower_band = data_mean - threshold*sigmahat/sqrt(nsubj);
+% lmthresh2scb(threshold, design_matrix, contrast_matrix, cqs.betahat, cqs.sigmahat);
+% upper_band = data_mean + threshold*sigma_hat/sqrt(nsubj);
+% lower_band = data_mean - threshold*sigma_hat/sqrt(nsubj);
 
 end
 

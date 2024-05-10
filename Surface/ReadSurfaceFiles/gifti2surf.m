@@ -28,6 +28,8 @@ clear srf
 if nargin == 2
     srf.lh = gifti2surf(path4gifti);
     srf.rh = gifti2surf(path4giftiright);
+    srf.lh.hemi = 'lh';
+    srf.rh.hemi = 'rh';
     return
 end
 

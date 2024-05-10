@@ -1,4 +1,4 @@
-function [ out ] = srf_cope_display( srf, lower_set, upper_set, muhat, c, seeback )
+function [ out ] = srf_scb2cope( srf, lower_band_im, upper_band_im, muhat, mask, c, seeback )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -26,21 +26,13 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-%lower_set = upper_cb > c;
-%upper_set = lower_cb > c;
-yellow_set = muhat > c;
-color_map = zeros(length(muhat), 3); % Generates random RGB colors
-color_map(logical(lower_set.*(1-upper_set)), 3) = 1;
-color_map(upper_set, 1) = 1;
-color_map(logical(1-lower_set), :) = ones(sum((1-lower_set)),3)*0.7;
+lower_set = upper_band_im > c;
+upper_set = lower_band_im > c;
+lower_set = lower_set.*mask;
+upper_set = upper_set.*mask;
+muhat = muhat.*zero2nan(mask);
 
-color_map(logical(yellow_set.*(1-upper_set)),1) = 1;
-color_map(logical(yellow_set.*(1-upper_set)),2) = 1;
-color_map(logical(yellow_set.*(1-upper_set)),3) = 0;
-
-color_map(isnan(muhat), :) = ones(sum(isnan(muhat)),3);
-
-srfplot(srf, color_map, seeback, 0.05, 1, NaN, 0)
+srf_cope_display( srf, lower_set, upper_set, muhat, c, seeback )
 
 end
 

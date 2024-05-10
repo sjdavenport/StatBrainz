@@ -1,0 +1,22 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%    This script tests the scopes_lm function
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+age = randi([40,60], nsubj, 1);
+age = age-mean(age);
+sex = rand(nsubj, 1) > 0.6;
+sex = sex - mean(sex);
+Z = [ones(nsubj,1), sex, age];
+design_matrix = [X,Z];
+nvox = 1000;
+% X_coeff = 2;
+
+FWHM_sig = 5;
+dim = [50,50];
+X_coeff = fast_conv(randn(dim), FWHM_sig, 2);
+data = 5 + 0.2*sex' + 0.12*age' + X_coeff + randn([dim, nsubj]);
+for I = 1:30
+    data(:,:,I) = data(:,:,I) + 
+end

@@ -14,7 +14,7 @@ function srf = loadsrf( surface_id, surface_type )
 %   srf             - Loaded surface data structure.
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+% srf = loadsrf('fs5', 'white');
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
@@ -70,6 +70,8 @@ end
 temp = load([srf_dir, surface_id, '/', surface_type, '.mat']);
 srf = temp.srf;
 % srf = fs2surf([srf_dir, surface_id, '.lh.', surface_type], [srf_dir, surface_id, '.rh.', surface_type]);
+srf.lh.hemi = 'lh';
+srf.rh.hemi = 'rh';
 
 end
 

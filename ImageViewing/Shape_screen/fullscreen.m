@@ -1,4 +1,4 @@
-function fullscreen
+function screen_size = fullscreen
 % fullscreen makes the plot fullscreen
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -36,8 +36,12 @@ end
 
 % set(groot, 'defaultFigureWindowState', 'maximized');
 
-monitorPositions = get(0, 'MonitorPositions');
-set(gcf, 'position', [0,0,monitorPositions(3:4)])
+% monitorPositions = get(0, 'MonitorPositions');
+% set(gcf, 'position', [0,0,monitorPositions(3:4)])
+
+screen_size = get(0, 'ScreenSize');
+% Set the figure position to cover the entire screen
+set(gcf, 'Position', screen_size);
 
 end
 

@@ -8,7 +8,13 @@
 srf = loadsrf( 'fs5');
 data = randn(srf.lh.nvertices, 1);
 smooth_data = smooth_surface(srf.lh, data, 20);
-srfplot(srf.lh, smooth_data)
+srfplot(srf.lh, smooth_data, 1)
+
+%%
+srf = loadsrf( 'fs5');
+data = randn(srf.rh.nvertices, 1);
+smooth_data = smooth_surface(srf.rh, data, 20);
+srfplot(srf.rh, smooth_data, 1)
 
 %%
 srf = loadsrf( 'hcp');

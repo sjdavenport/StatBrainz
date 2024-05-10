@@ -1,4 +1,4 @@
-function srfplot( srf, surface_data, seeback, edgealpha, dointerp, view_vec )
+function srfplot( srf, surface_data, seeback, edgealpha, dointerp, view_vec, dofullscreen )
 % SRFPLOT Plots surface data on a given surface.
 %
 %   srfplot(path4surf, surface_data, seeback, edgealpha, dointerp, view_vec)
@@ -19,7 +19,7 @@ function srfplot( srf, surface_data, seeback, edgealpha, dointerp, view_vec )
 %   Plots the surface with optional surface data.
 %--------------------------------------------------------------------------
 % EXAMPLES
-% See test_surfplot.m
+% See test_srfplot.m
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
@@ -34,14 +34,30 @@ if ~exist( 'seeback', 'var' )
    seeback = 0;
 end
 
+if ~exist( 'dofullscreen', 'var' )
+   % Default value
+   dofullscreen = 1;
+end
+
+if isfield(srf, 'hemi')
+    if strcmp(srf.hemi, 'lh')
+        default_frontview = [-89, 16];
+        default_backview = [89,-16];
+    else
+        seeback = 1 - seeback;
+        default_backview = [95, 13]; % Actually front but see back is back to front
+        default_frontview = [273, -4];
+    end
+end
+
 using_default_view = 0;
-if ~exist( 'view_vec', 'var' )
+if ~exist( 'view_vec', 'var' ) || isnan(view_vec)
    % Default value
    if seeback == 0
-       view_vec = [-89, 16];
+       view_vec = default_frontview;
        using_default_view = 1;
    else
-       view_vec = [89,-16];
+       view_vec = default_backview;
    end
 end
 
@@ -61,7 +77,7 @@ end
 
 if ~exist( 'dointerp', 'var' )
    % Default value
-   dointerp = 0;
+   dointerp = 1;
 end
 
 %%  Main Function Loop
@@ -149,14 +165,14 @@ end
 
 set(ptru,'AmbientStrength',0.5)
 axis image
-screen_size = get(0, 'ScreenSize');
-
-% Set the figure position to cover the entire screen
-set(gcf, 'Position', screen_size);
 
 if use_surface_data
     set(gcf, 'Color', 'black');
 end
-% fullscreen
+
+if dofullscreen
+    fullscreen;
+end
+
 end
 
