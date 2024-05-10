@@ -25,7 +25,7 @@ jointsrf.nvertices = size(jointsrf.vertices, 1);
 srfplot(jointsrf, [smooth_data.lh; smooth_data.rh])
 
 %%
-srfplot(srf, smooth_data, 0, 1, 1, 'left')
+srfplot(srf, smooth_data, 0, 1, 1)
 
 %%
 srfplot(srf.rh, smooth_data.rh, 1)

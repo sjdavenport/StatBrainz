@@ -6,10 +6,10 @@ function [ out ] = srf_cope_display( srf, lower_set, upper_set, muhat, c, seebac
 % Optional
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+%
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
@@ -20,13 +20,13 @@ function [ out ] = srf_cope_display( srf, lower_set, upper_set, muhat, c, seebac
 %%  Add/check optional values
 %--------------------------------------------------------------------------
 if ~exist( 'seeback', 'var' )
-   % Default value
-   seeback = 0;
+    % Default value
+    seeback = 0;
 end
 
 if ~exist( 'use_contour', 'var' )
-   % Default value
-   use_contour = 0;
+    % Default value
+    use_contour = 0;
 end
 
 if ~exist('dointerp','var')
@@ -41,6 +41,20 @@ end
 %--------------------------------------------------------------------------
 %lower_set = upper_cb > c;
 %upper_set = lower_cb > c;
+if isfield(srf, 'lh') && isfield(srf, 'rh')
+    color_map.lh = get_color_map(lower_set.lh, upper_set.lh, muhat.lh, c, use_contour, redblue);
+    color_map.rh = get_color_map(lower_set.rh, upper_set.rh, muhat.rh, c, use_contour, redblue);
+    srfplot(srf, color_map, seeback, 0.05, dointerp, 'top', 0)
+else
+    color_map = get_color_map(lower_set, upper_set, muhat, c, use_contour, redblue);
+    srfplot(srf, color_map, seeback, 0.05, dointerp, NaN, 0)
+end
+
+% axis image
+
+end
+
+function color_map = get_color_map(lower_set, upper_set, muhat, c, use_contour, redblue)
 yellow_set = muhat > c;
 if use_contour
     yellow_set = srf_contour(srf, yellow_set);
@@ -62,12 +76,4 @@ color_map(logical(yellow_set.*(1-upper_set)),2) = 1;
 color_map(logical(yellow_set.*(1-upper_set)),3) = 0;
 
 color_map(isnan(muhat), :) = ones(sum(isnan(muhat)),3);
-
-srfplot(srf, color_map, seeback, 0.05, dointerp, NaN, 0)
-% axis image
-
 end
-
-% color_map = get_color_map(lower_set, upper_set, muhat, c)
-% 
-% end
