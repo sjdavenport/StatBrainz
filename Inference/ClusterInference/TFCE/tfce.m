@@ -1,15 +1,16 @@
-function [tfced] = tfce(image,H,E,connectivity,dh,h0)
+function [tfce_im] = tfce(image,H,E,connectivity,dh,h0)
 % tfce(image,H,E,connectivity,dh) performs TFCE
 %--------------------------------------------------------------------------
 % ARGUMENTS
-%  image: a 3D matlab array
+%  image: a 2D or 3D matlab array
 %  H: height exponent (default is 2)
 %  E: extent exponent (default is 0.5)
 %  connectivity: connectivity used to compute the connected components
 %  dh: size of steps for cluster formation. Default is 0.1.
+%  h0: the cluster forming threshold - Default is h0 = 3.1.
 %--------------------------------------------------------------------------
 % OUTPUT
-%  tfced: an array with the same size as image giving the TFCE transformed
+%  tfce_im: an array with the same size as image giving the TFCE transformed
 %           image
 %--------------------------------------------------------------------------
 % EXAMPLES
@@ -62,7 +63,7 @@ threshs = h0:dh:max(image(:));
 threshs = threshs(2:end);
 nthreshs = length(threshs);
 
-% find positive voxels (greater than first threshold)
+% find number of voxels
 nvox = length(image(:));
 
 % find connected components
@@ -79,8 +80,8 @@ for h = 1:nthreshs
     curvals = (clustsize.^E).*(threshs(h)^H);
     vals = vals + curvals;
 end
-tfced = NaN(size(image));
-tfced(:) = vals.*dh;
+tfce_im = NaN(size(image));
+tfce_im(:) = vals.*dh;
 
 end
 

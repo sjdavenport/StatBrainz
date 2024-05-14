@@ -1,10 +1,19 @@
-function [ true_tfce_cluster_im, true_tfce_clusters ] = ... 
-    real_tfce_clusters( tstat_orig, mask, tfce_threshold, H,E,connectivity_criterion,dh,h0)
-% NEWFUN
+function [ true_tfce_cluster_im, true_tfce_clusters, cluster_pvals ] = ... 
+    real_tfce_clusters( tstat_orig, mask, tfce_threshold, H, E, connectivity_criterion, dh, h0, vec_of_maxima)
+% real_tfce_clusters( tstat_orig, mask, tfce_threshold, H, E, connectivity_criterion, dh, h0, vecoftfcevals)
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  tstat_orig: a 2D or 3D matlab array giving the test-statistic at each
+%              pixel/voxel
+%  mask: a 0/1 image with the same size as tstat_orig giving the mask
+%  vec_of_maxima: a vector of the values taken in the different permutations
 % Optional
+%  H: height exponent (default is 2)
+%  E: extent exponent (default is 0.5)
+%  connectivity_criterion: connectivity used to compute the connected components
+%  dh: size of steps for cluster formation. Default is 0.1.
+%  h0: the cluster forming threshold - Default is h0 = 3.1.
 %--------------------------------------------------------------------------
 % OUTPUT
 % 
@@ -72,6 +81,10 @@ end
 real_survivor_indices = max_tfce_within_real_clusters > tfce_threshold;
 true_tfce_clusters = real_surviving_tfce_clusters_vec(real_survivor_indices);
 true_tfce_cluster_im = cluster_im( size(mask), true_tfce_clusters, 0.5 );
+
+if exist('vec_of_maxima', 'var')
+    cluster_pvals = distbn2pval(vec_of_maxima, max_tfce_within_real_clusters);
+end
 
 end
 

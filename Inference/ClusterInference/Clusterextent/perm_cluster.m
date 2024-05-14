@@ -91,7 +91,7 @@ end
 
 for I = 2:nperm
     if show_loader == 1
-        loader(I-1, nperm-1, 'perm progress:');
+        loader(I-1, nperm-1, 'cluster perm progress:');
     end
     
     random_berns_for_iter = random_berns(:, I);

@@ -1,4 +1,4 @@
-function ax = overlay_brain( slice, padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
+function ax = overlay_brain( slice, region_masks, colors2use, alpha_val, underim, applybrainmask, upsample)
 % overlay_brain - Overlay region masks on a brain slice image.
 %
 %   overlay_brain(slice, padding, region_masks, colors2use, alpha_val, rotate)
@@ -7,11 +7,8 @@ function ax = overlay_brain( slice, padding, region_masks, colors2use, alpha_val
 %
 % Mandatory Inputs:
 %   - slice: A 3-element numeric array specifying the slice coordinates
-%            either [x,0,0] or [0,y,0] or [0,0,z]
 %
 % Optional Inputs:
-%   - padding: An optional numeric value specifying the padding around
-%              the region masks. Default is 2.
 %   - region_masks: An optional cell array of region masks to overlay on
 %                   the brain slice. Default is {NaN}.
 %   - colors2use: An optional string specifying the color of the overlay.
@@ -32,8 +29,7 @@ function ax = overlay_brain( slice, padding, region_masks, colors2use, alpha_val
 %
 % MNIbrain = imgload('MNIbrain.nii.gz');
 % MNIbrain = MNIbrain/max(MNIbrain(:));
-% slice = 45;
-% overlay_brain([0, 0, slice], 10, {MNIbrain(:,:,slice)> 0.8}, 'red', 0.6, 4)
+% overlay_brain([30,40,50], {MNIbrain > 0.8}, 'red', 0.6, 4)
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
@@ -52,17 +48,8 @@ if ~exist('colors2use', 'var')
     colors2use = [];
 end
 
-if ~exist('padding', 'var')
-    padding = 2;
-end
-
 if ~exist('underim', 'var')
     underim = [];
-end
-
-index_loc = find(slice);
-if ~exist('rotate', 'var')
-    rotate = 4;
 end
 
 if ~exist('applybrainmask', 'var')
@@ -88,58 +75,41 @@ else
 end
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-index = repmat({':'}, 1, 3);
-index{index_loc} = slice(index_loc);
+padding = 15;
+brain_im4D = combine_brains(brain_im, slice, brain_mask, padding);
+for I = 1:length(region_masks)
+    region_masks{I} = combine_brains(region_masks{I}, slice, brain_mask, padding);
+end
+% bounds = mask_bounds( brain_mask, padding );
+% bounds = {1:91,1:109,1:91};
 
-bounds = mask_bounds( brain_mask, padding );
-other_indices = setdiff(1:3,index_loc);
-bounds = bounds(other_indices);
-
-brain_im2D = squeeze(brain_im(index{:}));
 if applybrainmask
-    brain_mask2D = squeeze(brain_mask(index{:}));
+    brain_mask4D = combine_brains(brain_mask, slice, brain_mask, padding);
 else
-    brain_mask2D = ones(size(squeeze(brain_mask(index{:}))));
+    brain_mask4D = ones(size(brain_im3D));
 end
 
-% if rotate == 2
-%     imagesc(brain_im_bw')
-% %     data = data';
-% elseif rotate == 3
-%     imagesc(flipud(brain_im_bw'))
-% %     data = flipud(data);
-% elseif rotate == 4
-%     imagesc(flipud(brain_im_bw'));
-% %     data = flipud(data');
-% else
-% end
-
+rotate = 1;
 if any(isnan(underim(:)))
-    brain_im2D_bounded = brain_im2D(bounds{:});
-    if rotate == 2
-        brain_im2D_bounded = brain_im2D_bounded';
-    elseif rotate == 3
-        brain_im2D_bounded = flipud(brain_im2D_bounded);
-    elseif rotate == 4
-        brain_im2D_bounded = flipud(brain_im2D_bounded');
-    end
-    
-    brain_im_bw = ones([size(brain_im2D_bounded), 3]);
-    brain_im_bw = squeeze(brain_im_bw.*brain_im2D_bounded/max(brain_im2D_bounded(:)));
+    brain_im_bw = ones([size(brain_im4D), 3]);
+    brain_im_bw = squeeze(brain_im_bw.*brain_im4D/max(brain_im4D(:)));
     imagesc(brain_im_bw);
     hold on
-    underim2D = squeeze(underim(index{:}));
-    im1 = viewdata(underim2D, brain_mask2D, region_masks, colors2use, rotate, bounds, alpha_val);
-    if max(underim2D(:)) > min(underim2D(:))
-        caxis([min(underim2D(:)), max(underim2D(:))])
+    underim4D = combine_brains(underim, slice);
+    im1 = viewdata(underim4D, brain_mask2D, region_masks, colors2use, rotate, [], alpha_val);
+    if max(underim4D(:)) > min(underim4D(:))
+        caxis([min(underim4D(:)), max(underim4D(:))])
     end
 else
-    im1 = viewdata(brain_im2D, brain_mask2D, region_masks, colors2use, rotate, bounds, alpha_val);
+    im1 = viewdata(brain_im4D, brain_mask4D, region_masks, colors2use, rotate, [], alpha_val);
     colormap('gray')
 end
 
+% axes('Units', 'normalized', 'Position', [0 0 1 1])
 axis image
-fullscreen
+fullscreen;
 ax = gca;
+set(gcf, 'Color', 'black');
+
 end
 

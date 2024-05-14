@@ -10,10 +10,11 @@ function [ threshold, vec_of_maxima, permuted_tstat_store ] = ...
 % ARGUMENTS:
 %   - data: Input data matrix.
 %   - mask: Binary mask specifying the region of interest.
-%   - H: Height exponent (default is 2).
-%   - E: Extent exponent (default is 0.5).
-%   - connectivity: Connectivity used to compute connected components.
-%   - dh: Size of steps for cluster formation.
+%   - H: height exponent (default is 2)
+%   - E: extent exponent (default is 0.5)
+%   - connectivity: connectivity used to compute the connected components
+%   - dh: size of steps for cluster formation. Default is 0.1.
+%   - h0: the cluster forming threshold - Default is h0 = 3.1.
 %   - alpha: Significance level (default is 0.05).
 %   - nperm: Number of permutations for randomization (default is 1000).
 %   - show_loader: Flag to display progress loader (default is 1).
@@ -30,7 +31,7 @@ function [ threshold, vec_of_maxima, permuted_tstat_store ] = ...
 % data = wfield(dim, nsubj).field + Sig;
 % threshold = perm_tfce(data, ones(dim))
 %--------------------------------------------------------------------------
-% AUTHOR: Samuel Davenport
+% Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 
 %%  Check mandatory input and get important constants

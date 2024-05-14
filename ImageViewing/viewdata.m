@@ -133,6 +133,7 @@ im2 = imagesc(color);
 set(im2,'AlphaData',1-brain_mask);
 
 axis off
+% axis image
 
 end
 
