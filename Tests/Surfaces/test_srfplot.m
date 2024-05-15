@@ -8,24 +8,16 @@
 srf = loadsrf( 'fs5');
 subplot(1,2,1)
 smooth_data = srf_noise( srf, 20 );
-srfplot(srf.rh, smooth_data.rh, 0)
-hold on
-srfplot(srf.lh, smooth_data.lh, 0)
-
+srfplot(srf.lh, smooth_data.lh, 1)
 subplot(1,2,2)
-srfplot(srf.lh, smooth_data.lh, 0)
+srfplot(srf.rh, smooth_data.rh, 'side')
 
-%%
-clear jointsrf
-jointsrf.vertices = [srf.lh.vertices; srf.rh.vertices];
-jointsrf.faces = [srf.lh.faces; (srf.rh.faces + srf.lh.nvertices) ];
-jointsrf.nfaces = size(jointsrf.faces, 1);
-jointsrf.nvertices = size(jointsrf.vertices, 1);
-
-srfplot(jointsrf, [smooth_data.lh; smooth_data.rh])
 
 %%
 srfplot(srf, smooth_data, 0, 1, 1)
+
+%%
+srfplot(srf, smooth_data)
 
 %%
 srfplot(srf.rh, smooth_data.rh, 1)

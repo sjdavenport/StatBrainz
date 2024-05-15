@@ -1,7 +1,7 @@
-function srfplot( srf, surface_data, view_vec, dointerp, edgealpha, dofullscreen, dolighting )
+function srfplot2( srf, surface_data, seeback, edgealpha, dointerp, view_vec, dofullscreen, dolighting )
 % SRFPLOT Plots surface data on a given surface.
 %
-%   srfplot(path4surf, surface_data, view_vec, dointerp, edgealpha)
+%   srfplot(path4surf, surface_data, seeback, edgealpha, dointerp, view_vec)
 %   plots the surface defined by 'path4surf' with optional surface data
 %   'surface_data'. Various optional parameters can be specified.
 %--------------------------------------------------------------------------
@@ -10,9 +10,10 @@ function srfplot( srf, surface_data, view_vec, dointerp, edgealpha, dofullscreen
 %       path4surf   - Path to the surface file or surface structure.
 %   Optional
 %       surface_data- Surface data to be plotted.
-%       view_vec    - View vector for plotting (default: [-89, 16]).
-%       dointerp    - Flag for surface interpolation (default: 0).
+%       seeback     - Flag for viewing from the back (default: 0).
 %       edgealpha   - Transparency of surface edges (default: 0.2).
+%       dointerp    - Flag for surface interpolation (default: 0).
+%       view_vec    - View vector for plotting (default: [-89, 16]).
 %--------------------------------------------------------------------------
 % OUTPUT
 %   Plots the surface with optional surface data.
@@ -23,49 +24,41 @@ function srfplot( srf, surface_data, view_vec, dointerp, edgealpha, dofullscreen
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
+%%  Check mandatory input and get important constants
+%--------------------------------------------------------------------------
+
 %%  Add/check optional values
 %--------------------------------------------------------------------------
+if ~exist( 'seeback', 'var' )
+   % Default value
+   seeback = 0;
+end
+
 if ~exist( 'dofullscreen', 'var' )
    % Default value
    dofullscreen = 1;
 end
 
-if ~exist( 'view_vec', 'var' ) || any(isnan(view_vec))
-    if isfield(srf, 'hemi')
-        view_vec = 'side';
-    else
-        view_vec = 'top';
-    end
-end
-
-if ~exist( 'surface_data', 'var' )
-   % Default value
-   surface_data = [];
-end
-
+default_frontview = [-90, 0];
+% default_backview = [89,-16];
+default_backview = [90,0];
 if isfield(srf, 'hemi')
     if strcmp(srf.hemi, 'rh')
-        default_sideview = [90, 0];
-        default_backsideview = [270, 0];
-    else
-        default_sideview = [270,0];
-        default_backsideview = [90, 0];
+        seeback = 1 - seeback;
+        default_backview = [90, 0]; % Actually front but see back is back to front
+        default_frontview = [270, 0];
     end
-    if ischar(view_vec)
-        if strcmp(view_vec, 'side')
-            view_vec = default_sideview;
-        elseif strcmp(view_vec, 'backside')
-            view_vec = default_backsideview;
-        end
-    end
-    if isequal(view_vec, 0)
-        view_vec = default_sideview;
-    elseif isequal(view_vec, 1)
-        view_vec = default_backsideview;
-    end
-    if length(surface_data) == srf.nfaces
-        dointerp = 0;
-    end
+end
+
+using_default_view = 0;
+if ~exist( 'view_vec', 'var' ) || any(isnan(view_vec))
+   % Default value
+   if seeback == 0
+       view_vec = default_frontview;
+       using_default_view = 1;
+   else
+       view_vec = default_backview;
+   end
 end
 
 if ischar(view_vec)
@@ -82,6 +75,15 @@ if ischar(view_vec)
     elseif strcmp(view_vec, 'right')
         view_vec = [270, 0];
     end 
+end
+
+if ~exist( 'surface_data', 'var' )
+   % Default value
+   surface_data = [];
+else
+    if length(surface_data) == srf.nfaces
+        dointerp = 0;
+    end
 end
 
 if ~exist( 'dolighting', 'var' )
@@ -105,13 +107,13 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-% if seeback == 2
-%     subplot(1,2,1)
-%     srfplot( srf, surface_data, 0, edgealpha, dointerp, view_vec, dofullscreen )
-%     subplot(1,2,2)
-%     srfplot( srf, surface_data, 1, edgealpha, dointerp, view_vec, dofullscreen )
-%     return
-% end
+if seeback == 2
+    subplot(1,2,1)
+    srfplot( srf, surface_data, 0, edgealpha, dointerp, view_vec, dofullscreen )
+    subplot(1,2,2)
+    srfplot( srf, surface_data, 1, edgealpha, dointerp, view_vec, dofullscreen )
+    return
+end
 
 if isstruct(srf)
     g = srf;
@@ -122,7 +124,7 @@ if isstruct(srf)
         jointsrf.nfaces = size(jointsrf.faces, 1);
         jointsrf.nvertices = size(jointsrf.vertices, 1);
 
-        srfplot(jointsrf, [surface_data.lh; surface_data.rh], view_vec, dointerp, edgealpha, dofullscreen )
+        srfplot(jointsrf, [surface_data.lh; surface_data.rh], seeback, edgealpha, dointerp, view_vec, dofullscreen )
         % srfplot(g.lh, surface_data.lh, seeback, edgealpha, dointerp, view_vec, dofullscreen, 1 )
         % hold on
         % srfplot(g.rh, surface_data.rh, seeback, edgealpha, dointerp, view_vec, dofullscreen, 0 )
