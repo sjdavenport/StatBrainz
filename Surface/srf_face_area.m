@@ -1,4 +1,4 @@
-function face_areas = srf_face_area( srf )
+function [face_areas, vertex_areas] = srf_face_area( srf )
 % surf_face_area computes the area of each face on a given surface
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -55,6 +55,15 @@ for i = 1:size(faces, 1)
     
     % Store the area in the array
     face_areas(i) = area;
+end
+
+vertex_areas = zeros(srf.nvertices,1);
+
+dpf3 = face_areas/3;
+
+% Calculate the vertex areas from the face areas
+for f = 1:srf.nfaces
+    vertex_areas(faces(f,:)) = vertex_areas(faces(f,:)) + dpf3(f);
 end
 
 end

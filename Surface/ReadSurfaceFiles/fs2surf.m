@@ -17,7 +17,9 @@ function srf = fs2surf( path4fs, path4fsright)
 clear srf
 if nargin == 2
     srf.lh = fs2surf( path4fs);
+    srf.lh.hemi = 'lh';
     srf.rh = fs2surf( path4fsright);
+    srf.rh.hemi = 'rh';
     return
 end
 

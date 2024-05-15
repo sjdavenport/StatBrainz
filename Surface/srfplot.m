@@ -39,7 +39,6 @@ if ~exist( 'dofullscreen', 'var' )
    dofullscreen = 1;
 end
 
-
 default_frontview = [-90, 0];
 % default_backview = [89,-16];
 default_backview = [90,0];
@@ -81,6 +80,10 @@ end
 if ~exist( 'surface_data', 'var' )
    % Default value
    surface_data = [];
+else
+    if length(surface_data) == srf.nfaces
+        dointerp = 0;
+    end
 end
 
 if ~exist( 'dolighting', 'var' )
