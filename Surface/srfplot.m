@@ -68,6 +68,10 @@ if isfield(srf, 'hemi')
     end
 end
 
+if isequal(view_vec, 0)
+    view_vec = 'top';
+end
+
 if ischar(view_vec)
     if strcmp(view_vec, 'top')
         view_vec = [0,90];

@@ -1,4 +1,4 @@
-function [ lower_set, upper_set, muhat ] = srf_scb2cope( srf, lower_band_im, upper_band_im, muhat, mask, c, seeback )
+function [ lower_set, upper_set, muhat ] = srf_scb2cope( srf, lower_band_im, upper_band_im, muhat, mask, c, view_vec, use_contour, redblue, dointerp )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -19,9 +19,9 @@ function [ lower_set, upper_set, muhat ] = srf_scb2cope( srf, lower_band_im, upp
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'seeback', 'var' )
+if ~exist( 'dointerp', 'var' )
    % Default value
-   seeback = 0;
+   dointerp = 1;
 end
 
 %%  Main Function Loop
@@ -41,7 +41,7 @@ else
     muhat = muhat.*zero2nan(mask);
 end
 
-srf_cope_display( srf, lower_set, upper_set, muhat, c, seeback )
+srf_cope_display( srf, lower_set, upper_set, muhat, c, view_vec, use_contour, redblue, dointerp )
 
 end
 

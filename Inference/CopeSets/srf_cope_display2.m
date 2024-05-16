@@ -1,4 +1,4 @@
-function [ out ] = srf_cope_display( srf, lower_set, upper_set, muhat, c, view_vec, use_contour, redblue, dointerp )
+function [ out ] = srf_cope_display2( srf, lower_set, upper_set, muhat, c, view_vec, use_contour, redblue, dointerp )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -63,7 +63,7 @@ if use_contour
 end
 
 color_map = zeros(length(muhat), 3); % Generates random RGB colors
-color_map(upper_set, 1) = 1; %Red
+color_map(upper_set, 1) = 0.1; %Red
 
 if redblue
     color_map(logical(lower_set.*(1-upper_set)), 3) = 1; %Blue
