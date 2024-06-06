@@ -21,7 +21,7 @@ nomedwall_right = g.cdata;
 % path4gifti_right = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-R_white.surf.gii';
 % 
 % srf = gifti2surf(path4gifti_left, path4gifti_right);
-srf = loadsrf('fs6', 'white');
+srf = loadsrf('fs5', 'white');
 FWHM = 4;
 X = srf_noise(srf, FWHM);
 Y = X;
@@ -35,7 +35,7 @@ srfplot(srf.lh,Y.lh)
 %%
 % spherepathloc = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_sphere.surf.gii';
 % srf_sphere = gifti2surf(spherepathloc, spherepathloc);
-srf_sphere = loadsrf('fs6', 'sphere');
+srf_sphere = loadsrf('fs4', 'sphere');
 tic
 rho_store = spintest( X, Y, srf_sphere, 1000, 1 );
 toc

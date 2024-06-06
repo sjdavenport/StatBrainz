@@ -56,7 +56,7 @@ nsubj = s_data(end);
 D = length(s_data) - 1;
 data_mean = mean(data, D+1);
 
-if ~exist('sigmahat', 'var')
+if ~exist('sigmahat', 'var') || isempty(sigmahat)
     sigmahat = std(data, 0, D+1);
     demeaned_data = data - data_mean;
     threshold = fastperm( demeaned_data, nsubj, alpha/2, nboot, show_loader);

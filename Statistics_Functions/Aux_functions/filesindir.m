@@ -28,6 +28,14 @@ if nargin < 3
     hiddenfiles = 0;
 end
 
+if iscell(pattern)
+    listfiles = {};
+    for I = 1:length(pattern)
+        listfiles = [listfiles, filesindir( directory, pattern{I}, hiddenfiles)];
+    end
+    return
+end
+
 getfiles = dir(directory);
 
 C = struct2cell(getfiles);

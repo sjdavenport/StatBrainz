@@ -11,7 +11,7 @@ function cope_display( lower, upper, muhat, thresh, truth, colorswitch, docontou
 % EXAMPLES
 % dim = [100,100]; D = length(dim); nsubj = 25; FWHM = 4; c = 1;
 % mu = peakgen(2, 30, 10, dim); mask = ones(dim);
-% noise = noisegen( dim, nsubj, FWHM );
+% noise = fast_conv(randn([dim,nsubj]), FWHM, 2);
 % data = noise + mu; data_mean = mean(data,3);
 % % Plot FDR cope sets
 % [lower_fdr, upper_fdr] = fdr_cope_sets( data, c );

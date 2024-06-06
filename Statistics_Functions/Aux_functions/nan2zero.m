@@ -1,4 +1,4 @@
-function vec = nan2zero( vec )
+function vec = nan2zero( vec, val )
 % ZERO2NAN(vec) sets all of the nans to zeros.
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -13,7 +13,11 @@ function vec = nan2zero( vec )
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
 
-vec(isnan(vec)) = 0;
+if ~exist('val', 'var')
+    val = 0;
+end
+
+vec(isnan(vec)) = val;
 
 end
 

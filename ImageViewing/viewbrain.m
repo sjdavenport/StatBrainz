@@ -1,4 +1,4 @@
-function ax = viewbrain( brain_im, slice )
+function ax = viewbrain( brain_im, slice, brain_mask )
 % overlay_brain - Overlay region masks on a brain slice image.
 %
 %   overlay_brain(slice, padding, region_masks, colors2use, alpha_val, rotate)
@@ -29,12 +29,15 @@ function ax = viewbrain( brain_im, slice )
 %
 % MNIbrain = imgload('MNIbrain.nii.gz');
 % MNIbrain = MNIbrain/max(MNIbrain(:));
-% overlay_brain([30,40,50], {MNIbrain > 0.8}, 'red', 0.6, 4)
+% viewbrain(MNIbrain.*(MNIbrain> 0.8), [30,40,50]);
+% viewbrain(MNIbrain.*(MNIbrain> 0.8)/max(MNIbrain(:)), [30,40,50]);
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
 
-brain_mask = imgload('MNImask') > 0;
+if ~exist('brain_mask', 'var')
+    brain_mask = imgload('MNImask') > 0;
+end
 
 if ~exist('slice', 'var')
     slice = [30,40,50];

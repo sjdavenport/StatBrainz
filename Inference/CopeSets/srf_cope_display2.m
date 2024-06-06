@@ -1,4 +1,4 @@
-function [ out ] = srf_cope_display2( srf, lower_set, upper_set, muhat, c, view_vec, use_contour, redblue, dointerp )
+function [ out ] = srf_cope_display2( srf, lower_set, upper_set, muhat, c, view_vec, use_contour, dointerp )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -44,9 +44,12 @@ end
 if isfield(srf, 'lh') && isfield(srf, 'rh')
     color_map.lh = get_color_map(lower_set.lh, upper_set.lh, muhat.lh, c, use_contour, redblue, srf.lh);
     color_map.rh = get_color_map(lower_set.rh, upper_set.rh, muhat.rh, c, use_contour, redblue, srf.rh);
+    % srfplot(srf, )
     srfplot(srf, color_map, view_vec, 0.05, dointerp, 'top', 0)
 else
     color_map = get_color_map(lower_set, upper_set, muhat, c, use_contour, redblue, srf);
+    % srfplot(srf, ones(size(color_map)), view_vec, dointerp, 0.05, 0)
+    % hold on 
     srfplot(srf, color_map, view_vec, dointerp, 0.05, 0)
     % srfplot2(srf, color_map, seeback, 0.05, dointerp, NaN, 0)
     % srfplot2( srf, surface_data, seeback, edgealpha, dointerp, view_vec, dofullscreen, dolighting )
@@ -63,15 +66,20 @@ if use_contour
 end
 
 color_map = zeros(length(muhat), 3); % Generates random RGB colors
-color_map(upper_set, 1) = 0.1; %Red
+color_map(upper_set, 1) = 1; %Red
+color_map(upper_set, 2:3) = 0.2; %Red
 
-if redblue
-    color_map(logical(lower_set.*(1-upper_set)), 3) = 1; %Blue
-    color_map(logical(1-lower_set), :) = ones(sum((1-lower_set)),3)*0.7; %Grey
-else
-    color_map(logical(lower_set.*(1-upper_set)), :) = ones(sum(lower_set.*(1-upper_set)),3)*0.7; %Grey
-    color_map(logical(1-lower_set), 3) = 1; %Blue
-end
+color_map(logical(lower_set.*(1-upper_set)), 1) = 1; % Pink blue set
+color_map(logical(lower_set.*(1-upper_set)), 2:3) = 0.5; %Red
+
+color_map(logical(1-lower_set), :) = ones(sum((1-lower_set)),3)*0.7; %Grey
+
+% if redblue
+% 
+% else
+%     color_map(logical(lower_set.*(1-upper_set)), :) = ones(sum(lower_set.*(1-upper_set)),3)*0.7; %Grey
+%     color_map(logical(1-lower_set), 3) = 1; %Blue
+% end
 
 color_map(logical(yellow_set.*(1-upper_set)),1) = 1;
 color_map(logical(yellow_set.*(1-upper_set)),2) = 1;

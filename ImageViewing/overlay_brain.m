@@ -73,6 +73,7 @@ else
     brain_mask = imgload('MNImask') > 0;
     brain_im = brain_im.*brain_mask;
 end
+
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 padding = 15;

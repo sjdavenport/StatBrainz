@@ -6,18 +6,14 @@
 
 %% Illustration
 srf = loadsrf( 'fs5');
-subplot(1,2,1)
 smooth_data = srf_noise( srf, 20 );
-srfplot(srf.lh, smooth_data.lh, 1)
-subplot(1,2,2)
-srfplot(srf.rh, smooth_data.rh, 'side')
-
+srfplot(srf, smooth_data, 0, 0, 1)
 
 %%
-srfplot(srf, smooth_data, 0, 1, 1)
+srfplot(srf.lh, smooth_data.lh, 'side', 1)
 
 %%
-srfplot(srf, smooth_data)
+srfplot(srf.lh, [], 'side', 0, 0.25)
 
 %%
 srfplot(srf.rh, smooth_data.rh, 1)

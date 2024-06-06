@@ -1,4 +1,4 @@
-function [threshold, rho_store] = spintest( X, Y, spherepathloc, nperm, alpha, show_loader )
+function [threshold, rho_store] = spintest( X, Y, srf_sphere, nperm, alpha, show_loader )
 % SPINTEST Perform spin test to compute threshold and correlation values.
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -7,7 +7,7 @@ function [threshold, rho_store] = spintest( X, Y, spherepathloc, nperm, alpha, s
 %       consisting of the data from the first map
 %   Y: A structure such that X.lh and X.rh are vectors of length nvertices
 %       consisting of the data from the second map
-%   sphere:  a surface structure such that sphere.lh.vertices and sphere.lh.faces
+%   srf_sphere:  a surface structure such that sphere.lh.vertices and sphere.lh.faces
 %            are the vertices and faces of the sphere for the left
 %            hemisphere and similarly for the right hemispheres
 %
@@ -45,7 +45,7 @@ end
 %--------------------------------------------------------------------------
 % Generate spins of the first image
 [ left_rotations,  right_rotations] = ...
-             spin_surface( X, spherepathloc, nperm, 1, show_loader );
+             spin_surface( X, srf_sphere, nperm, 1, show_loader );
          
 % Compute the correlations between the spun surfaces and the data
 rho_store = zeros(1, nperm);
