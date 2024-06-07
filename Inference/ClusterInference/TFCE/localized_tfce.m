@@ -78,6 +78,9 @@ for I = 1:nmasks
         loader(I, nmasks, 'Progress:');
     end
     region_mask = region_masks{I};
+    if ~isequal(size(region_mask), [91,109,91])
+        region_mask = index2mask( region_mask );
+    end
     tfce_region = tfce(nan2zero(tstat_orig.*region_mask), H, E, connectivity_criterion, dh, h0);
     max_tfce_within_region(I) = max(tfce_region(:));
 end

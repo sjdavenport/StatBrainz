@@ -78,8 +78,10 @@ end
 %--------------------------------------------------------------------------
 padding = 15;
 brain_im4D = combine_brains(brain_im, slice, brain_mask, padding);
-for I = 1:length(region_masks)
-    region_masks{I} = combine_brains(region_masks{I}, slice, brain_mask, padding);
+if ~isnan(region_masks{1})
+    for I = 1:length(region_masks)
+        region_masks{I} = combine_brains(region_masks{I}, slice, brain_mask, padding);
+    end
 end
 % bounds = mask_bounds( brain_mask, padding );
 % bounds = {1:91,1:109,1:91};
@@ -96,8 +98,8 @@ if any(isnan(underim(:)))
     brain_im_bw = squeeze(brain_im_bw.*brain_im4D/max(brain_im4D(:)));
     imagesc(brain_im_bw);
     hold on
-    underim4D = combine_brains(underim, slice);
-    im1 = viewdata(underim4D, brain_mask2D, region_masks, colors2use, rotate, [], alpha_val);
+    underim4D = combine_brains(underim, slice, brain_mask, padding);
+    im1 = viewdata(underim4D, brain_mask4D, region_masks, colors2use, rotate, [], alpha_val);
     if max(underim4D(:)) > min(underim4D(:))
         caxis([min(underim4D(:)), max(underim4D(:))])
     end

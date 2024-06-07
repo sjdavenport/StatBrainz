@@ -1,6 +1,5 @@
 function combined_im = combine_brains( brain_im, slice, brain_mask, padding, use_bounds )
 % Combine multiple brain images into a single composite image.
-%
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
@@ -52,6 +51,11 @@ if use_bounds == 0
 end
 
 bounds = mask_bounds(brain_mask); 
+
+% Adjust the slice to account for the bounds
+for I = 1:3
+    slice(I) = slice(I) - bounds{I}(1) + 1;
+end
 brain_im = brain_im(bounds{:});
 brain1 = flipud(squeeze(brain_im(slice(1),:,:))');
 brain2 = flipud(squeeze(brain_im(:,slice(2),:))');
