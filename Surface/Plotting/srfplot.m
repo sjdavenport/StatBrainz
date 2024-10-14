@@ -143,7 +143,6 @@ else
    surface_data = double(surface_data);
 end
 
-
 vertices = double(g.vertices);
 X = vertices(:,1);
 Y = vertices(:,2);

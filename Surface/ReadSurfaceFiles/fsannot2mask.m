@@ -9,10 +9,10 @@ function [mask, region_names] = fsannot2mask( annotfile, region )
 % 
 %--------------------------------------------------------------------------
 % % EXAMPLES
-% annotfile = 'C:\Users\12SDa\davenpor\Data\Surface\freesurfer_files\fsaverage5\label\lh.aparc.annot';
+% annotfile = '/Users/sdavenport/Documents/Code/MATLAB/MyPackages/StatBrainz/BrainImages/Surface/fsaverage4/lh.aparc.annot';
 % mask = fsannot2mask( annotfile, 'medial_wall' );
-% srf = loadsrf('fs5', 'white')
-% srfplot(srf.lh, mask, 1)
+% srf = loadsrf('fs4', 'white')
+% srfplot(srf.lh, mask, 0)
 % mask = fsannot2mask( annotfile, 'bankssts' );
 % srf = loadsrf('fs5', 'white')
 % srfplot(srf.lh, mask, 2)

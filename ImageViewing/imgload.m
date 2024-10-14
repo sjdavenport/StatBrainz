@@ -41,7 +41,11 @@ else
         try
             img = niftiread([bs_img_loc, filename, '.nii.gz']);
         catch
-            error('This file is not available\n')
+            try 
+                img = load([bs_img_loc, filename]).data;
+            catch
+                error('This file is not available\n')
+            end
         end
     end
 end

@@ -26,7 +26,10 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-[ upper_set, lower_set, contour ] = srf_scb2cope( srf, -lower_band, -upper_band, -xbar, c );
+% [ upper_set, lower_set, contour ] = srf_scb2cope( srf, -lower_band,
+% -upper_band, -xbar, c ); % Equivalently
+[ lower_set, upper_set, contour ] = srf_scb2cope( srf, -upper_band, -lower_band, -xbar, c );
+
 
 sets = {lower_set, contour, upper_set};
 colours = {[0.5,0.5, 1], [0,1,1], [0,0,0.9]};

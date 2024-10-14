@@ -13,7 +13,7 @@ function [lower_set, upper_set, std_multipler] = sss_cope_sets(data, mask, ...
 % Optional
 %  nBoot   the number of bootstraps to use, default is 
 %  quant2use   a number between 0 and 1 representing the quantile at 
-%              which to ensure the confidence bands hold. Default is 0.95.
+%              which to ensure tn  he confidence bands hold. Default is 0.95.
 %--------------------------------------------------------------------------
 % OUTPUT
 %  lower_set:    a 0/1 array of size dim where 1 indicates the locations of

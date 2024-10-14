@@ -1,4 +1,4 @@
-function [ lower_set, upper_set, contour ] = srf_scb2cope( srf, lower_band_im, upper_band_im, muhat, c )
+function [ lower_set, upper_set, contour, yellow_set ] = srf_scb2cope( srf, lower_band_im, upper_band_im, muhat, c )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -14,16 +14,6 @@ function [ lower_set, upper_set, contour ] = srf_scb2cope( srf, lower_band_im, u
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
-%%  Check mandatory input and get important constants
-%--------------------------------------------------------------------------
-
-%%  Add/check optional values
-%--------------------------------------------------------------------------
-if ~exist( 'dointerp', 'var' )
-   % Default value
-   dointerp = 1;
-end
-
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 if isfield(srf, 'lh') && isfield(srf, 'rh')
@@ -35,6 +25,8 @@ if isfield(srf, 'lh') && isfield(srf, 'rh')
     end
     contour.lh = srf_contour(srf, muhat.lh > c) > 0;
     contour.rh = srf_contour(srf, muhat.rh > c) > 0;
+    yellow_set.lh = muhat.lh > c;
+    yellow_set.rh = muhat.rh > c;
 else
     lower_set = upper_band_im > c;
     upper_set = lower_band_im > c;
@@ -42,6 +34,7 @@ else
     % upper_set = upper_set.*mask;
     % muhat = muhat.*zero2nan(mask);
     contour = srf_contour(srf, muhat > c) > 0;
+    yellow_set = muhat > c;
 end
 
 % srf_cope_display( srf, lower_set, upper_set, muhat, c, view_vec, use_contour, redblue, dointerp )

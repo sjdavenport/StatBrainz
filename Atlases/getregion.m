@@ -19,21 +19,24 @@ function [HOc_regions, HOsc_regions] = getregion(points, atlas)
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
+
+sbdir = statbrainz_maindir;
+atlas_dir = [sbdir, 'Atlases/'];
+
 if ~exist('atlas', 'var')
     atlas = 'default';
 end
 if strcmp(atlas, 'default') || strcmp(atlas, 'HOc')
-    atlas_loc = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\BrainStat\Atlases\HarvardOxford\';
+    atlas_loc = [atlas_dir, 'HarvardOxford/'];
     HOc_names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Cortical.xml']);
     atlas_filename = 'HarvardOxford-cort-maxprob-thr25-2mm.nii.gz';
     HOc_atlas = imgload([atlas_loc, atlas_filename]);
     
-    atlas_loc = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\BrainStat\Atlases\HarvardOxford\';
     HOsc_names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Subcortical.xml']);
     atlas_filename = 'HarvardOxford-sub-maxprob-thr25-2mm.nii.gz';
     HOsc_atlas = imgload([atlas_loc, atlas_filename]);
 elseif strcmp(atlas, '15')
-    atlas_loc = 'C:\Users\12SDa\davenpor\davenpor\Toolboxes\BrainStat\Atlases\Derived_HarvardOxford\';
+    atlas_loc = [atlas_dir, 'Derived_HarvardOxford/'];
     HOc_names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Cortical.xml']);
     atlas_filename = 'HarvardOxford-cort-maxprob-thr25-115_nearest.nii.gz';
     HOc_atlas = imgload([atlas_loc, atlas_filename]);

@@ -73,6 +73,7 @@ end
 %--------------------------------------------------------------------------
 nmasks = length(region_masks);
 max_tfce_within_region = zeros(1, nmasks);
+
 for I = 1:nmasks
     if show_loader == 1
         loader(I, nmasks, 'Progress:');

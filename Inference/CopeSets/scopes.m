@@ -1,4 +1,4 @@
-function [ lower_band, upper_band, threshold ] = scopes( data, nboot, alpha, show_loader, sigmahat )
+function [ lower_band, upper_band, threshold ] = scopes( data, nblocks, nboot, alpha, show_loader, sigmahat )
 % SCOPES Computes confidence intervals for a data field using the SCOPES method.
 %
 %   [lower_band, upper_band] = SCOPES(data, mask, nboot, alpha, show_loader)
@@ -56,13 +56,17 @@ nsubj = s_data(end);
 D = length(s_data) - 1;
 data_mean = mean(data, D+1);
 
+if ~exist('nblocks', 'var')
+    nblocks = nsubj;
+end
+
 if ~exist('sigmahat', 'var') || isempty(sigmahat)
     sigmahat = std(data, 0, D+1);
     demeaned_data = data - data_mean;
-    threshold = fastperm( demeaned_data, nsubj, alpha/2, nboot, show_loader);
+    threshold = fastperm( demeaned_data, nblocks, alpha/2, nboot, show_loader);
 else
     demeaned_data = data - data_mean;
-    threshold = fastperm_mean( demeaned_data, nsubj, alpha/2, nboot, 0, show_loader,...
+    threshold = fastperm_mean( demeaned_data, nblocks, alpha/2, nboot, 0, show_loader,...
                                                 0, 0, sigmahat);
 end
 

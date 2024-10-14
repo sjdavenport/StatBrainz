@@ -11,7 +11,7 @@ function color_map = srf_colour( srf, region_masks, colours, background_gradient
 % EXAMPLES
 % srf = loadsrf('fs5', 'white')
 % noise = srf_noise( srf, 10, 1)
-% color_map = srf_colour( srf.lh, {noise.lh > 0}, {[1,0,0]} );
+% color_map = srf_colour( srf.lh, {noise.lh > 0, noise.lh < -0.1}, {[1,1,0], [1,0,0]} );
 % srfplot(srf.lh, color_map)
 %--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
@@ -43,9 +43,10 @@ else
     % color_map = ones(length(region_masks{1}), 3)*0.7;
     color_map = ones(length(region_masks{1}), 3)*background_gradient;
     for I = 1:length(region_masks)
-        color_map(region_masks{I}, 1) = colours{I}(1);
-        color_map(region_masks{I}, 2) = colours{I}(2);
-        color_map(region_masks{I}, 3) = colours{I}(3);
+        mask = logical(region_masks{I});
+        color_map(mask, 1) = colours{I}(1);
+        color_map(mask, 2) = colours{I}(2);
+        color_map(mask, 3) = colours{I}(3);
     end
 end
 

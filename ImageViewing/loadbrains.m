@@ -59,13 +59,14 @@ if as3D == 1
     data = zeros([Dim, nsubj]);
     if usenif == 1
         for I = 1:length(subjsubset)
-            nif = nifti([directory,subfilenames{subjsubset(I)}]);
+            nif = niftiread([directory,subfilenames{subjsubset(I)}]);
             data(:,:,:,I) = nif.dat(bounds{:});
             fprintf('Loaded subject %i\n', I)
         end
     else
         for I = 1:length(subjsubset)
-            img = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
+            % img = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
+            img = niftiread([directory,subfilenames{subjsubset(I)}]);
             data(:,:,:,I) = img(bounds{:});
             fprintf('Loaded subject %i\n', I)
         end

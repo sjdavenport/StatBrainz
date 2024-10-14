@@ -82,6 +82,7 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
+if length(size(data)) < 3
 if rotate == 2
     data = data';
     brain_mask = brain_mask';
@@ -101,11 +102,14 @@ elseif rotate == 4
         region_masks{I} = flipud(region_masks{I}');
     end
 end
+end
 
 data_mask = isnan(data);
 % im1 = imagesc(nan2zero(data), [0, 0.1849]);
 im1 = imagesc(nan2zero(data));
-set(im1,'AlphaData',1-data_mask);
+if length(size(data)) < 3
+    set(im1,'AlphaData',1-data_mask);
+end
 hold on
 
 if useregionmasks

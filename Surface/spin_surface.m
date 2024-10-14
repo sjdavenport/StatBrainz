@@ -92,6 +92,8 @@ for j = 2:nperm
     end
     %reflect across the Y-Z plane for right hemisphere
     TR = reflection_matrix * TL * reflection_matrix;
+    % bl = vertices_left*TL;
+    % br = vertices_right*TR;
     bl = bl*TL;
     br = br*TR;   
     

@@ -8,7 +8,7 @@ function cope_display( lower, upper, muhat, thresh, truth, colorswitch, docontou
 % thresh: the threshold at which to cut
 % truth: an array of size dim giving the true means
 %--------------------------------------------------------------------------
-% EXAMPLES
+% % EXAMPLES
 % dim = [100,100]; D = length(dim); nsubj = 25; FWHM = 4; c = 1;
 % mu = peakgen(2, 30, 10, dim); mask = ones(dim);
 % noise = fast_conv(randn([dim,nsubj]), FWHM, 2);

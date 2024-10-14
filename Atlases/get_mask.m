@@ -17,12 +17,36 @@ function [ mask, indices, areas ] = get_mask( atlas_name, region_name, together 
 %--------------------------------------------------------------------------
 % EXAMPLES
 % mask = get_mask('HOsc', 'amygdala');
-% viewbrain(mask, [0,0,25])
+% slice = bestclusterslice(0, mask);
+% overlay_brain(slice, {mask}, {'red'})
 %
 % mask = get_mask('HOc', 'fusiform');
-% viewbrain(mask, [0,0,26])
-% mask = get_mask('HOc', 'fusiform', 0);
-% viewbrain(mask, [0,0,26])
+% slice = bestclusterslice(0, mask);
+% overlay_brain(slice, {mask}, {'red'})
+% 
+% mask = get_mask('HOsc', 'Hippocampus', 0);
+% slice = bestclusterslice(0, mask);
+% overlay_brain(slice, {mask}, {'red'})
+%
+% mask = get_mask('HOc', 'Middle Frontal Gyrus');
+% slice = bestclusterslice(0, mask);
+% overlay_brain(slice, {mask}, {'red'})
+%
+% mask = get_mask('HOc', 'all');
+% slice = bestclusterslice(0, mask);
+% overlay_brain(slice, {mask}, {'red'})
+%
+% mask = get_mask('HOsc', 'all');
+% slice = bestclusterslice(0, mask);
+% overlay_brain(slice, {mask}, {'red'})
+%
+% mask = get_mask('Juelich', 'all');
+% slice = bestclusterslice(0, mask);
+% overlay_brain(slice, {mask}, {'red'})
+%
+% mask = get_mask('Talairach', 'all');
+% slice = bestclusterslice(0, mask);
+% overlay_brain(slice, {mask}, {'red'})
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
@@ -37,6 +61,10 @@ if strcmp(atlas_name, 'HOc')
     atlas_loc = [atlas_dir, 'HarvardOxford/'];
     names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Cortical.xml']);
     atlas_filename = 'HarvardOxford-cort-maxprob-thr25-2mm.nii.gz';
+elseif strcmp(atlas_name, 'HOc1mm')
+    atlas_loc = [atlas_dir, 'HarvardOxford/'];
+    names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Cortical.xml']);
+    atlas_filename = 'HarvardOxford-cort-maxprob-thr25-1mm.nii.gz';
 elseif strcmp(atlas_name, '15')
     atlas_loc = [atlas_dir, 'Derived_HarvardOxford/'];
     names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Cortical.xml']);
@@ -45,6 +73,14 @@ elseif strcmp(atlas_name, 'HOsc')
     atlas_loc = [atlas_dir, 'HarvardOxford/'];
     names = getBrainRegionNames([atlas_loc, 'HarvardOxford-Subcortical.xml']);
     atlas_filename = 'HarvardOxford-sub-maxprob-thr25-2mm.nii.gz';
+elseif strcmp(atlas_name, 'Juelich')
+    atlas_loc = [atlas_dir, 'Juelich/'];
+    names = getBrainRegionNames([atlas_loc, 'Juelich.xml']);
+    atlas_filename = 'Juelich-maxprob-thr25-2mm.nii.gz';
+elseif strcmp(atlas_name, 'Talairach')
+    atlas_loc = [atlas_dir, 'Talairach/'];
+    names = getBrainRegionNames([atlas_loc, 'Talairach.xml']);
+    atlas_filename = 'Talairach-labels-2mm.nii.gz';
 end
 
 if strcmp(region_name, 'all')

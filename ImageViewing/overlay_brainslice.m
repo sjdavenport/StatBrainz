@@ -1,4 +1,4 @@
-function ax = overlay_brainslice( slice, padding, region_masks, colors2use, alpha_val, underim, rotate, applybrainmask, upsample)
+function ax = overlay_brainslice( slice, region_masks, colors2use, alpha_val, underim, upsample, rotate, applybrainmask, doblackbackground, padding)
 % overlay_brain - Overlay region masks on a brain slice image.
 %
 %   overlay_brain(slice, padding, region_masks, colors2use, alpha_val, rotate)
@@ -33,7 +33,17 @@ function ax = overlay_brainslice( slice, padding, region_masks, colors2use, alph
 % MNIbrain = imgload('MNIbrain.nii.gz');
 % MNIbrain = MNIbrain/max(MNIbrain(:));
 % slice = 45;
-% overlay_brain([0, 0, slice], 10, {MNIbrain(:,:,slice)> 0.8}, 'red', 0.6, 4)
+% overlay_brainslice([0, 0, slice], {MNIbrain > 0.8}, 'red', 0.6)
+%
+% MNIbrain = imgload('MNIbrain.nii.gz');
+% MNIbrain = MNIbrain/max(MNIbrain(:));
+% slice = 45;
+% overlay_brainslice([0, 0, slice], {NaN}, {NaN}, 1, zero2nan(MNIbrain > 0.8), 1 )
+%
+% MNIbrain = imgload('MNIbrain.nii.gz');
+% MNIbrain = MNIbrain/max(MNIbrain(:));
+% slice = 45;
+% overlay_brainslice([0, 0, slice], {MNIbrain > 0.8}, {'red'}, 1, [], 1 )
 %--------------------------------------------------------------------------
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
@@ -44,8 +54,12 @@ if ~exist('region_masks', 'var')
     region_masks = {NaN};
 end
 
+if isnumeric(region_masks)
+    region_masks = {NaN};
+end
+
 if ~exist('alpha_val', 'var')
-    alpha_val = NaN;
+    alpha_val = 1;
 end
 
 if ~exist('colors2use', 'var')
@@ -53,7 +67,7 @@ if ~exist('colors2use', 'var')
 end
 
 if ~exist('padding', 'var')
-    padding = 2;
+    padding = 10;
 end
 
 if ~exist('underim', 'var')
@@ -73,9 +87,15 @@ if ~exist('upsample', 'var')
     upsample = 0;
 end
 
+if ~exist('doblackbackground', 'var')
+    doblackbackground = 1;
+end
+
 if upsample
     slice = slice*2;
-    underim = doubleim(underim);
+    if isequal(size(underim), [91,109,91])
+        underim = doubleim(underim);
+    end
     brain_im = imgload('MNIbrain1mm.nii.gz');
     brain_mask = imgload('MNImask1mm.nii.gz') > 0;
 %     brain_mask_orig = imgload('MNImask');
@@ -90,6 +110,16 @@ end
 %--------------------------------------------------------------------------
 index = repmat({':'}, 1, 3);
 index{index_loc} = slice(index_loc);
+
+if ~isequal(NaN, region_masks{1}) && length(size(region_masks{1})) ~= 2
+    for I = 1:length(region_masks)
+        if upsample && isequal(size(region_masks{I}), [91,109,91])
+            region_masks{I} = doubleim(region_masks{I});
+        end
+       region_masks{I} = squeeze(region_masks{I}(index{:}));
+    end
+
+end
 
 bounds = mask_bounds( brain_mask, padding );
 % bounds = {1:91,1:109,1:91};
@@ -140,7 +170,13 @@ else
 end
 
 axis image
-fullscreen;
+% fullscreen;
 ax = gca;
+set(gcf, 'Menubar', 'none')
+set(gca, 'Position', [0,0,1,1])
+if doblackbackground
+    set(gcf, 'Color', 'black');
+end
+
 end
 

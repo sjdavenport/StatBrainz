@@ -49,8 +49,19 @@ end
          
 % Compute the correlations between the spun surfaces and the data
 rho_store = zeros(1, nperm);
+% for I = 1:nperm
+%     rho_store(I) = corr([left_rotations(:,I);right_rotations(:,I)],[Y.lh;Y.rh], 'rows','complete');
+% end
+allY = [Y.lh;Y.rh];
+orignanlocs = isnan(allY);
+
+store = zeros(1, nperm);
 for I = 1:nperm
-    rho_store(I) = corr([left_rotations(:,I);right_rotations(:,I)],[Y.lh;Y.rh], 'rows','complete');
+    allperm = [left_rotations(:,I);right_rotations(:,I)];
+    permnanlocs = isnan(allperm);
+    jointnanlocs = (orignanlocs + permnanlocs) > 0;
+    rho_store(I) = corr(allperm(~jointnanlocs),allY(~jointnanlocs),'rows','complete');
+    store(I) = sum(permnanlocs);
 end
 
 threshold = prctile(rho_store, 100*(1-alpha) );

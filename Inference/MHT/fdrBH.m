@@ -1,10 +1,12 @@
-function [ rejection_ind, nrejections, rejection_locs ] = fdrBH( pvalues, alpha )
+function [ rejection_ind, nrejections, rejection_locs ] = fdrBH( pvalues, alpha, doBY )
 % FDRBH( pvalues, alpha ) implements the Benjamini-Hochberg procedure on a
 % vector of pvalues, controlling the FDR to a level alpha
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % pvalues       a vector of p-values
 % alpha         the significance level, default is 0.05
+% doBY          a (0/1) indicator whether to do the Benjamini-Yekutieli
+%               procedure instead. Default is 0, i.e. to do BH.
 %--------------------------------------------------------------------------
 % OUTPUT
 % rejection_ind a logical array with the same size as pvalues such that a
@@ -22,6 +24,16 @@ function [ rejection_ind, nrejections, rejection_locs ] = fdrBH( pvalues, alpha 
 %--------------------------------------------------------------------------
 if ~exist('alpha', 'var')
     alpha = 0.05;
+end
+
+if ~exist('doBY', 'var')
+    doBY = 0;
+end
+
+if doBY
+    innerbits = 1./(1:length(pvalues(:)));
+    mfactor = sum(innerbits);
+    alpha = alpha/mfactor;
 end
 
 Dim = size(pvalues);

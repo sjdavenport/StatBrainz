@@ -30,18 +30,33 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
+if length(size(surviving_cluster_im)) < 3
+    surviving_cluster_im = index2mask(surviving_cluster_im);
+end
+
+if isequal(slice_no, 0)
+    bestx = bestclusterslice( 1, surviving_cluster_im );
+    besty = bestclusterslice( 2, surviving_cluster_im );
+    bestz = bestclusterslice( 3, surviving_cluster_im );
+    maxsumlocs = [bestx(1), besty(1), bestz(1)];
+    return
+end
+
+dim = size(surviving_cluster_im);
+
 if iscell(surviving_cluster_im)
     maxsumlocs = cell(1, length(surviving_cluster_im));
     totalinslice = cell(1, length(surviving_cluster_im));
     for J = 1:length(surviving_cluster_im)
-        im = zeros(91,109,91);
+        % im = zeros(91,109,91);
+        im = zeros(dim);
         im(surviving_cluster_im{J}) = 1;
         [maxsumlocs{J}, totalinslice{J}] = bestclusterslice( slice_no, im );
     end
     return
 end
 
-dim = [91,109,91];
+% dim = [91,109,91];
 s_dim = dim(slice_no);
 slice = {':', ':', ':'};
 totalinslice = zeros(1,s_dim);

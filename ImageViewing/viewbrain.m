@@ -58,6 +58,8 @@ axis image
 fullscreen;
 ax = gca;
 set(gcf, 'Color', 'black');
+set(gcf, 'Menubar', 'none')
+set(gca, 'Position', [0,0,1,1])
 
 end
 
