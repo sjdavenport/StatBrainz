@@ -1,5 +1,5 @@
 # StatBrainz
-<table>
+<table border="0">
   <tr>
     <td>
       <img src="https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/logo.png" alt="Logo" width="1300" height="200">
