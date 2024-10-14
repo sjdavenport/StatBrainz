@@ -5,9 +5,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Illustration
+srf = loadsrf( 'hcp');
+smooth_data = srf_noise( srf, 20 );
+srfplot(srf, smooth_data, 'top', 0, 1)
+% caxis([-0.1 0.1]);
+colormap('jet')
+
+%%
 srf = loadsrf( 'fs5');
 smooth_data = srf_noise( srf, 20 );
-srfplot(srf, smooth_data, 0, 0, 1)
+srfplot(srf, smooth_data, 'top', 0, 1)
+
+%%
+srf = loadsrf( 'fs5');
+smooth_data = srf_noise( srf, 20 );
+srfplot(srf.lh, smooth_data.lh, 'side', 0, 1)
 
 %%
 srfplot(srf.lh, smooth_data.lh, 'side', 1)

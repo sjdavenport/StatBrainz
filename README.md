@@ -1,5 +1,5 @@
 # StatBrainz
-![Logo](https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/logo.png)
+<img src="https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/logo.png" alt="Logo" width="200" height="200">
 The Statbrainz package contains Matlab code to perform statistical inference and visualization of brain imaging data. 
 This includes functions to perform resampling and multiple testing. In particular methods for clustersize inference 
 (including associated TDP bounds), and both single and simultaneous CoPE (coverage of probability sets) are provided. 
