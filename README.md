@@ -1,23 +1,4 @@
 # StatBrainz
-
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/logo.png" alt="Logo" width="1300" height="200">
-    </td>
-    <td style="border: none;">
-      <p>
-      The Statbrainz package contains Matlab code to perform statistical inference and visualization of brain imaging data. 
-      This includes functions to perform resampling and multiple testing. In particular methods for clustersize inference 
-      (including associated TDP bounds), and both single and simultaneous CoPE (coverage of probability sets) are provided. 
-      The package also provides code for reading and visualizing volumetric and surface brain imaging data.
-      </p>
-    </td>
-  </tr>
-</table>
-
-
-
 <table border="0">
   <tr>
     <td>
@@ -33,14 +14,6 @@
     </td>
   </tr>
 </table>
-
-
-<img src="https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/logo.png" alt="Logo" width="200" height="200">
-
-The Statbrainz package contains Matlab code to perform statistical inference and visualization of brain imaging data. 
-This includes functions to perform resampling and multiple testing. In particular methods for clustersize inference 
-(including associated TDP bounds), and both single and simultaneous CoPE (coverage of probability sets) are provided. 
-The package also provide code for reading and visualizing volumetric and surface brain imaging data.
 
 In order to install either download the zip file or run
 ```bash
