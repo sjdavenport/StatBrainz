@@ -1,4 +1,4 @@
-function [ rejection_ind, nrejections, rejection_locs ] = fdrBH( pvalues, alpha, doBY )
+function [ rejection_ind, nrejections, rejection_locs, maxp ] = fdrBH( pvalues, alpha, doBY )
 % FDRBH( pvalues, alpha ) implements the Benjamini-Hochberg procedure on a
 % vector of pvalues, controlling the FDR to a level alpha
 %--------------------------------------------------------------------------
@@ -61,6 +61,8 @@ rejection_ind = reshape(rejection_ind, Dim);
 if isempty(nrejections)
     nrejections = 0;
 end
+
+maxp = max(pvalues(rejection_ind));
 
 end
 

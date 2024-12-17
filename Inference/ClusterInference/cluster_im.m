@@ -35,7 +35,12 @@ for I = 1:length(index_locations)
       surviving_clusters_vec{nsurvivors} = index_locations{I};
   end
 end
-surviving_clusters = convindall(surviving_clusters_vec);
+surviving_clusters = convindall(surviving_clusters_vec, dim);
+% if length(dim) == 2
+%     for I = 1:length(surviving_clusters)
+%         surviving_clusters{I} = surviving_clusters{I}(:,1:2);
+%     end
+% end
 
 end
 

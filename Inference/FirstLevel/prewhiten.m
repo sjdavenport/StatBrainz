@@ -1,4 +1,4 @@
-function converted_indices = convindall( indices2convert, dim )
+function [ data_pw ] = prewhiten( data )
 % NEWFUN
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -9,10 +9,10 @@ function converted_indices = convindall( indices2convert, dim )
 % 
 %--------------------------------------------------------------------------
 % EXAMPLES
-% convindall({[358390, 358389], 358380})
-% disp(ans{1})
+% data = Xgen2( 10000, 176, 0.7, 'ar1' );
+% data_pw = prewhiten( data );
 %--------------------------------------------------------------------------
-% AUTHOR: Samuel Davenport
+% Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 
 %%  Check mandatory input and get important constants
@@ -20,27 +20,21 @@ function converted_indices = convindall( indices2convert, dim )
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~iscell(indices2convert)
+if ~exist( 'opt1', 'var' )
    % Default value
-   indices2convert = {indices2convert};
+   opt1 = 0;
 end
-
-if ~exist('dim', 'var')
-    dim = [91,109,91];
-end
-
-D = length(dim);
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-
-converted_indices = cell(1, length(indices2convert));
-for I = 1:length(indices2convert)
-    changed = zeros(length(indices2convert{I}), D);
-    for J = 1:length(indices2convert{I})
-        changed(J,:) = convind(indices2convert{I}(J), dim);
-    end
-    converted_indices{I} = changed;
+data_pw = zeros(size(data));
+for I = 1:size(data, 1)
+    I
+    ts = data(I,:);
+    ts_cov = cov(ts);
+    ts_cov_sqrt = sqrt(ts_cov);
+    
+    data_pw = inv(ts_cov_sqrt)*ts;
 end
 
 end

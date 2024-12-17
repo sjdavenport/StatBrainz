@@ -1,4 +1,4 @@
-function mask = index2mask( indices )
+function mask = index2mask( indices, dim )
 % INDEX2MASK Converts linear indices to a 3D mask.
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -21,9 +21,13 @@ function mask = index2mask( indices )
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 
+if ~exist('dim', 'var')
+    dim = [91,109,91];
+end
+
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-mask = zeros([91,109,91]);
+mask = zeros(dim);
 mask(indices) = 1;
 
 end

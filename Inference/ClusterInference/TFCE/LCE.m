@@ -1,4 +1,4 @@
-function [pvals, max_tfce_within_region] = localized_tfce( ... 
+function [pvals, max_tfce_within_region] = LCE( ... 
     tstat_orig, region_masks, vec_of_maxima, H, E, connectivity_criterion, dh, h0, show_loader)
 % LOCALIZED_TFCE( tstat_orig, region_masks, vec_of_maxima, H, E, connectivity_criterion, dh, h0)
 % embeds TFCE into a closed testing procedure. P-values are computed by 
@@ -69,6 +69,10 @@ if ~exist( 'show_loader', 'var' )
    show_loader = 1;
 end
 
+if size(region_masks{1}, 2) == 2 || size(region_masks{1}, 3) == 2
+    error('Wrong input to LCE')
+end
+
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 nmasks = length(region_masks);
@@ -79,8 +83,8 @@ for I = 1:nmasks
         loader(I, nmasks, 'Progress:');
     end
     region_mask = region_masks{I};
-    if ~isequal(size(region_mask), [91,109,91])
-        region_mask = index2mask( region_mask );
+    if ~isequal(size(region_mask), size(tstat_orig))
+        region_mask = index2mask( region_mask, size(tstat_orig));
     end
     tfce_region = tfce(nan2zero(tstat_orig.*region_mask), H, E, connectivity_criterion, dh, h0);
     max_tfce_within_region(I) = max(tfce_region(:));
