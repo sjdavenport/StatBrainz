@@ -8,7 +8,7 @@
 %% Simple 3D example
 loadcluster92 = load('./cluster92.mat'); 
 CL = [loadcluster92.cluslocs.x, loadcluster92.cluslocs.y, loadcluster92.cluslocs.z ];
-clustertdp_lowerbound(loadcluster92.cluslocs, 61, 3)
+clustertp_lowerbound(loadcluster92.cluslocs, 61, 3)
 
 %% %% 1D Examples
 %% Simple 1D example

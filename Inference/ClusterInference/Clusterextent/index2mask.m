@@ -1,10 +1,10 @@
 function mask = index2mask( indices, dim )
-% INDEX2MASK Converts linear indices to a 3D mask.
+% INDEX2MASK Converts linear indices to a mask of dimension length(dim)
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
 %   indices : array
-%       A vector of linear indices to be converted into a 3D mask.
+%       A vector of linear indices to be converted.
 % -------------------------------------------------------------------------
 % OUTPUT
 %   mask : 3D array
@@ -13,6 +13,7 @@ function mask = index2mask( indices, dim )
 %       positions are set to 0.
 %--------------------------------------------------------------------------
 % EXAMPLES
+% % 2D 
 %   indices = [100, 2000, 50000];
 %   mask = index2mask(indices);
 %   % This will create a 3D mask of size [91, 109, 91] with the positions

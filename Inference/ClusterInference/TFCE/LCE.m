@@ -23,9 +23,9 @@ function [pvals, max_tfce_within_region] = LCE( ...
 % pvals: a vector of 
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+% See test_LCE.m
 %--------------------------------------------------------------------------
-% Copyright (C) - 2024 - Samuel Davenport
+% Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 
 %%  Add/check optional values
