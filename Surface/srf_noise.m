@@ -1,4 +1,4 @@
-function data = srf_noise( srf, FWHM, nsubj, metric )
+function data = srf_noise( srf, FWHM, nsubj, metric, mask )
 % SRF_NOISE Generates surface noise data.
 %   data = srf_noise(srf, FWHM, metric) generates surface noise data on the
 %   given surface structure 'srf' with specified full width at half maximum
@@ -38,23 +38,44 @@ if ~exist( 'nsubj', 'var' )
    nsubj = 1;
 end
 
+if ~exist( 'mask', 'var' )
+    usemask = 0;
+else
+    usemask = 1;
+end
+
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 lrh = 0;
 clear data
 if isfield(srf, 'lh')
-    data.lh = srf_noise( srf.lh, FWHM, nsubj, metric );
+    if usemask
+        data.lh = srf_noise( srf.lh, FWHM, nsubj, metric, mask.lh );
+    else
+        data.lh = srf_noise( srf.lh, FWHM, nsubj, metric );
+    end
     lrh = 1;
 end
 if isfield(srf, 'rh')
-    data.rh = srf_noise( srf.rh, FWHM, nsubj, metric );
+    if usemask
+        data.rh = srf_noise( srf.rh, FWHM, nsubj, metric, mask.rh );
+    else
+        data.rh = srf_noise( srf.rh, FWHM, nsubj, metric );
+    end
     lrh = 1;
 end
 
 if lrh == 0     
     data = randn(srf.nvertices, nsubj);
+    if usemask 
+        data = data.*mask;
+    end
     if FWHM > 0 
        data = smooth_surface(srf, data, FWHM, metric);
+       if usemask
+          smoothed_mask = smooth_surface(srf, mask, FWHM, metric);
+          data = data./smoothed_mask;
+       end
     end
 end
 

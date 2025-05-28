@@ -12,6 +12,9 @@ srfplot(srf, smooth_data, 'top', 0, 1)
 colormap('jet')
 
 %%
+srfplot(srf.lh, smooth_data.lh, 'right', 0, 1)
+
+%%
 srf = loadsrf( 'fs5');
 smooth_data = srf_noise( srf, 20 );
 srfplot(srf, smooth_data, 'top', 0, 1)
