@@ -17,7 +17,7 @@ function addSB2path
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-addpath(fileparts(mfilename('fullpath')))
+addpath(genpath(fileparts(mfilename('fullpath'))))
 
 end
 
