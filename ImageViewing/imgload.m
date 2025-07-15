@@ -18,6 +18,12 @@ function img = imgload( filename )
 sb_dir = statbrainz_maindir;
 bs_img_loc = [sb_dir, 'BrainImages/Volume/'];
 
+if strcmp(filename, 'hcp_mask')
+    a = load([sb_dir, 'BrainImages/Surface/hcp/hcp_mask.mat']);
+    img = a.mask;
+    return
+end
+
 % try
 %     a = load([bs_img_loc, filename, '.mat']);
 %     img = a.data;
