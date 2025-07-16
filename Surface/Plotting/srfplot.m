@@ -38,6 +38,18 @@ if ~exist( 'view_vec', 'var' ) || any(isnan(view_vec))
     end
 end
 
+if strcmp(view_vec, 'all')
+    plot_compact(2,2)
+    for doback = [0,1]
+        for hemis= {'lh', 'rh'}
+            h = hemis{1};
+            nexttile;
+            srfplot( srf.(h), surface_data.(h), doback )
+        end
+    end
+    return
+end
+
 if ~exist( 'surface_data', 'var' )
    % Default value
    surface_data = [];
