@@ -115,6 +115,7 @@ end
 
 for I = 2:nperm
     if show_loader == 1
+        %disp('showing loader')
         loader(I-1, nperm-1, 'tfce perm progress:');
     end
     
