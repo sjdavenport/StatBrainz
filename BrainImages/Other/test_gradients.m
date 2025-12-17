@@ -10,13 +10,7 @@ srfplot(srfwhite, srfdata, 'all')
 xml = xmlread('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Gifti_files/S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii');
 
 %%
-gii = load_gifti('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Gifti_files/S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii')
-
-%%
-fprintf('Array 1 encoding: %s\n', gii.darrays{1}.encoding);
-fprintf('Array 1 datatype: %s\n', gii.darrays{1}.datatype);
-fprintf('Array 1 size: %d x %d\n', size(gii.darrays{1}.data, 1), size(gii.darrays{1}.data, 2));
-fprintf('Array 1 min/max: %.6f / %.6f\n', min(gii.darrays{1}.data(:)), max(gii.darrays{1}.data(:)));
+gii = load_gifti('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Gifti_files/S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii');
 
 %%
 gifti2srf('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Surface/hcp/Sphere.10k.L.surf.gii', '/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Surface/hcp/Sphere.10k.R.surf.gii')

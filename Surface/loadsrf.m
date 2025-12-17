@@ -42,8 +42,9 @@ end
 
 if strcmp(surface_id, 'hcp')
     sb_dir = statbrainz_maindir;
-    srf_dir = [sb_dir, 'BrainImages/Gifti_files/'];
-    srf = gifti2surf([srf_dir, 'S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii'], [srf_dir, 'S1200.R.inflated_MSMAll.32k_fs_LR.surf.gii']);
+    srf_dir = [sb_dir, 'BrainImages/Surface/hcp/'];
+    temp = load([srf_dir, 'hcp_32k.mat']);
+    srf = temp.srf;    
     return
 end
 
