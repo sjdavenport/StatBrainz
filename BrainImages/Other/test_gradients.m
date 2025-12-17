@@ -10,7 +10,7 @@ srfplot(srfwhite, srfdata, 'all')
 xml = xmlread('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Gifti_files/S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii');
 
 %%
-gii = gifti('./S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii')
+gii = load_gifti('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Gifti_files/S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii')
 
 %%
 fprintf('Array 1 encoding: %s\n', gii.darrays{1}.encoding);
