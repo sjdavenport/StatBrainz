@@ -1,0 +1,43 @@
+data = readNPY("/Users/samd/Downloads/principle_gradient_asd.npy");
+
+srfwhite = loadsrf('fs5', 'sphere');
+
+srfdata.lh = data(1:10242);
+srfdata.rh = data(10243:end);
+srfplot(srfwhite, srfdata, 'all')
+
+%%
+xml = xmlread('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Gifti_files/S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii');
+
+%%
+gii = gifti('./S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii')
+
+%%
+fprintf('Array 1 encoding: %s\n', gii.darrays{1}.encoding);
+fprintf('Array 1 datatype: %s\n', gii.darrays{1}.datatype);
+fprintf('Array 1 size: %d x %d\n', size(gii.darrays{1}.data, 1), size(gii.darrays{1}.data, 2));
+fprintf('Array 1 min/max: %.6f / %.6f\n', min(gii.darrays{1}.data(:)), max(gii.darrays{1}.data(:)));
+
+%%
+gifti2srf('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Surface/hcp/Sphere.10k.L.surf.gii', '/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Surface/hcp/Sphere.10k.R.surf.gii')
+
+%%
+gifti('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Surface/hcp/Sphere.10k.L.surf.gii')
+
+%%
+lh = load('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Surface/hcp/Sphere.10k.L.surf.mat')
+rh = load('/Users/samd/Documents/Other/MyCode/StatBrainz/BrainImages/Surface/hcp/Sphere.10k.R.surf.mat')
+
+%%
+
+srf.lh.faces = lh.faces
+srf.lh.vertices = lh.vertices
+
+srf.rh.faces = rh.faces
+srf.rh.vertices = rh.vertices
+
+srfplot(srf, srfdata, 'all')
+
+%%
+hcp_srf = loadsrf('hcp');
+

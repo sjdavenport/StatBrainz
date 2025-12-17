@@ -11,7 +11,7 @@ function this = gifti_read(filename, this)
 
 % Import XML-based GIfTI file
 %--------------------------------------------------------------------------
-t = xml_parser(filename);
+t = my_xml_parser(filename);
 
 % Root element of a GIFTI file
 %--------------------------------------------------------------------------
