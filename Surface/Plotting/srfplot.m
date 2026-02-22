@@ -203,7 +203,7 @@ if use_surface_data
 end
 
 if dofullscreen
-    fullscreen;
+    fullscreen2;
 end
 
 end

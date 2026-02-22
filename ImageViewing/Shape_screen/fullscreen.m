@@ -41,7 +41,8 @@ end
 
 screen_size = get(0, 'ScreenSize');
 % Set the figure position to cover the entire screen
-set(gcf, 'Position', screen_size);
+%set(gcf, 'Position', screen_size);
+set(gcf, 'WindowState', 'maximized')
 
 end
 
