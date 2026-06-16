@@ -11,6 +11,11 @@ function fgreedy( cluster_csv_loc, cluster_threshold, runinbackground, usewsl )
 %   usewsl           - Flag to indicate whether to use Windows Subsystem 
 %                      for Linux (WSL) (default: 0).
 %--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+% OUTPUT
+% None (runs the fgreedy binary as a system call; output is written to a
+% log file alongside the CSV)
+%--------------------------------------------------------------------------
 % EXAMPLES
 % fgreedy('./ClusterTDPccode/k90.csv', 8, 1, 1)
 %--------------------------------------------------------------------------

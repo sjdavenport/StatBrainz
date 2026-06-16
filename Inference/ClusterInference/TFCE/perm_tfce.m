@@ -3,7 +3,7 @@ function [ threshold, vec_of_maxima, permuted_tstat_store ] = ...
 % PERM_TFCE Calculates threshold, maxima vector, and permuted t-statistics for TFCE.
 %
 %   [threshold, vec_of_maxima, permuted_tstat_store] = ...
-%       PERM_TFCE(data, mask, H, E, connectivity, dh, alpha, nperm, show_loader, store_perms)
+%       PERM_TFCE(data, mask, H, E, connectivity, dh, h0, alpha, nperm, show_loader, store_perms)
 %   calculates the threshold, vector of maxima, and permuted t-statistics for 
 %   Threshold-Free Cluster Enhancement (TFCE) based on input data and parameters.
 %--------------------------------------------------------------------------

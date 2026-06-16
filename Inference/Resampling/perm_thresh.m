@@ -1,24 +1,30 @@
 function [im_perm, threshold, vec_of_maxima] = perm_thresh( data, stat, ...
     twosample, stepdown, alpha, FWHM, mask, demean, niters, include_original )
-% PERM_THRESH( data, stat, niters, include_original, subject_mask, alpha ) 
-% implements the permutation test voxelwise on a dataset in order to 
-% estimate a one-sample threshold with which to perform multiple 
-% testing. This makes the assumption that the errors are symmetric.
+% PERM_THRESH implements a sign-flip permutation test voxelwise on a
+% dataset in order to estimate a one-sample threshold for multiple testing.
+% This makes the assumption that the errors are symmetric.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% data      a Dim by nsubj array of the data.
-% stat      is the statistic to use. STAT = 'Z', we use the mean. 
-%           STAT = 'T', we compute a one-sample t-stat. Default is STAT = 'Z'.
-% niters    the number of permutations to calculate
-% include_original 0/1 whether to include the original sample in your
-%           niters number of permutations.
-% alpha     the alpha level, default is 0.05.
+% Mandatory
+%  data             a Dim by nsubj array of the data
+%  stat             the statistic to use: 'Z' uses the mean, 'T' computes a
+%                   one-sample t-statistic (default: 'T')
+% Optional
+%  twosample        0/1 flag for two-sample (two-sided) test (default: 0)
+%  stepdown         stepdown depth; 0 means no stepdown (default: 0)
+%  alpha            the significance level (default: 0.05)
+%  FWHM             if not NaN, smooth the data with this FWHM before
+%                   computing the statistic (default: NaN)
+%  mask             spatial mask; NaN means no masking (default: NaN)
+%  demean           0/1 flag to demean the data before permuting (default: 0)
+%  niters           the number of permutations (default: 1000)
+%  include_original 0/1 whether to include the original sample in the
+%                   permutation distribution (default: 1)
 %--------------------------------------------------------------------------
 % OUTPUT
-% threshold         the threshold calculated from the 100(1-alpha)% percent
-%                   quantile of the vector of the maxima
-% vec_of_maxima     the 1 by niters vector of the maxima of the random 
-%                   lattice fields for each permutation
+% im_perm       binary image of locations exceeding the permutation threshold
+% threshold     the threshold from the 100(1-alpha)% quantile of vec_of_maxima
+% vec_of_maxima the 1 by niters vector of permutation maxima
 %--------------------------------------------------------------------------
 % EXAMPLES
 % data = normrnd(0,1,20,1000);

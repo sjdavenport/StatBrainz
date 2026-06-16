@@ -1,26 +1,29 @@
 function ax = overlay_brain( slice, region_masks, colors2use, alpha_val, underim, upsample, applybrainmask, outerpadding, doblackbackground)
-% overlay_brain - Overlay region masks on a brain slice image.
-%
-%   overlay_brain(slice, padding, region_masks, colors2use, alpha_val, rotate)
-%   overlays region masks on a brain slice image. It takes the following
-%   input arguments:
-%
-% Mandatory Inputs:
-%   - slice: A 3-element numeric array specifying the slice coordinates
-%
-% Optional Inputs:
-%   - region_masks: An optional cell array of region masks to overlay on
-%                   the brain slice. Default is {NaN}.
-%   - colors2use: An optional string specifying the color of the overlay.
-%                 Default is an empty string ([]), which results in
-%                 automatic color assignment.
-%   - alpha_val: An optional numeric value specifying the transparency
-%                of the overlay. Default is NaN (automatic transparency).
-%   - rotate: An optional numeric value specifying the rotation of the
-%             overlay. Default is 4.
+% overlay_brain overlays region masks on a combined three-view brain image.
 %--------------------------------------------------------------------------
-% Output:
-%   - out: The output of the overlay operation (not specified in detail).
+% ARGUMENTS
+% Mandatory
+%  slice          A 3-element numeric array specifying the [x, y, z] slice
+%                 coordinates
+% Optional
+%  region_masks   A cell array of region masks (3D logical arrays) to overlay
+%                 on the brain image. Default is {NaN}.
+%  colors2use     A cell array of color strings for each overlay. Default is
+%                 [] (white is used).
+%  alpha_val      A numeric value specifying the transparency of the overlay.
+%                 Default is 1.
+%  underim        An underlay image to display instead of the MNI brain.
+%                 Default is [].
+%  upsample       0/1 whether to use the 1mm MNI brain (doubled resolution).
+%                 Default is 0.
+%  applybrainmask 0/1 whether to apply the brain mask. Default is 1.
+%  outerpadding   cell array specifying outer padding. Default is
+%                 {[9,9],[9,10]}.
+%  doblackbackground  0/1 whether to set the figure background to black.
+%                 Default is 1.
+%--------------------------------------------------------------------------
+% OUTPUT
+%  ax             handle to the current axes
 %--------------------------------------------------------------------------
 % EXAMPLES:
 %   See test_overlay_brain.m

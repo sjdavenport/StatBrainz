@@ -1,12 +1,16 @@
 function [ circlemask ] = peak2circle( point_coordinates )
-% NEWFUN
+% PEAK2CIRCLE creates a hollow cubic shell mask centered at a given coordinate
+% in a 182x218x182 volume (1mm MNI space scaled by 2).
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  point_coordinates  a 1x3 vector [x, y, z] specifying the center point
+%                     in standard (91x109x91) voxel coordinates
 % Optional
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% circlemask   a logical 182x218x182 array with a hollow shell around the
+%              specified point
 %--------------------------------------------------------------------------
 % EXAMPLES
 % [ circlemask ] = peak2circle( [49,50,49] );

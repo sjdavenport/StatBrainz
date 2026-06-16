@@ -5,8 +5,9 @@ function cluster2csv(inputcluster, filename, savedir)
 %
 % ARGUMENTS
 %   inputcluster: Matrix representing the cluster. Columns represent
-%                 different dimensions.
+%                 different dimensions (up to 3 columns: x, y, z).
 %   filename:     Name of the CSV file (without extension) to be created.
+%   savedir:      Directory in which to save the CSV file (default: './')
 %
 % OUTPUT
 %   None

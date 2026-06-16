@@ -1,12 +1,21 @@
 function cope_display( lower, upper, muhat, thresh, truth, colorswitch, docontours, true_contourlinewidth, contourlinewidth )
-% cope_display( lower, upper, muhat, thresh, truth ) displays cope sets
+% COPE_DISPLAY displays cope sets overlaid on the data.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% lower: an array of size dim giving the lower set
-% upper: an array of size dim giving the upper set
-% muhat: an array of size dim giving the estatimated mean of the data
-% thresh: the threshold at which to cut
-% truth: an array of size dim giving the true means
+% Mandatory
+%  lower     an array of size dim giving the lower cope set
+%  upper     an array of size dim giving the upper cope set
+%  muhat     an array of size dim giving the estimated mean of the data
+%  thresh    the threshold at which to cut
+% Optional
+%  truth                an array of size dim giving the true means; default NaN (not shown)
+%  colorswitch          flag to display grey background for regions not in lower set; default 0
+%  docontours           flag to overlay contour lines on the cope sets; default 0
+%  true_contourlinewidth  line width for the true boundary contour; default 3
+%  contourlinewidth     line width for the cope set contours; default 3
+%--------------------------------------------------------------------------
+% OUTPUT
+%  (none — displays a figure)
 %--------------------------------------------------------------------------
 % % EXAMPLES
 % dim = [100,100]; D = length(dim); nsubj = 25; FWHM = 4; c = 1;

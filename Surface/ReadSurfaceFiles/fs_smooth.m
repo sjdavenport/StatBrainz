@@ -1,12 +1,12 @@
 function [ out ] = fs_smooth( data )
-% NEWFUN
+% FS_SMOOTH FreeSurfer-style surface smoothing (stub).
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  data  surface data to smooth
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  out  smoothed surface data
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

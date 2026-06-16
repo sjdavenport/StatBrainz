@@ -5,7 +5,7 @@ function [threshold, rho_store] = spintest( X, Y, srf_sphere, nperm, alpha, show
 % Mandatory arguments:
 %   X: A structure such that X.lh and X.rh are vectors of length nvertices
 %       consisting of the data from the first map
-%   Y: A structure such that X.lh and X.rh are vectors of length nvertices
+%   Y: A structure such that Y.lh and Y.rh are vectors of length nvertices
 %       consisting of the data from the second map
 %   srf_sphere:  a surface structure such that sphere.lh.vertices and sphere.lh.faces
 %            are the vertices and faces of the sphere for the left
@@ -14,7 +14,7 @@ function [threshold, rho_store] = spintest( X, Y, srf_sphere, nperm, alpha, show
 % Optional arguments:
 %   nperm: Number of permutations, default is 1000.
 %   alpha: Significance level, default is 0.05
-%   show_loader: Flag to display loader (default is false).
+%   show_loader: Flag to display loader (default is 1).
 %--------------------------------------------------------------------------
 % OUTPUT
 %   threshold: Threshold value computed from the spin test.

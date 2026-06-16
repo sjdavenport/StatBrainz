@@ -1,15 +1,16 @@
 function modul( I, modval )
-% NEWFUN
+% MODUL displays I when I is divisible by modval.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  I         the current integer value to test
+%  modval    the modulus; I is displayed when mod(I, modval) == 0
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% None
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+%
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------

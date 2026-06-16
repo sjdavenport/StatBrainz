@@ -1,12 +1,12 @@
 function surfscreen
-% fullscreen makes the plot fullscreen
+% SURFSCREEN sets the current figure to a wide position suitable for surface plots.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
 % Optional
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% None.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

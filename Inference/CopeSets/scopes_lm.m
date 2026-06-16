@@ -1,15 +1,13 @@
 function [ lower_band, upper_band ] = scopes_lm( data, design_matrix, contrast_matrix, nboot, alpha, show_loader )
-% SCOPES Computes confidence intervals for a data field using the SCOPES method.
-%
-%   [lower_band, upper_band] = SCOPES(data, mask, nboot, alpha, show_loader)
-%   computes simultaneous confidence bands using the bootstrap.
+% SCOPES_LM Computes simultaneous confidence bands using the SCOPES method for a linear model.
 %--------------------------------------------------------------------------
 % ARGUMENTS:
 %   - data: Data field of size dim by nsubj.
-%   - mask: Binary array (0/1) indicating the region of interest.
-%   - nboot: Number of bootstrap samples.
-%   - alpha: Significance level for confidence intervals.
-%   - show_loader: Flag to display progress loader during computation.
+%   - design_matrix: The design matrix for the linear model (nsubj by p).
+%   - contrast_matrix: The contrast matrix specifying the linear combination of interest.
+%   - nboot: Number of bootstrap samples; default is 5000.
+%   - alpha: Significance level for confidence intervals; default is 0.05.
+%   - show_loader: Flag to display progress loader during computation; default is 1.
 %--------------------------------------------------------------------------
 % OUTPUT:
 %   - lower_band: Lower confidence band for the data field.

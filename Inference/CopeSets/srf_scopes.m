@@ -1,19 +1,19 @@
 function [ lower_band, upper_band, threshold ] = srf_scopes( data, mask, nboot, alpha, show_loader, sigmahat )
-% SCOPES Computes confidence intervals for a data field using the SCOPES method.
-%
-%   [lower_band, upper_band] = SCOPES(data, mask, nboot, alpha, show_loader)
-%   computes simultaneous confidence bands using the bootstrap.
+% SRF_SCOPES Computes simultaneous confidence bands on a surface using the SCOPES method.
 %--------------------------------------------------------------------------
 % ARGUMENTS:
-%   - data: Data field of size dim by nsubj.
-%   - mask: Binary array (0/1) indicating the region of interest.
+%   - data: Surface data struct with fields lh and rh, each of size [nvertices, nsubj].
+%   - mask: Surface mask struct with fields lh and rh, each a logical array of size nvertices.
 %   - nboot: Number of bootstrap samples.
 %   - alpha: Significance level for confidence intervals.
 %   - show_loader: Flag to display progress loader during computation.
+%   - sigmahat: Optional pre-computed standard deviation struct with fields lh and rh;
+%               passed through to scopes if provided.
 %--------------------------------------------------------------------------
 % OUTPUT:
-%   - lower_band: Lower confidence band for the data field.
-%   - upper_band: Upper confidence band for the data field.
+%   - lower_band: Lower confidence band struct with fields lh and rh.
+%   - upper_band: Upper confidence band struct with fields lh and rh.
+%   - threshold: The bootstrap threshold used to construct the bands.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % %%

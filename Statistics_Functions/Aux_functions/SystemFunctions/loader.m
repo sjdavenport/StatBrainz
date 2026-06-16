@@ -1,11 +1,15 @@
 function loader( I, totalI, message )
-% loader( I, totalI ) is called with the current iteration and the total 
-% number of iterations in the loop, resulting in a progress bar being 
+% loader( I, totalI ) is called with the current iteration and the total
+% number of iterations in the loop, resulting in a progress bar being
 % printed to the command window.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% I: mandatory input, representing the current iteration of the loop.
-% totalI: mandatory input, representing the total number of iterations in the loop.
+% I:        mandatory input, representing the current iteration of the loop.
+% totalI:   mandatory input, representing the total number of iterations in the loop.
+% message:  optional string label printed at the start; default is 'Percent done:'
+%--------------------------------------------------------------------------
+% OUTPUT
+% None
 %--------------------------------------------------------------------------
 % EXAMPLES
 % for I = 1:10^5

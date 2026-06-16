@@ -1,12 +1,21 @@
 function [ lower_set, upper_set, contour, yellow_set ] = srf_scb2cope( srf, lower_band_im, upper_band_im, muhat, c )
-% NEWFUN
+% SRF_SCB2COPE converts simultaneous confidence bands to cope sets on a surface.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  srf           the surface structure (or struct with fields lh/rh for bilateral)
+%  lower_band_im lower confidence band of size equal to the number of vertices
+%                (or struct with lh/rh)
+%  upper_band_im upper confidence band of size equal to the number of vertices
+%                (or struct with lh/rh)
+%  muhat         estimated mean field over vertices (or struct with lh/rh)
+%  c             the threshold at which to generate the cope set
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  lower_set   lower cope set (0/1 array over vertices, or struct with lh/rh)
+%  upper_set   upper cope set (0/1 array over vertices, or struct with lh/rh)
+%  contour     contour of the excursion set {muhat > c} on the surface
+%  yellow_set  excursion set {muhat > c} (0/1 array over vertices, or struct with lh/rh)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

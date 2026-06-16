@@ -1,12 +1,14 @@
 function [ data_pw ] = prewhiten( data )
-% NEWFUN
+% PREWHITEN pre-whitens each row of the input data matrix by applying the
+% inverse square root of the row's covariance.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  data   a matrix of size nlocations by ntime, where each row is a
+%         time series to be pre-whitened
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% data_pw   a matrix of the same size as data with pre-whitened rows
 %--------------------------------------------------------------------------
 % EXAMPLES
 % data = Xgen2( 10000, 176, 0.7, 'ar1' );

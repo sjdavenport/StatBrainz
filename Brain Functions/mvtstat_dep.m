@@ -1,16 +1,20 @@
 function [tstat, xbar, std_dev, cohensd] = mvtstat( data, Dim, nansaszeros )
-% MVTSTAT( data, threeD, nansaszeros ) computes the multivariate t-statistic.
+% MVTSTAT( data, Dim, nansaszeros ) computes the multivariate t-statistic.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% data          An nsubj by nvox matrix with the data. Can also take in an 
+% data          An nsubj by nvox matrix with the data. Can also take in an
 %               nsubj by Dim matrix with the data but not fixed the output
 %               for this yet, the output is then [1, 91, 109, 91] not
 %               [91,109,91].
-% Dim           the dimension to return.
+% Dim           the dimensions to reshape the output to. Default is NaN
+%               (no reshape; output remains vectorized).
 % nansaszeros   0/1 whether to return NaN entries as zeros. Default is 0.
 %--------------------------------------------------------------------------
 % OUTPUT
 % tstat         the one sample t-statistic at each voxel.
+% xbar          the sample mean at each voxel.
+% std_dev       the sample standard deviation at each voxel.
+% cohensd       Cohen's d (xbar / std_dev) at each voxel.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % noise = noisegen([91,109,91], 20, 6, 1);

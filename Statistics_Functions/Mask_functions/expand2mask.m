@@ -1,12 +1,18 @@
 function [ out ] = expand2MNI( im, mask, padding )
-% NEWFUN
+% EXPAND2MNI( im, mask, padding ) places a sub-image im back into a full
+% [91,109] MNI-sized image at the bounds defined by mask.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  im      a 2D numeric array to expand into the MNI template space.
+%  mask    a 3D (or 2D) binary mask defining the bounds of im.
 % Optional
+%  padding   additional padding (in voxels) passed to mask_bounds.
+%            Default is 0.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  out   a [91,109] image with im inserted at the appropriate bounds.
+
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

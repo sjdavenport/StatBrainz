@@ -1,13 +1,17 @@
 function [ out ] = unwrap( data, mask )
-% NEWFUN
+% UNWRAP maps vectorized voxel data back into a brain image array.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-%  data is nvox by nsubj
-%  mask is a 3D array
+%  data     nvox by nsubj matrix (or a cell array of such matrices) of
+%           voxel values to be placed back into image space
+%  mask     a D-dimensional array whose non-zero entries identify the
+%           voxels corresponding to rows of data
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% out      array of size [size(mask), nsubj] with data placed at the
+%          in-mask voxels and zeros elsewhere; if data is a cell array,
+%          out is a cell array of the same length
 %--------------------------------------------------------------------------
 % EXAMPLES
 % MNImask = imgload('MNImask') > 0;

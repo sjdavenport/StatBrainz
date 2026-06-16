@@ -4,7 +4,10 @@ function [ bounds, bounded_mask ] = mask_bounds( mask, padding )
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% mask - a D-dimensional array of zeros and ones
+%  mask      a D-dimensional array of zeros and ones
+% Optional
+%  padding   number of extra voxels to add around the tight bounds in
+%            each direction. Default is 0.
 %--------------------------------------------------------------------------
 % OUTPUT
 % bounds - a D-by-1 cell array, where the dth entry gives the bounds of the 

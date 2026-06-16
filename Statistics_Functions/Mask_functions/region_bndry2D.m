@@ -1,12 +1,15 @@
 function [ masksum2D ] = region_bndry2D( regions, mask )
-% NEWFUN
+% REGION_BNDRY2D( regions, mask ) computes a 2D boundary image by
+% accumulating the boundaries of a set of 3D regions at slice 80.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  regions   a cell array of 3D binary masks, one per region.
+%  mask      a 3D binary mask used to define non-boundary voxels.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  masksum2D   a 2D image (double) with accumulated region boundaries.
+
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

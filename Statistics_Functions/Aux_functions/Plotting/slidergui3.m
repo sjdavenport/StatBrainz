@@ -1,4 +1,21 @@
 function sliderGUI3(f2plot, lowerbounds, upperbounds, label1, label2, label3)
+% SLIDERGUI3 creates an interactive figure with three sliders and text boxes
+% to explore a function over three scalar parameters simultaneously.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  f2plot        a function handle accepting a 1x3 vector of parameter values
+%  lowerbounds   a 1x3 vector of minimum values for each slider
+%  upperbounds   a 1x3 vector of maximum values for each slider
+%  label1        string label for the first slider
+%  label2        string label for the second slider
+%  label3        string label for the third slider
+%--------------------------------------------------------------------------
+% OUTPUT
+% None
+%--------------------------------------------------------------------------
+% Copyright (C) - 2023 - Samuel Davenport
+%--------------------------------------------------------------------------
     % Create figure and axis
     fig = figure('Position', [200, 200, 800, 600]);
     monitorPositions = fullscreen;

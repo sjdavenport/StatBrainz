@@ -1,16 +1,23 @@
 function data = gmrnd(num_samples, weights, means, std_devs)
-    % generate_gaussian_mixture generates random samples from a Gaussian mixture model
-    % Inputs:
-    %   num_samples - Number of samples to generate
-    %   weights     - A vector of mixture weights (must sum to 1)
-    %   means       - A vector of means for the Gaussian components
-    %   std_devs    - A vector of standard deviations for the Gaussian components
-    % Output:
-    %   data        - A vector of generated samples
-    %
-    % data = gmrnd(10000, [0.5, 0.5], [0,0], [1,7])
-    % histogram(data)
-    
+% gmrnd generates random samples from a Gaussian mixture model.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  num_samples  Number of samples to generate
+%  weights      A vector of mixture weights (must sum to 1)
+%  means        A vector of means for the Gaussian components
+%  std_devs     A vector of standard deviations for the Gaussian components
+%--------------------------------------------------------------------------
+% OUTPUT
+%  data         A vector of generated samples
+%--------------------------------------------------------------------------
+% EXAMPLES
+% data = gmrnd(10000, [0.5, 0.5], [0,0], [1,7])
+% histogram(data)
+%--------------------------------------------------------------------------
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
+
     % Validate inputs
     if abs(sum(weights) - 1) > 1e-6
         error('Mixture weights must sum to 1.');

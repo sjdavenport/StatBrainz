@@ -3,12 +3,15 @@ function [val, deriv, deriv2] = Gker( x, sigma2_or_FWHM, use_fwhm )
 % data and the variance: sigma2 or FWHM.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% x
-% sigma2_or_FWHM    If FWHM, it is the FWHM in voxels.
-% use_fwhm          Using the FWHM is the default
+% x                 a vector or matrix of values at which to evaluate the kernel
+% sigma2_or_FWHM    the FWHM in voxels (if use_fwhm=1) or the variance sigma^2
+% use_fwhm          1 to interpret sigma2_or_FWHM as FWHM (default), 0 for variance
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% val               the Gaussian kernel evaluated at x
+% deriv             the first derivative of the Gaussian kernel at x
+% deriv2            the second derivative of the Gaussian kernel at x
+
 %--------------------------------------------------------------------------
 % EXAMPLES
 % Gker([1.5,2]', 3)

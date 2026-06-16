@@ -1,12 +1,15 @@
 function [ out ] = vec_data( data, mask )
-% NEWFUN
+% VEC_DATA extracts in-mask voxel data from an image array into a matrix.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  data     D+1 dimensional array of size [spatial_dims, nsubj], where the
+%           last dimension indexes subjects
+%  mask     D-dimensional binary array identifying in-mask voxels; non-zero
+%           entries select which voxels are extracted
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% out      nvox by nsubj matrix where nvox = sum(mask(:) > 0)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % a = randn(10,10,50);

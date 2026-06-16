@@ -1,21 +1,23 @@
 function colored_region_mask = colorRegion(region_mask, color)
-% colorRegion - function that takes in a binary region_mask and a color name and returns the corresponding colored region mask
-%
-% Syntax:  colored_region_mask = colorRegion(region_mask, color)
-%
-% Inputs:
-%    region_mask - binary image of size [r,c]
-%    color - string containing the name of the color to be applied on the region_mask
-%
-% Outputs:
-%    colored_region_mask - colored region mask of size [r,c,3]
-%
-% Example:
+% colorRegion takes in a binary region_mask and a color name and returns the
+% corresponding colored region mask.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  region_mask   binary image of size [r,c]
+%  color         string containing the name of the color to be applied on
+%                the region_mask. Supported colors: 'red', 'green', 'blue',
+%                'yellow', 'magenta', 'white', 'black', 'gray'
+%--------------------------------------------------------------------------
+% OUTPUT
+%  colored_region_mask   colored region mask of size [r,c,3]
+%--------------------------------------------------------------------------
+% EXAMPLES
 %    color = 'red';
 %    colored_region_mask = colorRegion(region_mask, color);
-%
-% Supported colors:
-%    'red', 'green', 'blue', 'yellow', 'magenta', 'white', 'black', 'gray'
+%--------------------------------------------------------------------------
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
 [r,c] = size(region_mask);
 colored_region_mask = zeros([r,c,3]);
 

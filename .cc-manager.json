@@ -1,3 +1,21 @@
 {
-  "lastCommitSha": "9f80e37c7466fcbba54fb0c2c1b99180dbeefd11"
+  "lastCommitSha": "e9863fbd86fcad695770496c372ef644798070e5",
+  "status": "paused",
+  "accomplishment": "Standardized docstrings across all 131 modified .m files — reformatting non-standard headers and adding missing ARGUMENTS/OUTPUT sections, all comment-only changes.",
+  "last_session_summary": {
+    "completed": [
+      "Updated and standardized docstrings across all 218 .m files using parallel agents",
+      "Audited and reformatted 17 remaining non-standard docstrings to the ARGUMENTS/OUTPUT convention"
+    ],
+    "outstanding": [
+      "Commit the 131 docstring-only changes"
+    ]
+  },
+  "suggested_next_steps": [
+    "Commit the docstring changes",
+    "Fix brain_extraction3.m and bayespw.m function name mismatches",
+    "Add a .gitignore to exclude .DS_Store and .cc-manager.json files"
+  ],
+  "lastChecked": "2026-06-16T15:25:00.000Z",
+  "updatedAt": "2026-06-16T15:25:00.000Z"
 }

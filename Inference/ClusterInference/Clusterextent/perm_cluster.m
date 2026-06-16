@@ -1,14 +1,26 @@
 function [ threshold, vec_of_max_cluster_sizes, permuted_tstat_store ] = ... 
         perm_cluster( data, mask, CDT, connectivity, alpha, nperm, show_loader, store_perms )
-% NEWFUN
+% PERM_CLUSTER computes a permutation-based cluster-size threshold for
+% voxelwise inference using sign-flip permutations.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-%  data: 
-%  CDT: the cluster defining threshold. Default is 2.3.
+%  data          a Dim by nsubj array of the data
+%  mask          a binary spatial mask of size Dim
+% Optional
+%  CDT           cluster defining threshold (default: norminv(0.99) ~ 2.33)
+%  connectivity  connectivity criterion for connected components; in 2D 4 or
+%                8, in 3D 6, 18, or 26 (default: 8 in 2D, 26 in 3D)
+%  alpha         significance level (default: 0.05)
+%  nperm         number of permutations (default: 1000)
+%  show_loader   0/1 flag to display a progress loader (default: 1)
+%  store_perms   0/1 flag to store permuted t-statistics (default: 0)
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% threshold               the cluster-size threshold at the alpha level
+% vec_of_max_cluster_sizes 1 by nperm vector of maximum cluster sizes
+% permuted_tstat_store    matrix of permuted t-statistics (if store_perms=1,
+%                         otherwise NaN)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % dim = [50,50]; nsubj = 50; FWHM = 0;

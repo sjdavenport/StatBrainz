@@ -1,6 +1,36 @@
 function [INLA_model_obj, field_estimates, hyperpar_posteriors] = fit_bayesglm(BOLD, design, mask_qc, nuisance, spatial, ...
     scale_BOLD, hyperpriors, ar_order, ar_smooth, aic, n_threads, return_INLA, verbose, ...
     meanTol, varTol)
+% FIT_BAYESGLM fits a Bayesian GLM to fMRI BOLD data using INLA for
+% spatial smoothing of the activation coefficients.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  BOLD          cell array of BOLD data matrices (one per session)
+%  design        cell array of design matrices (one per session)
+%  mask_qc       quality-control mask struct (output of make_mask)
+%  nuisance      nuisance regressors to remove from BOLD and design
+%  spatial       struct describing the spatial structure; must contain field
+%                'spatial_type' equal to 'surf' or 'voxel'
+% Optional
+%  scale_BOLD    method to scale BOLD data (default: 'mean')
+%  hyperpriors   'default' or 'informative' (default: 'default')
+%  ar_order      AR model order for prewhitening (default: 6)
+%  ar_smooth     smoothing FWHM for AR coefficients (default: 5)
+%  aic           logical; whether to use AIC for AR order selection (default: false)
+%  n_threads     number of parallel threads (default: 4)
+%  return_INLA   which INLA output to return: 'trimmed' or 'full' (default: 'trimmed')
+%  verbose       verbosity level (default: 1)
+%  meanTol       tolerance for mean-based QC masking (default: 1e-6)
+%  varTol        tolerance for variance-based QC masking (default: 1e-6)
+%--------------------------------------------------------------------------
+% OUTPUT
+% INLA_model_obj        the fitted INLA model object
+% field_estimates       estimated activation fields
+% hyperpar_posteriors   posterior distributions of hyperparameters
+%--------------------------------------------------------------------------
+% Copyright (C) - 2023 - Samuel Davenport
+%--------------------------------------------------------------------------
 
     % Set default values
     if nargin < 15, meanTol = 1e-6; end

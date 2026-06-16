@@ -1,12 +1,18 @@
 function cdf = lcdf(x, mu, b)
-    % laplace_cdf computes the CDF of the Laplace distribution
-    % Inputs:
-    %   x  - The value(s) where the CDF is evaluated (scalar or vector)
-    %   mu - The location parameter (mean)
-    %   b  - The scale parameter (diversity), must be positive
-    % Output:
-    %   cdf - The value(s) of the CDF at x
-    
+% lcdf computes the CDF of the Laplace distribution.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  x    The value(s) where the CDF is evaluated (scalar or vector)
+%  mu   The location parameter (mean)
+%  b    The scale parameter (diversity), must be positive
+%--------------------------------------------------------------------------
+% OUTPUT
+%  cdf  The value(s) of the CDF at x
+%--------------------------------------------------------------------------
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
+
     % Validate input
     if b <= 0
         error('Scale parameter b must be positive');

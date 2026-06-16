@@ -1,12 +1,18 @@
 function [ outer_bndry,  inner_bndry ] = mask_bndry( mask, nonboundary_mask )
-% NEWFUN
+% MASK_BNDRY( mask, nonboundary_mask ) computes the outer and inner
+% boundary of a binary mask by dilation and erosion.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  mask              a binary array defining the region of interest.
 % Optional
+%  nonboundary_mask  a binary array of voxels to exclude from both
+%                    boundaries (e.g. already-assigned regions).
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  outer_bndry   binary array; voxels just outside the mask.
+%  inner_bndry   binary array; voxels just inside the mask.
+
 %--------------------------------------------------------------------------
 % EXAMPLES
 % % 3D brain example

@@ -10,6 +10,8 @@ function combined_im = combine_brains( brain_im, slice, brain_mask, padding, out
 % Optional
 %   padding       - Scalar, representing the padding width between brain
 %                   images. Default is 5.
+%   outerpad      - Cell array {rows, cols} of outer padding to add around
+%                   the final image. Default is {0,0}.
 %   use_bounds    - Binary value indicating whether to use the provided
 %                   brain mask bounds to crop the images. Default is 1.
 %--------------------------------------------------------------------------

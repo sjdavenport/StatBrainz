@@ -4,10 +4,12 @@ function fdp = fdp_calc( rejection_loc_mask, signal_loc_mask)
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  rejection_loc_mask  a binary array marking the rejected locations
+%  signal_loc_mask     a binary array marking the true signal locations
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% fdp   the false discovery proportion: proportion of rejections that are
+%       false positives (0 if there are no rejections)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

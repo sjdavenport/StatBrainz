@@ -1,17 +1,15 @@
 function tstat = pval2tstat( pval, df )
-% tstat2pval( tstat, do2sample ) calculates the pvalues from the
-% t-statistic. 
+% PVAL2TSTAT( pval, df ) converts p-values to t-statistics using the
+% inverse t-distribution.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-%  tstat: an array of size dim
-%  df: degrees of freedom
-% Optional
-%  do2sample: 0/1, 1: compute two sample p-values. 0: compute onesample
-%                 p-values. Default is 1 ie to do two sample.
+%  pval   an array of p-values.
+%  df     degrees of freedom.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  tstat  an array of t-statistics the same size as pval.
+
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

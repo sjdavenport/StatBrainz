@@ -1,24 +1,25 @@
 function names = getBrainRegionNames(xml_file)
-%GETBRAINREGIONNAMES Extracts the names of brain regions from an XML file
-%
-%   NAMES = GETBRAINREGIONNAMES(XML_FILE) extracts the names of brain
-%   regions from the XML file specified by XML_FILE and returns them as a
-%   cell array of strings.
-%
-%   Inputs:
-%   - XML_FILE: a string specifying the name of the XML file
-%
-%   Outputs:
-%   - NAMES: a cell array of strings, where each element contains the name
-%     of a brain region
-%
-%   Example:
+% GETBRAINREGIONNAMES extracts the names of brain regions from an XML file
+% and returns them as a cell array of strings.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  xml_file   a string specifying the name of the XML file
+%--------------------------------------------------------------------------
+% OUTPUT
+%  names      a cell array of strings, where each element contains the name
+%             of a brain region
+%--------------------------------------------------------------------------
+% EXAMPLES
 %       names = getBrainRegionNames('C:\Users\12SDa\davenpor\davenpor\Toolboxes\BrainStat\Atlases\HarvardOxford\HarvardOxford-Cortical.xml');
 %       for name = names
 %           disp(name)
 %       end
 %       getBrainRegionNames('C:\Users\12SDa\davenpor\davenpor\Toolboxes\StatBrainz\Atlases\HarvardOxford\HarvardOxford-Cortical.xml');
 %   See also PARSEXML, REGEXP
+%--------------------------------------------------------------------------
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
 
     % Read in the XML file as a cell array of strings
     lines = readlines(xml_file);

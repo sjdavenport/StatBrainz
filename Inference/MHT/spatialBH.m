@@ -9,7 +9,8 @@ function [ rej_locs, nrejections ] = spatialBH( data, FWHM )
 %           or NaN then no smoothing is performed
 %--------------------------------------------------------------------------
 % OUTPUT
-% rej_locs  a logical of size Dim with the locations of the rejections
+% rej_locs     a logical array of size Dim with the locations of the rejections
+% nrejections  the total number of rejections
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

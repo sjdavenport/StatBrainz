@@ -1,12 +1,14 @@
 function clustermask = getlargestcluster( mask )
-% NEWFUN
+% GETLARGESTCLUSTER returns a binary mask corresponding to the largest
+% connected component in the input binary mask.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  mask   a 2D or 3D binary array
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% clustermask   a binary array with the same size as mask containing only
+%               the largest connected component
 %--------------------------------------------------------------------------
 % EXAMPLES
 % mask = zeros(10,10);

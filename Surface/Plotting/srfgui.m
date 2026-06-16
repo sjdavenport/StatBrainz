@@ -1,12 +1,13 @@
 function [ out ] = srfgui( srf, surface_data )
-% NEWFUN
+% SRFGUI Interactive GUI for surface data visualisation (stub).
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  srf           surface structure
+%  surface_data  surface data to display
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  out  (unused)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

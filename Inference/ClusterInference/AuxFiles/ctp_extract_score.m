@@ -12,7 +12,9 @@ function [minscore_min, time_taken, has_finished] = ctp_extract_score(filename)
 %
 % OUTPUT
 %   - minscore_min: The minimum minscore value found in the log file.
-%   - time_taken: The maximum time value found in the log file.
+%   - time_taken:   The maximum time value found in the log file.
+%   - has_finished: 1 if the log file contains a totaltime_sec entry
+%                   (indicating the job completed), 0 otherwise.
 %--------------------------------------------------------------------------
 % EXAMPLE
 %--------------------------------------------------------------------------

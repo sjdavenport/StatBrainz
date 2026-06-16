@@ -1,12 +1,13 @@
 function [ out ] = dpvread( filename, nvertices )
-% NEWFUN
+% DPVREAD Reads a data-per-vertex text file into a matrix.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  filename    path to the data-per-vertex file (5 columns per vertex)
+%  nvertices   number of vertices to read
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  out  nvertices x 5 matrix of the per-vertex data
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

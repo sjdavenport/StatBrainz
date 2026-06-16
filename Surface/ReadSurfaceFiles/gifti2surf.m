@@ -1,12 +1,16 @@
 function [ srf ] = gifti2surf( path4gifti, path4giftiright )
-% NEWFUN
+% GIFTI2SURF Converts a GIFTI geometry file to a surface structure.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  path4gifti       path to the left (or single) hemisphere GIFTI file
 % Optional
+%  path4giftiright  path to the right hemisphere GIFTI file; if provided,
+%                   returns a bilateral struct with .lh and .rh
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  srf  surface structure with .faces, .vertices, .nfaces, .nvertices
+%       fields; bilateral struct with .lh/.rh if path4giftiright is supplied
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

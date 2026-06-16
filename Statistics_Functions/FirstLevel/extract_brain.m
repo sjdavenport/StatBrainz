@@ -1,12 +1,15 @@
 function extract_brain( filename, doplay, runnet )
-% NEWFUN
+% EXTRACT_BRAIN runs the HD-BET brain extraction tool on a NIfTI file.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  filename   path to the input NIfTI file (e.g. a T1w .nii or .nii.gz)
 % Optional
+%  doplay     1 to use the HD-BETplay variant, 0 for standard HD-BET; default is 0
+%  runnet     1 to execute the brain extraction command, 0 to print it; default is 1
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% None
 %--------------------------------------------------------------------------
 % EXAMPLES
 % filename = '/Users/sdavenport/Documents/Data/fMRI/Flanker/Unprocessed/sub-01/anat/sub-01_T1w.nii.gz';

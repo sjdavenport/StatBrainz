@@ -1,14 +1,15 @@
 function [ out ] = inverse_linear_template( y, k, m )
-% NEWFUN
+% INVERSE_LINEAR_TEMPLATE applies the inverse of the linear template
+% function, mapping template values back to the original p-value scale.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-%  y: array of floats of size B x nvoxels giving values to apply the inverse template to
+%  y: array of floats giving values to apply the inverse template to
 %  k: integer, giving the rejection set index
 %  m: integer giving the total number of hypotheses
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% out   array of the same size as y with the inverse template applied
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

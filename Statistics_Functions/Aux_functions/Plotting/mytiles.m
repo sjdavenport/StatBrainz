@@ -1,15 +1,17 @@
 function [ padded_im ] = mytiles( layout, filepaths2tiles, padding )
-% NEWFUN
+% MYTILES arranges images from file paths into a padded tiled layout.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  layout            a 1x2 vector [nrows, ncols] specifying the tile grid
+%  filepaths2tiles   a cell array of image file paths to display in the tiles
+%  padding           number of pixels of padding between tiles
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  padded_im    the composited uint8 image with all tiles arranged and padded
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+%
 %--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------

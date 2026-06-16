@@ -1,12 +1,17 @@
 function [ inner_contour, outer_contour ] = srf_contour( srf, mask, adjacent_set_mask )
-% NEWFUN
+% SRF_CONTOUR Computes the inner and outer contours of a mask on a surface.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  srf              surface structure (or bilateral struct with .lh/.rh)
+%  mask             logical mask vector over vertices
 % Optional
+%  adjacent_set_mask  logical mask; restricts contour to vertices adjacent
+%                     to this set
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  inner_contour    logical mask of vertices on the inner boundary of mask
+%  outer_contour    logical mask of vertices on the outer boundary of mask
 %--------------------------------------------------------------------------
 % % EXAMPLES
 % srf = loadsrf('fs5', 'sphere')

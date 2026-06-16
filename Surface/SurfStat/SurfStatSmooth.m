@@ -2,7 +2,7 @@ function Y = SurfStatSmooth( srf, Y, FWHM, metric, niters )
 
 %Smooths surface data by repeatedly averaging over edges.
 %
-% Usage: Y = SurfStatSmooth( Y, surf, FWHM );
+% Usage: Y = SurfStatSmooth( srf, Y, FWHM [, metric [, niters]] );
 % 
 % Y        = n x v or n x v x k matrix of surface data, v=#vertices;
 %            n=#observations; k=#variates, or memory map of same.

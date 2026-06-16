@@ -1,13 +1,14 @@
 function [ lower_set, upper_set ] = fdr_simul_cs( data, mask, thresh_vec, alpha_quant )
-% FDR_COPE_SETS( data, thresh, alpha_quant )
+% FDR_SIMUL_CS( data, mask, thresh_vec, alpha_quant )
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-%  data    an array of size [dim, nsubj] giving the observed data where dim
-%          is the size of the domain and nsubj is the number of subjects
-%  thresh  the threshold at which to generate the cope set
+%  data       an array of size [dim, nsubj] giving the observed data where
+%             dim is the size of the domain and nsubj is the number of subjects
+%  mask       a 0/1 array of size dim indicating the region of interest
+%  thresh_vec a vector of thresholds at which to generate the cope sets
 % Optional
-%  alpha_quant  a number between 0 and 1 giving the alpha quantile the
+%  alpha_quant  a number between 0 and 1 giving the alpha quantile;
 %               default is 0.05
 %--------------------------------------------------------------------------
 % OUTPUT

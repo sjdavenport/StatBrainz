@@ -1,6 +1,42 @@
 function results = GLM_est_resid_var_pw(BOLD, design, spatial, session_names, ...
     field_names, design_type, valid_cols, nT, ar_order, ar_smooth, aic, ...
     n_threads, do_pw)
+% GLM_est_resid_var_pw estimates residual variance and prewhitening
+% (AR) parameters for a Bayesian GLM, averaging across sessions and
+% optionally smoothing the parameters spatially.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  BOLD          cell array (one per session) of T by V BOLD data matrices
+%  design        cell array (one per session) of design matrices
+%  spatial       an nX by nV_D array giving the spatial structure; nV_D is
+%                the number of data locations
+%  session_names cell array of session name strings; its length sets nS
+%  field_names   cell array of field (task) name strings
+%  design_type   'regular' (one design per session) or 'per_location' (a
+%                separate design at each data location)
+%  valid_cols    nS by p logical array selecting the valid design columns
+%                for each session
+%  nT            vector of time-series lengths to build prewhitening
+%                matrices for
+%  ar_order      order of the autoregressive prewhitening model
+%  ar_smooth     spatial smoothing parameter for the AR parameters; no
+%                smoothing is applied when ar_smooth <= 0
+%  aic           0/1 whether to select the AR order by AIC
+%  n_threads     number of parallel threads; serial when empty or < 2
+%  do_pw         0/1 whether to perform prewhitening
+%--------------------------------------------------------------------------
+% OUTPUT
+%  results       a struct with fields:
+%                 var_resid    - nV_D by nS residual variances per session
+%                 sqrtInv_all  - cell array of square-root inverse
+%                                covariance matrices, one per entry of nT
+%                 AR_coefs_avg - session-averaged AR coefficients
+%                 var_avg      - session-averaged residual variance
+%                 max_AIC      - per-location maximum AIC (empty unless aic)
+%--------------------------------------------------------------------------
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
 
     nS = length(session_names);
     nV_D = size(spatial, 2);  % Assuming spatial has dimensions [nX, nV_D]

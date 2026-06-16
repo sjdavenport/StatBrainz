@@ -1,6 +1,6 @@
 function val = GkerMV2( x, sigma2_or_FWHM, use_fwhm )
-% GKERMV( x, sigma2_or_FWHM, use_fwhm ) calculates the Gaussian Kernel given
-% multivariate data and the FWHM of the kernel.
+% GKERMV2( x, sigma2_or_FWHM, use_fwhm ) calculates the Gaussian Kernel given
+% multivariate data with a potentially anisotropic FWHM per dimension.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % x                 a D by nevals matrix where each column is a

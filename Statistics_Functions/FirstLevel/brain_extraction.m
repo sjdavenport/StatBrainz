@@ -1,16 +1,17 @@
 function [ mask ] = brain_extraction( brain_im, threshold, skull_erosion )
-%BRAIN_THRESH Threshold a brain image to create a mask
-%
-%   mask = brain_thresh(brain_im, threshold, skull_erosion)
-%
-%   Mandatory Arguments:
-%   brain_im - A 3D or 4D brain image (matrix or nifti object)
-%   threshold - Scalar value to use as the threshold for creating the mask
-%
-%   Output:
-%   mask - A binary mask of the same size as brain_im, where voxels
-%          above the threshold are set to 1, and voxels below or equal
-%          to the threshold are set to 0.
+% BRAIN_EXTRACTION thresholds a brain image to create a mask.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  brain_im       A 3D or 4D brain image (matrix or nifti object)
+%  threshold      Scalar value to use as the threshold for creating the mask
+% Optional
+%  skull_erosion  Number of erosion steps to remove skull. Default is 2.
+%--------------------------------------------------------------------------
+% OUTPUT
+%  mask           A binary mask of the same size as brain_im, where voxels
+%                 above the threshold are set to 1, and voxels below or equal
+%                 to the threshold are set to 0.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % See fsl_reg_data.m

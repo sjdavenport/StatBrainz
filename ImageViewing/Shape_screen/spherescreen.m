@@ -1,12 +1,14 @@
 function spherescreen(docolorbar)
-% fullscreen makes the plot fullscreen
+% SPHERESCREEN sets the current figure to a square position suitable for sphere plots.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
 % Optional
+%  docolorbar   0/1 whether to display a colorbar and adjust the figure
+%               position to accommodate it. Default is 0.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% None.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

@@ -1,12 +1,19 @@
 function padded_im = pad_im( im, lower_padding, upper_padding )
-% PAD_IM( im, padding )
+% PAD_IM( im, lower_padding, upper_padding ) pads or crops an image by
+% adding/removing voxels at the lower and upper extents in each dimension.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  im              a 2D, 3D, or 4D numeric array.
+%  lower_padding   a vector of padding amounts at the lower end of each
+%                  dimension. Negative values crop instead of padding.
 % Optional
+%  upper_padding   a vector of padding amounts at the upper end of each
+%                  dimension. Default is lower_padding.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  padded_im   the padded (or cropped) image.
+
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

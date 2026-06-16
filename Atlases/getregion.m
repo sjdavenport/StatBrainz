@@ -1,11 +1,19 @@
 function [HOc_regions, HOsc_regions] = getregion(points, atlas)
-% GETREGION returns the number and name of the region at the given coordinates in the atlas.
-%
-% Syntax: [regionNum, regionName] = getRegion(atlas, names, x, y, z)
-%
-% Inputs:
-%   point - a cell array each entry of which is a 3D vector of integers 
-%           giving a point to find in the atlas
+% GETREGION returns the region names at given coordinates in the atlas.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%   points  a 3-element integer vector, or a cell array of such vectors,
+%           giving the voxel coordinate(s) to look up
+% Optional
+%   atlas   string identifying the atlas to use; 'default' uses both
+%           Harvard-Oxford cortical and subcortical atlases (default: 'default')
+%--------------------------------------------------------------------------
+% OUTPUT
+% HOc_regions   cell array of Harvard-Oxford Cortical region names for each point
+% HOsc_regions  cell array of Harvard-Oxford Sub-cortical region names for each point
+%               (empty when atlas is not 'default')
+%--------------------------------------------------------------------------
 %
 % % Examples:
 % point = [50, 60, 40]; % coordinates in MNI space

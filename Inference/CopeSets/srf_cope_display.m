@@ -1,12 +1,21 @@
 function [ out ] = srf_cope_display( srf, lower_set, upper_set, muhat, c, view_vec, use_contour, redblue, dointerp )
-% NEWFUN
+% SRF_COPE_DISPLAY displays cope sets on a surface mesh.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  srf         the surface structure (or struct with fields lh/rh for bilateral)
+%  lower_set   lower cope set (0/1 array over vertices, or struct with lh/rh)
+%  upper_set   upper cope set (0/1 array over vertices, or struct with lh/rh)
+%  muhat       estimated mean field over vertices (or struct with lh/rh)
+%  c           the threshold at which to generate the cope set
 % Optional
+%  view_vec    viewing angle vector; default is 0
+%  use_contour flag to replace yellow set with its contour; default is 0
+%  redblue     flag to use red/blue colour scheme (1) vs alternate (0); default is 1
+%  dointerp    flag to interpolate colours across the surface; default is 1
 %--------------------------------------------------------------------------
 % OUTPUT
-%
+%  out         (none returned; displays a figure)
 %--------------------------------------------------------------------------
 % EXAMPLES
 %

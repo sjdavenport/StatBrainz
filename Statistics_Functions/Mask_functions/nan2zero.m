@@ -1,11 +1,15 @@
 function vec = nan2zero( vec, val )
-% ZERO2NAN(vec) sets all of the nans to zeros.
+% NAN2ZERO( vec, val ) replaces all NaN entries in vec with val.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% vec       A vector.
+% Mandatory
+%  vec   a numeric array.
+% Optional
+%  val   the replacement value. Default is 0.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  vec   the array with NaN entries replaced by val.
+
 %--------------------------------------------------------------------------
 % EXAMPLES
 % nan2zero([1,5.1,0, nan, 0.0001])

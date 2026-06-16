@@ -1,12 +1,14 @@
 function [ mask ] = loadmask( srf, maskname )
-% NEWFUN
+% LOADMASK Loads a bilateral region mask from FreeSurfer annotation files.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  srf       surface identifier string (e.g. 'fs4', 'fs5'); 'fs' prefix is
+%            expanded to 'fsaverage' and used to locate .annot files
+%  maskname  region name to extract (passed to fsannot2mask)
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  mask  struct with .lh and .rh logical mask vectors for the region
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

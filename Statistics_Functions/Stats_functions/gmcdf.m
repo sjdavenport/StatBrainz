@@ -1,13 +1,19 @@
 function cdf = gmcdf(x, weights, means, std_devs)
-    % mixture_gaussian_cdf computes the CDF of a Gaussian mixture model
-    % Inputs:
-    %   x        - The value(s) where the CDF is evaluated (scalar or vector)
-    %   weights  - A vector of mixture weights (must sum to 1)
-    %   means    - A vector of means for the Gaussian components
-    %   std_devs - A vector of standard deviations for the Gaussian components
-    % Output:
-    %   cdf      - The value(s) of the CDF at x
-    
+% gmcdf computes the CDF of a Gaussian mixture model.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  x         The value(s) where the CDF is evaluated (scalar or vector)
+%  weights   A vector of mixture weights (must sum to 1)
+%  means     A vector of means for the Gaussian components
+%  std_devs  A vector of standard deviations for the Gaussian components
+%--------------------------------------------------------------------------
+% OUTPUT
+%  cdf       The value(s) of the CDF at x
+%--------------------------------------------------------------------------
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
+
     % Validate inputs
     if abs(sum(weights) - 1) > 1e-6
         error('Mixture weights must sum to 1.');

@@ -11,17 +11,17 @@ function [lower_set, upper_set, std_multipler] = sss_cope_sets(data, mask, ...
 %  mask    a 0/1 image with size dim representing the mask
 %  thresh  the threshold at which to generate the cope set
 % Optional
-%  nBoot   the number of bootstraps to use, default is 
-%  quant2use   a number between 0 and 1 representing the quantile at 
-%              which to ensure tn  he confidence bands hold. Default is 0.95.
+%  nBoot   the number of bootstraps to use; default is 1000
+%  quant2use   a number between 0 and 1 representing the quantile at
+%              which to ensure the confidence bands hold. Default is 0.95.
 %--------------------------------------------------------------------------
 % OUTPUT
 %  lower_set:    a 0/1 array of size dim where 1 indicates the locations of
 %                the lower cope set
 %  upper_set:    a 0/1 array of size dim where 1 indicates the locations of
 %                the upper cope set
-%  diff_val:     the number that needs to be added/substracted to thresh in
-%                order to obtain the level sets
+%  std_multipler:  the bootstrap multiplier used to expand the threshold;
+%                  equal to the bootstrap quantile times tau (1/sqrt(nsubj))
 %--------------------------------------------------------------------------
 % EXAMPLES
 % dim = [100, 100]; D = length(dim);

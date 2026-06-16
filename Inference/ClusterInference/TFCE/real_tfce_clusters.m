@@ -7,16 +7,22 @@ function [ true_tfce_cluster_im, true_tfce_clusters, cluster_pvals ] = ...
 %  tstat_orig: a 2D or 3D matlab array giving the test-statistic at each
 %              pixel/voxel
 %  mask: a 0/1 image with the same size as tstat_orig giving the mask
-%  vec_of_maxima: a vector of the values taken in the different permutations
+%  tfce_threshold: the TFCE threshold (e.g. from perm_tfce) above which a
+%                  cluster is declared significant
 % Optional
 %  H: height exponent (default is 2)
 %  E: extent exponent (default is 0.5)
 %  connectivity_criterion: connectivity used to compute the connected components
 %  dh: size of steps for cluster formation. Default is 0.1.
-%  h0: the cluster forming threshold - Default is h0 = 3.1.
+%  h0: the cluster forming threshold - Default is 0.
+%  vec_of_maxima: a vector of permutation maxima used to compute cluster
+%                 p-values; if omitted, cluster_pvals is not computed
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% true_tfce_cluster_im     binary image of voxels in significant TFCE clusters
+% true_tfce_clusters       cell array of significant cluster subscript indices
+% cluster_pvals            p-values for each cluster (only if vec_of_maxima
+%                          is provided)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

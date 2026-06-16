@@ -1,12 +1,12 @@
 function [ out ] = surf4( in )
-% NEWFUN
+% SURF4 Plots surface data in a 2x2 grid (both hemispheres, front and back).
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  in   input argument (unused in current implementation)
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  out  output argument (unused in current implementation)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

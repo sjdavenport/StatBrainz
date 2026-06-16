@@ -1,14 +1,15 @@
 function [ region_masks, region_names ] = atlas_masks( atlas, get_boundary )
-% NEWFUN
+% ATLAS_MASKS returns region masks and names for a given brain atlas.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-%    atlas 
+%    atlas        string identifying the atlas to use ('HOc', 'HOc1mm', or 'HOsc')
 % Optional
-%    get_boundary
+%    get_boundary  if 1, replace each region mask with its boundary mask (default: 0)
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% region_masks   cell array of binary masks, one per atlas region
+% region_names   cell array of region name strings corresponding to region_masks
 %--------------------------------------------------------------------------
 % EXAMPLES
 % [ region_masks, region_names ] = atlas_masks( 'HOc', 1 )

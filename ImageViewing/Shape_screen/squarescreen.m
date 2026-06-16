@@ -1,12 +1,12 @@
 function squarescreen
-% fullscreen makes the plot fullscreen
+% SQUARESCREEN sets the current figure to a compact square position.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
 % Optional
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% None.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

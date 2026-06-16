@@ -1,13 +1,19 @@
 function [ interval, std_error ] = bernstd( p, N, level )
-% BERNSTD( p, N, sigma ) generates the bernouilli standard error confidence
+% BERNSTD( p, N, level ) generates the Bernoulli standard error confidence
 % intervals that arise from the central limit theorem.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  p       a numeric vector of proportions (values in [0,1]).
+%  N       the sample size.
 % Optional
+%  level   the confidence level. Default is 0.95.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  interval    a 2-by-length(p) matrix; row 1 is the lower bound and
+%              row 2 the upper bound of the confidence interval.
+%  std_error   a 1-by-length(p) vector of standard errors.
+
 %--------------------------------------------------------------------------
 % EXAMPLES
 % bernstd(0.05,1000,0.95)

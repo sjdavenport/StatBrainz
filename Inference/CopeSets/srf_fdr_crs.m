@@ -1,20 +1,22 @@
 function [ lower_band, upper_band ] = srf_fdr_crs( data, mask, thresh, alpha_quant )
-% SRF_FDR_CRS( data, thresh, alpha_quant )
+% SRF_FDR_CRS( data, mask, thresh, alpha_quant )
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-%  data    an array of size [dim, nsubj] giving the observed data where dim
-%          is the size of the domain and nsubj is the number of subjects
-%  c  the threshold at which to generate the cope set
+%  data    a struct with fields lh and rh, each an array of size
+%          [nvertices, nsubj] giving the observed surface data
+%  mask    a struct with fields lh and rh, each a logical array of size
+%          nvertices indicating the region of interest
+%  thresh  the threshold at which to generate the cope set
 % Optional
-%  alpha_quant  a number between 0 and 1 giving the alpha quantile the
+%  alpha_quant  a number between 0 and 1 giving the alpha quantile;
 %               default is 0.05
 %--------------------------------------------------------------------------
 % OUTPUT
-%  lower_set:    a 0/1 array of size dim where 1 indicates the locations of
-%                the lower cope set
-%  upper_set:    a 0/1 array of size dim where 1 indicates the locations of
-%                the upper cope set
+%  lower_band    a struct with fields lh and rh giving the lower cope set
+%                over vertices (0/1 arrays)
+%  upper_band    a struct with fields lh and rh giving the upper cope set
+%                over vertices (0/1 arrays)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % dim = [100, 100]; D = length(dim);

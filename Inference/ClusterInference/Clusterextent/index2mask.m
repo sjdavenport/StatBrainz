@@ -5,12 +5,15 @@ function mask = index2mask( indices, dim )
 % Mandatory
 %   indices : array
 %       A vector of linear indices to be converted.
+% Optional
+%   dim : vector
+%       Dimensions of the output mask (default: [91, 109, 91])
 % -------------------------------------------------------------------------
 % OUTPUT
-%   mask : 3D array
-%       A 3D binary mask of size [91, 109, 91] where the positions
-%       specified by the input indices are set to 1, and all other
-%       positions are set to 0.
+%   mask : array
+%       A binary array of size dim (default [91, 109, 91]) where the
+%       positions specified by the input indices are set to 1 and all
+%       other positions are set to 0.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % % 2D 

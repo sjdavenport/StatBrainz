@@ -1,12 +1,16 @@
 function color_map = srf_colour( srf, region_masks, colours, background_gradient )
-% NEWFUN
+% SRF_COLOUR Builds an RGB colour map for a surface from region masks.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  srf                surface structure (or bilateral struct with .lh/.rh)
+%  region_masks       cell array of logical masks, one per region
+%  colours            cell array of [R,G,B] colour vectors, one per region
 % Optional
+%  background_gradient  scalar brightness for unmasked vertices (default: 0.7)
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  color_map  nvertices x 3 RGB matrix (or struct with .lh/.rh fields)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % srf = loadsrf('fs5', 'white')

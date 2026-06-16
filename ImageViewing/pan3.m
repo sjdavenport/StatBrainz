@@ -1,12 +1,15 @@
 function [ out ] = pan3( img, point, rotate )
-% NEWFUN
+% PAN3 displays a 3D image in three orthogonal slices with a red overlay mask.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  img    a 3D matrix to display
+%  point  a 1x3 vector [x, y, z] specifying the slice coordinates
 % Optional
+%  rotate a numeric value specifying the orientation of each slice. Default is 4.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  out    the output from the last overlay_brain call
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

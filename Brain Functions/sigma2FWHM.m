@@ -1,14 +1,15 @@
 function FWHM = sigma2FWHM( sigma )
-% NEWFUN serves as a function template.
+% SIGMA2FWHM converts a Gaussian kernel standard deviation to FWHM.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% 
+% Mandatory
+%  sigma    standard deviation of the Gaussian kernel
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% FWHM     full width at half maximum corresponding to sigma
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+%
 %--------------------------------------------------------------------------
 % AUTHOR: Sam Davenport.
 

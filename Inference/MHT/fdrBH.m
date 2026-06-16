@@ -9,10 +9,11 @@ function [ rejection_ind, nrejections, rejection_locs, maxp ] = fdrBH( pvalues, 
 %               procedure instead. Default is 0, i.e. to do BH.
 %--------------------------------------------------------------------------
 % OUTPUT
-% rejection_ind a logical array with the same size as pvalues such that a
-%               given entry is 1 if that point is rejected and 0 otherwise
-% nrejections   the total number of rejections
-% rejection_locs the locations of the rejections
+% rejection_ind   a logical array with the same size as pvalues such that a
+%                 given entry is 1 if that point is rejected and 0 otherwise
+% nrejections     the total number of rejections
+% rejection_locs  the locations of the rejections
+% maxp            the maximum p-value that is still rejected
 %--------------------------------------------------------------------------
 % EXAMPLES
 % nvals = 100; normal_rvs = normrnd(0,1,1,nvals);

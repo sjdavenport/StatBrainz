@@ -1,8 +1,19 @@
 function cmap = custom_colormap(color1, color2, num_colors)
-    % custom_colormap creates a colormap interpolating between two RGB colors
-    % color1: 1x3 array for the first RGB color (e.g., [1, 1, 0] for yellow)
-    % color2: 1x3 array for the second RGB color (e.g., [0.5, 0, 0.5] for purple)
-    % num_colors: Number of levels in the colormap (default is 64)
+% custom_colormap creates a colormap interpolating between two RGB colors.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  color1      1x3 array for the first RGB color (e.g., [1, 1, 0] for yellow)
+%  color2      1x3 array for the second RGB color (e.g., [0.5, 0, 0.5] for
+%              purple)
+% Optional
+%  num_colors  Number of levels in the colormap. Default is 64.
+%--------------------------------------------------------------------------
+% OUTPUT
+%  cmap        a num_colors by 3 colormap interpolating from color1 to color2
+%--------------------------------------------------------------------------
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
 
     if nargin < 3
         num_colors = 64;  % Default number of colors if not provided

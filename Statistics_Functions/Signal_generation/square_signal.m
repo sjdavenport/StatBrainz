@@ -1,12 +1,20 @@
 function signal = square_signal( dim, radii, center_locs )
-% NEWFUN
+% SQUARE_SIGNAL( dim, radii, center_locs ) generates a binary signal
+% consisting of square (hypercuboid) regions of ones within a zero image.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  dim          a vector giving the dimensions of the output image.
+%  radii        the half-side-length of each square region. If a scalar,
+%               the same radius is used for all peaks.
 % Optional
+%  center_locs  a cell array of centre coordinates, one per peak. Default
+%               is {dim/2 + 1/2} (a single centred peak).
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  signal   a numeric array of size dim with ones in the square regions
+%           and zeros elsewhere.
+
 %--------------------------------------------------------------------------
 % % EXAMPLES
 % dim = [50,50]; radii = 5;

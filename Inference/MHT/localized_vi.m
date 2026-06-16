@@ -13,7 +13,9 @@ function [pvals, max_tstat_within_region] = localized_vi( ...
 %  vec_of_maxima: a vector of the values taken in the different permutations
 %--------------------------------------------------------------------------
 % OUTPUT
-% pvals: a vector of 
+% pvals                    a vector of p-values, one per region mask
+% max_tstat_within_region  a vector of the maximum t-statistic within each
+%                          region
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

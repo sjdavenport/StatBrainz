@@ -1,8 +1,8 @@
 function [pvals, max_tfce_within_region] = LCE( ... 
     tstat_orig, region_masks, vec_of_maxima, H, E, connectivity_criterion, dh, h0, show_loader)
-% LOCALIZED_TFCE( tstat_orig, region_masks, vec_of_maxima, H, E, connectivity_criterion, dh, h0)
-% embeds TFCE into a closed testing procedure. P-values are computed by 
-% recalculating the TFCE.
+% LCE( tstat_orig, region_masks, vec_of_maxima, H, E, connectivity_criterion, dh, h0)
+% embeds TFCE into a closed testing procedure (Localized Cluster Enhancement).
+% P-values are computed by recalculating the TFCE within each region mask.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
@@ -20,7 +20,9 @@ function [pvals, max_tfce_within_region] = LCE( ...
 %  h0: the cluster forming threshold - Default is h0 = 3.1.
 %--------------------------------------------------------------------------
 % OUTPUT
-% pvals: a vector of 
+% pvals                    a vector of p-values, one per region mask
+% max_tfce_within_region   a vector of the maximum TFCE score within each
+%                          region
 %--------------------------------------------------------------------------
 % EXAMPLES
 % See test_LCE.m

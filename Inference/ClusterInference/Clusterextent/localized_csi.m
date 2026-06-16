@@ -20,7 +20,9 @@ function [pvals, max_cluster_within_region] = localized_csi( ...
 %  CDT: the cluster defining threshold, default is 3.1.
 %--------------------------------------------------------------------------
 % OUTPUT
-% pvals: a vector of 
+% pvals                      a vector of p-values, one per region mask
+% max_cluster_within_region  a vector of the maximum cluster size within
+%                            each region
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

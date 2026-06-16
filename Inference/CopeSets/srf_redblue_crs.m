@@ -1,12 +1,18 @@
 function color_map = srf_redblue_crs( srf, lower_band, upper_band, xbar, c, addlower )
-% NEWFUN
+% SRF_REDBLUE_CRS computes a red/blue colour map showing positive and negative cope sets on a surface.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  srf         the surface structure
+%  lower_band  lower confidence band of size equal to the number of vertices
+%  upper_band  upper confidence band of size equal to the number of vertices
+%  xbar        estimated mean field of size equal to the number of vertices
+%  c           the threshold at which to generate the cope set
 % Optional
+%  addlower    flag to include lower cope set regions in the colour map; default is 1
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  color_map   an nvertices-by-3 RGB colour map for the surface
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

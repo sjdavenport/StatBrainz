@@ -7,7 +7,8 @@ function template = linear_template(alpha, k, m)
 %  m: integer giving the total number of hypotheses
 %--------------------------------------------------------------------------
 % OUTPUT
-% template the corresponding value of the template
+% template  a vector of length k+1 giving the linear template values
+%           alpha*(1:(k+1))/m
 %--------------------------------------------------------------------------
 % EXAMPLES
 % linear_template(0.4, 5, 1000)

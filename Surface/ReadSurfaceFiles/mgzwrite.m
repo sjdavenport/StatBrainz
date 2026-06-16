@@ -1,12 +1,15 @@
 function [ out ] = mgzwrite( voldata, filename )
-% NEWFUN
+% MGZWRITE Writes a volume array to an .mgh or .mgz file.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  voldata   3-D volume array to write
 % Optional
+%  filename  output file path ending in '.mgh' or '.mgz'
+%            (default: './ex.mgh')
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  (none)  writes the file to disk
 %--------------------------------------------------------------------------
 % EXAMPLES
 % mask = MRIread('/Users/sdavenport/Documents/Data/Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/mri/brainmask.mgz');

@@ -6,7 +6,7 @@ function screen_size = fullscreen
 % Optional
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% screen_size   a 1x4 vector specifying the screen size [left, bottom, width, height]
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

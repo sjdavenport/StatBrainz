@@ -1,12 +1,16 @@
 function [ y ] = apower( x, power )
-% NEWFUN
+% APOWER( x, power ) raises x to a given power, preserving sign for
+% negative values (i.e. computes sign(x)*|x|^power).
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  x       a numeric array
 % Optional
+%  power   the exponent to apply. Default is 1/2.
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  y       numeric array the same size as x, with each element equal to
+%          sign(x(i))*|x(i)|^power
 %--------------------------------------------------------------------------
 % EXAMPLES
 % x = -50:0.1:50;

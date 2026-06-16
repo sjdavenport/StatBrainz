@@ -1,4 +1,19 @@
 function sliderGUI(f2plot, minval, maxval, label)
+% SLIDERGUI creates an interactive figure with a slider and text box to
+% explore a function over a scalar range.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  f2plot    a function handle accepting a single scalar value to plot
+%  minval    the minimum value of the slider range
+%  maxval    the maximum value of the slider range
+%  label     a string label displayed next to the slider value text box
+%--------------------------------------------------------------------------
+% OUTPUT
+% None
+%--------------------------------------------------------------------------
+% Copyright (C) - 2023 - Samuel Davenport
+%--------------------------------------------------------------------------
     % Create figure and axis
     fig = figure('Position', [200, 200, 600, 400]);
     monitorPositions = fullscreen;

@@ -1,12 +1,18 @@
 function converted_indices = convindall( indices2convert, dim )
-% NEWFUN
+% CONVINDALL( indices2convert, dim ) converts a cell array of linear
+% indices to coordinate vectors using convind.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  indices2convert   a cell array (or numeric vector, which is wrapped into
+%                    a cell) of linear indices to convert.
 % Optional
+%  dim               the size vector of the array, e.g. [91,109,91].
+%                    Default is [91,109,91].
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  converted_indices   a cell array the same length as indices2convert;
+%                      each entry is a matrix of coordinate vectors.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % convindall({[358390, 358389], 358380})

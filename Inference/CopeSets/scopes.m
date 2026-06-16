@@ -1,19 +1,19 @@
 function [ lower_band, upper_band, threshold ] = scopes( data, nblocks, nboot, alpha, show_loader, sigmahat )
-% SCOPES Computes confidence intervals for a data field using the SCOPES method.
-%
-%   [lower_band, upper_band] = SCOPES(data, mask, nboot, alpha, show_loader)
-%   computes simultaneous confidence bands using the bootstrap.
+% SCOPES Computes simultaneous confidence bands for a data field using the SCOPES method.
 %--------------------------------------------------------------------------
 % ARGUMENTS:
 %   - data: Data field of size dim by nsubj.
-%   - mask: Binary array (0/1) indicating the region of interest.
+%   - nblocks: Number of blocks to use in the permutation; default is nsubj.
 %   - nboot: Number of bootstrap samples.
 %   - alpha: Significance level for confidence intervals.
 %   - show_loader: Flag to display progress loader during computation.
+%   - sigmahat: Optional pre-computed standard deviation field of size dim;
+%               if provided fastperm_mean is used instead of fastperm.
 %--------------------------------------------------------------------------
 % OUTPUT:
 %   - lower_band: Lower confidence band for the data field.
 %   - upper_band: Upper confidence band for the data field.
+%   - threshold: The bootstrap threshold used to construct the bands.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % %%

@@ -1,12 +1,15 @@
 function viewdata2( regions, colors, alphas )
-% NEWFUN
+% VIEWDATA2 displays a set of binary region masks as colored overlays on a black background.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  regions  a cell array of 2D binary region masks, all of the same size [r,c]
+%  colors   a cell array of 1x3 RGB vectors specifying the color for each region
 % Optional
+%  alphas   a vector of transparency values for each region. Default is ones(1, length(regions)).
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% None.
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

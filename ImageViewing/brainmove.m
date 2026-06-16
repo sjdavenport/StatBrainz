@@ -1,5 +1,5 @@
 function [ plane, clim ] = brainmove( brain, plane, mask, padding, color_bar, clim )
-% NEWFUN serves as a function template.
+% BRAINMOVE displays a 2D brain slice and waits for arrow key input to step through slices.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % brain - a 3D matrix representing the brain volume

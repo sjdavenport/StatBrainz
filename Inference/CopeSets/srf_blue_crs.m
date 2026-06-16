@@ -1,12 +1,16 @@
 function color_map = srf_blue_crs( srf, lower_band, upper_band, xbar, c )
-% NEWFUN
+% SRF_BLUE_CRS computes a blue colour map for surface cope set display.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  srf         the surface structure
+%  lower_band  lower confidence band of size equal to the number of vertices
+%  upper_band  upper confidence band of size equal to the number of vertices
+%  xbar        estimated mean field of size equal to the number of vertices
+%  c           the threshold at which to generate the cope set
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  color_map   an nvertices-by-3 RGB colour map for the surface
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

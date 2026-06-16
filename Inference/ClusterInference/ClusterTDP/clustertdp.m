@@ -5,9 +5,14 @@ function [ tdp_bounds, tp_bounds ] = clustertdp( clusters, cluster_threshold, me
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory:
-% - clusters: Cell array containing clusters with x, y, and z coordinates.
-% - cluster_threshold: an integer giving the threshold obtained from
-%                          performing clustersize inference
+% - clusters: Cell array where each entry is a matrix of [x,y,z] coordinates
+%             for a significant cluster
+% - cluster_threshold: an integer giving the cluster-size threshold obtained
+%                      from clustersize inference
+% Optional:
+% - method: 'lowerbound' (default) computes an analytic lower bound;
+%           'heuristic' or 'greedy' dispatches the fgreedy algorithm
+% - savedir: directory to store fgreedy input/output (default: './')
 %--------------------------------------------------------------------------
 % OUTPUT
 % - tdp_bounds: Array giving the TDP lower bounds for each cluster.

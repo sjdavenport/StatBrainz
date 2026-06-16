@@ -1,11 +1,11 @@
 function listfiles = filesindir( directory, pattern, hiddenfiles )
-% FILESINDIR( directory, pattern, hiddenfiles ) saves all of the names of 
+% FILESINDIR( directory, pattern, hiddenfiles ) saves all of the names of
 % the files in a given directory in an array.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% directory     the location that you'd like to get the file names from!
-% pattern       if included only files including the pattern are returned
-% hiddenfiles   0/1, if 1 it includes hidden files otherwise it doesn't
+% directory     the location that you'd like to get the file names from!; default is './'
+% pattern       if included only files including the pattern are returned; default is NaN (all files)
+% hiddenfiles   0/1, if 1 it includes hidden files otherwise it doesn't; default is 0
 %--------------------------------------------------------------------------
 % OUTPUT
 % listfiles     a cell array giving the file in the specfied directory that

@@ -1,17 +1,21 @@
 function plotImagesInTile(imagePaths, numRows, numCols)
-    % plotImagesInTile - Plots images in a custom tiled layout using imagesc
-    %
-    % Syntax:
-    %   plotImagesInTile(imagePaths, numRows, numCols)
-    %
-    % Inputs:
-    %   imagePaths - Cell array of strings, each specifying the path to an image
-    %   numRows    - Number of rows in the tile layout
-    %   numCols    - Number of columns in the tile layout
-    %
-    % Example:
-    %   imagePaths = {'image1.png', 'image2.png', 'image3.png'};
-    %   plotImagesInTile(imagePaths, 2, 2);
+% plotImagesInTile plots images in a custom tiled layout using imagesc.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  imagePaths  Cell array of strings, each specifying the path to an image
+%  numRows     Number of rows in the tile layout
+%  numCols     Number of columns in the tile layout
+%--------------------------------------------------------------------------
+% OUTPUT
+%  None
+%--------------------------------------------------------------------------
+% EXAMPLES
+%   imagePaths = {'image1.png', 'image2.png', 'image3.png'};
+%   plotImagesInTile(imagePaths, 2, 2);
+%--------------------------------------------------------------------------
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
 
     % Validate inputs
     numImages = length(imagePaths);

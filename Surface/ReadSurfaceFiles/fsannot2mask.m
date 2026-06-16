@@ -1,12 +1,16 @@
 function [mask, region_names] = fsannot2mask( annotfile, region )
-% NEWFUN
+% FSANNOT2MASK Extracts a binary mask for a named region from a FreeSurfer
+% annotation file.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  annotfile   path to a FreeSurfer .annot annotation file
+%  region      name of the region to extract (e.g. 'bankssts');
+%              'medial_wall' is mapped to 'unknown'
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  mask          logical vector, true at vertices belonging to the region
+%  region_names  cell array of all region names in the annotation
 %--------------------------------------------------------------------------
 % % EXAMPLES
 % annotfile = '/Users/sdavenport/Documents/Code/MATLAB/MyPackages/StatBrainz/BrainImages/Surface/fsaverage4/lh.aparc.annot';

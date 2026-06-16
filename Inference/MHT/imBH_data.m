@@ -1,16 +1,17 @@
 function [rejection_ind, n_rejections] = imBH_data( data, mask )
-% imBH(data, mask) performs two sided multiple hypothesis correction using
-% the Benjamini-Hochberg (BH) procedure on the data and mask provided.
-% 
-% INPUTS:
+% IMBH_DATA performs two-sided multiple hypothesis correction using the
+% Benjamini-Hochberg (BH) procedure on raw data within a spatial mask.
+% A one-sample t-statistic is computed from the data and converted to
+% two-sided p-values before applying BH.
+%--------------------------------------------------------------------------
+% ARGUMENTS
 % Mandatory
-%   data: a dim by nsubj array
-% Optional
-%   mask: a logical mask indicating which p-values in the data should be c
-%         onsidered for correction
-% OUTPUT:
-% rejection_ind: a logical array indicating which hypotheses in the data 
-%               are rejected after correction using the BH procedure.
+%   data: a Dim by nsubj array of observations
+%   mask: a logical spatial mask indicating which locations to consider
+%--------------------------------------------------------------------------
+% OUTPUT
+% rejection_ind   a logical array of size Dim indicating rejected locations
+% n_rejections    the total number of rejections
 %--------------------------------------------------------------------------
 % EXAMPLES
 % data = wfield([10,10,20]).field;

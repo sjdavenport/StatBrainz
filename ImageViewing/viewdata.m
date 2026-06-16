@@ -1,16 +1,23 @@
 function im2 = viewdata( data, brain_mask, region_masks, colors2use, rotate, bounds, alpha_val, outside_color)
-% VIEWDATA - function to visualize a data matrix with a binary brain mask 
-% and a binary region mask overlayed on top
-%
-% Syntax: [out] = viewdata(data, brain_mask, region_mask, color2use)
-%
-% Inputs:
-%    data - a data matrix of size [r,c]
-%    brain_mask - binary image of size [r,c] 
-%    region_mask - binary image of size [r,c] or a cell array of such
-%                   images
-%    color2use - a cell array containing strings containing the name of the 
-%               color to be applied on the region_mask
+% VIEWDATA visualizes a data matrix with a binary brain mask and optional
+% region mask overlays.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  data          a 2D data matrix of size [r,c]
+%  brain_mask    binary image of size [r,c]; area outside mask is colored black
+% Optional
+%  region_masks  a cell array of binary region masks of size [r,c]. Default is {NaN}.
+%  colors2use    a cell array of color strings for each region mask. Default is {'white'}.
+%  rotate        numeric value specifying orientation: 2=transpose, 3=flipud,
+%                4=flipud+transpose. Default is 4.
+%  bounds        cell array of index ranges used to crop data and masks before
+%                display. Default is [] (no cropping).
+%  alpha_val     scalar or vector of transparency values for each overlay. Default is 1.
+%  outside_color scalar intensity for the color outside the brain mask. Default is 0 (black).
+%--------------------------------------------------------------------------
+% OUTPUT
+% im2   handle to the last imagesc object drawn (the outside-brain color overlay)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % % Brain imaging example

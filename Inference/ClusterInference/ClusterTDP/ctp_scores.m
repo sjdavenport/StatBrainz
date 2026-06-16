@@ -1,12 +1,14 @@
 function tp_bounds = ctp_scores( logdir )
-% NEWFUN
+% CTP_SCORES reads fgreedy log files from a directory and returns the true
+% positive lower bounds for each cluster.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  logdir   path to the directory containing per-cluster fgreedy log
+%           subdirectories (each must contain a 'fgreedy.log' file)
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% tp_bounds   a vector of true positive lower bounds, one per cluster
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

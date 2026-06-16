@@ -1,18 +1,23 @@
 function srfplot( srf, surface_data, view_vec, dointerp, edgealpha, dofullscreen, dolighting )
 % SRFPLOT Plots surface data on a given surface.
 %
-%   srfplot(path4surf, surface_data, view_vec, dointerp, edgealpha)
-%   plots the surface defined by 'path4surf' with optional surface data
-%   'surface_data'. Various optional parameters can be specified.
+%   srfplot(srf, surface_data, view_vec, dointerp, edgealpha, dofullscreen,
+%   dolighting) plots the surface 'srf' with optional surface data and view
+%   settings.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 %   Mandatory
-%       path4surf   - Path to the surface file or surface structure.
+%       srf          - Surface structure with .faces and .vertices fields.
 %   Optional
-%       surface_data- Surface data to be plotted.
-%       view_vec    - View vector for plotting (default: [-89, 16]).
-%       dointerp    - Flag for surface interpolation (default: 0).
-%       edgealpha   - Transparency of surface edges (default: 0.2).
+%       surface_data - Surface data to be plotted (default: []).
+%       view_vec     - View vector or string ('side','backside','top',
+%                      'back','front','bottom','left','right','all');
+%                      default depends on srf.hemi field.
+%       dointerp     - Flag for surface interpolation (default: 1).
+%       edgealpha    - Transparency of surface edges (default: 0.05 when
+%                      surface_data provided, 0.2 otherwise).
+%       dofullscreen - Flag to display full screen (default: 1).
+%       dolighting   - Flag to apply headlight lighting (default: 1).
 %--------------------------------------------------------------------------
 % OUTPUT
 %   Plots the surface with optional surface data.

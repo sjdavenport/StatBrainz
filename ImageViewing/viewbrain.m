@@ -1,26 +1,17 @@
 function ax = viewbrain( brain_im, slice, brain_mask )
-% overlay_brain - Overlay region masks on a brain slice image.
-%
-%   overlay_brain(slice, padding, region_masks, colors2use, alpha_val, rotate)
-%   overlays region masks on a brain slice image. It takes the following
-%   input arguments:
-%
-% Mandatory Inputs:
-%   - slice: A 3-element numeric array specifying the slice coordinates
-%
-% Optional Inputs:
-%   - region_masks: An optional cell array of region masks to overlay on
-%                   the brain slice. Default is {NaN}.
-%   - colors2use: An optional string specifying the color of the overlay.
-%                 Default is an empty string ([]), which results in
-%                 automatic color assignment.
-%   - alpha_val: An optional numeric value specifying the transparency
-%                of the overlay. Default is NaN (automatic transparency).
-%   - rotate: An optional numeric value specifying the rotation of the
-%             overlay. Default is 4.
+% viewbrain displays a brain image across three orthogonal views.
 %--------------------------------------------------------------------------
-% Output:
-%   - out: The output of the overlay operation (not specified in detail).
+% ARGUMENTS
+% Mandatory
+%  brain_im    A 3D brain image matrix to display.
+% Optional
+%  slice       A 3-element numeric array [x, y, z] specifying the slice
+%              coordinates. Default is [30,40,50].
+%  brain_mask  A 3D binary mask defining the brain region. Default is the
+%              MNImask.
+%--------------------------------------------------------------------------
+% OUTPUT
+%  ax          handle to the current axes
 %--------------------------------------------------------------------------
 % EXAMPLES:
 %   To overlay a white matter region mask on a brain slice at coordinates

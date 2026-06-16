@@ -1,12 +1,14 @@
 function screen_size = screenshape(shape, color)
-% fullscreen makes the plot fullscreen
+% SCREENSHAPE sets the current figure position and optionally its background color.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  shape    a 1x4 vector specifying the figure position [left, bottom, width, height]
 % Optional
+%  color    if provided, sets the figure background to white (any value triggers this)
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+% screen_size   a 1x4 vector specifying the screen size [left, bottom, width, height]
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

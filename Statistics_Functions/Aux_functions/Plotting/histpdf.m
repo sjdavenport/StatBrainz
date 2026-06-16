@@ -1,15 +1,18 @@
 function [ hist_edges, smooth_pdf ] = histpdf( data, FWHM )
-% NEWFUN
+% HISTPDF computes a histogram-based probability density estimate of data.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
+%  data       a vector of data values to compute the PDF for
 % Optional
+%  FWHM       FWHM for Gaussian smoothing of the PDF; default is 0 (no smoothing)
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  hist_edges    bin centres of the histogram
+%  smooth_pdf    the estimated (optionally smoothed) probability density
 %--------------------------------------------------------------------------
 % EXAMPLES
-% 
+%
 %--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------

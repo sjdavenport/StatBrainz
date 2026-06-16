@@ -1,14 +1,15 @@
 function [face_areas, vertex_areas] = srf_face_area( srf )
-% surf_face_area computes the area of each face on a given surface
+% SRF_FACE_AREA Computes the area of each face on a given surface.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% path4surf   a path to a file storing the geometry information, gifti and
-%             freesurfer paths are accepted. A structure g containing
-%             g.faces and a g.vertices entries can also be used here.
+%  srf         surface structure with .faces and .vertices fields, or a
+%              path to a gifti (.gii) or FreeSurfer geometry file
 %--------------------------------------------------------------------------
 % OUTPUT
-% face_areas    a vector giving the area of each face
+%  face_areas    a vector giving the area of each face
+%  vertex_areas  a vector giving the area associated with each vertex
+%                (sum of one-third of each adjacent face area)
 %--------------------------------------------------------------------------
 % EXAMPLES
 % 

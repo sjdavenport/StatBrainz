@@ -1,5 +1,18 @@
 function rk = rkval(k, d)
-% Example: rk(81,3)
+% RKVAL computes the r_k constant used in the clusterTP lower bound
+% calculation, defined as min_{1<=i<=k} (fdk(i,d) - i) / fdk(i,d).
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+%  k   the cluster-size threshold (positive integer)
+% Optional
+%  d   the dimension of the lattice (default: 3)
+%--------------------------------------------------------------------------
+% OUTPUT
+% rk   the r_k constant (a scalar in [0,1])
+%--------------------------------------------------------------------------
+% Copyright (C) - 2023 - Samuel Davenport
+%--------------------------------------------------------------------------
 if nargin < 2
     d = 3;  % Default value for d
 end

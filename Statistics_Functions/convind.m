@@ -10,17 +10,19 @@ function out = convind( ind, size_of_array, conv2what)
 % the two.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% ind       A numeric vector. If its of length one it corresponds to the
-%           location in the vector representation and if its of length 
-%           greater than one it corresponds to the coordinate vector.
-% conv2what       0/1/2, converts the indices to fsleyes indices if 1 and
-%                 to aligned anatomical coordinates (for use in papers) if 
-%                 set to 2. Just returns the coordinates (the default) is
-%                 affected if set to 0. 
-% size_of_array   A numeric vector. This corresponds to [x_1, ..., x_n] in 
-%                 the above description. This is defaulted to [91,109,91]
-%                 which is the default size of the 2mm MNI brain image 
-%                 in voxels.
+% Mandatory
+%  ind             A numeric vector. If its of length one it corresponds to the
+%                  location in the vector representation and if its of length
+%                  greater than one it corresponds to the coordinate vector.
+% Optional
+%  size_of_array   A numeric vector. This corresponds to [x_1, ..., x_n] in
+%                  the above description. This is defaulted to [91,109,91]
+%                  which is the default size of the 2mm MNI brain image
+%                  in voxels.
+%  conv2what       0/1/2, converts the indices to fsleyes indices if 1 and
+%                  to aligned anatomical coordinates (for use in papers) if
+%                  set to 2. Just returns the coordinates (the default) is
+%                  affected if set to 0. Default is 0.
 %--------------------------------------------------------------------------
 % OUTPUT
 % out       out is a coordinate vector if ind has length 1 and it is a

@@ -1,19 +1,22 @@
  function [ data, bounded_mask ] = loadsubs( subjsubset, directory, usenif, mask, as3D, subfilenames  )
-% LOADSUBS( subjsubset, directory, usenif, subfilenames, as3D )
+% LOADSUBS( subjsubset, directory, usenif, mask, as3D, subfilenames )
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % subjsubset     a vector of positive integers denoting the files in the
 %               directory that you would like to load
 % directory      the directory to load the files from
-% usenif        0/1 load the files using nifti or not. Default is 1 i.e. to
+% usenif         0/1 load the files using nifti or not. Default is 1 i.e. to
 %               use nifti
-% subfilensame   a cell arry giving the names of the different files in the
+% mask           a 3D binary mask; default is the MNImask
+% as3D           0/1 whether to load the images as 3D matrices or 1D
+%               vectorized versions. Default is 0.
+% subfilenames   a cell array giving the names of the different files in the
 %               directory that you would like to access
-% as3D          0/1 whether to save the images as 3D matrices or 1D
-%               vectorized versions
 %--------------------------------------------------------------------------
 % OUTPUT
-% data          a 
+% data           a matrix of size [prod(Dim), nsubj] (as3D=0) or
+%                [Dim, nsubj] (as3D=1) containing the loaded brain data
+% bounded_mask   the brain mask cropped to its bounding box
 %--------------------------------------------------------------------------
 % EXAMPLES
 % exsubs = loadsubs( 3:5,'C:/Users/12Sda/davenpor/data/RestingStateData/Oulu/', 0 );

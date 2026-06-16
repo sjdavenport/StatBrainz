@@ -1,4 +1,15 @@
 function screen_size = fullscreen2()
+% FULLSCREEN2 maximizes the current figure or creates a new maximized figure.
+%--------------------------------------------------------------------------
+% ARGUMENTS
+% Mandatory
+% Optional
+%--------------------------------------------------------------------------
+% OUTPUT
+% screen_size   a 1x4 vector specifying the screen size [left, bottom, width, height]
+%--------------------------------------------------------------------------
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
     % Get the screen dimensions first
     screen_size = get(0, 'ScreenSize');
     

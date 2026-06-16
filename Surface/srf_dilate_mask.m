@@ -1,12 +1,15 @@
 function [ dilated_mask ] = srf_dilate_mask( srf, mask, dilation )
-% NEWFUN
+% SRF_DILATE_MASK Dilates or erodes a mask on a surface.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
-% Optional
+%  srf       surface structure
+%  mask      logical mask vector over vertices
+%  dilation  integer number of dilation steps; positive to dilate, negative
+%            to erode, 0 returns mask unchanged
 %--------------------------------------------------------------------------
 % OUTPUT
-% 
+%  dilated_mask  logical mask after dilation/erosion
 %--------------------------------------------------------------------------
 % EXAMPLES
 % % Positive dilation

@@ -1,29 +1,30 @@
 function ax = overlay_brainslice( slice, region_masks, colors2use, alpha_val, underim, upsample, rotate, applybrainmask, doblackbackground, padding)
-% overlay_brain - Overlay region masks on a brain slice image.
+% overlay_brainslice - Overlay region masks on a single brain slice image.
 %
-%   overlay_brain(slice, padding, region_masks, colors2use, alpha_val, rotate)
-%   overlays region masks on a brain slice image. It takes the following
-%   input arguments:
-%
-% Mandatory Inputs:
-%   - slice: A 3-element numeric array specifying the slice coordinates
-%            either [x,0,0] or [0,y,0] or [0,0,z]
-%
-% Optional Inputs:
-%   - padding: An optional numeric value specifying the padding around
-%              the region masks. Default is 2.
-%   - region_masks: An optional cell array of region masks to overlay on
-%                   the brain slice. Default is {NaN}.
-%   - colors2use: An optional string specifying the color of the overlay.
-%                 Default is an empty string ([]), which results in
-%                 automatic color assignment.
-%   - alpha_val: An optional numeric value specifying the transparency
-%                of the overlay. Default is NaN (automatic transparency).
-%   - rotate: An optional numeric value specifying the rotation of the
-%             overlay. Default is 4.
+%   overlay_brainslice(slice, region_masks, colors2use, alpha_val, underim, upsample, rotate, applybrainmask, doblackbackground, padding)
 %--------------------------------------------------------------------------
-% Output:
-%   - out: The output of the overlay operation (not specified in detail).
+% ARGUMENTS
+% Mandatory
+%  slice          A 3-element numeric array specifying the slice coordinates
+%                 either [x,0,0] or [0,y,0] or [0,0,z]
+% Optional
+%  region_masks   A cell array of region masks to overlay on the brain slice.
+%                 Default is {NaN}.
+%  colors2use     A cell array of color strings. Default is [].
+%  alpha_val      A numeric value specifying the transparency of the overlay.
+%                 Default is 1.
+%  underim        An underlay image. Default is [].
+%  upsample       0/1 whether to use the 1mm MNI brain. Default is 0.
+%  rotate         A numeric value specifying the orientation of the slice.
+%                 Default is 4.
+%  applybrainmask 0/1 whether to apply the brain mask. Default is 1.
+%  doblackbackground  0/1 whether to set figure background to black.
+%                 Default is 1.
+%  padding        scalar specifying the cropping padding around the brain
+%                 mask. Default is 10.
+%--------------------------------------------------------------------------
+% OUTPUT
+%  ax             handle to the current axes
 %--------------------------------------------------------------------------
 % EXAMPLES:
 %   To overlay a white matter region mask on a brain slice at coordinates

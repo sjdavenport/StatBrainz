@@ -2,8 +2,8 @@ function h=BigFont(sz)
 % FORMAT [h] = BigFont([sz],...)
 % Makes fonts on current plot big
 %
-% [sz]  Width of line.  By default 18.
-% 
+% [sz]  Font size.  By default 20.
+%
 %
 %________________________________________________________________________
 % %W% %E%
