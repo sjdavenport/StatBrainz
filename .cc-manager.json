@@ -1,21 +1,25 @@
 {
-  "lastCommitSha": "e9863fbd86fcad695770496c372ef644798070e5",
-  "status": "paused",
-  "accomplishment": "Standardized docstrings across all 131 modified .m files — reformatting non-standard headers and adding missing ARGUMENTS/OUTPUT sections, all comment-only changes.",
+  "lastCommitSha": "eb03f301de637185be4da1113acdc50d593025d6",
+  "status": "active",
+  "accomplishment": "Re-ran all 165 tests with a classifier sweep to separate fixable test bugs from genuine missing-dependency failures, and fixed test_imgload and test_viewdata to run against bundled data.",
   "last_session_summary": {
     "completed": [
-      "Updated and standardized docstrings across all 218 .m files using parallel agents",
-      "Audited and reformatted 17 remaining non-standard docstrings to the ARGUMENTS/OUTPUT convention"
+      "Fixed test_imgload (replaced broken pan3 call with bundled image + imagesc) so it runs",
+      "Fixed test_viewdata (replaced RFT/wfield input generation with bundled MNImask + normrnd)"
     ],
     "outstanding": [
-      "Commit the 131 docstring-only changes"
+      "Finish classifying all remaining failing tests from the sweep — fix fixable ones, report the rest"
     ]
   },
   "suggested_next_steps": [
-    "Commit the docstring changes",
-    "Fix brain_extraction3.m and bayespw.m function name mismatches",
-    "Add a .gitignore to exclude .DS_Store and .cc-manager.json files"
+    "Read the classify sweep output and fix the OTHER failures that aren't missing deps",
+    "Commit all test files and TEST_REPORT.md once the sweep is done",
+    "Install RFTtoolbox and re-run the ~15 wfield/convfield-blocked tests"
   ],
-  "lastChecked": "2026-06-16T15:25:00.000Z",
-  "updatedAt": "2026-06-16T15:25:00.000Z"
+  "updatedAt": "2026-06-18T07:30:00.000Z",
+  "name": "StatBrainz",
+  "path": "/Users/samd/Documents/Code/Packages/Matlab/StatBrainz",
+  "priority": null,
+  "group": null,
+  "purpose": "MATLAB package for statistical inference and visualization of brain imaging data (volumetric and surface)"
 }
