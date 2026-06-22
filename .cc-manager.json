@@ -1,5 +1,5 @@
 {
-  "lastCommitSha": "c69a0214e5bcc7d038339ac5bfbf5613dd6f0922",
+  "lastCommitSha": "ea244915197f5a00db26c57e3c9f2508e881ab09",
   "status": "active",
   "accomplishment": "Re-ran all 165 tests with a classifier sweep to separate fixable test bugs from genuine missing-dependency failures, and fixed test_imgload and test_viewdata to run against bundled data.",
   "last_session_summary": {
@@ -21,5 +21,6 @@
   "path": "/Users/samd/Documents/Code/Packages/Matlab/StatBrainz",
   "priority": null,
   "group": null,
-  "purpose": "MATLAB package for statistical inference and visualization of brain imaging data (volumetric and surface)"
+  "purpose": "MATLAB package for statistical inference and visualization of brain imaging data (volumetric and surface)",
+  "lastContentHash": "a122204101ae0196d20289592ecdfc0728b9d68b"
 }
