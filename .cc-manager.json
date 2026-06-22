@@ -1,5 +1,5 @@
 {
-  "lastCommitSha": "ea244915197f5a00db26c57e3c9f2508e881ab09",
+  "lastCommitSha": "4fe47466433b639a80ffda7aea3643eea0704788",
   "status": "active",
   "accomplishment": "Re-ran all 165 tests with a classifier sweep to separate fixable test bugs from genuine missing-dependency failures, and fixed test_imgload and test_viewdata to run against bundled data.",
   "last_session_summary": {
@@ -22,5 +22,13 @@
   "priority": null,
   "group": null,
   "purpose": "MATLAB package for statistical inference and visualization of brain imaging data (volumetric and surface)",
-  "lastContentHash": "a122204101ae0196d20289592ecdfc0728b9d68b"
+  "lastContentHash": "b3451fbb0871760b7e0bb594fe974f3aa127cc98",
+  "syncLocal": {
+    "state": "synced",
+    "head": "4fe47466433b639a80ffda7aea3643eea0704788",
+    "branch": "main"
+  },
+  "syncVm": {
+    "state": "unreachable"
+  }
 }
