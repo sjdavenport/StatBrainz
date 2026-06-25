@@ -1,0 +1,31 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ans =
+
+  1x4 cell array
+
+  Columns 1 through 3
+
+    {'test_filesindir.m'}    {'test_loader.m'}    {'test_modul.m'}
+
+  Column 4
+
+    {'test_statbrain...'}
+
+
+ans =
+
+  1x1 cell array
+
+    {0x0 double}
+
+
+ans =
+
+  1x1 cell array
+
+    {0x0 double}
+
+
+STATUS: PASS

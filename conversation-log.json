@@ -1532,7 +1532,43 @@
         "role": "assistant",
         "content": "I've launched the full test run in the background. It runs each of the 166 `test_*.m` files in its own MATLAB process and captures combined stdout+stderr into `Tests/test_output/`, mirroring the subdirectory layout (e.g. `Tests/test_output/Statistics_Functions/test_apower.txt`), with a trailing `STATUS: PASS`/`FAIL`/`TIMEOUT` line per test. I'll report back when it finishes.",
         "timestamp": "2026-06-25T15:14:18.775Z"
+      },
+      {
+        "role": "user",
+        "content": "check test run progress",
+        "timestamp": "2026-06-25T15:18:00.564Z"
+      },
+      {
+        "role": "assistant",
+        "content": "152/166 done, in the Surface tests now. Nearly finished. Let me wait a bit more.",
+        "timestamp": "2026-06-25T15:31:05.867Z"
+      },
+      {
+        "role": "assistant",
+        "content": "152/166 complete. Almost done — I'll check back shortly.",
+        "timestamp": "2026-06-25T15:31:10.285Z"
+      },
+      {
+        "role": "user",
+        "content": "<task-notification>\n<task-id>by8289g6q</task-id>\n<tool-use-id>toolu_01U53RMHVttrU2QbNMz8KZ5w</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-samd-Documents-Code-Packages-Matlab-StatBrainz/9a8e9240-0eeb-4ddb-b613-490427173dc6/tasks/by8289g6q.output</output-file>\n<status>completed</status>\n<summary>Background command \"Run all tests, capturing per-test output\" completed (exit code 0)</summary>\n</task-notification>",
+        "timestamp": "2026-06-25T15:32:42.518Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. All 166 tests ran, each with its output captured.\n\n**Results: 129 passed, 37 failed** — matching the previous run exactly (no timeouts).\n\nOutput is in `Tests/test_output/`, mirroring the test directory structure. Each file holds the test's combined stdout+stderr plus a trailing `STATUS: PASS`/`FAIL` line (and the full error report via `getReport` on failures). For example:\n\n- `Tests/test_output/Statistics_Functions/test_apower.txt`\n- `Tests/test_output/Surface/test_srf_contour.txt`\n\nThe runner script is saved at `Tests/run_all_tests.sh` if you want to re-run. The 37 failures are the same environment/source issues catalogued in `FAILING_TESTS.txt` (missing RFTtoolbox, SPM, FreeSurfer readers, hardcoded data paths, and a handful of source bugs) — none are new regressions.",
+        "timestamp": "2026-06-25T15:36:10.599Z"
+      },
+      {
+        "role": "user",
+        "content": "check test run progress",
+        "timestamp": "2026-06-25T15:36:11.041Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The run already completed — 129 passed, 37 failed, all 166 output files written to `Tests/test_output/`. Nothing left to check. (The earlier scheduled wakeup just fired after the task had already finished.)",
+        "timestamp": "2026-06-25T15:36:14.603Z"
       }
-    ]
+    ],
+    "updatedAt": "2026-06-25T15:36:15.012Z"
   }
 ]

@@ -1,0 +1,19 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ERROR: Error using cd
+Unable to change current folder to
+'/Users/samd/Documents/Code/Packages/Matlab/StatBrainz/Tests/Inference/ClusterInference/ClusterTDP/./ClusterTDPccode'
+(Name is nonexistent or not a folder).
+
+Error in fgreedy (line 48)
+    cd(fileparts(cluster_csv_loc)); %fileparts extracts the folder name!
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in test_fgreedy (line 7)
+fgreedy('./ClusterTDPccode/k90.csv', 8, 1, 1)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

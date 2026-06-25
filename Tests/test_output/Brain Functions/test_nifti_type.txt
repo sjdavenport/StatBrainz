@@ -1,0 +1,11 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ans =
+
+     0
+     2
+     1
+
+
+STATUS: PASS

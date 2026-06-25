@@ -1,0 +1,10 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+zsh:1: no such file or directory: /opt/homebrew/bin/python3.9
+
+ans =
+
+   127
+
+
+STATUS: PASS

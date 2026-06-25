@@ -1,0 +1,18 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+Annotation file cannot be opened
+
+ERROR: Output argument "vertices" (and possibly others) not assigned a value in the
+execution with "read_annotation" function.
+
+Error in fsannot2mask (line 29)
+[~,vertex_labels,region_codes] = read_annotation(annotfile);
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in test_fsannot2mask (line 8)
+[mask, region_names] = fsannot2mask( annotfile, 'medial_wall' );
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

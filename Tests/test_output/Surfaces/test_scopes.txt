@@ -1,0 +1,13 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ERROR: Unrecognized function or variable 'data'.
+
+Error in test_scopes (line 2)
+[ lower_band, upper_band ] = scopes( data, 1000, 0.05 );
+                                     ^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

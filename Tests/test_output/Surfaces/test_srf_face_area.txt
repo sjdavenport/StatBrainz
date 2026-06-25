@@ -1,0 +1,13 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ERROR: Unrecognized function or variable 'fa'.
+
+Error in test_srf_face_area (line 10)
+srfplot(srf4white.lh, fa)
+                      ^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

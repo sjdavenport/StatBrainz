@@ -1,0 +1,9 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+pvals =
+
+    0.1500    0.0600    0.0074
+
+
+STATUS: PASS

@@ -1,0 +1,13 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ERROR: Undefined function 'overlay_brain3' for input arguments of type 'cell'.
+
+Error in test_overlay_brain3_dep (line 10)
+overlay_brain3([30,40,50], [], {MNIbrain > 0.8}, 'red', 0.6, 4)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

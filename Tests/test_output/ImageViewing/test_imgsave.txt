@@ -1,0 +1,16 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ERROR: Undefined function 'spm_vol' for input arguments of type 'char'.
+
+Error in imgsave (line 63)
+    header = spm_vol([bsloc, 'BrainImages/ExData.nii']);
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in test_imgsave (line 8)
+imgsave( zeros(91,109,91), 'examplesave', tempdir )
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

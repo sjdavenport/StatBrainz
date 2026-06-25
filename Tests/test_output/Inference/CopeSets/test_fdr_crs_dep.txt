@@ -1,0 +1,13 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ERROR: Undefined function 'wfield' for input arguments of type 'double'.
+
+Error in test_fdr_crs_dep (line 14)
+lat_data = wfield( dim, nsubj, 'L', 1);
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

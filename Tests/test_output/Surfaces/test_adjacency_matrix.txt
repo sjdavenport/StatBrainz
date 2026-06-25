@@ -1,0 +1,16 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ERROR: Undefined function 'gifti' for input arguments of type 'char'.
+
+Error in gifti2surf (line 42)
+g = gifti(path4gifti);
+    ^^^^^^^^^^^^^^^^^
+Error in test_adjacency_matrix (line 9)
+srf = gifti2surf(path4gifti);
+      ^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

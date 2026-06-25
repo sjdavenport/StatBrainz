@@ -1,0 +1,20 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+srf = 
+
+  struct with fields:
+
+    lh: [1x1 struct]
+    rh: [1x1 struct]
+
+
+noise = 
+
+  struct with fields:
+
+    lh: [10242x1 double]
+    rh: [10242x1 double]
+
+
+STATUS: PASS

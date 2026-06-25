@@ -1,0 +1,14 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+pvals =
+
+    0.1180    1.0000
+
+
+max_tstat_within_region =
+
+    3.5784         0
+
+
+STATUS: PASS

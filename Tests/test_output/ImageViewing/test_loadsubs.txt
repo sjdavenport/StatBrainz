@@ -1,0 +1,16 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ERROR: Index exceeds the number of array elements. Index must not exceed 1.
+
+Error in loadsubs (line 79)
+            img = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in test_loadsubs (line 7)
+exsubs = loadsubs( 3:5,'C:/Users/12Sda/davenpor/data/RestingStateData/Oulu/', 0 );
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

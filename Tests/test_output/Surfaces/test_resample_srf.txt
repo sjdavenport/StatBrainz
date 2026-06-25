@@ -1,0 +1,6 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+Elapsed time is 0.001780 seconds.
+Elapsed time is 2.203828 seconds.
+
+STATUS: PASS

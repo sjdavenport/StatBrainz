@@ -1,0 +1,9 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+fdp =
+
+    0.5371
+
+
+STATUS: PASS

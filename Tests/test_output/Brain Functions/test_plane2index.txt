@@ -1,0 +1,11 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+index =
+
+  1x3 cell array
+
+    {':'}    {':'}    {[50]}
+
+
+STATUS: PASS

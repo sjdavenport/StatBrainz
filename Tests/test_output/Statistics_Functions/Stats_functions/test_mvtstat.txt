@@ -1,0 +1,61 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ans =
+
+    1.0589
+
+
+muuuu =
+
+   -0.0372
+
+
+sigmatilde =
+
+    0.7906
+
+
+ans =
+
+   -0.2103
+
+
+ans =
+
+   -0.2103
+
+
+data =
+
+     1     5     9
+     2     6    10
+     3     7    11
+     4     8    12
+
+
+tstat =
+
+    2.1651
+    2.5981
+    3.0311
+    3.4641
+
+
+xbar =
+
+     5
+     6
+     7
+     8
+
+
+std_dev =
+
+    4.0000
+    4.0000
+    4.0000
+    4.0000
+
+
+STATUS: PASS

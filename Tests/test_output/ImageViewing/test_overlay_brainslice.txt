@@ -1,0 +1,49 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ans = 
+
+  Axes with properties:
+
+             XLim: [0.5000 91.5000]
+             YLim: [0.5000 109.5000]
+           XScale: 'linear'
+           YScale: 'linear'
+    GridLineStyle: '-'
+         Position: [0 0 1 1]
+            Units: 'normalized'
+
+  Use GET to show all properties
+
+
+ans = 
+
+  Axes with properties:
+
+             XLim: [0.5000 163.5000]
+             YLim: [0.5000 200.5000]
+           XScale: 'linear'
+           YScale: 'linear'
+    GridLineStyle: '-'
+         Position: [0 0 1 1]
+            Units: 'normalized'
+
+  Use GET to show all properties
+
+
+ans = 
+
+  Axes with properties:
+
+             XLim: [0.5000 163.5000]
+             YLim: [0.5000 200.5000]
+           XScale: 'linear'
+           YScale: 'linear'
+    GridLineStyle: '-'
+         Position: [0 0 1 1]
+            Units: 'normalized'
+
+  Use GET to show all properties
+
+
+STATUS: PASS

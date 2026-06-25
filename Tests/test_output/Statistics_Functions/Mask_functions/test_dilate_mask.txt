@@ -1,0 +1,46 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ans =
+
+  5x5 logical array
+
+   1   1   1   1   0
+   1   1   1   1   1
+   1   1   1   1   1
+   1   1   1   1   1
+   1   1   1   1   0
+
+
+ans =
+
+  5x5 logical array
+
+   0   0   0   0   0
+   0   0   0   0   0
+   0   0   0   0   0
+   0   0   0   0   0
+   0   0   0   0   0
+
+
+ans =
+
+  5x5 logical array
+
+   0   0   0   0   0
+   0   0   0   0   0
+   0   0   1   0   0
+   0   0   0   0   0
+   0   0   0   0   0
+
+
+mask =
+
+     0     0     1     1     0
+     1     1     1     1     1
+     1     1     1     1     1
+     1     1     1     1     1
+     0     0     1     1     0
+
+
+STATUS: PASS

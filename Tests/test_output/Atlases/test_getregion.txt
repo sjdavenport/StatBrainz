@@ -1,0 +1,26 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+Point 1
+Harvard-Oxford Cortical atlas: not found 
+Harvard-Oxford Sub-cortical atlas: Left Thalamus
+Point 1
+Harvard-Oxford Cortical atlas: Parahippocampal Gyrus, anterior division
+Harvard-Oxford Sub-cortical atlas: Right Amygdala
+
+ans =
+
+  1x1 cell array
+
+    {'Parahippocampal Gyrus, anterior division'}
+
+Point 1
+Harvard-Oxford Cortical atlas: Parahippocampal Gyrus, anterior division
+
+ans =
+
+  1x1 cell array
+
+    {'Parahippocampal Gyrus, anterior division'}
+
+
+STATUS: PASS

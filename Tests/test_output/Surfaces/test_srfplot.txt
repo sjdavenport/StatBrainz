@@ -1,0 +1,20 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+[Warning: surface_data not included - plotting the empty mesh] 
+[> In srfplot (line 157)
+In test_srfplot (line 31)
+In run (line 112)] 
+
+ERROR: Unrecognized function or variable 'g'.
+
+Error in srfplot (line 163)
+vertices = double(g.vertices);
+                  ^^^^^^^^^^
+Error in test_srfplot (line 53)
+srfplot(path4gifti_left, X_left(1:10242))
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

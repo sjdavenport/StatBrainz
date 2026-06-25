@@ -1,0 +1,9 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+thresh =
+
+   -2.5862
+
+
+STATUS: PASS

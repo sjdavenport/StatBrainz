@@ -1,0 +1,14 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ans =
+
+  1x2 cell array
+
+    {2x3 double}    {[22 15 37]}
+
+    32    15    37
+    31    15    37
+
+
+STATUS: PASS

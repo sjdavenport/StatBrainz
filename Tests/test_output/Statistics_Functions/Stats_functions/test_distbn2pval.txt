@@ -1,0 +1,9 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+pval_vec =
+
+    0.4900    0.1360    0.0250
+
+
+STATUS: PASS

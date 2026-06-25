@@ -1,0 +1,43 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+rejection_ind =
+
+  1x100 logical array
+
+  Columns 1 through 19
+
+   1   1   0   1   0   0   0   0   1   1   0   1   1   0   1   0   0   1   1
+
+  Columns 20 through 38
+
+   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+
+  Columns 39 through 57
+
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+
+  Columns 58 through 76
+
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+
+  Columns 77 through 95
+
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0
+
+  Columns 96 through 100
+
+   0   0   0   0   0
+
+
+nrejections =
+
+    12
+
+
+sig_locs =
+
+     1     2     4     9    10    12    13    15    18    19    20    94
+
+
+STATUS: PASS

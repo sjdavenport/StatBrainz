@@ -1,0 +1,32 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+5 x 1 surfaces to smooth, % remaining: 100 Done
+5 x 1 surfaces to smooth, % remaining: 100 Done
+Reading from version 2
+colortable with 36 entries read (originally /autofs/space/amaebi_026/users/buckner_cortical_atlas/scripts/colortable_final.txt)
+Reading from version 2
+colortable with 36 entries read (originally /autofs/space/amaebi_026/users/buckner_cortical_atlas/scripts/colortable_final.txt)
+5 x 1 surfaces to smooth, % remaining: 100 Done
+
+ERROR: Dot indexing is not supported for variables of this type.
+
+Error in SurfStatSmooth (line 34)
+    s=Ym.Format{2};
+      ^^^^^^^^^^^^
+Error in smooth_surface (line 74)
+    smooth_data = SurfStatSmooth( srf, data', FWHM, metric, niters)';
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in srf_noise (line 78)
+          smoothed_mask = smooth_surface(srf, mask, FWHM, metric);
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in srf_noise (line 55)
+        data.lh = srf_noise( srf.lh, FWHM, nsubj, metric, mask.lh );
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in test_srf_noise (line 24)
+noise = srf_noise( srf, FWHM, nsubj, 'ones', mask);
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL

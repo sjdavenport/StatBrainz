@@ -1,0 +1,17 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+srf = 
+
+  struct with fields:
+
+    lh: [1x1 struct]
+    rh: [1x1 struct]
+
+
+niters =
+
+     5
+
+
+STATUS: PASS

@@ -1,0 +1,49 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+val =
+
+    0.1566    0.0913
+
+
+val =
+
+    0.0210
+
+
+valplushx =
+
+    0.0210
+
+
+ans =
+
+   -0.0129
+
+
+ans =
+
+   -0.0259
+
+
+val =
+
+    0.0210
+
+
+val =
+
+    0.0210    0.0000
+
+
+ans =
+
+    4.0000
+
+
+ans =
+
+     3
+
+
+STATUS: PASS

@@ -1,0 +1,16 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+ERROR: Undefined function 'SpheroidSignal' for input arguments of type 'double'.
+
+Error in peakgen (line 116)
+    Sig = Sig + SpheroidSignal(wDim, Rad(peak), Mag(peak), Smo(peak), centre_locs{peak}); %- Signal Should smooth here really!!
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error in test_cope_display (line 8)
+mu = peakgen(2, 30, 10, dim); mask = ones(dim);
+     ^^^^^^^^^^^^^^^^^^^^^^^
+Error in run (line 112)
+evalin('caller', strcat(scriptStem, ';'));
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+STATUS: FAIL
