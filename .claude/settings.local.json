@@ -40,7 +40,11 @@
       "Bash(/Applications/MATLAB_R2024b.app/bin/matlab -batch \"addSB2path; close all force; pvals=rand\\(10,10\\); mask=true\\(10,10\\); try, ri=imBH\\(pvals,mask\\); fprintf\\('IMBH_OK n=%d\\\\n', numel\\(ri\\)\\); catch e, fprintf\\('IMBH_ERR %s\\\\n', e.message\\); end\")",
       "Bash(chmod +x /tmp/classify.sh)",
       "Bash(/tmp/classify.sh)",
-      "Bash(grep -q '^spm_smooth$' /tmp/known_missing.txt)"
+      "Bash(grep -q '^spm_smooth$' /tmp/known_missing.txt)",
+      "Bash(/Applications/MATLAB_R2024b.app/bin/matlab *)",
+      "Bash(pkill -9 -f \"MATLAB_maca64 -batch\")",
+      "Bash(pkill -9 -f \"matlab.*-batch\")",
+      "Bash(kill -9 24909)"
     ]
   }
 }

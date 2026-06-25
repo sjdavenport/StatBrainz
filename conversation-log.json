@@ -830,5 +830,456 @@
       }
     ],
     "updatedAt": "2026-06-18T06:59:35.171Z"
+  },
+  {
+    "sessionId": "19d9325a-359d-4716-a721-e0cac6677985",
+    "timestamp": "2026-06-24T13:46:25.086Z",
+    "messages": [
+      {
+        "role": "user",
+        "content": "I'd like to turn this repo into a statistical software package. can you look into it and determine what needs to be done to get it there?",
+        "timestamp": "2026-06-24T13:45:10.782Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll investigate the repo to understand its current state and what it would take to turn it into a statistical software package.",
+        "timestamp": "2026-06-24T13:45:14.263Z"
+      },
+      {
+        "role": "assistant",
+        "content": "This is **StatBrainz**, a MATLAB package for statistical inference and visualization of brain imaging data. There's already significant prior work here. Let me understand the current state more deeply before recommending a path.",
+        "timestamp": "2026-06-24T13:45:20.779Z"
+      },
+      {
+        "role": "assistant",
+        "content": "A substantial MATLAB codebase (~270 `.m` files across functional areas, 167 test files). It already works as a loadable package via `addSB2path`. The question is what \"statistical software package\" means beyond its current state. Let me dig into the structure conventions, tests, and packaging to identify concrete gaps.",
+        "timestamp": "2026-06-24T13:45:27.702Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I now have a clear picture. Let me look at a couple of representative source files to gauge code quality and the docstring convention, since that determines how much packaging work is realistic.",
+        "timestamp": "2026-06-24T13:45:39.983Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I have a thorough picture now. Let me give you the assessment and a plan rather than diving into changes, since \"turn it into a statistical software package\" is a direction that benefits from your input on scope.\n\n## Where StatBrainz is today\n\nIt's **already a functioning MATLAB package**, not a loose pile of scripts:\n\n- **~270 source functions** organized into clear domains (`Inference`, `Statistics_Functions`, `Surface`, `ImageViewing`, `Brain Functions`, `Atlases`, `BrainImages`).\n- **Consistent, high-quality docstrings** — every function has a structured `ARGUMENTS / OUTPUT / EXAMPLES / AUTHOR` header. This is the single biggest asset; it's the hard part of \"being a package\" and it's largely done.\n- **A test for every function** (167 `test_*.m`) plus a detailed `TEST_REPORT.md`, License, Notice, README with illustrations, and a one-line installer (`addSB2path`).\n\nSo the codebase *content* is in good shape. What's missing is the **packaging, distribution, and reliability scaffolding** that distinguishes \"a folder of good MATLAB code on GitHub\" from \"a statistical software package\" you'd cite, version, and install. Here's the gap analysis:\n\n### Gaps to close\n\n| Area | Current state | What a \"package\" needs |\n|---|---|---|\n| **Distribution** | Clone + `addSB2path` only | A MATLAB Toolbox (`.prj` → `.mltbx`) installable via Add-On Manager; a `Contents.m` for `ver`/`help StatBrainz` |\n| **Tests** | \"Runs clean\" example scripts, not assertions | Real `matlab.unittest` assertions; a `runtests`-style entry point; CI |\n| **CI/automation** | None | GitHub Actions running tests on push (MATLAB has an official action) |\n| **Versioning/metadata** | None | `CITATION.cff`, `CHANGELOG.md`, a version number, semantic releases |\n| **Dependency handling** | Silent assumption RFTtoolbox + SPM are on the path | Declared/optional deps, graceful errors when missing (currently ~15 tests just fail) |\n| **Known source defects** | Documented in TEST_REPORT | Fix the function-name≠file-name mismatches, empty stubs (`fs_smooth`, `gen_mask`), missing helpers (`findstrings`, `capstr`) |\n| **Contribution** | None | `CONTRIBUTING.md`, issue templates |\n\nBefore I build any of this, two decisions are yours:",
+        "timestamp": "2026-06-24T13:45:56.095Z"
+      },
+      {
+        "role": "assistant",
+        "content": "What would you like to clarify? Happy to expand on any of the gaps I listed, the current state of the repo, or what the options would actually involve before you decide.",
+        "timestamp": "2026-06-24T13:46:24.661Z"
+      },
+      {
+        "role": "user",
+        "content": "I just want the top 3 things that could be done to make it better",
+        "timestamp": "2026-06-24T13:46:38.608Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Here are the top 3, in priority order:\n\n## 1. Make the tests actually verify correctness (and add CI)\nRight now the 167 tests only check that example scripts \"run without error\" — `TEST_REPORT.md` says so explicitly: *\"passing means runs clean, not output verified correct.\"* That's not a safety net; a function can return garbage and still pass. Converting even the core statistical functions (the `Inference` and `Statistics_Functions` math) to assertion-based `matlab.unittest` tests, plus a GitHub Actions workflow (MATLAB has an official action) running them on every push, is the single biggest reliability upgrade. **This is what most distinguishes \"scripts on GitHub\" from \"a package you can trust.\"**\n\n## 2. Fix the known source defects already documented in TEST_REPORT.md\nThese are real bugs in shipped code, not test issues — and they're already cataloged for you:\n- **Function-name ≠ file-name mismatches** (e.g. `Xgen2.m` declares `Xgen`, `slidergui3.m` declares `sliderGUI3`, `bayespw.m` declares `GLM_est_resid_var_pw`). MATLAB dispatches on the file name, so the declared names are unreachable — these functions are effectively broken.\n- **Missing helpers** `findstrings` and `capstr`, called by shipped `get_mask` but absent from the repo.\n- **Empty/stub functions** like `fs_smooth` (never assigns output).\n\nThese are concrete, bounded, and make the package genuinely non-functional in spots.\n\n## 3. Make it installable and citable\nTurn it from \"clone + run `addSB2path`\" into a proper toolbox:\n- A **`.prj`/`.mltbx`** so it installs through MATLAB's Add-On Manager, plus a **`Contents.m`** so `help StatBrainz` and `ver` work.\n- A **`CITATION.cff`** and a version number — essential for a *statistical* package, where users need to cite the methods (clustersize inference, TDP bounds, CoPE sets) in papers.\n\n---\n\nAll three are achievable in MATLAB with no rewrite — they build on the strong docstrings and structure already there. Want me to start on any one of them? I'd suggest **#2** first (quick, concrete wins that also unblock tests), then **#1**.",
+        "timestamp": "2026-06-24T13:46:52.377Z"
+      },
+      {
+        "role": "user",
+        "content": "okay can you go through the tutorial notebooks and ensure that they all run and flag the ones that don't?",
+        "timestamp": "2026-06-24T13:47:47.981Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The tutorials are mostly `.mlx` (MATLAB Live Scripts — binary/zipped XML format) plus one `.m`. Let me check whether MATLAB is even available in this environment, since running them requires it.",
+        "timestamp": "2026-06-24T13:47:55.073Z"
+      },
+      {
+        "role": "assistant",
+        "content": "There's no MATLAB or Octave in this environment, so I **cannot execute** the tutorials here. (The prior session's `TEST_REPORT.md` notes tests were run on the user's own Mac with `MATLAB_R2024b`, not in this sandbox.)\n\nI have two realistic options:\n\n1. **Static analysis** — I extract the code from each `.mlx`/`.m` tutorial and trace it against the actual repo: do the called functions exist, do file names match (the dispatch bug), are dependencies (RFTtoolbox/SPM) or hardcoded data paths required, are there obvious errors. This catches the *same classes of failures* documented in TEST_REPORT.md without execution, and I can flag which tutorials will fail and why.\n2. **You run them** — I prep a runner and you execute in your MATLAB, pasting back errors.\n\nLet me do #1 now — it's the most I can do autonomously and likely catches most issues. First I need to extract code from the `.mlx` files (they're zipped XML).",
+        "timestamp": "2026-06-24T13:48:04.852Z"
+      },
+      {
+        "role": "assistant",
+        "content": "`unzip` isn't available but Python's `zipfile` works. Let me write a small extractor that pulls the code out of `matlab/document.xml` from each `.mlx`. The code lives in `<w:t>` text runs inside paragraphs marked as code.",
+        "timestamp": "2026-06-24T13:48:20.376Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Extraction worked. Let me read all the extracted tutorial code.",
+        "timestamp": "2026-06-24T13:48:28.258Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I have all the tutorial code. Now I'll statically verify each one: which functions it calls, whether those functions exist in the repo (and whether the file name matches the dispatched name), and whether it needs missing deps (RFTtoolbox/SPM) or hardcoded/missing data. Let me build a function inventory and check every call.",
+        "timestamp": "2026-06-24T13:48:34.482Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The loop produced no output — likely an issue with how the list iterated. Let me redo it cleanly.",
+        "timestamp": "2026-06-24T13:48:43.639Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Strange — no output at all. The `grep -qx` may be failing silently. Let me debug.",
+        "timestamp": "2026-06-24T13:48:48.802Z"
+      },
+      {
+        "role": "user",
+        "content": "[Request interrupted by user]",
+        "timestamp": "2026-06-24T13:48:49.822Z"
+      },
+      {
+        "role": "user",
+        "content": "why is there no matlab?",
+        "timestamp": "2026-06-24T13:48:59.357Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Good question — it's just the nature of where this session is running, not something wrong with your repo.\n\nThis Claude Code session is running in a **Linux sandbox** (`/workspace`), not on your Mac. MATLAB is commercial, license-locked software that has to be installed and activated per machine — it isn't part of this container image, and there's no MATLAB or Octave on the `PATH` here (I checked). That's also why the prior session's `TEST_REPORT.md` says the 165 tests were run on *your* machine with `/Applications/MATLAB_R2024b.app/bin/matlab -batch` — that was your local Mac, where your license lives.\n\nSo in this environment I can't *execute* MATLAB code. What I **can** do:\n\n1. **Static analysis** (what I'm doing now) — extract the code from each tutorial and check it against the actual repo: do the called functions exist, do file names match the declared names (the dispatch bug), do they need missing deps or hardcoded data. This catches most of the failure classes without running anything.\n\n2. **Hand you a runner** — I prepare a script you execute in your own MATLAB and paste back the errors.\n\n3. **Install Octave** in this sandbox as a partial substitute — but Octave isn't fully MATLAB-compatible (Live Scripts, many toolbox functions, and graphics won't work), so it'd give misleading results for this package. I don't recommend it.\n\nThe empty grep output I just hit is a separate shell quirk in my analysis, not a MATLAB issue — let me sort that out and continue with the static check.",
+        "timestamp": "2026-06-24T13:49:10.488Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The inventory and grep both work fine — the issue was the shell function definition not persisting. Let me run the check inline in one block.",
+        "timestamp": "2026-06-24T13:49:15.707Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Now I have concrete hits. Let me verify the specific problem areas: the missing functions (`saveim`, `load_srf`), declared-name vs file-name mismatches for the functions tutorials call, the data files the tutorials load, and dependency functions like `square_signal`.",
+        "timestamp": "2026-06-24T13:49:24.175Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Good — the surface functions' names all match. Now let me confirm the data files the tutorials load, and check `square_signal`/`saveim`/`load_srf` situations, plus whether `imgload('fullmean')` resolves (a documented bug).",
+        "timestamp": "2026-06-24T13:49:32.679Z"
+      },
+      {
+        "role": "assistant",
+        "content": "`fs4` data isn't an obvious file match — `loadsrf` likely resolves it internally. Let me check how `loadsrf` finds surfaces (the surface tutorial calls `loadsrf('fs4',...)`), confirm `imgload`'s search covers `DerivedUKB`, and check `statbrainz_maindir`'s trailing-slash behavior (the tutorials concatenate `sb_dir` with paths both with and without a slash).",
+        "timestamp": "2026-06-24T13:49:41.883Z"
+      },
+      {
+        "role": "assistant",
+        "content": "`loadsrf('fs4')` and `hcp` resolve to dirs that exist (`fsaverage4`, `Surface/hcp/hcp_32k.mat`). Note `loadsrf('bert')` has a hardcoded Windows path but no tutorial uses 'bert'. Let me verify the two remaining concerns: the `imgload('fullmean')` short-name lookup (the `.m` tutorial uses it; TEST_REPORT flagged it fails) and check the `hcp` surface mat + the `imgload` search path.",
+        "timestamp": "2026-06-24T13:49:51.498Z"
+      },
+      {
+        "role": "assistant",
+        "content": "That confirms the documented bug. `imgload('fullmean')` looks **only** in `BrainImages/Volume/`, but `fullmean.nii` lives in `BrainImages/Real_data/DerivedUKB/`. So the short-name form in `clustersize_inference_tutorial.m` fails, while the `.mlx` version uses the full path and works. Let me confirm `fullmean.nii` is not also in `Volume/`, and check `MNImask` is.",
+        "timestamp": "2026-06-24T13:49:59.149Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Confirmed. `MNImask` resolves (it's in `Volume/`), but `fullmean`/`fullstd` only exist in `DerivedUKB/`, which `imgload`'s short-name search doesn't cover. The static analysis is complete. Here's the report.\n\n## Tutorial Run Report\n\n**Environment note:** I could not *execute* these — this Claude Code session runs in a Linux sandbox with no MATLAB (your license lives on your Mac). So this is a **static trace**: I extracted the code from each `.mlx`/`.m`, checked every called function against the repo (accounting for MATLAB's file-name dispatch), and verified every data file and dependency. This catches the same failure classes as the prior `TEST_REPORT.md`, but does not confirm numerical output.\n\nThere are **8 tutorial files**. One is a PDF (instructions), one a `.json`. Of the **6 code tutorials**:\n\n### ✅ Will run (all functions + data present)\n| Tutorial | Notes |\n|---|---|\n| **`surface_tutorial.mlx`** | All functions exist (`loadsrf`, `srfplot`, `smooth_surface`, `spintest`, `tstat2pval`, `fdrBH`…); `fs4`/`hcp` surfaces resolve to real dirs; `hcpWM_surface.mat` present. Uses `load_srf`/`load_srf('hcp')` in two cells — **`load_srf` does not exist** (the function is `loadsrf`). Those two cells will error; the rest runs. |\n| **`confidence_regions_tutorial.mlx`** | All functions present (`gifti2surf`, `srf_fdr_crs`, `srf_color_crs`, `srf_scb2cope`, `srf_colour`, `scopes`, `srf_cope_display`); both gifti files + `hcpWM_surface.mat` present. Should run clean. |\n| **`testing.mlx`** | Trivial 4-line isosurface demo; `imgload`/`srfplot` exist. Runs. |\n\n### ⚠️ Will partially fail\n| Tutorial | Problem |\n|---|---|\n| **`surface_tutorial.mlx`** | Calls **`load_srf`** (2 cells) — no such file; the function is `loadsrf`. → `Unrecognized function 'load_srf'`. Also references `srf` / `sb_dir` before they're defined in a couple of cells (relies on workspace state from earlier cells). |\n| **`LCE_tutorial.mlx`** | Calls **`saveim`** (3×) — **no such function in the repo** (only `save_annot2mat`, etc.). → errors at each `saveim`/`saveim('signal.png')` call. Also references undefined vars `brain_mask`, `region_masks`, `colors2use`, `lce_cluster_im` in trailing cells (looks like unfinished draft cells). Core TFCE/LCE computation cells (`tfce`, `perm_tfce`, `perm_cluster`, `LCE`, `numOfConComps`, `cluster_im`) are all fine. |\n\n### ❌ Will fail\n| Tutorial | Problem |\n|---|---|\n| **`clustersize_inference_tutorial.m`** (the `.m`, not `.mlx`) | Uses **`imgload('fullmean')`** and **`imgload('fullstd')`** (short names). `imgload` only searches `BrainImages/Volume/`, but those files live in `BrainImages/Real_data/DerivedUKB/`. → `This file is not available`. **The `.mlx` version of this same tutorial avoids the bug by passing full paths** — so you have two divergent copies. |\n| **`hcp_data_download.mlx`** | Not really runnable code — it's prose + a manual HCP download workflow gated behind signing the HCP Data Use Terms. The referenced `ukb.mat` (mentioned in the clustersize tutorials' text) is **not in the repo**. |\n\n### Root causes (all fixable, and they overlap with your \"fix known defects\" priority)\n1. **`saveim` is missing** — breaks `LCE_tutorial`. Either add it (likely a thin wrapper around `print`/`exportgraphics`) or remove the calls.\n2. **`load_srf` vs `loadsrf`** — `surface_tutorial` calls a name that doesn't exist. Either add a `load_srf.m` alias or fix the tutorial.\n3. **`imgload` short-name search doesn't cover `Real_data/DerivedUKB/`** — breaks the `.m` clustersize tutorial. Widen `imgload`'s search path (and reconcile the `.m`/`.mlx` duplicates).\n4. **Draft/unfinished cells** in `LCE_tutorial` reference undefined variables.\n\nWant me to **fix these** (add `saveim` + a `load_srf` alias, widen `imgload`'s search to `DerivedUKB`, clean the `.m` tutorial)? Note I can edit the `.m` file directly, but the `.mlx` files are binary Live Scripts — I can patch the source functions they depend on (the higher-leverage fix), but editing `.mlx` *contents* cleanly really needs MATLAB on your end.",
+        "timestamp": "2026-06-24T13:50:25.808Z"
+      }
+    ],
+    "updatedAt": "2026-06-24T13:50:26.269Z"
+  },
+  {
+    "sessionId": "0d16a014-a670-4b07-9a06-70c62b6eeeca",
+    "timestamp": "2026-06-24T14:13:13.429Z",
+    "messages": [
+      {
+        "role": "user",
+        "content": "for all of the plotting functions like srfplot, I'd like the test function to save output from the function in tests/Figures/",
+        "timestamp": "2026-06-24T14:07:31.723Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll look at the existing test functions for the plotting functions to understand the current pattern.",
+        "timestamp": "2026-06-24T14:07:42.664Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Let me look at a couple of the existing plotting test files to understand the current pattern.",
+        "timestamp": "2026-06-24T14:08:10.751Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The Figures dir is empty. Let me see all the plotting test files and a representative sample to understand the variety of patterns.",
+        "timestamp": "2026-06-24T14:09:24.566Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Now I understand the structure. The plotting test files create a figure but don't save it. I need to add a `saveas`/`exportgraphics` line to each so output lands in `tests/Figures/`. \n\nLet me check what the absolute path to `tests/Figures/` is and whether tests rely on a relative working directory. Let me clarify a couple of decisions before editing.\n\nThe key question is which tests count as \"plotting functions\". Let me figure out the scope and whether the path should be relative or absolute.",
+        "timestamp": "2026-06-24T14:09:33.778Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Now let me check how the GUI/animated functions behave (sliderGUI, slidergui3, animatefun) — those are interactive and may not have a stable figure to save. Let me check their sources quickly.",
+        "timestamp": "2026-06-24T14:10:25.490Z"
+      },
+      {
+        "role": "assistant",
+        "content": "animatefun, sliderGUI, slidergui3 are interactive/animated — they don't produce a single static figure to save meaningfully, but they do render to the current figure. I'll capture the current figure after the call with `exportgraphics(gcf, ...)`. For animatefun it ends on the last frame, which is fine.\n\nLet me add a save line to each of the 9 tests. I'll use `exportgraphics(gcf, 'tests/Figures/<name>.png')` since it works for both axes-content and surfaces.",
+        "timestamp": "2026-06-24T14:10:41.369Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I had only read test_srfplot2.m via Read; the others I read through Bash (`cat`), which doesn't count. Let me Read each then edit.",
+        "timestamp": "2026-06-24T14:11:00.088Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. Added an `exportgraphics(gcf, 'tests/Figures/<name>.png')` line to the 9 plotting tests that actually render a figure:\n\n- `test_srfplot2.m` → srfplot2.png\n- `test_srf_colour.m` → srf_colour.png\n- `test_srf_contour.m` → srf_contour.png\n- `test_BigFont.m` → BigFont.png\n- `test_animatefun.m` → animatefun.png\n- `test_custom_colormap.m` → custom_colormap.png\n- `test_histpdf.m` → histpdf.png\n- `test_sliderGUI.m` → sliderGUI.png\n- `test_slidergui3.m` → slidergui3.png\n\nSkipped the commented-out stubs (newfun, surf4, mytiles, plotImagesInTile, srfgui) per your scope choice. Paths are relative to the repo root as requested.\n\nTwo notes worth flagging:\n- The interactive GUI tests (`sliderGUI`, `slidergui3`, `animatefun`) will save whatever frame the current figure is on when the call returns — fine as a smoke-test artifact, but not a \"controlled\" view.\n- These all rely on the test being run from the repo root so `tests/Figures/` resolves. If your runner ever `cd`s elsewhere, the saves will fail.",
+        "timestamp": "2026-06-24T14:13:12.982Z"
+      },
+      {
+        "role": "user",
+        "content": "have you run them? I don't see any figures?",
+        "timestamp": "2026-06-24T14:13:32.650Z"
+      },
+      {
+        "role": "assistant",
+        "content": "You're right — I edited the files but never ran them. Let me run them headless and check the figures land in `tests/Figures/`.",
+        "timestamp": "2026-06-24T14:13:39.310Z"
+      },
+      {
+        "role": "assistant",
+        "content": "MATLAB takes a while to start. Let me wait for it to finish.",
+        "timestamp": "2026-06-24T14:16:38.558Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll wait for the MATLAB run to complete; you'll get notified.",
+        "timestamp": "2026-06-24T14:20:07.909Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The job is still running but the first result is already informative: the run is happening from a different working directory, so `tests/Figures/` doesn't resolve. This confirms the relative-path concern. Let me check the cwd and full output.",
+        "timestamp": "2026-06-24T14:20:15.339Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The problem is clear: MATLAB's working directory when running `-batch` isn't the repo root, so the relative path `tests/Figures/` doesn't resolve. The right fix is to make the save path robust to cwd. \n\nRather than the bare relative path you chose, I'll resolve `tests/Figures` relative to the repo root via `addSB2path`/`which`. Let me confirm how the repo root is locatable.",
+        "timestamp": "2026-06-24T14:20:21.221Z"
+      },
+      {
+        "role": "assistant",
+        "content": "`addSB2path` is on the path, so `fileparts(which('addSB2path'))` reliably gives the repo root regardless of cwd. There's also a `statbrainz_maindir` helper I saw in the tests. Let me check it.",
+        "timestamp": "2026-06-24T14:21:38.160Z"
+      },
+      {
+        "role": "assistant",
+        "content": "There's a purpose-built helper, `statbrainz_maindir`, that returns the repo root with a trailing slash. That's the idiomatic anchor. I'll change each save line to:\n\n```matlab\nexportgraphics(gcf, [statbrainz_maindir, 'tests/Figures/<name>.png'])\n```\n\nLet me update all 9 files.",
+        "timestamp": "2026-06-24T14:21:45.091Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Now let me run the non-interactive tests again (explicitly cd'ing into the repo root via `-sd` so `addSB2path` works), and skip the interactive GUI ones since they block.",
+        "timestamp": "2026-06-24T14:22:03.403Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll report back once the run completes and I've confirmed the PNGs exist.",
+        "timestamp": "2026-06-24T14:22:13.246Z"
+      },
+      {
+        "role": "user",
+        "content": "when you run the tests a matlab plot window opens and freezes so that it can't be closed (its open now!)",
+        "timestamp": "2026-06-24T14:22:54.380Z"
+      },
+      {
+        "role": "assistant",
+        "content": "That's the GUI/interactive tests — `sliderGUI`, `slidergui3`, and `animatefun` create interactive windows that block. But my last run only included the 6 non-interactive ones, none of which should block... unless `-batch` is still popping a visible window. Let me kill the stuck MATLAB now and stop the background job.",
+        "timestamp": "2026-06-24T14:22:59.530Z"
+      },
+      {
+        "role": "assistant",
+        "content": "That process is the one I just killed (exit 1 = killed). Let me confirm nothing's left, then check what the run actually produced before I killed it.",
+        "timestamp": "2026-06-24T14:30:14.546Z"
+      },
+      {
+        "role": "assistant",
+        "content": "PID 24909 survived `pkill` — it's still up (that's your frozen window). Let me kill it by PID directly.",
+        "timestamp": "2026-06-24T14:30:19.272Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The frozen window is gone now. Sorry about that.\n\nHere's what's going on. Two real problems:\n\n1. **`-batch` still opens visible figure windows on macOS.** MATLAB's `-batch` is supposed to be headless, but `srfplot` (and the others) create actual figure windows, and on this Mac they pop up and can hang. The run never even got past `addSB2path` to the first test before I killed it — the Figures dir is still empty, and the only output was the Java warnings.\n\n2. **The window freezes because the figures render on-screen.** To save figures without any window appearing, the figures need to be created *invisible*.\n\nThe clean fix is to force figures off-screen for the whole run with `set(0,'DefaultFigureVisible','off')`. `exportgraphics` still captures invisible figures fine. That way nothing pops up and nothing can freeze.\n\nBefore I run anything again, one decision — how do you want to handle visibility?",
+        "timestamp": "2026-06-24T14:31:00.425Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Hide only at run time — test files stay interactive. Let me run the 6 non-interactive tests with figures forced off-screen.",
+        "timestamp": "2026-06-24T14:31:21.102Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Running with figures hidden — no window should appear this time. I'll check the result when it completes.",
+        "timestamp": "2026-06-24T14:31:27.317Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll report back once it finishes. If a window pops up again before then, tell me and I'll kill it immediately.",
+        "timestamp": "2026-06-24T14:31:30.745Z"
+      },
+      {
+        "role": "user",
+        "content": "<task-notification>\n<task-id>b6ue1azty</task-id>\n<tool-use-id>toolu_01LyT5EpsWgWVBCWdhTo175b</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-samd-Documents-Code-Packages-Matlab-StatBrainz/0d16a014-a670-4b07-9a06-70c62b6eeeca/tasks/b6ue1azty.output</output-file>\n<status>completed</status>\n<summary>Background command \"Run non-interactive tests with figures hidden\" completed (exit code 0)</summary>\n</task-notification>",
+        "timestamp": "2026-06-24T14:31:36.073Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Completed cleanly (exit 0). Let me check the output and confirm the PNGs exist.",
+        "timestamp": "2026-06-24T14:31:39.029Z"
+      },
+      {
+        "role": "assistant",
+        "content": "All 6 non-interactive tests ran OK and saved figures — no window popped up. Let me visually confirm a couple look right (the surface ones especially).",
+        "timestamp": "2026-06-24T14:31:45.735Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Both look correct — the contour test shows the original mask + inner/outer contours on the sphere, and histpdf is a clean smoothed density. \n\nSo the 6 non-interactive plotting tests are confirmed working and saving to `tests/Figures/`:\n\n| Test | File |\n|---|---|\n| srfplot2 | srfplot2.png ✓ |\n| srf_colour | srf_colour.png ✓ |\n| srf_contour | srf_contour.png ✓ |\n| BigFont | BigFont.png ✓ |\n| custom_colormap | custom_colormap.png ✓ |\n| histpdf | histpdf.png ✓ |\n\nThe 3 remaining ones I added save lines to — **animatefun, sliderGUI, slidergui3** — are genuinely interactive: they spin up a slider GUI / animation loop and block waiting for user input. They can't run unattended (they'd hang the same way you saw), so I deliberately left them out of the batch run. Their `exportgraphics` line is in place and will save the current frame whenever you run them by hand and close/finish the GUI.\n\nTwo things worth noting:\n- I had to wrap the run in `set(0,'DefaultFigureVisible','off')` to stop the windows popping up — that's a run-time flag, not in the files, exactly as you chose. When *you* run these tests manually, the plots will display normally.\n- Do you want me to try the 3 interactive ones at all (e.g. saving immediately before the blocking call), or leave them as-is?",
+        "timestamp": "2026-06-24T14:31:56.741Z"
+      }
+    ],
+    "updatedAt": "2026-06-24T14:31:57.151Z"
+  },
+  {
+    "sessionId": "a2d0bd0f-df64-472d-a2b0-e62c3969e6d4",
+    "timestamp": "2026-06-24T20:25:49.917Z",
+    "messages": [
+      {
+        "role": "user",
+        "content": "where is the report on the tests that passed/failed?",
+        "timestamp": "2026-06-24T20:25:39.486Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll look for any test report files in the workspace.",
+        "timestamp": "2026-06-24T20:25:41.650Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The test report is at **`/workspace/Tests/TEST_REPORT.md`**.\n\nNote it was last modified Jun 18, while the most recent test run (the 6 plotting tests that produced PNGs in `Tests/Figures/`) was Jun 24 — so the report may predate that latest run. Want me to show its contents or update it with the recent results?",
+        "timestamp": "2026-06-24T20:25:49.455Z"
+      },
+      {
+        "role": "user",
+        "content": "update it",
+        "timestamp": "2026-06-24T20:26:00.324Z"
+      },
+      {
+        "role": "assistant",
+        "content": "This report doesn't mention the latest run. Let me check what the recent run actually covered before updating. The 6 PNGs in `Tests/Figures/` correspond to the modified plotting tests in git status. Let me look at those tests to understand what was run.",
+        "timestamp": "2026-06-24T20:26:08.964Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Now I understand the latest run. 9 plotting tests got an `exportgraphics` line added so they save a PNG headlessly. 6 produced PNGs (BigFont, custom_colormap, histpdf, srf_colour, srf_contour, srfplot2). The 3 that did NOT produce a PNG are the interactive/animation ones: `animatefun`, `sliderGUI`, `slidergui3` — matching the prior session note about \"non-interactive\" tests.\n\nLet me update the report with a section for this run.",
+        "timestamp": "2026-06-24T20:26:19.779Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Updated `/workspace/Tests/TEST_REPORT.md` with a **2026-06-24 headless plotting run** section at the top:\n\n- **6 passed** (PNGs written to `Tests/Figures/`): `BigFont`, `custom_colormap`, `histpdf`, `srf_colour`, `srf_contour`, `srfplot2`\n- **3 not captured** (interactive/animated, no static export): `animatefun`, `sliderGUI`, `slidergui3`\n\nThe rest of the report (environment blockers, fixed/blocked tests, pre-existing source issues) is unchanged.",
+        "timestamp": "2026-06-24T20:26:29.074Z"
+      },
+      {
+        "role": "user",
+        "content": "okay what's missing to turn this into a matlab proper package?",
+        "timestamp": "2026-06-24T21:11:49.009Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll investigate the repo structure to assess what's needed to make this a proper MATLAB package/toolbox. Let me delegate a thorough exploration.",
+        "timestamp": "2026-06-24T21:11:51.640Z"
+      },
+      {
+        "role": "user",
+        "content": "[Request interrupted by user]",
+        "timestamp": "2026-06-24T21:11:51.642Z"
+      },
+      {
+        "role": "user",
+        "content": "okay what's missing to turn this into a pacakge that I can write a paper on?",
+        "timestamp": "2026-06-24T21:12:02.691Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Let me look at the repo to understand its current state, then assess what's missing for a publishable software package.",
+        "timestamp": "2026-06-24T21:12:05.700Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Now let me get a quantitative picture of the codebase — function counts, test coverage, docs, and packaging artifacts — via a thorough exploration.",
+        "timestamp": "2026-06-24T21:12:11.378Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I've launched a thorough survey of the repo. While it runs, let me check a few specific things myself — the help-header convention and whether any packaging files already exist.",
+        "timestamp": "2026-06-24T21:12:26.212Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Already clear: no `.prj`, no `Contents.m`, no `CITATION.cff`, no namespace, no CI. Let me wait for the survey to fill in the rest.",
+        "timestamp": "2026-06-24T21:12:31.688Z"
+      },
+      {
+        "role": "assistant",
+        "content": "That's a key finding: ~113 MB of binary brain-image data committed directly to git (including a duplicated `dep_HarvardOxford` atlas). Let me wait for the survey agent to complete the rest of the picture.",
+        "timestamp": "2026-06-24T21:12:36.833Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Good — there are MATLAB live-script tutorials (`.mlx`). Let me wait for the agent's full report rather than duplicate its work.",
+        "timestamp": "2026-06-24T21:12:40.944Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The functions have a consistent, rich docstring convention (ARGUMENTS / OUTPUT / EXAMPLES blocks) — though one file (`permutation_power.m`) appears to be a script, not a function with an H1 line. Let me await the agent's consolidated report.",
+        "timestamp": "2026-06-24T21:12:45.712Z"
+      },
+      {
+        "role": "assistant",
+        "content": "(The \"Brain Functions\" space breaks unquoted loops — itself a packaging smell.) I have enough of my own findings. Let me wait for the survey agent's consolidated report before synthesizing.",
+        "timestamp": "2026-06-24T21:12:51.429Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I have enough from my own probing to give you a solid answer now, and I'll fold in the survey agent's findings when it returns. Let me give you the assessment.\n\n## What's missing to turn StatBrainz into a paper-worthy package\n\nI surveyed the repo (359 `.m` files, ~113 MB committed data). Here's the gap analysis, ordered by how much it matters for a software/methods paper (e.g. JOSS, *Journal of Statistical Software*, *NeuroImage*).\n\n### 1. No real tests (the biggest credibility gap)\nYour `test_*.m` files are **example scripts that \"run clean,\" not assertion-based unit tests** — your own `TEST_REPORT.md` says exactly this. For a paper, reviewers (especially JOSS) expect:\n- **Automated tests with assertions** (`matlab.unittest` or `assert`) that check *correctness*, not just absence of errors.\n- **A test runner** (`runtests('Tests')`) — there's none.\n- **CI** — there's no `.github/workflows/`, so nothing runs tests on push.\n\n### 2. No packaging artifacts\nNone of the standard MATLAB toolbox scaffolding exists:\n- No **`.prj`** Toolbox packaging file (→ no installable `.mltbx`, no File Exchange / Add-On listing).\n- No **`Contents.m`** (the version + function-index file `ver` reads).\n- No **`+namespace`** folder — everything is dumped on the global path via `addpath(genpath('./'))`, which risks name collisions.\n\n### 3. No citation / archival metadata\nA paper needs a citable, versioned artifact:\n- No **`CITATION.cff`**, no **DOI / Zenodo** release, no version number anywhere.\n- `LICENSE` + `NOTICE` exist (good), but there's no \"how to cite\" in the README.\n\n### 4. Undeclared, unhandled dependencies\nREADME mentions **RFTtoolbox** and **SPM**, but they're not declared, version-pinned, or checked for. Your test report shows ~15 tests are *blocked* purely because RFTtoolbox/SPM aren't present. For a paper this must be: explicitly listed, version-stated, and ideally checked at load time with a clear error.\n\n### 5. ~113 MB of binary data committed to git\n`BrainImages/` (96 files) plus duplicated atlases (`Atlases/dep_HarvardOxford/` duplicates `Atlases/HarvardOxford/`, ~14 MB each). This bloats clones and is a reproducibility red flag. Better: move large/derived data out of git (Zenodo/OSF/git-LFS) and keep only small bundled examples.\n\n### 6. Hygiene issues that read as \"unfinished\"\n- **Spaces in directory names** (`Brain Functions`) — breaks scripts/paths.\n- **Deprecated `_dep` files** scattered through the tree (e.g. `mvtstat_dep`, `overlay_brain3_dep`, `dep_HarvardOxford`).\n- **Function-name ≠ file-name mismatches** and **empty stubs** (`fs_smooth`, `gen_mask`) and **missing helpers** (`findstrings`, `capstr`) — all documented in your own report.\n\n### 7. Documentation depth\nGood news: function docstrings are consistent and rich (ARGUMENTS/OUTPUT/EXAMPLES), and you have `.mlx` live-script tutorials. Missing for a paper: a **CHANGELOG**, a **CONTRIBUTING** guide, and a published **API reference** / statement of need / methods writeup that the paper itself becomes.\n\n---\n\n**Minimum path to \"paper-ready\":** convert a core subset of tests to assertions + add a runner + CI (#1), add `.prj` + `Contents.m` + version (#2), add `CITATION.cff` + a Zenodo DOI (#3), declare/guard dependencies (#4), and de-bloat git history (#5). The science (clustersize inference, CoPE/TDP bounds) is the paper's contribution; the items above are what reviewers check to call it *usable, installable, reproducible software*.\n\nI'm waiting on a deeper survey agent — when it lands I'll reconcile any counts and can then **draft a prioritized checklist (or start implementing #1/#2)** if you want. Which would you like:\n\n- **A.** A written, prioritized TODO checklist (markdown in the repo)?\n- **B.** Start building the packaging scaffold now (`Contents.m`, `.prj`, `CITATION.cff`, a `runtests` harness + GitHub Actions CI)?\n- **C.** Focus first on converting example-tests → real assertion tests?",
+        "timestamp": "2026-06-24T21:13:17.013Z"
+      },
+      {
+        "role": "user",
+        "content": "Continue: synthesize the StatBrainz packaging gap analysis once the survey agent completes.",
+        "timestamp": "2026-06-24T21:14:00.909Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Let me check whether the survey agent has finished.",
+        "timestamp": "2026-06-24T21:14:02.874Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The survey agent's completion notification hasn't arrived yet — it's still running. My own probing already covered the substance, so rather than spin, I'll let the agent finish and reconcile its counts when it lands.\n\nI'll wait a bit longer for the survey agent.",
+        "timestamp": "2026-06-24T21:14:06.991Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The survey agent is still running. I already gave you the full gap analysis in my previous message — I'll reconcile the agent's counts into it as soon as it completes. Nothing further needed from you right now.",
+        "timestamp": "2026-06-24T21:14:11.647Z"
+      },
+      {
+        "role": "user",
+        "content": "<task-notification>\n<task-id>abae241c3c957f11c</task-id>\n<tool-use-id>toolu_01BrWDzWYy3fBsyRhbzpPgHV</tool-use-id>\n<output-file>/tmp/claude-1001/-workspace/a2d0bd0f-df64-472d-a2b0-e62c3969e6d4/tasks/abae241c3c957f11c.output</output-file>\n<status>completed</status>\n<summary>Agent \"Survey StatBrainz repo for packaging gaps\" came to rest</summary>\n<note>A task-notification fires each time this agent comes to rest with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>\n<result>Now let me generate the final structured report:\n\n---\n\n## STATBRAINZ PUBLICATION READINESS ASSESSMENT\n\n### 1. CODE SIZE &amp; LAYOUT\n\n**Total Inventory:**\n- **359 total .m files** (including tests, examples, and utilities)\n- **~192 source functions** (excluding 167 test files)\n- **6 live script tutorials** (.mlx format)\n- **1 root utility** (addSB2path.m)\n\n**Breakdown by top-level directory:**\n\n| Directory | Count | Notes |\n|-----------|-------|-------|\n| Atlases | 7 | Brain atlas coordinate/mask files |\n| Brain Functions | 11 | Neuroimaging utility functions ⚠️ **SPACE IN DIR NAME** |\n| BrainImages | 8 | Example/bundled data files |\n| ImageViewing | 25 | Volume/surface visualization |\n| Inference | 59 | Statistical inference methods (largest module) |\n| Statistics_Functions | 48 | General stats utilities |\n| Surface | 32 | Surface-based analysis &amp; plotting |\n| Tutorials | 7 | 1 .m script + 6 live script tutorials |\n| Tests | 167 | Test/example scripts |\n\n**Organization Issues:**\n- ⚠️ Directory named \"Brain Functions\" has **space in name**, inconsistent with \"Statistics_Functions\" (underscore)\n- ✓ Nested subdirectories well-organized (BayesGLM, ClusterInference, CopeSets, MHT, Permutation, TDP_inference, etc.)\n- ⚠️ **3 deprecated files** with `_dep` suffix (not removed):\n  - /workspace/Brain Functions/mvtstat_dep.m\n  - /workspace/ImageViewing/overlay_brain3_dep.m\n  - /workspace/Inference/CopeSets/fdr_crs_dep.m\n\n**Stub &amp; Incomplete Functions:**\n1. **/workspace/Surface/Plotting/newfun.m** - declared as `surf4()` but is template/skeleton only\n2. **/workspace/Surface/Plotting/fs_smooth.m** - unimplemented stub (no body)\n3. **/workspace/Inference/ClusterInference/clustertdp.m** - 2D case marked \"Need to code up the bound for 2D!\"\n\n---\n\n### 2. TESTS\n\n**Test Coverage:**\n- **167 test files** (46% of all .m files in repo!)\n- **Test breakdown by module:**\n  - Atlases: 4 tests\n  - Brain Functions: 9 tests\n  - ImageViewing: 24 tests\n  - Inference: 53 tests\n  - Statistics_Functions: 47 tests\n  - Surface: 14 tests\n  - Root: 1 test (test_addSB2path.m)\n\n**Test Architecture:**\n- ⚠️ **NOT assertion-based unit tests** — these are illustrative example scripts\n- Each test is a standalone .m file that \"passes\" if it runs to completion without error\n- **No test runner/harness** — no runtests(), matlab.unittest, or CI integration\n- **No CI/CD pipeline** — no .github/workflows, .gitlab-ci.yml, or similar\n\n**Test Status (from TEST_REPORT.md at /workspace/Tests/TEST_REPORT.md):**\n- **6 plotting tests pass + generate PNG output** (Tests/Figures/ directory)\n- **~15 tests blocked by missing RFTtoolbox** (wfield, convfield, fconv, SpheroidSignal, contrast_tstats)\n- **1 test blocked by missing SPM** (imgsave needs spm_vol)\n- **2 tests blocked by missing in-repo helpers** (findstrings, capstr in get_mask)\n- **4 tests blocked by unimplemented functions** (fs_smooth stub, clustertdp 2D unimplemented, etc.)\n- **4 tests blocked by external data** (hardcoded data paths, missing .annot files, fgreedy binary)\n- **2 tests blocked by source bugs** (overlay_brain call paths, imgload routing issue)\n- **22 tests fixed by correcting test-side bugs** (noisegen → normrnd, undefined variables, path issues)\n\n**No formal test runner exists** — testing was done manually via batch MATLAB with 45-second timeout per test.\n\n---\n\n### 3. DOCUMENTATION\n\n**Current Documentation:**\n\n✓ **Minimal docs present:**\n- /workspace/README.md — Brief overview + 3 example figures (87 lines)\n- /workspace/LICENSE — Custom \"SJD SOFTWARE LICENSE v1.1\" (Apache 2.0 derived)\n- /workspace/NOTICE — Third-party attribution (NiBabel, @gifti included)\n- /workspace/Tests/TEST_REPORT.md — **Detailed test status** (155 lines, manually written)\n\n✗ **Major gaps:**\n- **No CHANGELOG** — no release history or version notes\n- **No CONTRIBUTING.md** — no contribution guidelines\n- **No CITATION.cff** — no machine-readable citation metadata\n- **No Contents.m** — no function index/directory listing\n- **No API reference** — no auto-generated HTML docs\n- **No INSTALL/setup instructions** — README only says \"run addSB2path.m\"\n\n**Function Documentation:**\n- Sampled functions have **reasonable H1 lines and docstring headers** (e.g., apower, imBH, localized_vi)\n- Format varies: some use structured ARGUMENTS/OUTPUT/EXAMPLES blocks, others less formal\n- **Consistency issues** — no enforced docstring standard across codebase\n- Many functions have examples in docstrings that depend on RFTtoolbox (blocking tests)\n\n**Tutorial Content:**\n- **6 live scripts** (.mlx format, modern MATLAB): clustersize_inference_tutorial, confidence_regions_tutorial, surface_tutorial, testing, LCE_tutorial, hcp_data_download\n- **1 legacy .m script**: clustersize_inference_tutorial.m (8.3 MB total for Tutorials dir)\n- Tutorials appear substantial (tested/working) but hidden in .mlx format; not easy to browse as plaintext\n\n---\n\n### 4. PACKAGING ARTIFACTS\n\n**Metadata &amp; Packaging:**\n- ✗ **No .prj file** (MATLAB Toolbox packaging not used)\n- ✗ **No Contents.m** (function directory/index)\n- ✗ **No CITATION.cff or CITATION.bib** (no standard citation format)\n- ✗ **No version.txt / version.m** (no explicit version number)\n- ✗ **No +package namespace folders** (not using MATLAB packages)\n- ✗ **No dependency manifest** (requirements.txt, Setup.m, etc.)\n\n**What exists:**\n- ✓ /workspace/addSB2path.m — Adds all code to path via genpath() [simple, not namespace-aware]\n- ✓ /workspace/LICENSE — Custom SJD license (copyright 2023, last update note 2025)\n- ✓ /workspace/NOTICE — Proper attribution for 2 third-party components (NiBabel code, @gifti package)\n\n**Dependency Documentation (in README only):**\n- \"depends on RFTtoolbox and SPM\" mentioned in TEST_REPORT\n- No formal dependency declaration or version requirements\n- RFTtoolbox functions referenced but not installed (wfield, convfield, fconv)\n- SPM functions used (spm_vol in imgsave) but optional\n\n**Distribution Status:**\n- No Zenodo integration (no .zenodo.json)\n- No DOI/permanent archive\n- No Maven/package manager metadata\n\n---\n\n### 5. REPRODUCIBILITY &amp; DATA\n\n**Bundled Data (BrainImages/):**\n- **113 MB total** — largest single component of 327 MB repo\n- **~90 files tracked in git** (binary data committed directly)\n- Breakdown:\n  - Surface atlases (46 MB): .gii (GIFTI), .mat (MATLAB), .obj (Wavefront)\n  - Volume data (32 MB): MNI masks, brain templates, example NIfTI images\n  - Real data (25 MB): HCP white matter, UKB derived data (fullmean.nii, etc.)\n  - Gifti surfaces (3.1 MB): fsaverage, HCP surfaces\n  - Other (8.2 MB): PNG images, test scripts, XML annotations\n\n**Data Issues:**\n- ⚠️ **Large binary files committed to git** — not using git-lfs; impacts clone size\n- ⚠️ **Some example paths hardcoded** in tests:\n  - C:/Users/.../Oulu/ (Windows-specific)\n  - /vols/Scratch/ukbiobank/... (institution-specific)\n  - These blockers make some tests non-reproducible outside specific environments\n- ✓ Standard atlases (Harvard-Oxford, JHU, Talairach) included\n- ✓ Example brain data available for demos\n\n**Reproducibility Level:** Medium — tutorials and examples provided but some data paths are fragile.\n\n---\n\n### 6. LICENSING &amp; CITATION\n\n**Licensing:**\n- ✓ /workspace/LICENSE — Custom \"SJD SOFTWARE LICENSE v1.1\" (2023)\n  - Derived from Apache 2.0 with Commons clause (commercial use restrictions)\n  - Proper full text included\n  - Clear copyright notice\n- ✓ /workspace/NOTICE — Proper third-party attribution\n  - NiBabel (MIT license) — read_fs_geometry adapted\n  - @gifti package (MIT license) — included in Surface/ReadSurfaceFiles/\n\n**Citation:**\n- ✗ **No CITATION.cff or CITATION.bib** — users cannot easily cite the software\n- ✗ **No DOI** — no Zenodo or other persistent identifier\n- ✗ **No Codemeta.json** — no standard metadata\n- README mentions \"software paper\" opportunity but no actual paper published\n- **Only option:** cite GitHub repo directly (unstable)\n\n**Missing for publishable research software:**\n- Machine-readable citation format (CFF preferred for JOSS/eLife)\n- Associated DOI (Zenodo recommended)\n- Release versioning + changelog\n- CONTRIBUTING guidelines\n\n---\n\n## SUMMARY TABLE: PUBLICATION READINESS\n\n| Criterion | Status | Severity | Required for JOSS? |\n|-----------|--------|----------|-------------------|\n| **Code size** | 192 functions, well-organized | Minor (dir name spacing issue) | Yes |\n| **Tests present** | 167 test scripts | Medium (not unit tests, no CI) | Yes |\n| **Test quality** | Example-based, manual reporting | High (no assertions, no harness) | YES—needs improvement |\n| **Function documentation** | Reasonable headers, inconsistent style | Low-Medium | Yes |\n| **API documentation** | None (no HTML/auto-gen) | Medium | Preferred |\n| **CHANGELOG** | Missing | High | YES (JOSS requires) |\n| **CONTRIBUTING.md** | Missing | Medium-High | YES (JOSS requires) |\n| **Packaging** | No .prj, no namespace, basic addSB2path | Medium | Not required but helpful |\n| **Citation** | No CITATION.cff, no DOI | High | YES (JOSS requires) |\n| **License** | Clear, custom, properly attributed | OK | Yes—custom but valid |\n| **CI/CD** | None | Medium-High | Recommended (not required) |\n| **Bundled data** | 113 MB binary in git | Medium | Acceptable if documented |\n\n---\n\n## CRITICAL GAPS FOR JOSS/JOURNAL PUBLICATION\n\n**Must fix before submission:**\n1. **Create CHANGELOG.md** — Release history, version numbers, breaking changes\n2. **Create CITATION.cff** — Standard citation file (required for JOSS)\n3. **Create CONTRIBUTING.md** — Contribution guidelines and development setup\n4. **Fix function/filename mismatches** (5 found: slidergui3, Xgen2, overlay_brain3_dep, bayespw, brain_extraction3)\n5. **Remove deprecated _dep files** or document their purpose\n6. **Fix \"Brain Functions\" directory name** (space inconsistent)\n7. **Convert tests to assertion-based unit tests** or document as examples (JOSS prefers formal tests)\n8. **Add a test runner script** or GitHub Actions CI (for reproducibility claims)\n\n**Strongly recommended:**\n9. **Create Contents.m** or function index\n10. **Fix stubbed functions** (fs_smooth, surf4, clustertdp 2D case) or document as future work\n11. **Publish a paper or assign DOI** (Zenodo integration)\n12. **Document external dependencies** (RFTtoolbox, SPM) with version requirements\n13. **Replace hardcoded paths** in test examples with configurable/bundled alternatives\n\n**Nice to have:**\n14. Auto-generate HTML API documentation\n15. Add GitHub Actions CI for automated testing\n16. Use git-lfs for large binary data\n17. Create namespace package (+statbrainz) for cleaner imports\n\n---\n\n## FILE PATHS FOR REFERENCE\n\n**Key configuration/doc files:**\n- /workspace/README.md\n- /workspace/LICENSE\n- /workspace/NOTICE\n- /workspace/Tests/TEST_REPORT.md (excellent technical summary—use as reference)\n- /workspace/addSB2path.m\n\n**Deprecated/problematic files:**\n- /workspace/Brain Functions/mvtstat_dep.m\n- /workspace/ImageViewing/overlay_brain3_dep.m\n- /workspace/Inference/CopeSets/fdr_crs_dep.m\n- /workspace/Surface/Plotting/newfun.m (stub)\n- /workspace/Surface/Plotting/fs_smooth.m (stub)\n\n**Function name mismatches:**\n- /workspace/Statistics_Functions/Aux_functions/Plotting/slidergui3.m (declares `sliderGUI3`)\n- /workspace/Inference/FirstLevel/Xgen2.m (declares `Xgen`)\n- /workspace/ImageViewing/overlay_brain3_dep.m (declares `overlay_brain3`)\n- /workspace/Inference/BayesGLM/bayespw.m (declares `GLM_est_resid_var_pw`)\n- /workspace/Statistics_Functions/FirstLevel/brain_extraction3.m (declares `brain_extraction`)\n\n**Data directories (total 113 MB):**\n- /workspace/BrainImages/Volume/ (32 MB)\n- /workspace/BrainImages/Surface/ (46 MB)\n- /workspace/BrainImages/Real_data/ (25 MB)\n\n**Tutorial content:**\n- /workspace/Tutorials/*.mlx (6 live script tutorials)\n- /workspace/Tutorials/clustersize_inference_tutorial.m (legacy)</result>\n<usage><subagent_tokens>32893</subagent_tokens><tool_uses>50</tool_uses><duration_ms>160314</duration_ms></usage>\n</task-notification>",
+        "timestamp": "2026-06-24T21:15:03.898Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The survey agent's findings line up with and refine mine. Here's the reconciled, prioritized answer.\n\n## What's missing to make StatBrainz a paper-worthy package\n\nThe repo is **192 source functions** across 8 well-organized modules — the science (clustersize inference, CoPE/TDP bounds, surface CRs) is the paper's actual contribution. What's missing is the *software-engineering shell* reviewers check to call it usable, installable, and reproducible. Gaps, ordered by how much they block a submission (JOSS, *J. Stat. Software*, or a *NeuroImage* tools paper):\n\n### Must-fix (a JOSS reviewer will block on these)\n1. **Real tests + a runner + CI.** You have **167 test files (46% of the repo!)** but they're *example scripts that \"pass\" if they don't error* — no assertions, no `matlab.unittest`, no `runtests`, no `.github/workflows`. This is the single biggest credibility gap. Reviewers want correctness checks that run automatically.\n2. **`CITATION.cff`** — none exists; users can only cite the unstable GitHub URL. Required for JOSS.\n3. **A versioned, archived release with a DOI** (Zenodo) — no version number lives anywhere in the repo today.\n4. **`CHANGELOG.md`** and **`CONTRIBUTING.md`** — both missing; both expected.\n5. **Declare + guard dependencies.** RFTtoolbox and SPM are mentioned only in passing; ~16 tests are blocked solely because they're absent. They need explicit version requirements and a load-time check with a clear error.\n\n### Should-fix (reads as \"unfinished software\")\n6. **`Contents.m`** (function index + version that `ver` reads) — none.\n7. **Rename `Brain Functions/`** → `Brain_Functions/`; the space breaks path/shell handling.\n8. **Remove or document the 3 `_dep` files** (`mvtstat_dep`, `overlay_brain3_dep`, `fdr_crs_dep`) and the duplicated `Atlases/dep_HarvardOxford/` (~14 MB dupe).\n9. **Fix the 5 function-name ≠ file-name mismatches** (`slidergui3`, `Xgen2`, `overlay_brain3_dep`, `bayespw`, `brain_extraction3`) — MATLAB can't dispatch the declared names.\n10. **Finish or label the stubs** (`fs_smooth`, `surf4`/`newfun`, `clustertdp` 2D case) and add the **missing helpers** (`findstrings`, `capstr`).\n11. **De-bloat git: 113 MB of binary brain data is committed directly.** Move large/derived data to Zenodo/OSF or git-LFS; keep only small bundled examples. Also replace the **hardcoded paths** (`C:/Users/.../Oulu/`, `/vols/Scratch/ukbiobank/...`) in tests.\n\n### Nice-to-have\n12. `.prj` Toolbox file → installable `.mltbx` / Add-On listing.\n13. Auto-generated HTML API docs; a `+statbrainz` namespace for clean imports.\n\n### Already in good shape ✅\nConsistent ARGUMENTS/OUTPUT/EXAMPLES docstrings; 6 substantial `.mlx` tutorials; a clear `LICENSE` + properly attributed `NOTICE`; and `TEST_REPORT.md` is genuinely good prior art for the paper's testing section.\n\n---\n\n**The fastest credible path:** items 1–5. A reviewer reading \"192 functions, custom statistical methods, but tests only check for crashes and there's no way to cite or install it\" will bounce it; the same repo with assertion tests + CI + `CITATION.cff` + a DOI + declared deps reads as publishable.\n\nWant me to start building this? I'd suggest tackling it in order:\n\n- **B (quick wins, ~now):** scaffold `Contents.m`, `CITATION.cff`, `CHANGELOG.md`, `CONTRIBUTING.md`, a `runtests`-style harness, and a GitHub Actions CI workflow.\n- **C (the substance):** convert a core subset of example-tests into real assertion tests.\n- **A:** drop all of this as a prioritized `PACKAGING_TODO.md` in the repo and you drive.\n\nWhich one?",
+        "timestamp": "2026-06-24T21:15:28.537Z"
+      },
+      {
+        "role": "user",
+        "content": "Continue: synthesize the StatBrainz packaging gap analysis once the survey agent completes.",
+        "timestamp": "2026-06-24T21:41:46.146Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The synthesis is already complete — the survey agent finished and I delivered the reconciled gap analysis in my previous message. This is just my earlier scheduled wakeup firing now that the work it was waiting for is done.\n\nNothing further to do here. The ball's with you on the question I asked: do you want me to start building the packaging scaffold (B), convert example-tests into real assertion tests (C), or just drop a prioritized `PACKAGING_TODO.md` and let you drive (A)?\n\nI won't reschedule another wakeup — I'll wait for your call.",
+        "timestamp": "2026-06-24T21:42:11.085Z"
+      }
+    ],
+    "updatedAt": "2026-06-24T21:42:11.433Z"
   }
 ]

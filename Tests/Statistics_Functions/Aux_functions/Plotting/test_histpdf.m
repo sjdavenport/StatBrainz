@@ -8,3 +8,4 @@
 data = randn(1, 1000);
 [hist_edges, smooth_pdf] = histpdf(data);
 figure; plot(hist_edges, smooth_pdf)
+exportgraphics(gcf, [statbrainz_maindir, 'tests/Figures/histpdf.png'])

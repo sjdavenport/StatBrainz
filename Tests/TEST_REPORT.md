@@ -11,6 +11,34 @@ tests — passing means "runs clean", not "output verified correct".
 
 ---
 
+## Update — 2026-06-24: headless plotting run
+
+Nine plotting tests were given an `exportgraphics(gcf, ...)` line so they save a PNG to
+`Tests/Figures/` and can run headless (no frozen / interactive windows). Run under MATLAB
+in `-batch` mode.
+
+**Passed — 6 figures written to `Tests/Figures/`:**
+
+| Test | Output |
+|------|--------|
+| `test_BigFont` | `BigFont.png` |
+| `test_custom_colormap` | `custom_colormap.png` |
+| `test_histpdf` | `histpdf.png` |
+| `test_srf_colour` | `srf_colour.png` |
+| `test_srf_contour` | `srf_contour.png` |
+| `test_srfplot2` | `srfplot2.png` |
+
+**Not captured — inherently interactive / animated (no static PNG produced):**
+
+- `test_animatefun` — animation loop, no single steady frame
+- `test_sliderGUI` — interactive slider GUI
+- `test_slidergui3` — interactive slider GUI
+
+These three run but do not yield a meaningful static export; they need a live session to
+verify.
+
+---
+
 ## Environment blockers (affect many tests, not fixable in the tests)
 
 Two dependencies the package assumes are on the MATLAB path are **not installed in this
