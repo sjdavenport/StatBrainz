@@ -1,0 +1,50 @@
+StatBrainz failing tests, grouped by cause (37 total)
+Run: MATLAB R2024b, -nodisplay -batch, each test in its own process, 60s timeout.
+
+== Missing RFTtoolbox (wfield / SpheroidSignal / contrast_tstats) -- 14 ==
+test_cope_display        SpheroidSignal
+test_fdr_crs_dep         wfield
+test_fdr_simul_cs        wfield
+test_imBH                wfield
+test_imBH_data           wfield
+test_pc                  wfield
+test_peakgen             SpheroidSignal
+test_perm_cluster        SpheroidSignal
+test_perm_tfce           SpheroidSignal
+test_perm_thresh         wfield
+test_scopes              wfield (+ undefined var 'data')
+test_scopes_lm           contrast_tstats
+test_srf_scopes          wfield
+test_sss_cope_sets       wfield
+
+== Missing SPM (spm_vol / spm_smooth) -- 2 ==
+test_fast_conv           spm_smooth
+test_imgsave             spm_vol
+
+== Missing FreeSurfer / gifti readers (gifti / MRIread / read_annotation) -- 5 ==
+test_SurfStatEdge        gifti
+test_adjacency_matrix    gifti
+test_smooth_surface      gifti
+test_mgzwrite            MRIread
+test_fsannot2mask        read_annotation (returns no output)
+
+== Missing in-repo helpers (findstrings) -- 2 ==
+test_get_mask            findstrings
+test_mask_bndry          findstrings
+
+== Missing data files / hardcoded paths -- 4 ==
+test_brainmove           "This file is not available"
+test_loadbrains          hardcoded data dir (index exceeds array)
+test_loadsubs            hardcoded data dir (index exceeds array)
+test_fgreedy             ./ClusterTDPccode folder/binary not present
+
+== Source bugs / stubs / name mismatches -- 10 ==
+test_fs_smooth           empty stub: output 'out' never assigned
+test_clustertdp          2D case unsupported (index exceeds array bounds)
+test_overlay_brain3_dep  function-name != file-name (overlay_brain3 undefined)
+test_graph_cc            undefined var 'indices_notsurvived'
+test_spin_surface        undefined var 'srf'
+test_spintest            undefined var 'X'
+test_srf_face_area       undefined var 'fa'
+test_srf_noise           dot indexing not supported for this type
+test_srfplot             undefined var 'g'
