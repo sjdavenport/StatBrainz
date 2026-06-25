@@ -1,0 +1,310 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+
+region_masks =
+
+  1x48 cell array
+
+  Columns 1 through 3
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 4 through 6
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 7 through 9
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 10 through 12
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 13 through 15
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 16 through 18
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 19 through 21
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 22 through 24
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 25 through 27
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 28 through 30
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 31 through 33
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 34 through 36
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 37 through 39
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 40 through 42
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 43 through 45
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 46 through 48
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+
+region_names =
+
+  1x48 cell array
+
+  Columns 1 through 3
+
+    {'Frontal Pole'}    {'Insular Cortex'}    {'Superior Front...'}
+
+  Columns 4 through 6
+
+    {'Middle Frontal...'}    {'Inferior Front...'}    {'Inferior Front...'}
+
+  Columns 7 through 9
+
+    {'Precentral Gyrus'}    {'Temporal Pole'}    {'Superior Tempo...'}
+
+  Columns 10 through 12
+
+    {'Superior Tempo...'}    {'Middle Tempora...'}    {'Middle Tempora...'}
+
+  Columns 13 through 15
+
+    {'Middle Tempora...'}    {'Inferior Tempo...'}    {'Inferior Tempo...'}
+
+  Columns 16 through 18
+
+    {'Inferior Tempo...'}    {'Postcentral Gyrus'}    {'Superior Parie...'}
+
+  Columns 19 through 21
+
+    {'Supramarginal ...'}    {'Supramarginal ...'}    {'Angular Gyrus'}
+
+  Columns 22 through 24
+
+    {'Lateral Occipi...'}    {'Lateral Occipi...'}    {'Intracalcarine...'}
+
+  Columns 25 through 27
+
+    {'Frontal Medial...'}    {'Juxtapositiona...'}    {'Subcallosal Co...'}
+
+  Columns 28 through 30
+
+    {'Paracingulate ...'}    {'Cingulate Gyru...'}    {'Cingulate Gyru...'}
+
+  Columns 31 through 33
+
+    {'Precuneous Cortex'}    {'Cuneal Cortex'}    {'Frontal Orbita...'}
+
+  Columns 34 through 36
+
+    {'Parahippocampa...'}    {'Parahippocampa...'}    {'Lingual Gyrus'}
+
+  Columns 37 through 39
+
+    {'Temporal Fusif...'}    {'Temporal Fusif...'}    {'Temporal Occip...'}
+
+  Columns 40 through 42
+
+    {'Occipital Fusi...'}    {'Frontal Opercu...'}    {'Central Opercu...'}
+
+  Columns 43 through 45
+
+    {'Parietal Operc...'}    {'Planum Polare'}    {'Heschl's Gyrus...'}
+
+  Columns 46 through 48
+
+    {'Planum Temporale'}    {'Supracalcarine...'}    {'Occipital Pole'}
+
+
+ans = 
+
+  Axes with properties:
+
+             XLim: [0.5000 269.5000]
+             YLim: [0.5000 108.5000]
+           XScale: 'linear'
+           YScale: 'linear'
+    GridLineStyle: '-'
+         Position: [0 0 1 1]
+            Units: 'normalized'
+
+  Use GET to show all properties
+
+
+region_masks =
+
+  1x48 cell array
+
+  Columns 1 through 3
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 4 through 6
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 7 through 9
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 10 through 12
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 13 through 15
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 16 through 18
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 19 through 21
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 22 through 24
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 25 through 27
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 28 through 30
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 31 through 33
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 34 through 36
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 37 through 39
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 40 through 42
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 43 through 45
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+  Columns 46 through 48
+
+    {91x109x91 double}    {91x109x91 double}    {91x109x91 double}
+
+
+region_names =
+
+  1x48 cell array
+
+  Columns 1 through 3
+
+    {'Frontal Pole'}    {'Insular Cortex'}    {'Superior Front...'}
+
+  Columns 4 through 6
+
+    {'Middle Frontal...'}    {'Inferior Front...'}    {'Inferior Front...'}
+
+  Columns 7 through 9
+
+    {'Precentral Gyrus'}    {'Temporal Pole'}    {'Superior Tempo...'}
+
+  Columns 10 through 12
+
+    {'Superior Tempo...'}    {'Middle Tempora...'}    {'Middle Tempora...'}
+
+  Columns 13 through 15
+
+    {'Middle Tempora...'}    {'Inferior Tempo...'}    {'Inferior Tempo...'}
+
+  Columns 16 through 18
+
+    {'Inferior Tempo...'}    {'Postcentral Gyrus'}    {'Superior Parie...'}
+
+  Columns 19 through 21
+
+    {'Supramarginal ...'}    {'Supramarginal ...'}    {'Angular Gyrus'}
+
+  Columns 22 through 24
+
+    {'Lateral Occipi...'}    {'Lateral Occipi...'}    {'Intracalcarine...'}
+
+  Columns 25 through 27
+
+    {'Frontal Medial...'}    {'Juxtapositiona...'}    {'Subcallosal Co...'}
+
+  Columns 28 through 30
+
+    {'Paracingulate ...'}    {'Cingulate Gyru...'}    {'Cingulate Gyru...'}
+
+  Columns 31 through 33
+
+    {'Precuneous Cortex'}    {'Cuneal Cortex'}    {'Frontal Orbita...'}
+
+  Columns 34 through 36
+
+    {'Parahippocampa...'}    {'Parahippocampa...'}    {'Lingual Gyrus'}
+
+  Columns 37 through 39
+
+    {'Temporal Fusif...'}    {'Temporal Fusif...'}    {'Temporal Occip...'}
+
+  Columns 40 through 42
+
+    {'Occipital Fusi...'}    {'Frontal Opercu...'}    {'Central Opercu...'}
+
+  Columns 43 through 45
+
+    {'Parietal Operc...'}    {'Planum Polare'}    {'Heschl's Gyrus...'}
+
+  Columns 46 through 48
+
+    {'Planum Temporale'}    {'Supracalcarine...'}    {'Occipital Pole'}
+
+
+ans = 
+
+  Axes with properties:
+
+             XLim: [0.5000 269.5000]
+             YLim: [0.5000 108.5000]
+           XScale: 'linear'
+           YScale: 'linear'
+    GridLineStyle: '-'
+         Position: [0 0 1 1]
+            Units: 'normalized'
+
+  Use GET to show all properties
+
+
+STATUS: PASS
