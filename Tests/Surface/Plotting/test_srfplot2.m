@@ -9,4 +9,6 @@
 srf = loadsrf('fs5', 'white');
 noise = srf_noise( srf, 10, 1 );
 srfplot2(srf.lh, noise.lh)
-exportgraphics(gcf, [statbrainz_maindir, 'tests/Figures/srfplot2.png'])
+figpath = [statbrainz_maindir, 'tests/Figures/srfplot2.png'];
+exportgraphics(gcf, figpath)
+fprintf('srfplot2: figure written, file exists: %d\n', isfile(figpath));

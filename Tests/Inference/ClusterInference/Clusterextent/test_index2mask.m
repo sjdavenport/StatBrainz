@@ -9,3 +9,7 @@ indices = [100, 2000, 50000];
 mask = index2mask(indices);
 % This will create a 3D mask of size [91, 109, 91] with the positions
 % corresponding to the linear indices 100, 2000, and 50000 set to 1.
+
+% Echo a summary of the result so the test produces visible output.
+fprintf('index2mask: mask size [%s], %d voxels set\n', ...
+    num2str(size(mask)), nnz(mask));
