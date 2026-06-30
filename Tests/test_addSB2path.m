@@ -4,6 +4,6 @@
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% TODO: example inputs are placeholders — verify against intended usage.
-% Run from the StatBrainz root directory:
-% addSB2path
+addSB2path
+% Confirm a package function is now on the path
+exist('loadsrf', 'file')

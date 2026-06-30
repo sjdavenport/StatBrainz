@@ -44,7 +44,8 @@
       "Bash(/Applications/MATLAB_R2024b.app/bin/matlab *)",
       "Bash(pkill -9 -f \"MATLAB_maca64 -batch\")",
       "Bash(pkill -9 -f \"matlab.*-batch\")",
-      "Bash(kill -9 24909)"
+      "Bash(kill -9 24909)",
+      "Bash(grep -vE 'WARNING|^$')"
     ]
   }
 }

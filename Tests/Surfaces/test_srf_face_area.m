@@ -7,7 +7,7 @@
 srf4white = loadsrf('fs4', 'white');
 fa_white = srf_face_area(srf4white.lh);
 
-srfplot(srf4white.lh, fa)
+srfplot(srf4white.lh, fa_white)
 
 %%
 srf4sphere = loadsrf('fs4', 'sphere');

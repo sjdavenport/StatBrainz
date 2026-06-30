@@ -11,6 +11,41 @@ tests — passing means "runs clean", not "output verified correct".
 
 ---
 
+## Update — 2026-06-29: placeholder tests filled + reproducibility pass
+
+Ten placeholder tests (TODO header + commented-out skeleton, no runnable body) were
+given real, runnable bodies that pass headless. Inputs are synthetic where the function
+is pure, or read from bundled data otherwise.
+
+| Test | How filled |
+|------|------------|
+| `test_inverse_linear_template` | pure numeric inputs |
+| `test_get_pivotal_stats` | random null-pval matrix + `@inverse_linear_template` handle (docstring says "string" but source calls it as a function); seeded |
+| `test_bestclusterslice` | synthetic 3D cluster; **`slice_no` is a dim index (1/2/3)**, not a slice number |
+| `test_voxLCE` | synthetic TFCE image; **H and h0 are mandatory** (no defaults despite docstring) |
+| `test_expand2mask` | MNImask sub-image; **call `expand2mask`** (file name) — declared name `expand2MNI` is not dispatchable |
+| `test_region_bndry2D` | two synthetic sub-volume regions of MNImask. NB: function hardcodes dim-3 slice 80, which is empty in the 91×109×91 mask, so output is 0 — function appears written for a different orientation/resolution |
+| `test_srf_blue_crs` / `test_srf_redblue_crs` / `test_srf_color_crs` / `test_srf_scb2cope` | `loadsrf('fs4','white').lh` + synthetic per-vertex bands; output is `size()` (deterministic) |
+| `test_fs2surf` | bundled `BrainImages/Surface/fs5.{lh,rh}.white` |
+| `test_addSB2path` | run from repo root, confirm `loadsrf` on path |
+
+**Still blocked (left as documented placeholders):**
+
+- `test_gifti2surf` — `gifti2surf` calls the third-party `gifti` reader, not installed
+  in this environment (bundled `.gii` files exist under `BrainImages/Gifti_files/`).
+
+**Reproducibility:** ran the full suite once and diffed against the existing baseline.
+Most diffs were just the new result-echoing lines (deterministic). The only output that
+actually varied run-to-run via RNG was `test_get_pivotal_stats` (`min` of a random
+matrix); `rng(0)` added there (and to `test_voxLCE`/`test_expand2mask` as belt-and-braces
+where `rand`/`randn` feed the echoed value). `test_resample_srf` differs only in `toc`
+timing lines — inherent, not seedable.
+
+**Source name≠file mismatches surfaced here** (add to the list at the bottom):
+`expand2mask.m` declares `expand2MNI`.
+
+---
+
 ## Update — 2026-06-24: headless plotting run
 
 Nine plotting tests were given an `exportgraphics(gcf, ...)` line so they save a PNG to

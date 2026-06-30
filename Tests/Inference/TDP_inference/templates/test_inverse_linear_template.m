@@ -4,8 +4,7 @@
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% TODO: example inputs are placeholders — verify against intended usage.
-% y = rand(10, 1);
-% k = 5;
-% m = 100;
-% out = inverse_linear_template(y, k, m);
+y = [0.01, 0.1, 0.5, 1];
+k = 3;
+m = 100;
+out = inverse_linear_template(y, k, m)
