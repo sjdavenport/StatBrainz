@@ -43,7 +43,7 @@ end
 %--------------------------------------------------------------------------
 % Smooth the data
 if ~isnan(FWHM)
-    data = fconv(data, FWHM, D);
+    data = fast_conv(data, FWHM, D);
 end
 
 tstateval = mvtstat(data);

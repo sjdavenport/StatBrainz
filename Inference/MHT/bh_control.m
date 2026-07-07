@@ -68,7 +68,7 @@ nvals = 100; ntrue = 0;
 
 fdr_est = 0; df = 3;
 for I = 1:niters
-    t_rvs = wfield(nvals, 1, 'T', 3).field;
+    t_rvs = wnoise(nvals, 1, 'T', 3);
     t_rvs(1:ntrue) = t_rvs(1:ntrue) + 2;
     pvalues = 1 - tcdf(t_rvs, df);
 

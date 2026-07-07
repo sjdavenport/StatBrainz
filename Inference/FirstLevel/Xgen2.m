@@ -45,7 +45,7 @@ end
 
 if strcmp(method, 'Gaussian')
     noise = randn([n,m]);
-    [X, ss] = fconv(noise, rho, 1);
+    [X, ss] = fast_conv(noise, rho, 1);
     X = X/sqrt(ss); % Standardize X
 elseif strcmp(method, 'ar1')
     X = zeros(n,m);

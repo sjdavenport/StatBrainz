@@ -46,9 +46,6 @@ function Sig = peakgen( Mag, Rad, Smo, Dim, centre_locs )
 % surf(mean(lat_data,3))
 %--------------------------------------------------------------------------
 
-%Set to sum(100*clock) to ensure that this is different each time.
-randn('seed',sum(100*clock));   %-Random number generator initializaiton
-
 %DEFAULT VARS
 
 if nargin < 1

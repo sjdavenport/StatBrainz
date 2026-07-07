@@ -11,6 +11,66 @@ tests — passing means "runs clean", not "output verified correct".
 
 ---
 
+## Update — 2026-07-07: RFTtoolbox / SPM dependencies removed (in-repo replacements)
+
+The two big environment blockers below (missing **RFTtoolbox** and, for signal
+generation, missing **SPM**) have now been eliminated by adding dependency-free in-repo
+equivalents and rewiring every call site — shipped source, docstrings, and test scripts.
+None of this has been re-run under MATLAB (not available in this environment); the changes
+are signature-matched and, for the RNG functions, Monte-Carlo-validated in a Python
+re-implementation of the same algorithm.
+
+**New dependency-free functions added:**
+
+| Function | Location | Replaces |
+|----------|----------|----------|
+| `wnoise` | `Statistics_Functions/Signal_generation/` | `wfield(...).field` — returns the raw noise array instead of a `Field` object; all field types (`N/T/L/S/S2/U/P`), no `Field`/mask machinery |
+| `trnd` | `Statistics_Functions/Aux_functions/` | Stats-Toolbox `trnd`; t = Z/√(V/ν) with V~χ²(ν) drawn via Marsaglia–Tsang (valid for non-integer ν) |
+| `pearsrnd` | `Statistics_Functions/Aux_functions/` | Stats-Toolbox `pearsrnd`; full Pearson-type dispatch, reuses the same Gamma sampler |
+
+`trnd`/`pearsrnd` mean `wnoise`'s `'T'` and `'P'` field types need **no Statistics
+Toolbox**. The `'L'` (Laplacian) branch is drawn by inverse-CDF (the original called the
+absent `rlap`).
+
+**`SpheroidSignal` chain extracted** from `other/Signal/` into
+`Statistics_Functions/Signal_generation/` — `SpheroidSignal`, `MkRadImg`, and `MySmooth`.
+`MySmooth`'s smoothing was rerouted from `SepKernel`+`fconv` (2D) / `spm_smooth` (3D) to a
+single in-repo `fast_conv(Img, FWHM, nDim)` call, so the whole
+`peakgen → SpheroidSignal → {MkRadImg, MySmooth} → fast_conv` chain is now in-package with
+no RFTtoolbox and no SPM. (NB: the `fast_conv` smoothing path is kernel-equivalent to the
+old SPM path but may differ slightly in exact magnitudes.)
+
+**Call sites rewired:**
+
+- **`fconv` → `fast_conv`** (the in-repo separable-Gaussian smoother): live code in
+  `Xgen2.m`, `spatialBH.m`, `perm_thresh.m`; docstrings in `scopes`/`scopes_lm`/
+  `srf_scopes`/`numOfConComps`/`unwrap`.
+- **`wfield(...).field` → `wnoise(...)`**: live code in `bh_control.m`; docstrings in
+  `imBH`/`imBH_data`/`tfce`/`perm_tfce`/`perm_cluster`/`viewdata`/`mvtstat`/`perm_thresh`/
+  the `scopes` trio and the `fdr`/`sss` copeset examples.
+- **`Field`/`convfield`/`ConvFieldParams` object idiom → `fast_conv` + explicit `mask`**:
+  the `scopes` docstrings collapsed to the plain-array form.
+- **Test scripts** updated to match (11 files): `test_imBH`, `test_imBH_data`,
+  `test_perm_thresh`, `test_pc`, `test_perm_tfce`, `test_perm_cluster`, `test_fdr_crs_dep`,
+  `test_fdr_simul_cs`, `test_sss_cope_sets`, `test_scopes` (CopeSets), `test_srf_scopes`,
+  `test_scopes` (Surfaces).
+
+**`peakgen.m`** — removed the `randn('seed',sum(100*clock))` reseed line (deprecated
+syntax, clobbered the caller's global RNG stream, and `peakgen` consumes no randomness
+anyway). Now deterministic given its inputs.
+
+**Still genuinely blocked (unchanged / out of scope):**
+
+- `test_fast_conv` — intentionally benchmarks `fast_conv` **against** `spm_smooth` /
+  `convfield`, so it still requires SPM + RFTtoolbox by design.
+- `test_imgsave` — still needs SPM's `spm_vol` (image *saving*, unrelated to the above).
+- Tests whose **later cells** hardcode HCP/UKB data paths (e.g. `test_perm_cluster`) still
+  error there — a pre-existing data-availability issue, not a dependency one.
+- Source name≠file / helper gaps listed at the bottom are unchanged (e.g. `fdr_cope_sets`
+  vs the `fdr_crs`-declared file; `get_mask`'s missing `findstrings`/`capstr`).
+
+---
+
 ## Update — 2026-06-29: placeholder tests filled + reproducibility pass
 
 Ten placeholder tests (TODO header + commented-out skeleton, no runnable body) were
@@ -76,16 +136,22 @@ verify.
 
 ## Environment blockers (affect many tests, not fixable in the tests)
 
-Two dependencies the package assumes are on the MATLAB path are **not installed in this
-environment**. Tests that rely on them cannot pass here regardless of the test code.
+Two dependencies the package assumed were on the MATLAB path were **not installed in this
+environment**.
 
-1. **RFTtoolbox is not on the path.** The following functions are used throughout the
-   docstring examples but do not exist in StatBrainz — they live in the author's companion
-   RFTtoolbox: `wfield`, `convfield`, `fconv`, `Field`, `SpheroidSignal`, `contrast_tstats`.
-   Installing RFTtoolbox (and adding it to the path) would unblock most of these.
+1. **RFTtoolbox — RESOLVED (see 2026-07-07 update above).** `wfield`, `fconv`,
+   `convfield`, `Field`, and `SpheroidSignal` were used throughout the docstring examples
+   (and a handful of live code paths) but lived in the author's companion RFTtoolbox. These
+   have been replaced with dependency-free in-repo equivalents (`wnoise`, `fast_conv`, the
+   extracted `SpheroidSignal` chain, and `trnd`/`pearsrnd`), and every call site rewired.
+   The `~~struck-through~~` entries in the blocked list below are no longer blocked by this.
+   The lone exception is `contrast_tstats` (used only by `test_scopes_lm`), which has no
+   in-repo replacement yet.
 
 2. **SPM is not installed** (`spm_vol` / `spm` absent). `imgsave` writes NIfTI via SPM, so
-   any test that saves an image is blocked. (Note: `imgload` works for bundled images.)
+   any test that saves an image is blocked. (Note: `imgload` works for bundled images; and
+   signal-generation smoothing, which formerly used SPM's `spm_smooth`, now routes through
+   `fast_conv` — so `SpheroidSignal`/`peakgen` no longer need SPM.)
 
 ---
 
@@ -119,23 +185,33 @@ the original intent; only the broken parts were changed.
 
 ## Tests blocked (cannot pass in this environment — NOT fixed)
 
-### Blocked by missing RFTtoolbox (`wfield` / `convfield` / `fconv` / `SpheroidSignal` / `contrast_tstats`)
+### Previously blocked by missing RFTtoolbox — now UNBLOCKED (2026-07-07)
 
-- `test_cope_display` (`SpheroidSignal`)
-- `test_fdr_crs_dep` (`wfield`)
-- `test_fdr_simul_cs` (`wfield`)
-- `test_scopes` *(pre-existing test)* (`wfield`)
-- `test_scopes_lm` (`contrast_tstats`)
-- `test_srf_scopes` (`wfield`)
-- `test_sss_cope_sets` (`wfield`)
-- `test_imBH` (`wfield`)
-- `test_imBH_data` (`wfield`)
-- `test_pc` (`wfield`)
-- `test_perm_cluster` (`SpheroidSignal`)
-- `test_perm_tfce` (`SpheroidSignal`)
-- `test_perm_thresh` (`wfield`)
-- `test_viewdata` (`wfield`)
-- `test_peakgen` — 2nd cell: `peakgen` internally calls `SpheroidSignal`
+All of the below were rewired to the in-repo `wnoise` / `fast_conv` / extracted
+`SpheroidSignal` and no longer depend on RFTtoolbox. (Not yet re-run under MATLAB; some
+still have *unrelated* pre-existing blockers noted in parentheses.)
+
+- ~~`test_cope_display` (`SpheroidSignal`)~~ → `SpheroidSignal` now in-repo
+- ~~`test_fdr_crs_dep` (`wfield`)~~ → `wnoise`+`fast_conv` (NB: test still calls
+  `fdr_cope_sets` while the file declares `fdr_crs` — separate name mismatch)
+- ~~`test_fdr_simul_cs` (`wfield`)~~ → `wnoise`+`fast_conv`
+- ~~`test_scopes` *(pre-existing test)* (`wfield`)~~ → `wnoise`+`fast_conv`
+- ~~`test_srf_scopes` (`wfield`)~~ → `wnoise`+`fast_conv`
+- ~~`test_sss_cope_sets` (`wfield`)~~ → `wnoise`+`fast_conv`
+- ~~`test_imBH` (`wfield`)~~ → `wnoise`
+- ~~`test_imBH_data` (`wfield`)~~ → `wnoise`
+- ~~`test_pc` (`wfield`)~~ → `wnoise`+`fast_conv`
+- ~~`test_perm_cluster` (`SpheroidSignal`)~~ → `wnoise`+`fast_conv`+`SpheroidSignal` (NB:
+  later cells still hardcode HCP/UKB data paths)
+- ~~`test_perm_tfce` (`SpheroidSignal`)~~ → `wnoise` + `SpheroidSignal` via `peakgen`
+- ~~`test_perm_thresh` (`wfield`)~~ → `wnoise`
+- ~~`test_viewdata` (`wfield`)~~ → already fixed earlier; docstring now uses `wnoise`
+- ~~`test_peakgen` — 2nd cell: `peakgen` internally calls `SpheroidSignal`~~ →
+  `SpheroidSignal` extracted in-repo; `peakgen` reseed line also removed
+
+**Still blocked by RFTtoolbox:**
+
+- `test_scopes_lm` (`contrast_tstats`) — no in-repo replacement for `contrast_tstats` yet.
 
 ### Blocked by missing SPM
 
@@ -187,3 +263,10 @@ name is unreachable). Tests were written/fixed to call the file name:
 Missing helpers referenced by shipped code: `findstrings`, `capstr` (in `get_mask`).
 Unimplemented stubs: `fs_smooth`, `gen_mask`, `surf4` (`newfun.m`), several `bayespw`
 sub-functions.
+
+**Resolved 2026-07-07** (see top update): shipped source that called the RFTtoolbox
+`fconv` in live code (`Xgen2.m`, `spatialBH.m`, `perm_thresh.m`) or `wfield` (`bh_control.m`)
+now calls the in-repo `fast_conv` / `wnoise`. `SpheroidSignal`, `MkRadImg`, and `MySmooth`
+were extracted into `Statistics_Functions/Signal_generation/` (with `MySmooth` rerouted
+through `fast_conv`), so `peakgen` no longer needs RFTtoolbox or SPM. New helpers added:
+`wnoise`, `trnd`, `pearsrnd`.

@@ -1,81 +1,77 @@
-function imgsave( array, filename, directory, header)
-% IMGSAVE( array, filename, directory, header) saves a [91,109,91] array 
-% as a nifti file. Note it can also take a 91*109*91 vector an as input as
-% it will automatically reshape it to be the right size.
+function imgsave( array, filename, directory, header )
+% IMGSAVE( array, filename, directory, header) saves an array as a nifti
+% file using MATLAB's built-in niftiwrite (which requires MATLAB version
+% >= 2017), so that no SPM installation is required. It is the write
+% counterpart to imgload.
+%
+% Note it can also take a 91*109*91 vector as an input as it will
+% automatically reshape it to be the right size.
 %--------------------------------------------------------------------------
 % ARGUMENTS
-% array     is the [91,109,91] array to be saved.
-% filename  is the name of the file that you would like to save.
-% directory is the directory that you would like to save to. Note that
-%           setting this to be 2 puts everything in the CSI directory.
-% header    is the information about the file. If you're saving lots of 
-%           images then its better to provide this so that it doesn't have 
-%           to be loaded each time.
+% array     the array to be saved (typically [91,109,91]). A 902629x1 (or
+%           1x902629) vector is automatically reshaped to [91,109,91].
+% filename  the name of the file to save (the .nii extension is added
+%           automatically if not present).
+% directory the directory to save to. Default is the current working
+%           directory (pwd). The saved file is <directory>/<filename>.nii.
+% header    optional nifti header info struct (as returned by niftiinfo).
+%           If not provided, geometry is taken from the bundled template
+%           BrainImages/Volume/ExData.nii and adjusted to match array.
 %--------------------------------------------------------------------------
 % OUTPUT
-% A saved image at the desired location.
+% A saved image at <directory>/<filename>.nii
 %--------------------------------------------------------------------------
 % EXAMPLES
-% %At home:
-% global lobal
-% imgsave( zeros(91,109,91), 'examplesave', strcat(lobal,'TomsMiniProject/Matlab/' ) )
-% % This saves the image to TomsMiniProject/Matlab/examplesave.nii in the
-% % lobal directory.
-% global CSI
-% imgsave( zeros(91,109,91), 'examplesave', CSI )
-% %The above saves to the CSI directory.
-%
-% Saving data on your computer
-% imgsave( zeros(91,109,91), 'examplesave', 3 )
+% % Save an example image to a temporary directory
+% imgsave( zeros(91,109,91), 'examplesave', tempdir )
+% % reload it to check
+% im = niftiread( fullfile(tempdir, 'examplesave.nii') );
 %--------------------------------------------------------------------------
-if nargin < 3
-    directory = 2;
+% AUTHOR: Samuel Davenport
+%--------------------------------------------------------------------------
+
+sb_dir = statbrainz_maindir;
+
+%%  Add/check optional values
+%--------------------------------------------------------------------------
+if nargin < 3 || isempty( directory )
+    directory = pwd;
 end
 
-global lobal
-global parloc
-global CSI
-global where_davenpor
-global stdsize
-global bsloc
-if directory == 1
-    directory = parloc;
-elseif directory == 2
-    directory = CSI;
-elseif directory == 3
-    %Ie local saving of images.
-    directory = strcat(where_davenpor, 'exampledata');
-elseif directory == 4
-    %Large Files
-    directory = strcat(parloc, 'largefiles/');
+if ~(exist( directory, 'dir' ) == 7)
+    error( 'This directory does not exist' )
 end
 
-if ~(exist(directory, 'dir') == 7)
-    error('This directory does not exist')
+% Reshape a flattened MNI-space vector back to [91,109,91]
+if isequal( size(array), [1, 902629] ) || isequal( size(array), [902629, 1] )
+    array = reshape( array, [91,109,91] );
 end
 
-if ~strcmp(directory(end), '/')
-    directory = strcat(directory, '/');
-    %     error('USER: this needs to be a valid directory and end in /.')
+% niftiwrite writes single/double as-is; ensure a concrete numeric type
+array = double( array );
+
+%%  Obtain a header (geometry) for the file
+%--------------------------------------------------------------------------
+if nargin < 4 || isempty( header )
+    % Borrow the spatial geometry from the bundled example image, exactly as
+    % the previous SPM-based version did with spm_vol(...'ExData.nii').
+    header = niftiinfo( [sb_dir, 'BrainImages/Volume/ExData.nii'] );
 end
 
-if (nargin < 4)
-    header = spm_vol([bsloc, 'BrainImages/ExData.nii']);
-%     if ~strcmp(TYPE,'jala')
-%         header = spm_vol(strcat(lobal,'TomsMiniProject/Matlab/ExData.nii'));
-%     else
-%         header = spm_vol('/vols/Scratch/ukbiobank/nichols/SelectiveInf/BrainStat/BrainImages/MNImask.nii');
-%     end
+% Make the header consistent with the array actually being written,
+% otherwise niftiwrite errors on a size/type mismatch.
+header.ImageSize   = size( array );
+header.Datatype    = class( array );
+header.PixelDimensions = header.PixelDimensions(1:ndims(array));
+
+%%  Write the file
+%--------------------------------------------------------------------------
+% Strip a trailing .nii from filename if present (niftiwrite adds it back).
+if length(filename) > 4 && strcmp( filename(end-3:end), '.nii' )
+    filename = filename(1:end-4);
 end
 
-if isequal(size(array), [1, 902629]) || isequal(size(array), [902629, 1])
-    array = reshape(array, stdsize);
-end
-
-file = strcat(directory, filename, '.nii');
-header.fname = file;
-header.private.dat.fname = file;
-spm_write_vol(header, array)
+file = fullfile( directory, filename );
+niftiwrite( array, file, header );
 
 end
-
