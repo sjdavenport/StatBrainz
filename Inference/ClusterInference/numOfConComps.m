@@ -26,7 +26,7 @@ function [number_of_clusters, occurences, cluster_sizes, index_locations] = ...
 % sizes
 %
 % dim = [25,25]; noise = randn(dim); FWHM = 4;
-% [smooth_noise, ss] = fconv(noise, FWHM, 2);
+% [smooth_noise, ss] = fast_conv(noise, FWHM, 2);
 % smooth_noise = smooth_noise./sqrt(ss);
 % [number_of_clusters, occurences, sizes, index_locations] = numOfConComps(smooth_noise, 1);
 % surviving_cluster_im = cluster_im( dim, index_locations, 25 )

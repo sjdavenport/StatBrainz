@@ -89,18 +89,16 @@ end
 % effectsize = 0.5;
 % field_type = 'L';
 % field_params = 3;
-% lat_data = wfield(dim, nsubj, field_type, field_params);
-% 
+% lat_data = wnoise(dim, nsubj, field_type, field_params);
+%
 % signal = peakgen( effectsize, 8, 10, dim, {[20,20], [20,80], [50,50], [80,20], [80,80]});
-% lat_data.field = lat_data.field + signal;
-% 
+% lat_data = lat_data + signal;
+%
 % FWHM = 10;
-% tstat_orig = convfield_t(lat_data, FWHM).field;
-% pvals_orig = tstat_pval(tstat_orig, nsubj-1, 0);
-% smooth_fields = convfield(lat_data, FWHM);
-% smooth_fields_gauss = Gaussianize(smooth_fields.field);
+% smooth_fields = fast_conv(lat_data, FWHM, length(dim));
+% smooth_fields_gauss = Gaussianize(smooth_fields);
 % % Need to investigate why occasionally get imaginary parts!
-% 
-% % smooth_fields_gauss = sqrt(smooth_fields.field);
-% tstat_gauss = mvtstat(smooth_fields_gauss.field);
+%
+% % smooth_fields_gauss = sqrt(smooth_fields);
+% tstat_gauss = mvtstat(smooth_fields_gauss);
 % pvals_gauss = tstat_pval(tstat_gauss, nsubj-1, 0);

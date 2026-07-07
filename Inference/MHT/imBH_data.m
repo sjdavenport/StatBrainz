@@ -14,7 +14,7 @@ function [rejection_ind, n_rejections] = imBH_data( data, mask )
 % n_rejections    the total number of rejections
 %--------------------------------------------------------------------------
 % EXAMPLES
-% data = wfield([10,10,20]).field;
+% data = wnoise([10,10,20]);
 % mask = peakgen( 1, 5, 3, [10,10]) > 0.5;
 % rejection_ind = imBH_data( data, mask )
 %--------------------------------------------------------------------------

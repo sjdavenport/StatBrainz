@@ -28,7 +28,7 @@ function [ threshold, vec_of_maxima, permuted_tstat_store ] = ...
 % EXAMPLES
 % dim = [50,50]; nsubj = 50; FWHM = 0;
 % Sig = 0.25*peakgen(1, 10, 8, dim);
-% data = wfield(dim, nsubj).field + Sig;
+% data = wnoise(dim, nsubj) + Sig;
 % threshold = perm_tfce(data, ones(dim))
 %--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport

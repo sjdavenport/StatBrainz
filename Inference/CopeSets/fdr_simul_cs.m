@@ -25,9 +25,8 @@ function [ lower_set, upper_set ] = fdr_simul_cs( data, mask, thresh_vec, alpha_
 % mask = ones(dim);
 % c = 2;
 % 
-% lat_data = wfield( dim, nsubj, 'L', 1);
-% f = convfield(lat_data, FWHM);
-% noise = f.field;
+% lat_data = wnoise( dim, nsubj, 'L', 1);
+% noise = fast_conv(lat_data, FWHM, D);
 % data = noise + mu;
 % 
 % [lower_fdr, upper_fdr] = fdr_cope_sets( data, c );

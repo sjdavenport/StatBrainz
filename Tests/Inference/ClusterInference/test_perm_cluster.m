@@ -49,8 +49,8 @@ dim = [50,50]; nsubj = 50; FWHM = 3;
 Sig = 0.5*peakgen(1, 10, 8, dim);
 % Sig = zeros(dim); Sig(25:26,25) = 3;
 % Sig = 0.5*square_signal(dim, 4, {[25,20], [25,30]} );
-data = wfield(dim, nsubj).field + Sig;
-data = fconv(data, FWHM, 2);
+data = wnoise(dim, nsubj) + Sig;
+data = fast_conv(data, FWHM, 2);
 
 % Run clustersize inference
 CDT = 2.3;
@@ -107,13 +107,12 @@ imagesc(upper_band)
 dim = [50,50]; nsubj = 50; FWHM = 0;
 Sig = 0.25*peakgen(1, 10, 8, dim);
 Sig = 0.5*square_signal(dim, 4, {[25,20], [25,30]} );
-data = wfield(dim, nsubj);
-data.field = data.field + Sig;
-tstat = convfield_t(data, FWHM);
-tstat_tfce = tfce(tstat.field,2,0.5,8,0.05);
+data = wnoise(dim, nsubj) + Sig;
+tstat = mvtstat(data);
+tstat_tfce = tfce(tstat,2,0.5,8,0.05);
 
 subplot(1,2,1)
-surf(tstat.field)
+surf(tstat)
 title('Original tstat')
 view([-14,15])
 subplot(1,2,2)
@@ -212,9 +211,9 @@ Mag = [0.5, 0.5, 1, 1];
 Rad = [ 10, 20, 10, 20]/5;
 Sig = 0.25*peakgen(Mag, Rad, 4, dim, {[25, 75]/2, [25, 25]/2, [75,75]/2, [75, 25]/2});
 surf(Sig)
-data = wfield(dim, nsubj).field + Sig;
+data = wnoise(dim, nsubj) + Sig;
 FWHM = 4;
-data = fconv(data, FWHM, 2);
+data = fast_conv(data, FWHM, 2);
 
 % Run clustersize inference
 CDT = 2.3;

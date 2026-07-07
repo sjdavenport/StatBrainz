@@ -19,11 +19,11 @@ Sig((floor(11*scale):floor(40*scale)), floor(6*scale):floor(45*scale)) = 0.6;
 Sig = repmat(Sig, repval, repval);
 bigdim = size(Sig);
 % FWHM = 3;
-noise = fconv(wfield(bigdim, nsubj).field, FWHM, 2);
+noise = fast_conv(wnoise(bigdim, nsubj), FWHM, 2);
 noise_std = std(noise(:));
 noise = noise/noise_std;
 if breakupnoise == 1
-    noise2 = fconv(wfield(bigdim, nsubj).field, 10, 2);
+    noise2 = fast_conv(wnoise(bigdim, nsubj), 10, 2);
     noise2_std = std(noise2(:));
     noise2 = noise2/noise2_std;
     dilated_mask = dilate_mask(Sig > 0,1);

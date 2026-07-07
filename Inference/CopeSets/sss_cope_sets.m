@@ -31,10 +31,8 @@ function [lower_set, upper_set, std_multipler] = sss_cope_sets(data, mask, ...
 % mask = ones(dim);
 % c = 2;
 % 
-% % noise = noisegen( dim, nsubj, FWHM );
-% lat_data = wfield( dim, nsubj, 'L', 1);
-% f = convfield(lat_data, FWHM);
-% noise = f.field;
+% lat_data = wnoise( dim, nsubj, 'L', 1);
+% noise = fast_conv(lat_data, FWHM, D);
 % data = noise + mu;
 % 
 % [lower_set, upper_set] = sss_cope_sets(data, mask, c, 1000);

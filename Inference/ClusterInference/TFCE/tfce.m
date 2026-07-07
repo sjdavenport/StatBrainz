@@ -16,12 +16,12 @@ function [tfce_im] = tfce(image,H,E,connectivity,dh,h0)
 % EXAMPLES
 % dim = [50,50]; nsubj = 50; FWHM = 2;
 % Sig = 0.1*peakgen(1, 10, 8, dim);
-% data = wfield(dim, nsubj);
-% data.field = data.field + Sig;
-% tstat = convfield_t(data, FWHM);
-% tstat_tfce = tfce(tstat.field,2,0.5,8,0.05)
+% data = wnoise(dim, nsubj) + Sig;
+% smooth_data = fast_conv(data, FWHM, 2);
+% tstat = mvtstat(smooth_data);
+% tstat_tfce = tfce(tstat,2,0.5,8,0.05)
 % subplot(1,2,1)
-% surf(tstat.field)
+% surf(tstat)
 % subplot(1,2,2)
 % surf(tstat_tfce)
 %--------------------------------------------------------------------------

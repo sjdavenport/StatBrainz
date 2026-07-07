@@ -8,9 +8,8 @@ data = normrnd(0,1,20,1000);
 [~, threshold] = perm_thresh(data, 'T');
 
 %%
-lat_data = wfield([5,5], 10);
-tic; [~,threshold] = perm_thresh_new(lat_data, 'T'); toc
-tic; [~,threshold] = perm_thresh(lat_data.field, 'T');toc
+lat_data = wnoise([5,5], 10);
+tic; [~,threshold] = perm_thresh(lat_data, 'T');toc
 
 %%
 % Normal data with 1 voxel (very similar (as expected)!)
