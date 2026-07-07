@@ -45,10 +45,10 @@ surfscreen
 save('./SensorimotorAssociation_Axis_32k.mat', 'data')
 
 %%
-anat = gifti('Desikan.32k.L.label.gii');
+anat = read_gifti('Desikan.32k.L.label.gii');
 clear data
 data.lh = anat.cdata;
-anat = gifti('Desikan.32k.R.label.gii');
+anat = read_gifti('Desikan.32k.R.label.gii');
 data.rh = anat.cdata;
 
 srfplot(srf, data, 'all')

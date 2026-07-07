@@ -46,7 +46,7 @@ end
 lhrh = 0;
 clear smooth_data
 if ~isstruct(srf)
-    g = gifti(srf);
+    g = read_gifti(srf);
     clear srf
     srf.faces = g.faces;
     srf.vertices = g.vertices;

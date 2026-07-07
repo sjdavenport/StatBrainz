@@ -37,10 +37,10 @@ rho_store(1)
 
 %% Get the medial wall masks
 path4gifti = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_desc-nomedialwall_dparc.label.gii';
-g = gifti(path4gifti);
+g = read_gifti(path4gifti);
 nomedwall_left = g.cdata; 
 path4gifti = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-R_desc-nomedialwall_dparc.label.gii';
-g = gifti(path4gifti);
+g = read_gifti(path4gifti);
 nomedwall_right = g.cdata; 
 
 

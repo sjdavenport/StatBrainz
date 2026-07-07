@@ -26,7 +26,7 @@ if isstruct(srf)
     vertices = srf.vertices;
     faces = srf.faces;
 elseif strcmp(srf(end-3:end), '.gii')
-    g = gifti(srf);
+    g = read_gifti(srf);
     vertices = g.vertices;
     faces = g.faces;
 else

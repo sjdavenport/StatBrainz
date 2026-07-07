@@ -2,12 +2,12 @@ sb_dir = statbrainz_maindir;
 
 pathdir = [sb_dir, 'BrainImages/Gifti_files/'];
 
-lh_data = load_gifti([pathdir, 'S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii']);
+lh_data = read_gifti([pathdir, 'S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii']);
 lh_data.nfaces = size(lh_data.faces,1);
 lh_data.nvertices = size(lh_data.vertices,1);
 lh_data.hemi = 'lh';
 
-rh_data = load_gifti([pathdir, 'S1200.R.inflated_MSMAll.32k_fs_LR.surf.gii']);
+rh_data = read_gifti([pathdir, 'S1200.R.inflated_MSMAll.32k_fs_LR.surf.gii']);
 rh_data.nfaces = size(lh_data.faces,1);
 rh_data.nvertices = size(lh_data.vertices,1);
 rh_data.hemi = 'rh';
