@@ -53,7 +53,9 @@
       "Bash(chmod +x /Users/samd/Documents/Code/Packages/Matlab/StatBrainz/Tests/drive_tests.sh)",
       "Bash(bash /Users/samd/Documents/Code/Packages/Matlab/StatBrainz/Tests/drive_tests.sh)",
       "Bash(pkill -9 -f \"run_one_test\")",
-      "Bash(pkill -9 -f \"MATLAB.*-batch\")"
+      "Bash(pkill -9 -f \"MATLAB.*-batch\")",
+      "Bash(python3 -c \"import nibabel\")",
+      "Bash(python3 -c ' *)"
     ]
   }
 }

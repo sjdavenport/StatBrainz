@@ -33,7 +33,12 @@ end
 
 %%  Read and parse the XML
 %--------------------------------------------------------------------------
-dom = xmlread( path4gifti );
+% Parse with DTD loading disabled: GIFTI files declare a remote DOCTYPE
+% (gifti.dtd) which xmlread would otherwise try to fetch over the network.
+parser = javaObject('org.apache.xerces.parsers.DOMParser');
+parser.setFeature('http://apache.org/xml/features/nonvalidating/load-external-dtd', false);
+parser.parse( java.io.File(path4gifti).toURI().toString() );
+dom = parser.getDocument();
 arrays = dom.getElementsByTagName('DataArray');
 
 g = struct();
@@ -215,16 +220,12 @@ else
     bis = ByteArrayInputStream( typecast(uint8(bytes(:)), 'int8') );
     iis = InflaterInputStream( bis, Inflater() );
 end
-bos = ByteArrayOutputStream();
 
-buf = zeros(1, 65536, 'int8');
-nread = iis.read( buf );
-while nread > 0
-    bos.write( buf, 0, nread );
-    nread = iis.read( buf );
-end
+% readAllBytes keeps the read buffer inside the JVM; passing a MATLAB
+% array to iis.read() would copy it by value and lose the inflated data.
+javabytes = iis.readAllBytes();
 iis.close();
 
-out = typecast( bos.toByteArray, 'uint8' );
+out = typecast( javabytes, 'uint8' );
 out = out(:);
 end

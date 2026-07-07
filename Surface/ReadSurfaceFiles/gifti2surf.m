@@ -39,7 +39,7 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-g = gifti(path4gifti);
+g = read_gifti(path4gifti);
 srf.faces = g.faces;
 srf.vertices = g.vertices;
 srf.nfaces = length(g.faces);
