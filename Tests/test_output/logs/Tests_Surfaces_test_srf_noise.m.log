@@ -1,0 +1,3 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+###RESULT### FAIL | Tests/Surfaces/test_srf_noise.m | Dot indexing is not supported for variables of this type.

@@ -1,0 +1,3 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+###RESULT### FAIL | Tests/Surface/ReadSurfaceFiles/test_fs_smooth.m | Output argument "out" (and possibly others) not assigned a value in the execution with "fs_smooth" function.

@@ -1,0 +1,166 @@
+FAIL | Tests/Atlases/test_get_mask.m | Undefined function 'findstrings' for input arguments of type 'cell'.
+OK | Tests/Atlases/test_getregion.m |
+FAIL | Tests/Aux_Functions/test_fast_conv.m | Undefined function 'spm_smooth' for input arguments of type 'double'.
+OK | Tests/Atlases/test_getBrainRegionNames.m |
+OK | Tests/Atlases/test_atlas_masks.m |
+OK | Tests/Brain Functions/test_gen_mask.m |
+OK | Tests/Brain Functions/test_nifti_type.m |
+OK | Tests/Brain Functions/test_plane2index.m |
+OK | Tests/Brain Functions/test_mvtstat_dep.m |
+OK | Tests/Brain Functions/test_getMNImask.m |
+OK | Tests/Brain Functions/test_voxinMNI.m |
+OK | Tests/Brain Functions/test_vec_data.m |
+OK | Tests/Brain Functions/test_sigma2FWHM.m |
+OK | Tests/ImageViewing/Shape_screen/test_fullscreen.m |
+OK | Tests/Brain Functions/test_unwrap.m |
+OK | Tests/ImageViewing/Shape_screen/test_squarescreen.m |
+OK | Tests/ImageViewing/Shape_screen/test_fullscreen2.m |
+OK | Tests/ImageViewing/Shape_screen/test_surfscreen.m |
+OK | Tests/ImageViewing/Shape_screen/test_screenshape.m |
+OK | Tests/ImageViewing/Shape_screen/test_spherescreen.m |
+OK | Tests/ImageViewing/test_imgload.m |
+OK | Tests/ImageViewing/test_colorRegion.m |
+FAIL | Tests/ImageViewing/test_brainmove.m | This file is not available\n
+OK | Tests/ImageViewing/test_add_region.m |
+OK | Tests/ImageViewing/test_combine_brains.m |
+OK | Tests/ImageViewing/test_imgsave.m |
+FAIL | Tests/ImageViewing/test_overlay_brain3_dep.m | Undefined function 'overlay_brain3' for input arguments of type 'cell'.
+FAIL | Tests/ImageViewing/test_loadbrains.m | Index exceeds the number of array elements. Index must not exceed 1.
+FAIL | Tests/ImageViewing/test_loadsubs.m | Index exceeds the number of array elements. Index must not exceed 1.
+OK | Tests/ImageViewing/test_overlay_brain.m |
+OK | Tests/ImageViewing/test_pan3.m |
+OK | Tests/ImageViewing/test_overlay_brainslice.m |
+OK | Tests/ImageViewing/test_viewbrain.m |
+OK | Tests/ImageViewing/test_plot_compact.m |
+OK | Tests/ImageViewing/test_peak2circle.m |
+OK | Tests/Inference/BayesGLM/test_bayespw.m |
+OK | Tests/Inference/BayesGLM/test_Copy_of_fit_bayesglm.m |
+OK | Tests/ImageViewing/test_viewdata.m |
+OK | Tests/ImageViewing/test_viewthresh.m |
+OK | Tests/ImageViewing/test_viewdata2.m |
+OK | Tests/Inference/ClusterInference/AuxFiles/test_rkval.m |
+OK | Tests/Inference/ClusterInference/AuxFiles/test_cluster2csv.m |
+OK | Tests/Inference/ClusterInference/ClusterTDP/test_cluster_tp2tdp.m |
+OK | Tests/Inference/BayesGLM/test_fit_bayesglm.m |
+OK | Tests/Inference/ClusterInference/AuxFiles/test_ctp_extract_score.m |
+OK | Tests/Inference/ClusterInference/ClusterTDP/test_ctp_scores.m |
+OK | Tests/Inference/ClusterInference/Clusterextent/test_localized_csi.m |
+FAIL | Tests/Inference/ClusterInference/ClusterTDP/test_fgreedy.m | Unable to change current folder to '/Users/samd/Documents/Code/Packages/Matlab/StatBrainz/./ClusterTDPccode' (Name is nonexistent or not a folder).
+OK | Tests/Inference/ClusterInference/Clusterextent/test_index2mask.m |
+OK | Tests/Inference/ClusterInference/TFCE/test_perm_tfce.m |
+OK | Tests/Inference/ClusterInference/TFCE/test_voxLCE.m |
+OK | Tests/Inference/ClusterInference/TFCE/test_real_tfce_clusters.m |
+OK | Tests/Inference/ClusterInference/test_cluster_im.m |
+OK | Tests/Inference/ClusterInference/test_bestclusterslice.m |
+OK | Tests/Inference/ClusterInference/test_LCE.m |
+FAIL | Tests/Inference/ClusterInference/test_clustertp_lowerbound.m | Unable to find file or directory './cluster92.mat'.
+OK | Tests/Inference/ClusterInference/test_getlargestcluster.m |
+OK | Tests/Inference/ClusterInference/test_numOfConComps.m |
+FAIL | Tests/Inference/ClusterInference/test_clustertdp.m | Index in position 2 exceeds array bounds. Index must not exceed 2.
+OK | Tests/Inference/ClusterInference/test_pc.m |
+FAIL | Tests/Inference/CopeSets/test_cope_display.m | Undefined function 'fdr_cope_sets' for input arguments of type 'double'.
+FAIL | Tests/Inference/CopeSets/test_fdr_crs_dep.m | Undefined function 'fdr_cope_sets' for input arguments of type 'double'.
+OK | Tests/Inference/CopeSets/test_fdr_crs.m |
+OK | Tests/Inference/ClusterInference/test_tfce.m |
+    fprintf('FAIL | %s | %s\n', rel, msg);
+FAIL | Tests/Inference/CopeSets/test_scopes_lm.m | Undefined function 'contrast_tstats' for input arguments of type 'double'.
+FAIL | Tests/Inference/CopeSets/test_scopes.m | Not enough input arguments.
+OK | Tests/Inference/CopeSets/test_srf_color_crs.m |
+OK | Tests/Inference/CopeSets/test_srf_blue_crs.m |
+FAIL | Tests/Inference/CopeSets/test_fdr_simul_cs.m | Undefined function 'fdr_cope_sets' for input arguments of type 'double'.
+OK | Tests/Inference/CopeSets/test_srf_cope_display2.m |
+OK | Tests/Inference/CopeSets/test_srf_scb2cope.m |
+OK | Tests/Inference/CopeSets/test_srf_cope_display.m |
+OK | Tests/Inference/CopeSets/test_srf_redblue_crs.m |
+OK | Tests/Inference/CopeSets/test_srf_fdr_crs.m |
+OK | Tests/Inference/FirstLevel/test_prewhiten.m |
+OK | Tests/Inference/CopeSets/test_sss_cope_sets.m |
+OK | Tests/Inference/FirstLevel/test_Xgen2.m |
+OK | Tests/Inference/MHT/test_fdp_calc.m |
+FAIL | Tests/Inference/CopeSets/test_srf_scopes.m | Undefined function 'fastperm' for input arguments of type 'double'.
+OK | Tests/Inference/MHT/test_imBH_data.m |
+FAIL | Tests/Inference/MHT/test_imBH.m | Arrays have incompatible sizes for this operation.
+OK | Tests/Inference/MHT/test_localized_vi.m |
+OK | Tests/Inference/MHT/test_fdrthresh.m |
+OK | Tests/Inference/MHT/test_fdrBH.m |
+OK | Tests/Inference/TDP_inference/templates/test_inverse_linear_template.m |
+OK | Tests/Inference/TDP_inference/templates/test_get_pivotal_stats.m |
+    fprintf('FAIL | %s | %s\n', rel, msg);
+OK | Tests/Inference/MHT/test_spatialBH.m |
+OK | Tests/Inference/Resampling/test_perm_thresh.m |
+OK | Tests/Inference/TDP_inference/templates/test_linear_template.m |
+OK | Tests/Statistics_Functions/Aux_functions/Plotting/test_BigFont.m |
+OK | Tests/Statistics_Functions/Aux_functions/Plotting/test_animatefun.m |
+OK | Tests/Statistics_Functions/Aux_functions/Plotting/test_custom_colormap.m |
+OK | Tests/Statistics_Functions/Aux_functions/Plotting/test_histpdf.m |
+OK | Tests/Statistics_Functions/Aux_functions/Plotting/test_plotImagesInTile.m |
+OK | Tests/Statistics_Functions/Aux_functions/SystemFunctions/test_filesindir.m |
+OK | Tests/Statistics_Functions/Aux_functions/Plotting/test_mytiles.m |
+OK | Tests/Statistics_Functions/Aux_functions/Plotting/test_slidergui3.m |
+OK | Tests/Statistics_Functions/Aux_functions/Plotting/test_sliderGUI.m |
+OK | Tests/Statistics_Functions/FirstLevel/test_brain_extraction.m |
+OK | Tests/Statistics_Functions/Aux_functions/SystemFunctions/test_loader.m |
+OK | Tests/Statistics_Functions/Aux_functions/SystemFunctions/test_statbrainz_maindir.m |
+OK | Tests/Statistics_Functions/Aux_functions/SystemFunctions/test_modul.m |
+OK | Tests/Statistics_Functions/FirstLevel/test_brain_extraction2.m |
+OK | Tests/Statistics_Functions/FirstLevel/test_extract_brain.m |
+OK | Tests/Statistics_Functions/FirstLevel/test_brain_extraction3.m |
+OK | Tests/Statistics_Functions/ImageOperations/Kernels/test_GkerMV2.m |
+OK | Tests/Statistics_Functions/ImageOperations/Kernels/test_GkerMV.m |
+OK | Tests/Statistics_Functions/ImageOperations/Kernels/test_Gker.m |
+OK | Tests/Statistics_Functions/ImageOperations/test_FWHM2sigma.m |
+OK | Tests/Statistics_Functions/ImageOperations/Kernels/test_Gkerderiv.m |
+OK | Tests/Statistics_Functions/Mask_functions/test_dilate_mask.m |
+OK | Tests/Statistics_Functions/ImageOperations/test_doubleim.m |
+OK | Tests/Statistics_Functions/ImageOperations/Kernels/test_Gkerderiv2.m |
+OK | Tests/Statistics_Functions/Mask_functions/test_mask_bounds.m |
+OK | Tests/Statistics_Functions/Mask_functions/test_expand2mask.m |
+FAIL | Tests/Statistics_Functions/Mask_functions/test_mask_bndry.m | Undefined function 'findstrings' for input arguments of type 'cell'.
+OK | Tests/Statistics_Functions/Mask_functions/test_pad_im.m |
+OK | Tests/Statistics_Functions/Mask_functions/test_nan2zero.m |
+OK | Tests/Statistics_Functions/Mask_functions/test_region_bndry2D.m |
+OK | Tests/Statistics_Functions/Mask_functions/test_zero2nan.m |
+OK | Tests/Statistics_Functions/Stats_functions/test_bernstd.m |
+OK | Tests/Statistics_Functions/Signal_generation/test_peakgen.m |
+OK | Tests/Statistics_Functions/Signal_generation/test_square_signal.m |
+OK | Tests/Statistics_Functions/Stats_functions/test_mvtstat.m |
+OK | Tests/Statistics_Functions/Stats_functions/test_distbn2pval.m |
+OK | Tests/Statistics_Functions/Stats_functions/test_gmrnd.m |
+OK | Tests/Statistics_Functions/Stats_functions/test_lcdf.m |
+OK | Tests/Statistics_Functions/Stats_functions/test_gmcdf.m |
+OK | Tests/Statistics_Functions/test_asinh_data_trans.m |
+OK | Tests/Statistics_Functions/test_asinh_trans.m |
+OK | Tests/Statistics_Functions/Stats_functions/test_pval2tstat.m |
+OK | Tests/Statistics_Functions/Stats_functions/test_tstat2pval.m |
+OK | Tests/Statistics_Functions/test_apower.m |
+OK | Tests/Surface/Plotting/test_newfun.m |
+OK | Tests/Statistics_Functions/test_convind.m |
+OK | Tests/Statistics_Functions/test_convindall.m |
+OK | Tests/Statistics_Functions/test_gen_noise.m |
+OK | Tests/Surface/Plotting/test_srf_colour.m |
+OK | Tests/Surface/Plotting/test_surf4.m |
+OK | Tests/Surface/ReadSurfaceFiles/test_dpvread.m |
+OK | Tests/Surface/Plotting/test_srfgui.m |
+OK | Tests/Surface/ReadSurfaceFiles/test_fs2surf.m |
+OK | Tests/Surface/Plotting/test_srfplot2.m |
+FAIL | Tests/Surface/ReadSurfaceFiles/test_fs_smooth.m | Output argument "out" (and possibly others) not assigned a value in the execution with "fs_smooth" function.
+FAIL | Tests/Surface/ReadSurfaceFiles/test_fsannot2mask.m | Output argument "vertices" (and possibly others) not assigned a value in the execution with "read_annotation" function.
+OK | Tests/Surface/ReadSurfaceFiles/test_gifti2surf.m |
+OK | Tests/Surface/test_loadsrf.m |
+OK | Tests/Surface/test_srf_contour.m |
+FAIL | Tests/Surfaces/test_SurfStatEdge.m | Undefined function 'gifti' for input arguments of type 'char'.
+FAIL | Tests/Surfaces/test_adjacency_matrix.m | Undefined function 'gifti' for input arguments of type 'char'.
+FAIL | Tests/Surfaces/Reading_surface_data/test_mgzwrite.m | Undefined function 'MRIread' for input arguments of type 'char'.
+OK | Tests/Surface/test_srf_fwhm2niters.m |
+OK | Tests/Surface/test_srf_dilate_mask.m |
+FAIL | Tests/Surfaces/test_scopes.m | Not enough input arguments.
+OK | Tests/Surfaces/test_loadmask.m |
+FAIL | Tests/Surfaces/test_graph_cc.m | Unrecognized function or variable 'indices_notsurvived'.
+OK | Tests/Surfaces/test_resample_srf_nn.m |
+OK | Tests/Surfaces/test_resample_srf.m |
+FAIL | Tests/Surfaces/test_spin_surface.m | Unrecognized function or variable 'srf'.
+FAIL | Tests/Surfaces/test_srf_noise.m | Dot indexing is not supported for variables of this type.
+FAIL | Tests/Surfaces/test_smooth_surface.m | Undefined function 'gifti' for input arguments of type 'char'.
+OK | Tests/Surfaces/test_srf_face_area.m |
+FAIL | Tests/Surfaces/test_srfplot.m | Unrecognized function or variable 'g'.
+OK | Tests/test_addSB2path.m |

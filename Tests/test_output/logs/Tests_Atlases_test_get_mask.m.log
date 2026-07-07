@@ -1,0 +1,3 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+###RESULT### FAIL | Tests/Atlases/test_get_mask.m | Undefined function 'findstrings' for input arguments of type 'cell'.

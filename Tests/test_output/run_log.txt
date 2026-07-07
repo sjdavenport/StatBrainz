@@ -1,0 +1,44 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+[  1/166] OK    Tests/test_addSB2path.m
+[  2/166] OK    Tests/Atlases/test_atlas_masks.m
+[  3/166] OK    Tests/Atlases/test_getBrainRegionNames.m
+[  4/166] FAIL  Tests/Atlases/test_get_mask.m  -- Undefined function 'findstrings' for input arguments of type 'cell'.
+[  5/166] OK    Tests/Atlases/test_getregion.m
+[  6/166] FAIL  Tests/Aux_Functions/test_fast_conv.m  -- Undefined function 'spm_smooth' for input arguments of type 'double'.
+[  7/166] OK    Tests/Brain Functions/test_gen_mask.m
+[  8/166] OK    Tests/Brain Functions/test_getMNImask.m
+[  9/166] OK    Tests/Brain Functions/test_mvtstat_dep.m
+[ 10/166] OK    Tests/Brain Functions/test_nifti_type.m
+[ 11/166] OK    Tests/Brain Functions/test_plane2index.m
+[ 12/166] OK    Tests/Brain Functions/test_sigma2FWHM.m
+[ 13/166] OK    Tests/Brain Functions/test_unwrap.m
+[ 14/166] OK    Tests/Brain Functions/test_vec_data.m
+[ 15/166] OK    Tests/Brain Functions/test_voxinMNI.m
+[ 16/166] OK    Tests/ImageViewing/test_add_region.m
+[ 17/166] FAIL  Tests/ImageViewing/test_brainmove.m  -- This file is not available\n
+[ 18/166] OK    Tests/ImageViewing/test_colorRegion.m
+[ 19/166] OK    Tests/ImageViewing/test_combine_brains.m
+[ 20/166] OK    Tests/ImageViewing/test_imgload.m
+[ 21/166] OK    Tests/ImageViewing/test_imgsave.m
+[ 22/166] FAIL  Tests/ImageViewing/test_loadbrains.m  -- Index exceeds the number of array elements. Index must not exceed 1.
+[ 23/166] FAIL  Tests/ImageViewing/test_loadsubs.m  -- Index exceeds the number of array elements. Index must not exceed 1.
+[ 24/166] OK    Tests/ImageViewing/test_overlay_brain.m
+[ 25/166] FAIL  Tests/ImageViewing/test_overlay_brain3_dep.m  -- Undefined function 'overlay_brain3' for input arguments of type 'cell'.
+[ 26/166] OK    Tests/ImageViewing/test_overlay_brainslice.m
+[ 27/166] OK    Tests/ImageViewing/test_pan3.m
+[ 28/166] OK    Tests/ImageViewing/test_peak2circle.m
+[ 29/166] OK    Tests/ImageViewing/test_plot_compact.m
+[ 30/166] OK    Tests/ImageViewing/test_viewbrain.m
+[ 31/166] OK    Tests/ImageViewing/test_viewdata.m
+[ 32/166] OK    Tests/ImageViewing/test_viewdata2.m
+[ 33/166] OK    Tests/ImageViewing/test_viewthresh.m
+[ 34/166] OK    Tests/ImageViewing/Shape_screen/test_fullscreen.m
+[ 35/166] OK    Tests/ImageViewing/Shape_screen/test_fullscreen2.m
+[ 36/166] OK    Tests/ImageViewing/Shape_screen/test_screenshape.m
+[ 37/166] OK    Tests/ImageViewing/Shape_screen/test_spherescreen.m
+[ 38/166] OK    Tests/ImageViewing/Shape_screen/test_squarescreen.m
+[ 39/166] OK    Tests/ImageViewing/Shape_screen/test_surfscreen.m
+[ 40/166] OK    Tests/Inference/BayesGLM/test_Copy_of_fit_bayesglm.m
+[ 41/166] OK    Tests/Inference/BayesGLM/test_bayespw.m
+[ 42/166] OK    Tests/Inference/BayesGLM/test_fit_bayesglm.m

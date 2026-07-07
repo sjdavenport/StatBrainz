@@ -45,7 +45,15 @@
       "Bash(pkill -9 -f \"MATLAB_maca64 -batch\")",
       "Bash(pkill -9 -f \"matlab.*-batch\")",
       "Bash(kill -9 24909)",
-      "Bash(grep -vE 'WARNING|^$')"
+      "Bash(grep -vE 'WARNING|^$')",
+      "Bash(grep -rlE \"pause\\\\s*$|pause;|pause\\\\s*%\" Tests --include=\"*.m\")",
+      "Bash(pkill -f \"run_all_tests_report\")",
+      "Bash(pkill -f \"MATLAB.*-batch\")",
+      "Bash(echo \"exit=$?\")",
+      "Bash(chmod +x /Users/samd/Documents/Code/Packages/Matlab/StatBrainz/Tests/drive_tests.sh)",
+      "Bash(bash /Users/samd/Documents/Code/Packages/Matlab/StatBrainz/Tests/drive_tests.sh)",
+      "Bash(pkill -9 -f \"run_one_test\")",
+      "Bash(pkill -9 -f \"MATLAB.*-batch\")"
     ]
   }
 }

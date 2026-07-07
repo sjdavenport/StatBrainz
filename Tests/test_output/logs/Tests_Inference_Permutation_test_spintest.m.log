@@ -1,0 +1,8 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+{Reference to a cleared variable rel.
+
+Error in run_one_test (line 16)
+    fprintf('###RESULT### FAIL | %s | %s\n', rel, msg);
+                                             ^^^
+} 

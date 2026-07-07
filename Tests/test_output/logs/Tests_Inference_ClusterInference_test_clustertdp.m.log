@@ -1,0 +1,3 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+###RESULT### FAIL | Tests/Inference/ClusterInference/test_clustertdp.m | Index in position 2 exceeds array bounds. Index must not exceed 2.

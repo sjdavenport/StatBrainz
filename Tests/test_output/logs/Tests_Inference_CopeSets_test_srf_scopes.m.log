@@ -1,0 +1,3 @@
+WARNING: package sun.awt.X11 not in java.desktop
+WARNING: package sun.awt.X11 not in java.desktop
+###RESULT### FAIL | Tests/Inference/CopeSets/test_srf_scopes.m | Undefined function 'fastperm' for input arguments of type 'double'.
