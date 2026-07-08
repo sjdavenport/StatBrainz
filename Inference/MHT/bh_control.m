@@ -47,7 +47,7 @@ nvals = 100; ntrue = 0;
 
 fdr_est = 0;
 for I = 1:niters
-    normal_rvs = noisegen(nvals, 1, FWHM)';
+    normal_rvs = fast_conv(wnoise(nvals, 1), FWHM, 1)';
     normal_rvs(1:ntrue) = normal_rvs(1:ntrue) + 2;
     pvalues = 1 - normcdf(normal_rvs);
 

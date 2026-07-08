@@ -1,21 +1,28 @@
 StatBrainz failing tests, grouped by cause (37 total)
 Run: MATLAB R2024b, -nodisplay -batch, each test in its own process, 60s timeout.
 
-== Missing RFTtoolbox (wfield / SpheroidSignal / contrast_tstats) -- 14 ==
-test_cope_display        SpheroidSignal
-test_fdr_crs_dep         wfield
-test_fdr_simul_cs        wfield
-test_imBH                wfield
-test_imBH_data           wfield
-test_pc                  wfield
-test_peakgen             SpheroidSignal
-test_perm_cluster        SpheroidSignal
-test_perm_tfce           SpheroidSignal
-test_perm_thresh         wfield
-test_scopes              wfield (+ undefined var 'data')
-test_scopes_lm           contrast_tstats
-test_srf_scopes          wfield
-test_sss_cope_sets       wfield
+== Stale RFTtoolbox references in tests (wfield / SpheroidSignal / contrast_tstats) -- 14 ==
+-- NOTE: production code no longer depends on RFTtoolbox. SpheroidSignal is
+--   defined in-repo (smooths via fast_conv), and wfield has an in-repo
+--   replacement (wnoise). These tests fail only because the TEST files still
+--   call the old external names -- this is test hygiene, not a real dependency.
+-- FOLLOW-UP (deferred): update these tests to the internalized functions:
+--     * wfield          -> wnoise  (raw array) or fast_conv(wnoise(...),FWHM,D) for smooth noise
+--     * contrast_tstats -> in-repo least-squares path (test_scopes_lm)
+test_cope_display        SpheroidSignal   (in-repo; likely a separate failure -- re-triage)
+test_fdr_crs_dep         wfield  -> wnoise
+test_fdr_simul_cs        wfield  -> wnoise
+test_imBH                wfield  -> wnoise
+test_imBH_data           wfield  -> wnoise
+test_pc                  wfield  -> wnoise
+test_peakgen             SpheroidSignal   (in-repo; likely a separate failure -- re-triage)
+test_perm_cluster        SpheroidSignal   (in-repo; likely a separate failure -- re-triage)
+test_perm_tfce           SpheroidSignal   (in-repo; likely a separate failure -- re-triage)
+test_perm_thresh         wfield  -> wnoise
+test_scopes              wfield  -> wnoise (+ undefined var 'data')
+test_scopes_lm           contrast_tstats -> in-repo least-squares path
+test_srf_scopes          wfield  -> wnoise
+test_sss_cope_sets       wfield  -> wnoise
 
 == Missing SPM (spm_vol / spm_smooth) -- 2 ==
 test_fast_conv           spm_smooth
@@ -28,9 +35,11 @@ test_smooth_surface      gifti
 test_mgzwrite            MRIread
 test_fsannot2mask        read_annotation (returns no output)
 
-== Missing in-repo helpers (findstrings) -- 2 ==
-test_get_mask            findstrings
-test_mask_bndry          findstrings
+== Missing in-repo helpers (findstrings) -- 2 -- FIXED ==
+-- Added Atlases/findstrings.m (substring search returning [indices, matches]).
+-- Both tests expected to pass now; verify under MATLAB, then move to PASSING.
+test_get_mask            findstrings   (FIXED -- pending verification)
+test_mask_bndry          findstrings   (FIXED -- pending verification)
 
 == Missing data files / hardcoded paths -- 4 ==
 test_brainmove           "This file is not available"

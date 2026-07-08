@@ -1,14 +1,19 @@
 %% fast_conv vs SPM Tutorial
 % This tutorial compares the StatBrainz fast_conv smoothing function against
-% SPM's spm_smooth, both in terms of output and speed.
+% SPM's spm_smooth and the RFTtoolbox convfield, both in terms of output and
+% speed.
 %
-% DEPENDENCY: this tutorial requires SPM to be on the matlab path (it uses
-% spm_smooth, spm_smoothkern and spm_smooth_mod). fast_conv itself does NOT
-% depend on SPM -- see Tests/Aux_Functions/test_fast_conv.m for standalone
-% fast_conv examples.
+% DEPENDENCIES: this tutorial is a comparison against external toolboxes and
+% therefore requires BOTH of the following on the matlab path:
+%   * SPM         -- for spm_smooth, spm_smoothkern and spm_smooth_mod
+%   * RFTtoolbox  -- for convfield
+% These are needed ONLY to reproduce the comparison. fast_conv itself is
+% self-contained and depends on NEITHER SPM nor RFTtoolbox -- see
+% Tests/Aux_Functions/test_fast_conv.m for standalone fast_conv examples that
+% run with no external dependencies.
 %
 % To run this tutorial you first need to add all functions in the StatBrainz
-% toolbox to the matlab path, as well as SPM.
+% toolbox to the matlab path, as well as SPM and the RFTtoolbox.
 
 statsbrainz_pathloc = '';
 addpath(genpath(statsbrainz_pathloc));
