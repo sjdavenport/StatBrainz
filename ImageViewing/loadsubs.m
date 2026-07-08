@@ -5,8 +5,9 @@
 % subjsubset     a vector of positive integers denoting the files in the
 %               directory that you would like to load
 % directory      the directory to load the files from
-% usenif         0/1 load the files using nifti or not. Default is 1 i.e. to
-%               use nifti
+% usenif         retained for backward compatibility; ignored. Files are now
+%               always read with the base-MATLAB niftiread (handles both .nii
+%               and .nii.gz), so no SPM dependency is required.
 % mask           a 3D binary mask; default is the MNImask
 % as3D           0/1 whether to load the images as 3D matrices or 1D
 %               vectorized versions. Default is 0.
@@ -55,31 +56,16 @@ nsubj = length(subjsubset);
 
 if as3D == 1
     data = zeros([Dim, nsubj]);
-    if usenif == 1
-        for I = 1:length(subjsubset)
-            nif = nifti([directory,subfilenames{subjsubset(I)}]);
-            data(:,:,:,I) = nif.dat(bounds{:});
-        end
-    else
-        for I = 1:length(subjsubset)
-            img = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
-            data(:,:,:,I) = img(bounds{:});
-        end
+    for I = 1:length(subjsubset)
+        img = niftiread([directory,subfilenames{subjsubset(I)}]);
+        data(:,:,:,I) = img(bounds{:});
     end
 else
     data = zeros([prod(Dim), nsubj]);
-    if usenif == 1
-        for I = 1:length(subjsubset)
-            nif = nifti([directory,subfilenames{subjsubset(I)}]);
-            bounded_nif = nif.dat(bounds{:});
-            data(:,I) = bounded_nif(:);
-        end
-    else
-        for I = 1:length(subjsubset)
-            img = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
-            img = img(bounds{:});
-            data(:,I) = img(:);
-        end
+    for I = 1:length(subjsubset)
+        img = niftiread([directory,subfilenames{subjsubset(I)}]);
+        img = img(bounds{:});
+        data(:,I) = img(:);
     end
 end
 

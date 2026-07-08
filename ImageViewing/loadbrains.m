@@ -41,12 +41,6 @@ if ~exist('subjsubset', 'var')
     subjsubset = 1:length(subfilenames);
 end
 
-if strcmp(subfilenames{1}(end-1:end), 'gz')
-    usenif = 0;
-else
-    usenif = 1;
-end
-
 % Obtain the bounded mask
 bounds = mask_bounds( mask );
 bounded_mask = mask(bounds{:});
@@ -59,36 +53,18 @@ nsubj = length(subjsubset);
 
 if as3D == 1
     data = zeros([Dim, nsubj]);
-    if usenif == 1
-        for I = 1:length(subjsubset)
-            nif = niftiread([directory,subfilenames{subjsubset(I)}]);
-            data(:,:,:,I) = nif.dat(bounds{:});
-            fprintf('Loaded subject %i\n', I)
-        end
-    else
-        for I = 1:length(subjsubset)
-            % img = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
-            img = niftiread([directory,subfilenames{subjsubset(I)}]);
-            data(:,:,:,I) = img(bounds{:});
-            fprintf('Loaded subject %i\n', I)
-        end
+    for I = 1:length(subjsubset)
+        img = niftiread([directory,subfilenames{subjsubset(I)}]);
+        data(:,:,:,I) = img(bounds{:});
+        fprintf('Loaded subject %i\n', I)
     end
 else
     data = zeros([prod(Dim), nsubj]);
-    if usenif == 1
-        for I = 1:length(subjsubset)
-            nif = nifti([directory,subfilenames{subjsubset(I)}]);
-            bounded_nif = nif.dat(bounds{:});
-            data(:,I) = bounded_nif(:);
-            fprintf('Loaded subject %i\n', I)
-        end
-    else
-        for I = 1:length(subjsubset)
-            img = spm_read_vols(spm_vol([directory,subfilenames{subjsubset(I)}]));
-            img = img(bounds{:});
-            data(:,I) = img(:);
-            fprintf('Loaded subject %i\n', I)
-        end
+    for I = 1:length(subjsubset)
+        img = niftiread([directory,subfilenames{subjsubset(I)}]);
+        img = img(bounds{:});
+        data(:,I) = img(:);
+        fprintf('Loaded subject %i\n', I)
     end
 end
 

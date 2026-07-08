@@ -212,15 +212,4 @@ if dofullscreen
 end
 
 end
-% 
-% if strcmp(srf(end-3:end), '.gii')
-%     if ~exist('gifti', 'file')
-%         error('You need to install the gifti matlab package, available here: https://github.com/gllmflndn/gifti in order to read gifti surface files. Once installed you must make sure its contents are available on the matlab path.')
-%     end
-%     g = gifti(srf);
-% else
-%     [vertices, faces] = read_fs_geometry(srf);
-%     g.vertices = vertices;
-%     g.faces = faces;
-% end
 

@@ -1,5 +1,5 @@
 tic
-cope11 = spm_read_vols(spm_vol('C:\Users\12SDa\davenpor\Data\HCP\HCPContrasts\WM\100307\WM\Level2\cope11.nii.gz'));
+cope11 = niftiread('C:\Users\12SDa\davenpor\Data\HCP\HCPContrasts\WM\100307\WM\Level2\cope11.nii.gz');
 toc
 tic
 load('cope11vec.mat')
