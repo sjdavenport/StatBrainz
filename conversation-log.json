@@ -4457,7 +4457,28 @@
         "role": "assistant",
         "content": "I ran all 7 tutorials in `Tutorials/` cell-by-cell against the real toolbox path (converting the `.mlx` live scripts to plain `.m` first). Here's the verdict.\n\n## Summary\n\n| Tutorial | Runs? | Blocker |\n|---|---|---|\n| `clustersize_inference_tutorial` (.m/.mlx) | ⚠️ **No** — but algorithm is fine | `imgload('fullmean')`/`imgload('fullstd')` can't find the data files |\n| `LCE_tutorial.mlx` | ⚠️ **Partial** — core works | Missing `saveim` function + undefined display vars |\n| `surface_tutorial.mlx` | ⚠️ **Partial** — core works | `load_srf` typo + undefined `sb_dir` |\n| `confidence_regions_tutorial.mlx` | ⚠️ **Partial** — FDR works | Wrong `scopes` args + undefined `srf` |\n| `fast_conv_vs_spm_tutorial.m` | ❌ **No** (expected) | Needs SPM + RFTtoolbox (external, not installed) |\n| `hcp_data_download.mlx` | ➖ N/A | Documentation only, no runnable code |\n| `testing.mlx` | ✅ **Yes** | (a 4-line scratch file, not really a tutorial) |\n\n## Details & causes\n\n**1. `clustersize_inference_tutorial`** — Cell 2 dies on `imgload('fullmean')` → *\"This file is not available\"*, and everything downstream cascades because `data` never gets created. **Root cause:** `imgload` only searches `BrainImages/Volume/`, but `fullmean.nii` and `fullstd.nii` actually live in `BrainImages/Real_data/DerivedUKB/`. I verified the algorithm itself is sound: pointing at the correct path, `gen_noise` → `mvtstat` → `perm_cluster` runs end-to-end (produced `q=587`). Fix = move the two `.nii` files into `Volume/`, or teach `imgload` to look in `DerivedUKB/`.\n\n**2. `LCE_tutorial`** — The actual method works: the TFCE transform, `perm_tfce`, `perm_cluster`, `numOfConComps`, and `LCE` cells all pass. Failures are display/glue only:\n- `saveim` / `saveim('signal.png')` — **`saveim` is missing from the toolbox entirely** (aborts the cell before later variables are assigned, causing cascades).\n- References to `brain_mask`, `region_masks`, and `lce_cluster_im` that the author **never defines** anywhere in the tutorial.\n\n**3. `surface_tutorial`** — Intro (`loadsrf`, `srfplot`, `smooth_surface`) and the whole Spin Test section pass. The HCP working-memory section (cell 4 on) fails on:\n- `load_srf('hcp')` — **typo**; the function is `loadsrf` (used correctly earlier in the same file).\n- `sb_dir` used on line 33 but **never defined** (needs `sb_dir = statbrainz_maindir;`).\n\n**4. `confidence_regions_tutorial`** — Data loading, noise generation, and FDR cope sets (cells 2–3) pass. Failures:\n- `srf.lh` (cell 4) — `srf` is never defined; the file uses `hcp_srf` everywhere else.\n- `scopes(data, 1000, 0.05, 1)` (cell 7) — two bugs: `data` is a **struct** (`.lh`/`.rh`) but `scopes` wants a numeric array, and the **argument order is wrong** (signature is `scopes(data, nblocks, nboot, alpha, ...)`).\n\n**5. `fast_conv_vs_spm_tutorial`** — Fails only because SPM (`spm_smooth`, `spm_smooth_mod`, `spm_smoothkern`) and RFTtoolbox (`convfield`) aren't on the path. This is an **expected external-dependency failure** — the tutorial's own header documents that it requires both, and `fast_conv` itself is self-contained (tested separately in `Tests/`).\n\nThe recurring theme: the **numerical/statistical code all works**. Breakage is a missing `saveim` helper, one missing data-file location (`imgload` path), and a handful of undefined-variable/typo bugs in the live-script glue (likely from refactors that renamed things without updating the tutorials). Want me to fix any of these — the `imgload` path issue and the `load_srf`/`sb_dir`/`srf` fixes are quick, low-risk wins?",
         "timestamp": "2026-07-09T13:52:42.263Z"
+      },
+      {
+        "role": "user",
+        "content": "fix 1 by changing the path to that folder",
+        "timestamp": "2026-07-09T13:53:32.288Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The tutorial calls `imgload('fullmean')` and `imgload('fullstd')`. The cleanest fix that only touches what's needed: make `imgload` fall back to the `Real_data/DerivedUKB/` folder for these files. But you said \"change the path to that folder\" — let me look at the load logic to place the fix correctly.",
+        "timestamp": "2026-07-09T13:53:41.652Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The tutorial only calls `imgload('fullmean')` / `imgload('fullstd')` (no extension), which goes through the `else` branch. The minimal, surgical fix is to add `Real_data/DerivedUKB/` as a fallback location in that branch, mirroring the existing `hcp_mask` special-case pattern.",
+        "timestamp": "2026-07-09T13:53:51.014Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Fixed. `imgload` now falls back to `BrainImages/Real_data/DerivedUKB/` — `fullmean` and `fullstd` both load, and `MNImask` still resolves from `Volume/` as before. The clustersize tutorial's data-loading cell will now work.",
+        "timestamp": "2026-07-09T13:55:16.785Z"
       }
-    ]
+    ],
+    "updatedAt": "2026-07-09T13:55:17.163Z"
   }
 ]

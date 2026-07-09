@@ -47,10 +47,14 @@ else
         try
             img = niftiread([bs_img_loc, filename, '.nii.gz']);
         catch
-            try 
-                img = load([bs_img_loc, filename]).data;
+            try
+                img = niftiread([sb_dir, 'BrainImages/Real_data/DerivedUKB/', filename, '.nii']);
             catch
-                error('This file is not available\n')
+                try
+                    img = load([bs_img_loc, filename]).data;
+                catch
+                    error('This file is not available\n')
+                end
             end
         end
     end
