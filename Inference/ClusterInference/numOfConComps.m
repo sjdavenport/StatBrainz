@@ -3,8 +3,8 @@ function [number_of_clusters, occurences, cluster_sizes, index_locations] = ...
 % NUMOFCONCOMPS(data, thresh, connectivity_criterion) calculates the number
 % of connected components in an array that lie above a threshold.
 %--------------------------------------------------------------------------
-% REQUIRES the image processing toolbox for Matlab, specifically the
-% function bwconncomp.m .
+% Uses conncomp_bw.m (a toolbox-free connected components implementation),
+% so no Image Processing Toolbox is required.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % data      a 2 or 3 dimensional array of real values.
@@ -54,7 +54,7 @@ if D == 2
     if sum(connectivity_criterion == [4,8]) ~= 1
         error('In 2D the connectivity criterion must be 4 or 8')
     end
-    conComponents = bwconncomp(ones_and_zeros, connectivity_criterion);
+    conComponents = conncomp_bw(ones_and_zeros, connectivity_criterion);
 elseif D == 3
     if nargin < 3
         connectivity_criterion = 18;
@@ -62,7 +62,7 @@ elseif D == 3
     if sum(connectivity_criterion == [6,18,26]) ~= 1
         error('In 3D the connectivity criterion must be 6, 18 or 26')
     end
-    conComponents = bwconncomp(ones_and_zeros, connectivity_criterion);
+    conComponents = conncomp_bw(ones_and_zeros, connectivity_criterion);
 else
     error('The dimension must be 2 or 3.');
 end

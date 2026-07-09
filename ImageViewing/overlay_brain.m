@@ -90,7 +90,7 @@ if ~isnan(region_masks{1})
             region_masks{I} = index2mask(region_masks{I});
         elseif ~isequal(size(region_masks{I}), [182,218,182])
             if upsample
-                region_masks{I} = imresize3(region_masks{I}, 2);
+                region_masks{I} = upsample3_nn(region_masks{I}, 2);
             end
         end
         region_masks{I} = combine_brains(region_masks{I}, slice, brain_mask, padding, outerpadding);

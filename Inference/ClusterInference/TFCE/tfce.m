@@ -68,7 +68,7 @@ nvox = length(image(:));
 
 % find connected components
 vals = zeros(nvox,1);
-cc = arrayfun(@(x) bwconncomp(bsxfun(@ge,image,x),connectivity), threshs);
+cc = arrayfun(@(x) conncomp_bw(bsxfun(@ge,image,x),connectivity), threshs);
 for h = 1:nthreshs
     clustsize = zeros(nvox,1);
     ccc = cc(h);

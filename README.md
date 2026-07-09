@@ -24,6 +24,15 @@ from the command line.
 In order to use the package, navigate to the StatBrainz main directory within matlab
 and run the function addSB2path.m
 
+## Requirements
+
+StatBrainz runs in base MATLAB, but some functions require the following MATLAB toolboxes:
+
+- **Statistics and Machine Learning Toolbox** — used throughout the inference and statistics code (e.g. `normcdf`, `norminv`, `tcdf`, `tinv`, `normrnd`, `binornd`, `randsample`, `prctile`, `corr`, `pdist`, `mvnpdf`, `skewness`, `kurtosis`).
+- **Image Processing Toolbox** — used by `dilmask.m` (`imresize`, `strel`, `imdilate`, `imshow`).
+
+SPM is no longer required.
+
 ## Illustrations
 ### Simultaneous bounds on excursion sets
 ![alt text](https://github.com/sjdavenport/StatBrainz/blob/main/BrainImages/Other/clustersizevsCIs2.png)

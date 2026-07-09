@@ -32,7 +32,7 @@ end
 
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-CC = bwconncomp( mask );
+CC = conncomp_bw( mask );
 lengths = cellfun(@length, CC.PixelIdxList);
 largestloc = find(lengths == max(lengths));
 clusterindices = CC.PixelIdxList{largestloc};

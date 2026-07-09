@@ -27,7 +27,7 @@ lowerthreshmask = brain_im > 25;
 
 filled_mask = zeros(size(mask));
 for I = 1:size(mask,3)
-    filled_mask(:,:,I) = imfill(lowerthreshmask(:,:,I), 'holes');
+    filled_mask(:,:,I) = fill_holes(lowerthreshmask(:,:,I));
 end
 filled_mask_eroded = dilate_mask(filled_mask, -skull_erosion);
 

@@ -49,9 +49,6 @@ if ~exist('quant2use')
 end
 quant2use = quant2use*100;
 
-[x,y,z] = ndgrid(-1:1);
-se = strel('arbitrary',sqrt(x.^2 + y.^2 + z.^2) <=1);
-
 thr   = thresh;  % In raw change units, mu
 
 dim = size(mask);

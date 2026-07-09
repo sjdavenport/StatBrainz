@@ -55,7 +55,12 @@
       "Bash(pkill -9 -f \"run_one_test\")",
       "Bash(pkill -9 -f \"MATLAB.*-batch\")",
       "Bash(python3 -c \"import nibabel\")",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(mkdir -p /tmp/tut_run)",
+      "Bash(cp /tmp/mlx_extracted/*.m /tmp/tut_run/)",
+      "Bash(cp /Users/samd/Documents/Code/Packages/Matlab/StatBrainz/Tutorials/clustersize_inference_tutorial.m /tmp/tut_run/)",
+      "Bash(cp /Users/samd/Documents/Code/Packages/Matlab/StatBrainz/Tutorials/fast_conv_vs_spm_tutorial.m /tmp/tut_run/)",
+      "Read(//tmp/**)"
     ]
   }
 }

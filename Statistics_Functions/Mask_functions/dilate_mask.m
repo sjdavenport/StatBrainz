@@ -28,11 +28,6 @@ function dilated_mask = dilate_mask( mask, dilation )
 % AUTHOR: Samuel Davenport
 %--------------------------------------------------------------------------
 
-%%  Check mandatory input and get important constants
-%--------------------------------------------------------------------------
-Dim = size( mask );
-D   = length( Dim );
-
 %%  add/check optional values
 %--------------------------------------------------------------------------
 if ~exist( 'dilation', 'var' )
@@ -42,13 +37,10 @@ end
 
 %%  Main Function
 %--------------------------------------------------------------------------
-% Obtain the array of ones with which to dilate the image
-ones_array = ones( ones(1, D) * ( 2 * abs( dilation ) + 1 ) ) ;
-
 if dilation > 0
-    dilated_mask = imdilate( mask, ones_array ); %Dilation
+    dilated_mask = box_dilate( mask, dilation ); %Dilation
 elseif dilation < 0
-    dilated_mask = ~imdilate( ~mask, ones_array ); %Erosion
+    dilated_mask = ~box_dilate( ~mask, abs(dilation) ); %Erosion
 else
     dilated_mask = mask; %I.e. return the original mask if htere is no dilation
 end
