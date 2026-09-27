@@ -15,13 +15,9 @@ function addSB2path
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 
-a = pwd;
-if ~strcmp(a(end-9:end), 'StatBrainz')
-    warning('Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.')
-end
 %%  Main Function Loop
 %--------------------------------------------------------------------------
-addpath(genpath('./'))
+addpath(genpath(fileparts(mfilename('fullpath'))))
 
 end
 
