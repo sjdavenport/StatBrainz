@@ -4628,5 +4628,31 @@
         "timestamp": "2026-07-23T16:13:48.205Z"
       }
     ]
+  },
+  {
+    "sessionId": "79925f60-9e36-4b45-817d-30eae3ceb19f",
+    "timestamp": "2026-09-27T13:04:57.275Z",
+    "messages": [
+      {
+        "role": "user",
+        "content": "check out the conversation log in the mounted LCE_paper. it identifies some issues with the functions in Statbrainz and I'd like to go through them one by one to discuss them and then fix them if necessary",
+        "timestamp": "2026-09-27T13:03:52.117Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Reading through the LCE_paper conversation log to pull out the StatBrainz issues it flagged.",
+        "timestamp": "2026-09-27T13:04:05.281Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Found the issues. Now checking each against the current StatBrainz source.",
+        "timestamp": "2026-09-27T13:04:19.994Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The log flags five StatBrainz issues (sessions on 14 Aug, 21 Sep and 27 Sep). I've checked each one against the current source in `/workspace`:\n\n1. **`voxLCE`**: its input is the wrong statistic. Details below.\n2. **`numOfConComps`**: `hist(sizeArray, unique(sizeArray))` errors in Octave when no cluster survives the threshold (`numOfConComps.m:80`).\n3. **`clustertdp`**: it hard-codes `usewsl = 1` in `fgreedy(..., 1, 1)` (`clustertdp.m:72`), so it fails on a Mac. It also tells you to use `monitor_cTDP`, which doesn't exist. While checking I found two small extras. `exist('savedir','dir')` tests the literal string, not the variable (line 55). And the error message names the method `lower_bounds` when it's actually `lowerbound`.\n4. **`ctp_scores`**: `filesindir` sorts the folders alphabetically (`cluster_1, cluster_10, cluster_2…`). With 10 or more clusters, the bounds get assigned to the wrong clusters.\n5. (Not really a StatBrainz bug.) matperm has its own copies of `perm_tfce` and `perm_cluster`, which shadow StatBrainz's depending on path order, and its `perm_cluster` uses a different default CDT.\n\nThe log also said `fastperm` didn't exist, but a later session found it in matperm, so I've left that off.\n\n**Issue 1: `voxLCE`** (`Inference/ClusterInference/TFCE/voxLCE.m:35-36`)\n\n```matlab\nvoxLCE_threshold = (tfce_threshold*(H+1) + h0^(H+1))^(1/(H+1));\nvoxel_significant_im = tfce_tstat > voxLCE_threshold;\n```\n\nThe formula is correct, but only if you apply it to the raw t-statistic Tᵥ. Tᵥ is significant when (Tᵥ^(H+1) − h₀^(H+1))/(H+1) > t*. The problem is that the input is called `tfce_tstat` and documented as \"TFCE statistic values\". Everywhere else in StatBrainz, `tfce_tstat` means the TFCE-transformed image (see `test_tfce.m:16`). So `all_fpr_job.m:70` passed the TFCE image, and every setting it tested gave a voxelwise FWER of 1.00. The paper's scripts now compute the threshold inline instead. Two smaller problems: the docstring promises defaults of H = 2 and h₀ = 0 but the code never sets them, and there's a leftover `opt1` template block.\n\nMy proposed fix is small. Rename the input to `tstat` and correct the docstring so it says to pass the original t-statistic, not the TFCE image. Add the H = 2 and h₀ = 0 defaults, remove the `opt1` block, and update `test_voxLCE.m` to match. The signature stays the same, so existing callers keep working. One subtlety: `tfce` integrates with a discrete step `dh`, so an isolated voxel's TFCE value isn't exactly (Tᵥ^(H+1) − h₀^(H+1))/(H+1). If you want, I can add a sentence to the docstring saying the threshold is exact for the continuous integral. Shall I go ahead with this fix?",
+        "timestamp": "2026-09-27T13:04:56.867Z"
+      }
+    ]
   }
 ]
