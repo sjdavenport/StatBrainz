@@ -19,21 +19,18 @@ function tp_bounds = ctp_scores( logdir )
 %%  Check mandatory input and get important constants
 %--------------------------------------------------------------------------
 
-%%  Add/check optional values
-%--------------------------------------------------------------------------
-if ~exist( 'opt1', 'var' )
-   % Default value
-   opt1 = 0;
-end
-
 %%  Main Function Loop
 %--------------------------------------------------------------------------
+% Read the clusters in numeric order: filesindir sorts alphabetically
+% (cluster_1, cluster_10, cluster_2, ...)
 cluster_names = filesindir(logdir);
-tp_bounds = zeros(1, length(cluster_names));
-for I = 1:length(cluster_names)
-    [tp_bounds(I), timetaken, hasfinished] = ctp_extract_score([logdir,cluster_names{I},'/fgreedy.log']);
+nclusters = sum(~cellfun(@isempty, regexp(cluster_names, '^cluster_\d+$')));
+tp_bounds = zeros(1, nclusters);
+for I = 1:nclusters
+    cluster_name = ['cluster_', num2str(I)];
+    [tp_bounds(I), ~, hasfinished] = ctp_extract_score(fullfile(logdir, cluster_name, 'fgreedy.log'));
     if ~hasfinished
-        fprintf(['The computation for ',num2str(cluster_names{I}),' is still in progress\n'])
+        fprintf(['The computation for ', cluster_name, ' is still in progress\n'])
     end
 end
 

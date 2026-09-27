@@ -28,11 +28,6 @@ function [ tdp_bounds, tp_bounds ] = clustertdp( clusters, cluster_threshold, me
 
 %%  Add/check optional values
 %--------------------------------------------------------------------------
-if ~exist( 'savedir', 'var' )
-   % Default value
-   savedir = './';
-end
-
 if ~exist('savedir', 'var')
     savedir = './';
 end
@@ -52,7 +47,7 @@ else
 end
 
 if strcmp(method, 'heuristic')
-    if ~exist('savedir', 'dir')
+    if ~exist(savedir, 'dir')
         mkdir(savedir)
     end
 end
@@ -69,10 +64,10 @@ for I = 1:length(clusters)
         cluster_log_dir = [savedir, '/cluster_', num2str(I), '/'];
         mkdir(cluster_log_dir);
         cluster2csv(clusters{I}, ['cluster_', num2str(I)], cluster_log_dir);
-        fgreedy([cluster_log_dir, 'cluster_', num2str(I), '.csv'], cluster_threshold, 1, 1)
-        fprintf('Jobs running the heuristic lower bound have been dispatched,\nyou can monitor the progress using the monitor_cTDP function\n') 
+        fgreedy([cluster_log_dir, 'cluster_', num2str(I), '.csv'], cluster_threshold, 1)
+        fprintf('Jobs running the heuristic lower bound have been dispatched,\nyou can collect the results using ctp_scores(savedir)\n') 
     else
-        error('The method must be either lower_bounds or heuristic\n')
+        error('The method must be either lowerbound or heuristic\n')
     end
 end
 

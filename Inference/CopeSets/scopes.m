@@ -28,7 +28,7 @@ function [ lower_band, upper_band, threshold ] = scopes( data, nblocks, nboot, a
 % mask = ones(dim) > 0;
 % smoothed_data = fast_conv(data, FWHM_applied, 2);
 % c_vec = 0:0.1:0.2;
-% [ lower_band, upper_band ] = scopes( smoothed_data, mask, 1000, 0.05, 1 );
+% [ lower_band, upper_band ] = scopes( smoothed_data, nsubj, 1000, 0.05, 1 );
 %
 % smooth_Sig = fast_conv(Sig, FWHM_applied, 2);
 % 

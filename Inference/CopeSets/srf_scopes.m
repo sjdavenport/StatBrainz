@@ -28,7 +28,7 @@ function [ lower_band, upper_band, threshold ] = srf_scopes( data, mask, nboot, 
 % mask = ones(dim) > 0;
 % smoothed_data = fast_conv(data, FWHM_applied, 2);
 % c_vec = 0:0.1:0.2;
-% [ lower_band, upper_band ] = scopes( smoothed_data, mask, 1000, 0.05, 1 );
+% [ lower_band, upper_band ] = scopes( smoothed_data, nsubj, 1000, 0.05, 1 );
 %
 % smooth_Sig = fast_conv(Sig, FWHM_applied, 2);
 % 
@@ -56,12 +56,13 @@ upper_band.lh = zeros(size(mask.lh));
 upper_band.rh = zeros(size(mask.rh));
 
 if exist('sigmahat', 'var')
-    sigmahat_vec = [sigmahat.lh(mask), sigmahat.rh(mask)];
+    sigmahat_vec = [sigmahat.lh(mask.lh); sigmahat.rh(mask.rh)];
 else
     sigmahat_vec = [];
 end
 
-[ lower_out, upper_out, threshold ] = scopes( [masked_data.lh; masked_data.rh], nboot, alpha, show_loader, sigmahat_vec);
+nsubj = size(data.lh, 2);
+[ lower_out, upper_out, threshold ] = scopes( [masked_data.lh; masked_data.rh], nsubj, nboot, alpha, show_loader, sigmahat_vec);
 
 lower_band.lh(mask.lh) = lower_out(1:sum(mask.lh));
 lower_band.rh(mask.rh) = lower_out((sum(mask.lh)+1):end);

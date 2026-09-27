@@ -77,7 +77,12 @@ if nargout > 1
     
     %Get the number of occurences for each cluster size. e.g. occurences(k)
     %is the number of times we observed clusters of size sizes(k).
-    [occurences, cluster_sizes] = hist(sizeArray, unique(sizeArray));
+    if isempty(sizeArray)
+        occurences = [];
+        cluster_sizes = [];
+    else
+        [occurences, cluster_sizes] = hist(sizeArray, unique(sizeArray));
+    end
 end
 
 end

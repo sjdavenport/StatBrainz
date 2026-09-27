@@ -1,5 +1,5 @@
-function fgreedy( cluster_csv_loc, cluster_threshold, runinbackground, usewsl )
-% fgreedy(cluster_csv_loc, runinbackground, usewsl) run the fgreedy
+function fgreedy( cluster_csv_loc, cluster_threshold, runinbackground )
+% fgreedy(cluster_csv_loc, cluster_threshold, runinbackground) run the fgreedy
 % algorithm on a CSV file containing the cluster locations.
 %--------------------------------------------------------------------------
 % ARGUMENTS
@@ -8,16 +8,14 @@ function fgreedy( cluster_csv_loc, cluster_threshold, runinbackground, usewsl )
 %   cluster_threshold - an integer giving the cluster threshold
 % Optional:
 %   runinbackground  - Flag to run the algorithm in the background (default: 1).
-%   usewsl           - Flag to indicate whether to use Windows Subsystem 
-%                      for Linux (WSL) (default: 0).
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 % OUTPUT
 % None (runs the fgreedy binary as a system call; output is written to a
-% log file alongside the CSV)
+% log file alongside the CSV, as the binary is run from the CSV's folder)
 %--------------------------------------------------------------------------
 % EXAMPLES
-% fgreedy('./ClusterTDPccode/k90.csv', 8, 1, 1)
+% fgreedy('./ClusterTDPccode/k90.csv', 8, 1)
 %--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
@@ -28,38 +26,20 @@ if ~exist( 'runinbackground', 'var' )
    % Default value
    runinbackground = 1;
 end
-
-if ~exist( 'usewsl', 'var' )
-   % Default value
-   usewsl = 0;
-end
 %%  Main Function Loop
 %--------------------------------------------------------------------------
 fgreedy_loc = which('fgreedy.c');
 fgreedy_loc = fgreedy_loc(1:end-9);
-% cluster_csv_loc = './ClusterTDPccode/k90.csv';
-if usewsl == 0
-    if runinbackground == 1
-        system([fgreedy_loc, 'fgreedy ', cluster_csv_loc,' -x ', fgreedy_loc, 'batch7.cnf -k',num2str(cluster_threshold),', &']);
-    else
-        system([fgreedy_loc, 'fgreedy ', cluster_csv_loc,' -x ', fgreedy_loc, 'batch7.cnf -k',num2str(cluster_threshold)]);
-    end
+[csv_dir, csv_name, csv_ext] = fileparts(cluster_csv_loc);
+if isempty(csv_dir)
+    csv_dir = '.';
+end
+cmd = ['cd "', csv_dir, '" && "', fgreedy_loc, 'fgreedy" "', csv_name, csv_ext, ...
+       '" -x "', fgreedy_loc, 'batch7.cnf" -k', num2str(cluster_threshold)];
+if runinbackground == 1
+    system([cmd, ' &']);
 else
-    cd(fileparts(cluster_csv_loc)); %fileparts extracts the folder name!
-    fgreedy_loc = strrep(fgreedy_loc, '\', '\\');
-    fgreedy_loc = strrep(fgreedy_loc, '/', '\\');
-    cluster_csv_loc = strrep(cluster_csv_loc, '\', '\\');
-    cluster_csv_loc = strrep(cluster_csv_loc, '/', '\\');
-    [~, fgreedy_loc] = system(['wsl wslpath -u "' fgreedy_loc '"']);
-    [~, cluster_csv_loc] = system(['wsl wslpath -u "' cluster_csv_loc '"']);
-    fgreedy_loc = strtrim(fgreedy_loc);
-    cluster_csv_loc = strtrim(cluster_csv_loc);
-    if runinbackground == 1
-        system(['wsl ', fgreedy_loc, 'fgreedy ', cluster_csv_loc,' -x ', fgreedy_loc, 'batch7.cnf -k',num2str(cluster_threshold),'&& exit &']);
-    else
-        system(['wsl ', fgreedy_loc, 'fgreedy ', cluster_csv_loc,' -x ', fgreedy_loc, 'batch7.cnf -k',num2str(cluster_threshold)]);
-    end
+    system(cmd);
 end
 
 end
-
