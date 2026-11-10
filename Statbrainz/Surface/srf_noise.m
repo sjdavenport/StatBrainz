@@ -17,9 +17,6 @@ function data = srf_noise( srf, FWHM, nsubj, metric, mask )
 %   data         - Generated surface noise data containing fields for the
 %                   left and right hemisphere if they are provided in srf.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% See ex_srf_noise.m
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

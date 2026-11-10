@@ -10,13 +10,6 @@ function clustermask = getlargestcluster( mask )
 % clustermask   a binary array with the same size as mask containing only
 %               the largest connected component
 %--------------------------------------------------------------------------
-% EXAMPLES
-% mask = zeros(10,10);
-% mask(2,2) = 1;
-% mask(5:8, 5:8) = 1;
-% clustermask = getlargestcluster(mask);
-% imagesc(clustermask)
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

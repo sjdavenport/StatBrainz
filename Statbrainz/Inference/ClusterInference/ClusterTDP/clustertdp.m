@@ -18,8 +18,6 @@ function [ tdp_bounds, tp_bounds ] = clustertdp( clusters, cluster_threshold, me
 % - tdp_bounds: Array giving the TDP lower bounds for each cluster.
 % - tp_bounds: Array of TP lower bounds for each cluster.
 %--------------------------------------------------------------------------
-% EXAMPLES
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

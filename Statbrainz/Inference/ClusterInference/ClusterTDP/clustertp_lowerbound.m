@@ -13,9 +13,6 @@ function lower_bound = clustertp_lowerbound(CL, cluster_threshold, D)
 % - lower_bound: The calculated lower bound on the proportion of true
 %                positives within each cluster.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% See ex_clustertp_lowerbound.m
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Jelle Goeman, Wouter Weeda, Xu Chen 
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------

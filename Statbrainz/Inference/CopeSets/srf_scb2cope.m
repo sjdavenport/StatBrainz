@@ -17,9 +17,6 @@ function [ lower_set, upper_set, contour, yellow_set ] = srf_scb2cope( srf, lowe
 %  contour     contour of the excursion set {muhat > c} on the surface
 %  yellow_set  excursion set {muhat > c} (0/1 array over vertices, or struct with lh/rh)
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

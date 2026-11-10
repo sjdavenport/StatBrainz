@@ -19,12 +19,6 @@ function [ plane, clim ] = brainmove( brain, plane, mask, padding, color_bar, cl
 % plane - a 1x3 vector specifying which plane was viewed
 % clim - a 1x2 vector specifying the color limits of the brain volume
 %--------------------------------------------------------------------------
-% EXAMPLES
-% brain = imgload('fullmean');
-% mask = imgload('MNImask')
-% [plane, clim] = brainmove(brain, [0,0,20], mask)
-% [plane, clim] = brainmove(brain, [0,0,20], mask, 10, 1, [0,1])
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 if ~exist('mask', 'var')

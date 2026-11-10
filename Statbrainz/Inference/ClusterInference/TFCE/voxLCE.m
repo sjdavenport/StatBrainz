@@ -15,9 +15,6 @@ function [ voxel_significant_im ] = voxLCE( tstat, tfce_threshold, H, h0 )
 % voxel_significant_im   a binary image of the same size as tstat
 %                        with 1 where the voxel is significant
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

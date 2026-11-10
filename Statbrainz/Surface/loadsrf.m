@@ -13,9 +13,6 @@ function srf = loadsrf( surface_id, surface_type )
 % OUTPUT
 %   srf             - Loaded surface data structure.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% srf = loadsrf('fs5', 'white');
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

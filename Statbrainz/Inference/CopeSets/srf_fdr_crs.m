@@ -18,17 +18,6 @@ function [ lower_band, upper_band ] = srf_fdr_crs( data, mask, thresh, alpha_qua
 %  upper_band    a struct with fields lh and rh giving the upper cope set
 %                over vertices (0/1 arrays)
 %--------------------------------------------------------------------------
-% EXAMPLES
-% dim = [100, 100]; D = length(dim);
-% mu = repmat(linspace(1, 3), dim(2), 1);
-% nsubj = 30; FWHM = 5; c = 2;
-% lat_data = randn([dim, nsubj]);
-% noise = fast_conv(lat_data, FWHM, 2)*5;
-% data = noise + mu;
-% 
-% [lower_fdr, upper_fdr] = fdr_crs( data, c );
-% cope_display( lower_fdr, upper_fdr, mean(data,3), c ); fullscreen
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

@@ -17,9 +17,6 @@ function [pvals, max_tstat_within_region] = localized_vi( ...
 % max_tstat_within_region  a vector of the maximum t-statistic within each
 %                          region
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

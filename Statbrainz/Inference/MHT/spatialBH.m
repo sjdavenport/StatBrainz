@@ -12,9 +12,6 @@ function [ rej_locs, nrejections ] = spatialBH( data, FWHM )
 % rej_locs     a logical array of size Dim with the locations of the rejections
 % nrejections  the total number of rejections
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % TODO
 % Extend to other statistics other than one-sample t
 %--------------------------------------------------------------------------

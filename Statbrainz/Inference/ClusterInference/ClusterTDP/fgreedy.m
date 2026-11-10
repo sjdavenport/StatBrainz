@@ -14,9 +14,6 @@ function fgreedy( cluster_csv_loc, cluster_threshold, runinbackground )
 % None (runs the fgreedy binary as a system call; output is written to a
 % log file alongside the CSV, as the binary is run from the CSV's folder)
 %--------------------------------------------------------------------------
-% EXAMPLES
-% fgreedy('./ClusterTDPccode/k90.csv', 8, 1)
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

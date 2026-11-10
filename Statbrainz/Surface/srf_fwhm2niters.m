@@ -17,10 +17,6 @@ function niters = srf_fwhm2niters( FWHM, srf, fudge_factor )
 % OUTPUT
 %   niters           - Number of smoothing iterations.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% srf = loadsrf('fs5', 'sphere')
-% niters = srf_fwhm2niters( 8, srf )
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

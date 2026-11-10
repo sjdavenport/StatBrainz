@@ -22,9 +22,6 @@ function srfplot2( srf, surface_data, seeback, edgealpha, dointerp, view_vec, do
 % OUTPUT
 %   Plots the surface with optional surface data.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% See ex_srfplot.m
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

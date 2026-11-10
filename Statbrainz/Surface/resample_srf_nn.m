@@ -11,9 +11,6 @@ function nnindices = resample_srf_nn( srfin, srfout )
 % OUTPUT
 %   nnindices - A vector giving the nearest neighbor indices for resampling.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% See ex_resample_srf.nn.
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

@@ -25,9 +25,6 @@ function ax = overlay_brain( slice, region_masks, colors2use, alpha_val, underim
 % OUTPUT
 %  ax             handle to the current axes
 %--------------------------------------------------------------------------
-% EXAMPLES:
-%   See ex_overlay_brain.m
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

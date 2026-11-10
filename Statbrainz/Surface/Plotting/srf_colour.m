@@ -12,12 +12,6 @@ function color_map = srf_colour( srf, region_masks, colours, background_gradient
 % OUTPUT
 %  color_map  nvertices x 3 RGB matrix (or struct with .lh/.rh fields)
 %--------------------------------------------------------------------------
-% EXAMPLES
-% srf = loadsrf('fs5', 'white')
-% noise = srf_noise( srf, 10, 1)
-% color_map = srf_colour( srf.lh, {noise.lh > 0, noise.lh < -0.1}, {[1,1,0], [1,0,0]} );
-% srfplot(srf.lh, color_map)
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

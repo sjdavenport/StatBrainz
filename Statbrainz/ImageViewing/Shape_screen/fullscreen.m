@@ -8,9 +8,6 @@ function screen_size = fullscreen
 % OUTPUT
 % screen_size   a 1x4 vector specifying the screen size [left, bottom, width, height]
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

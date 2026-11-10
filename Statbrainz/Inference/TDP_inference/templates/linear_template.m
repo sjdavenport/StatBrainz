@@ -10,9 +10,6 @@ function template = linear_template(alpha, k, m)
 % template  a vector of length k+1 giving the linear template values
 %           alpha*(1:(k+1))/m
 %--------------------------------------------------------------------------
-% EXAMPLES
-% linear_template(0.4, 5, 1000)
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 % Copyright (C) - 2021 - Pierre Neuvial
 %--------------------------------------------------------------------------

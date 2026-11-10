@@ -25,12 +25,6 @@ function [ threshold, vec_of_maxima, permuted_tstat_store ] = ...
 %   - vec_of_maxima: Vector of maxima obtained from TFCE calculations.
 %   - permuted_tstat_store: Matrix storing permuted t-statistics (if enabled).
 %--------------------------------------------------------------------------
-% EXAMPLES
-% dim = [50,50]; nsubj = 50; FWHM = 0;
-% Sig = 0.25*peakgen(1, 10, 8, dim);
-% data = wnoise(dim, nsubj) + Sig;
-% threshold = perm_tfce(data, ones(dim))
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

@@ -19,16 +19,6 @@ function im2 = viewdata( data, brain_mask, region_masks, colors2use, rotate, bou
 % OUTPUT
 % im2   handle to the last imagesc object drawn (the outside-brain color overlay)
 %--------------------------------------------------------------------------
-% EXAMPLES
-% % Brain imaging example
-% MNImask = imgload('MNImask');
-% mask2D = MNImask(:,:,50);
-% lat_data = wnoise([91,109]);
-% smooth_data = fast_conv(lat_data, 3, 2);
-% region_mask = get_mask('HOsc', 'amygdala');
-% viewdata( smooth_data, mask2D, region_mask(:,:,23) )
-% viewdata( smooth_data > 0, mask2D, region_mask(:,:,23) )
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

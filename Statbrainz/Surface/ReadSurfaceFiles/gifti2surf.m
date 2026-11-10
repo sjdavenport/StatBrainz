@@ -12,9 +12,6 @@ function [ srf ] = gifti2surf( path4gifti, path4giftiright )
 %  srf  surface structure with .faces, .vertices, .nfaces, .nvertices
 %       fields; bilateral struct with .lh/.rh if path4giftiright is supplied
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

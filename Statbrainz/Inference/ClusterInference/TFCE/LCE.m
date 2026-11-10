@@ -24,9 +24,6 @@ function [pvals, max_tfce_within_region] = LCE( ...
 % max_tfce_within_region   a vector of the maximum TFCE score within each
 %                          region
 %--------------------------------------------------------------------------
-% EXAMPLES
-% See ex_LCE.m
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

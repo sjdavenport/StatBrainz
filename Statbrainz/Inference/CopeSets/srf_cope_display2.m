@@ -16,9 +16,6 @@ function [ out ] = srf_cope_display2( srf, lower_set, upper_set, muhat, c, view_
 % OUTPUT
 %  out         (none returned; displays a figure)
 %--------------------------------------------------------------------------
-% EXAMPLES
-%
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

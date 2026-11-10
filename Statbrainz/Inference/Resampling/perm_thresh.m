@@ -26,18 +26,6 @@ function [im_perm, threshold, vec_of_maxima] = perm_thresh( data, stat, ...
 % threshold     the threshold from the 100(1-alpha)% quantile of vec_of_maxima
 % vec_of_maxima the 1 by niters vector of permutation maxima
 %--------------------------------------------------------------------------
-% EXAMPLES
-% data = normrnd(0,1,20,1000);
-% [~, threshold] = perm_thresh(data, 'T');
-%
-% lat_data = wnoise([5,5], 10);
-% tic; [~,threshold] = perm_thresh(lat_data, 'T'); toc
-%
-% % Normal data with 1 voxel (very similar (as expected)!)
-% nsubj = 100; data = randn(1,nsubj);
-% [~, thresh] = perm_thresh(data, 'Z')
-% 1.96*std(data')/sqrt(nsubj)
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 if ~exist('stat', 'var')

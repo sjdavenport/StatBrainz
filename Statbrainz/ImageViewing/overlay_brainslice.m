@@ -26,26 +26,6 @@ function ax = overlay_brainslice( slice, region_masks, colors2use, alpha_val, un
 % OUTPUT
 %  ax             handle to the current axes
 %--------------------------------------------------------------------------
-% EXAMPLES:
-%   To overlay a white matter region mask on a brain slice at coordinates
-%   [0, 0, slice] with a padding of 10, red color, transparency of 0.75, and
-%   rotation of 4, you can use the following command:
-%
-% MNIbrain = imgload('MNIbrain.nii.gz');
-% MNIbrain = MNIbrain/max(MNIbrain(:));
-% slice = 45;
-% overlay_brainslice([0, 0, slice], {MNIbrain > 0.8}, 'red', 0.6)
-%
-% MNIbrain = imgload('MNIbrain.nii.gz');
-% MNIbrain = MNIbrain/max(MNIbrain(:));
-% slice = 45;
-% overlay_brainslice([0, 0, slice], {NaN}, {NaN}, 1, zero2nan(MNIbrain > 0.8), 1 )
-%
-% MNIbrain = imgload('MNIbrain.nii.gz');
-% MNIbrain = MNIbrain/max(MNIbrain(:));
-% slice = 45;
-% overlay_brainslice([0, 0, slice], {MNIbrain > 0.8}, {'red'}, 1, [], 1 )
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

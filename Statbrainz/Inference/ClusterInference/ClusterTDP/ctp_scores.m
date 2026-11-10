@@ -10,9 +10,6 @@ function tp_bounds = ctp_scores( logdir )
 % OUTPUT
 % tp_bounds   a vector of true positive lower bounds, one per cluster
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

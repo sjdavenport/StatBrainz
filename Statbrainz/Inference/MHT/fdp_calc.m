@@ -11,9 +11,6 @@ function fdp = fdp_calc( rejection_loc_mask, signal_loc_mask)
 % fdp   the false discovery proportion: proportion of rejections that are
 %       false positives (0 if there are no rejections)
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

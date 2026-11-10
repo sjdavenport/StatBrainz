@@ -16,8 +16,6 @@ function [minscore_min, time_taken, has_finished] = ctp_extract_score(filename)
 %   - has_finished: 1 if the log file contains a totaltime_sec entry
 %                   (indicating the job completed), 0 otherwise.
 %--------------------------------------------------------------------------
-% EXAMPLE
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
     % Read the log file

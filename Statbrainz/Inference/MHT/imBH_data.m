@@ -13,11 +13,6 @@ function [rejection_ind, n_rejections] = imBH_data( data, mask )
 % rejection_ind   a logical array of size Dim indicating rejected locations
 % n_rejections    the total number of rejections
 %--------------------------------------------------------------------------
-% EXAMPLES
-% data = wnoise([10,10,20]);
-% mask = peakgen( 1, 5, 3, [10,10]) > 0.5;
-% rejection_ind = imBH_data( data, mask )
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

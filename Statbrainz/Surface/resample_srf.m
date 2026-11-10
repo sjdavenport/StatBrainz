@@ -18,9 +18,6 @@ function resampled_data = resample_srf( surface_data, srfin, srfout, intertype )
 % OUTPUT
 %   resampled_data   - Resampled surface data on the output surface.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

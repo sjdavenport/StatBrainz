@@ -13,9 +13,6 @@ function adj_matrix = adjacency_matrix( srf, metric )
 % OUTPUT
 %   adj_matrix      - Computed adjacency matrix. 
 %--------------------------------------------------------------------------
-% EXAMPLES
-% See ex_adjacency_matrix.m
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

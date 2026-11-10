@@ -11,9 +11,6 @@ function thresh = fdrthresh( pvals, pval_rejection_ind, df )
 % OUTPUT
 % thresh  the t-statistic threshold corresponding to the largest rejected p-value
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

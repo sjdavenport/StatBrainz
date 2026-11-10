@@ -5216,8 +5216,418 @@
         "role": "assistant",
         "content": "Yes, but only the help comments. I did not change code in any existing function.\n\n- **Earlier session:** The first session in `conversation-log.json` did a docstring pass because you asked for it. It updated about 131 `.m` files to fix wrong or missing ARGUMENTS and OUTPUT sections and to use the standard format. The log says that every edited line was a comment line. That work is already in your commit history.\n- **Since the last commit (`1b7d21a`):** 87 package files have changes that are not committed. I compared each one with HEAD, and all the changes are only on comment lines. There are three types of change:\n  - `% AUTHOR: Samuel Davenport` became `% Copyright (C) - <year> - Samuel Davenport` (80 lines).\n  - `See test_<name>.m` became `See ex_<name>.m`, because of the rename to `Examples/`.\n  - Missing separator lines were added.\n- **This session:** I did not edit any existing function. I wrote help comments only for the 4 copied functions (`capstr`, `lmindices`, `pad_vals`, `sbasis`).\n\nI can give you the list of the 87 files or the full diff if you want to check them.",
         "timestamp": "2026-11-10T13:54:20.862Z"
+      },
+      {
+        "role": "user",
+        "content": "are there some fucntions which have an examples section in their docstring?",
+        "timestamp": "2026-11-10T14:09:51.395Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes. I checked 198 `.m` files in `Statbrainz/` and left out the third-party code:\n\n- **89 files** have example code in the EXAMPLES section, for example `get_mask`, `scopes`, `tfce`, `mvtstat`, `fast_conv` and `viewbrain`. Most have 1 to 10 lines. Some are long: `fast_conv` has 89 lines, and `get_mask`, `GkerMV`, `scopes`, `scopes_lm`, `srf_scopes` and `mvtstat` have about 20 each.\n- **68 files** have only `See ex_<name>.m` (or an empty section).\n- **41 files** have no EXAMPLES section. Some of these are scripts, not functions, for example `test_gradients.m`, `Untitled3.m` and `testing_brainim_underlay.m`. Others are functions, for example `getregion`, `plane2index`, `cope_display`, `bayespw` and `gmcdf`.\n\n`CLAUDE.md` permits both forms (\"a few short lines of code, or `See ex_<name>.m`\"). The long code blocks are not \"a few short lines\". Some of them also call functions that are not in the repo, for example `wfield`, which appears in the CoPE set examples. Do you want me to move the long examples into the `ex_` files and replace them with `See ex_<name>.m`? I can also give you the full list in a file.",
+        "timestamp": "2026-11-10T14:10:05.399Z"
+      },
+      {
+        "role": "user",
+        "content": "I want to remove each of those example code docstring sections. Example code should only belong in the examples functions that have been created. I've updated the claude.md file accordingly",
+        "timestamp": "2026-11-10T14:11:22.429Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I will remove the full EXAMPLES section from each own function. I will not touch third-party files or `_dep` files, as `CLAUDE.md` says.",
+        "timestamp": "2026-11-10T14:12:15.692Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The check failed because the paths do not match HEAD now. I will check whether the git state changed.",
+        "timestamp": "2026-11-10T14:12:35.911Z"
+      },
+      {
+        "role": "assistant",
+        "content": "You made a new commit (`aabead1`), so I can now compare with `git diff` directly.",
+        "timestamp": "2026-11-10T14:12:39.235Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I removed the EXAMPLES section from 154 functions. In each one, I deleted the `% EXAMPLES` heading, its content and the separator that closed it, so the OUTPUT section now goes directly to the Copyright line. This includes the 4 functions that I copied in this session. The diff to your commit `aabead1` has 1066 deletions and 0 insertions, and every deleted line is a comment line. I did not change code, line endings or encoding.\n\nMy first attempt changed the CRLF line endings and could have lost bytes that are not UTF-8. I saw this in the diff, restored the files from `aabead1` and ran the edit again in a byte-safe way. I did not touch the three `_dep` files (`mvtstat_dep`, `fdr_crs_dep` and `overlay_brain3_dep`), because `CLAUDE.md` says they stay as they are, so they still have EXAMPLES sections. I also did not touch the third-party files. `fgreedy.m` lines 11 and 12 have two separator lines together. That was there before my edit, so I did not change it.",
+        "timestamp": "2026-11-10T14:13:07.615Z"
+      },
+      {
+        "role": "user",
+        "content": "Okay I'd like to go through the functions where bugs were identified one by one. For each print their docstring and then describe the bug",
+        "timestamp": "2026-11-10T14:26:49.145Z"
+      },
+      {
+        "role": "user",
+        "content": "Okay I'd like to go through the functions where bugs were identified one by one. For each print their docstring and then describe the bug. let's start with the first one",
+        "timestamp": "2026-11-10T14:26:55.518Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The first entry is `fit_bayesglm` (`Statbrainz/Inference/BayesGLM/fit_bayesglm.m`). It is the first function in section 2 of `KNOWN_BUGS.md`. Section 1 lists only missing dependencies, and the mounts have now resolved most of them.\n\n```matlab\nfunction [INLA_model_obj, field_estimates, hyperpar_posteriors] = fit_bayesglm(BOLD, design, mask_qc, nuisance, spatial, ...\n    scale_BOLD, hyperpriors, ar_order, ar_smooth, aic, n_threads, return_INLA, verbose, ...\n    meanTol, varTol)\n% FIT_BAYESGLM fits a Bayesian GLM to fMRI BOLD data using INLA for\n% spatial smoothing of the activation coefficients.\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  BOLD          cell array of BOLD data matrices (one per session)\n%  design        cell array of design matrices (one per session)\n%  mask_qc       quality-control mask struct (output of make_mask)\n%  nuisance      nuisance regressors to remove from BOLD and design\n%  spatial       struct describing the spatial structure; must contain field\n%                'spatial_type' equal to 'surf' or 'voxel'\n% Optional\n%  scale_BOLD    method to scale BOLD data (default: 'mean')\n%  hyperpriors   'default' or 'informative' (default: 'default')\n%  ar_order      AR model order for prewhitening (default: 6)\n%  ar_smooth     smoothing FWHM for AR coefficients (default: 5)\n%  aic           logical; whether to use AIC for AR order selection (default: false)\n%  n_threads     number of parallel threads (default: 4)\n%  return_INLA   which INLA output to return: 'trimmed' or 'full' (default: 'trimmed')\n%  verbose       verbosity level (default: 1)\n%  meanTol       tolerance for mean-based QC masking (default: 1e-6)\n%  varTol        tolerance for variance-based QC masking (default: 1e-6)\n%--------------------------------------------------------------------------\n% OUTPUT\n% INLA_model_obj        the fitted INLA model object\n% field_estimates       estimated activation fields\n% hyperpar_posteriors   posterior distributions of hyperparameters\n%--------------------------------------------------------------------------\n% Copyright (C) - 2023 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**Bugs**\n\n1. **The file does not parse.** Lines 120 to 122 have one closing bracket too few:\n   ```matlab\n   x_r = diff(range(find(any(mask_r, 2))) * res(1);\n   ```\n   There are 5 `(` and 4 `)`. Probably the intended line is `diff(range(find(any(mask_r, 2)))) * res(1)`. Because of this, MATLAB cannot call the function.\n2. **The defaults use the wrong `nargin` values (lines 35 to 45).** In the signature, the arguments are numbered: 6 `scale_BOLD`, 12 `return_INLA`, 13 `verbose`, 14 `meanTol`, 15 `varTol`. The code has these errors:\n   - `nargin < 15` sets `meanTol`, but it must set `varTol`.\n   - `nargin < 14` sets `varTol`, but it must set `meanTol`.\n   - `nargin < 13` sets `return_INLA`, but it must set `verbose`.\n   - `nargin < 12` sets `verbose`, but it must set `return_INLA`.\n   - `nargin < 5` sets `scale_BOLD`, but it must be `nargin < 6`. With 5 inputs, `scale_BOLD` is not defined.\n\n   The result is that a value from the user can be overwritten, and the related default is then not set. For example, with 14 inputs, the `meanTol` that the user gives is replaced by 1e-6, and `varTol` is not defined.\n3. **The function is not implemented.** The INLA fit (lines 188 to 193) is only a placeholder comment. All three outputs stay `[]` (lines 53 to 55). The docstring does not tell the user this.\n\n`KNOWN_BUGS.md` reported only the `nargin < 5` problem. I found the four swapped defaults when I read the code again now. Do you want me to fix bugs 1 and 2 and add a note about bug 3 to the docstring? Or shall we go to the next function?",
+        "timestamp": "2026-11-10T14:27:23.399Z"
+      },
+      {
+        "role": "user",
+        "content": "let's move that folder to the new depcreated folder in the folder Statbrainz",
+        "timestamp": "2026-11-10T15:24:10.040Z"
+      },
+      {
+        "role": "user",
+        "content": "[Request interrupted by user]",
+        "timestamp": "2026-11-10T15:24:17.723Z"
+      },
+      {
+        "role": "user",
+        "content": "continue",
+        "timestamp": "2026-11-10T15:24:36.541Z"
+      },
+      {
+        "role": "user",
+        "content": "[Request interrupted by user]",
+        "timestamp": "2026-11-10T15:24:38.324Z"
+      },
+      {
+        "role": "user",
+        "content": "let's move that function to the new depcreated folder in the folder Statbrainz",
+        "timestamp": "2026-11-10T15:24:43.972Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I moved `fit_bayesglm.m` to `Statbrainz/Deprecated/` with `git mv`, so git keeps its history. `CLAUDE.md` says that `Tests/` and `Examples/` mirror the package folders, so I also moved its test and example to the new folders `Tests/Deprecated/` and `Examples/Deprecated/`. I updated the path in `Tests/KNOWN_BUGS.md`. I did not change the function or rename it to `fit_bayesglm_dep`. `addSB2path` adds the full repo to the path, so the function is still on the path.\n\n`Statbrainz/Inference/BayesGLM/` still contains `Copy_of_fit_bayesglm.m`, which is an older copy of the same function, and the file `runbayesglm.asv`, which is a MATLAB autosave. Do you want me to move these to `Deprecated/` too? The next function in `KNOWN_BUGS.md` is `fdr_simul_cs`. Shall I continue with it?",
+        "timestamp": "2026-11-10T15:29:20.558Z"
+      },
+      {
+        "role": "user",
+        "content": "no remove those files",
+        "timestamp": "2026-11-10T15:29:50.270Z"
+      },
+      {
+        "role": "assistant",
+        "content": "`Examples/Inference/BayesGLM/ex_Copy_of_fit_bayesglm.m` is the example for `Copy_of_fit_bayesglm`, so it has no use without the function. I will remove it too.",
+        "timestamp": "2026-11-10T15:29:55.262Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I removed `Copy_of_fit_bayesglm.m`, `runbayesglm.asv` and the example `ex_Copy_of_fit_bayesglm.m` with `git rm`. Git tracked all three, so you can get them back from commit `aabead1` if necessary. `Copy_of_fit_bayesglm` had no test, and no other file referred to it.\n\nShall I continue with `fdr_simul_cs`?",
+        "timestamp": "2026-11-10T15:29:58.386Z"
+      },
+      {
+        "role": "user",
+        "content": "yes",
+        "timestamp": "2026-11-10T15:30:00.471Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The next function is `fdr_simul_cs` (`Statbrainz/Inference/CopeSets/fdr_simul_cs.m`).\n\n```matlab\nfunction [ lower_set, upper_set ] = fdr_simul_cs( data, mask, thresh_vec, alpha_quant )\n% FDR_SIMUL_CS( data, mask, thresh_vec, alpha_quant )\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  data       an array of size [dim, nsubj] giving the observed data where\n%             dim is the size of the domain and nsubj is the number of subjects\n%  mask       a 0/1 array of size dim indicating the region of interest\n%  thresh_vec a vector of thresholds at which to generate the cope sets\n% Optional\n%  alpha_quant  a number between 0 and 1 giving the alpha quantile;\n%               default is 0.05\n%--------------------------------------------------------------------------\n% OUTPUT\n%  lower_set:    a 0/1 array of size dim where 1 indicates the locations of\n%                the lower cope set\n%  upper_set:    a 0/1 array of size dim where 1 indicates the locations of\n%                the upper cope set\n%--------------------------------------------------------------------------\n% Copyright (C) - 2025 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\nThe function is not complete, and the code stops in the middle. These are the bugs:\n\n1. **The file does not parse.** Line 52 is a bare `for` with no loop variable, no body and no `end`. MATLAB cannot call the function.\n2. **`thresh` is not defined (lines 30 and 55).** The argument is `thresh_vec`. Line 30 also stops a vector of thresholds with \"Thresh must be a single number\", but the purpose of the function is to accept a vector of thresholds.\n3. **`pvals` has the wrong initialisation (line 40).** `pvals = [sum(mask(:)), nthresholds]` makes a 1 by 2 vector that holds the two sizes. It does not make an array of zeros. It must be `zeros(sum(mask(:)), nthresholds)`. The loop then overwrites it, so the result is correct by chance, but it is not good code.\n4. **`data_tstat` and `data_std` are not defined (lines 53 to 58).** The loop calculates `data_tstat_thresh` only for each threshold and does not keep it. The code never calculates `data_std`.\n5. **The output has the wrong shape.** `rejection_ind` is nmask by nthresholds, because the BH correction is applied to the p-values for all the thresholds together. But the docstring says that `lower_set` and `upper_set` are arrays of size dim, one for each output. There is no code that maps the masked vectors back to the image (for example with `vec2im` or `mask`), and the code does not decide whether there is one set for each threshold.\n6. **The docstring is not complete.** The first line does not describe what the function does. Also, `alpha_quant` \"default is 0.05\" does not use the house form `Default is 0.05.`\n\nThis function looks like a draft that you did not complete, like `fit_bayesglm`. It has a test (`Tests/Inference/CopeSets/test_fdr_simul_cs.m`) and an example (`Examples/Inference/CopeSets/ex_fdr_simul_cs.m`). Both fail because the file does not parse.\n\nYou can complete it, but then you must decide on point 5: is the output one pair of sets for each threshold, for example a dim by nthresholds array? Or you can move it to `Deprecated/` like `fit_bayesglm`. What do you want to do?",
+        "timestamp": "2026-11-10T15:30:16.824Z"
+      },
+      {
+        "role": "user",
+        "content": "move it to the deprecated folder please",
+        "timestamp": "2026-11-10T15:31:52.700Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I moved `fdr_simul_cs.m` to `Statbrainz/Deprecated/`. I also moved its test to `Tests/Deprecated/` and its example to `Examples/Deprecated/`. In `Tests/KNOWN_BUGS.md`, I updated the path and the line numbers, because they changed when I removed the EXAMPLES sections.\n\nThe next function is `brain_extraction2` (`Statistics_Functions/FirstLevel`). Shall I continue?",
+        "timestamp": "2026-11-10T15:32:01.308Z"
+      },
+      {
+        "role": "user",
+        "content": "yes",
+        "timestamp": "2026-11-10T15:32:20.294Z"
+      },
+      {
+        "role": "user",
+        "content": "[Request interrupted by user]",
+        "timestamp": "2026-11-10T15:32:26.141Z"
+      },
+      {
+        "role": "user",
+        "content": "yes and continue automatically after having decprated a function",
+        "timestamp": "2026-11-10T15:32:38.323Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I will move `brain_extraction2` to `Deprecated/`, and then I will show the next function.",
+        "timestamp": "2026-11-10T15:32:43.039Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I moved `brain_extraction2.m` and its test and example to the `Deprecated` folders, and I updated `KNOWN_BUGS.md`. `Statistics_Functions/FirstLevel/brain_extraction2.asv` is still there. It is a MATLAB autosave, like the one that you removed before.\n\nThe next function is `bayespw` (`Statbrainz/Inference/BayesGLM/bayespw.m`).\n\n```matlab\nfunction results = GLM_est_resid_var_pw(BOLD, design, spatial, session_names, ...\n    field_names, design_type, valid_cols, nT, ar_order, ar_smooth, aic, ...\n    n_threads, do_pw)\n% GLM_est_resid_var_pw estimates residual variance and prewhitening\n% (AR) parameters for a Bayesian GLM, averaging across sessions and\n% optionally smoothing the parameters spatially.\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  BOLD          cell array (one per session) of T by V BOLD data matrices\n%  design        cell array (one per session) of design matrices\n%  spatial       an nX by nV_D array giving the spatial structure; nV_D is\n%                the number of data locations\n%  session_names cell array of session name strings; its length sets nS\n%  field_names   cell array of field (task) name strings\n%  design_type   'regular' (one design per session) or 'per_location' (a\n%                separate design at each data location)\n%  valid_cols    nS by p logical array selecting the valid design columns\n%                for each session\n%  nT            vector of time-series lengths to build prewhitening\n%                matrices for\n%  ar_order      order of the autoregressive prewhitening model\n%  ar_smooth     spatial smoothing parameter for the AR parameters; no\n%                smoothing is applied when ar_smooth <= 0\n%  aic           0/1 whether to select the AR order by AIC\n%  n_threads     number of parallel threads; serial when empty or < 2\n%  do_pw         0/1 whether to perform prewhitening\n%--------------------------------------------------------------------------\n% OUTPUT\n%  results       a struct with fields:\n%                 var_resid    - nV_D by nS residual variances per session\n%                 sqrtInv_all  - cell array of square-root inverse\n%                                covariance matrices, one per entry of nT\n%                 AR_coefs_avg - session-averaged AR coefficients\n%                 var_avg      - session-averaged residual variance\n%                 max_AIC      - per-location maximum AIC (empty unless aic)\n%--------------------------------------------------------------------------\n% Copyright (C) - 2025 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**Bugs**\n\n1. **The function name is not the file name.** The file is `bayespw.m`, but it declares `GLM_est_resid_var_pw`. MATLAB uses the file name, so you call it as `bayespw(...)`. The docstring uses the other name.\n2. **The helpers are placeholders, so the results are not correct:**\n   - `getSqrtInvCpp` (line 151) always returns `eye(nTime)`, so no prewhitening occurs.\n   - `pw_estimate` (lines 163 to 165) returns `var(resid)` and an AR coefficient of `zeros(ar_order, 1)`. It does not fit an AR model, and `aic` is always `[]`.\n   - `pw_smooth` (line 168) does not assign its outputs, so a call with `do_pw = 1` and `ar_smooth > 0` gives an error.\n3. **`do_pw = 1` fails at line 76.** `pw_est.phi` is ar_order by 1, but `AR_coefs(:, :, ss)` is nV by ar_order. Also with `aic = 1`, line 78 puts `[]` into `AR_AIC(:, ss)`, which also gives an error.\n4. **In the `do_pw = 1` branch, the code calculates `template_pw` (line 116) but does not use it,** and the `field_names` argument is also not used.\n5. **The docstring does not follow the house style.** The first line is not the function name in capitals, and the docstring does not say that the function is a draft with placeholder helpers.\n\nThe only branch that works is `do_pw = 0`. That branch gives the residual variance after a nuisance regression and a diagonal `sqrtInv_all`. Like `fit_bayesglm`, this function is a part of the Bayesian GLM port that is not complete. Do you want me to move it to `Deprecated/`?",
+        "timestamp": "2026-11-10T15:33:00.508Z"
+      },
+      {
+        "role": "user",
+        "content": "no go back to brain_extraction2 we didn't conider that yet",
+        "timestamp": "2026-11-10T15:34:06.096Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I misunderstood your \"yes\". I will move `brain_extraction2` back to `FirstLevel` and then describe it.",
+        "timestamp": "2026-11-10T15:34:08.424Z"
+      },
+      {
+        "role": "assistant",
+        "content": "`brain_extraction2` is back in `Statistics_Functions/FirstLevel`, and git sees no move now. Its test, example and `KNOWN_BUGS.md` entry are also back.\n\n```matlab\nfunction [ mask ] = brain_extraction2( brain_im )\n% BRAIN_EXTRACTION2 thresholds a brain image to create a mask.\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  brain_im  A 3D or 4D brain image (matrix or nifti object)\n%--------------------------------------------------------------------------\n% OUTPUT\n%  mask      A binary mask of the same size as brain_im, where voxels\n%            above the threshold are set to 1, and voxels below or equal\n%            to the threshold are set to 0.\n%--------------------------------------------------------------------------\n% Copyright (C) - 2023 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**Bugs**\n\n1. **The file does not parse.** Line 19, `lower_cutoff = floor(lower_thresh * length(sorted_input)))`, has one closing bracket too many and no semicolon.\n2. **Four variables are not defined:**\n   - `sorted_input` (line 19). Probably this is the `im_data_sorted` that line 21 calculates.\n   - `vec_of_max_cluster_sizes` and `alpha` (line 22). This line is a copy from `perm_cluster` and has no relation to this function.\n   - `h` (lines 25 and 26). `h.BinEdges` and `h.Values` come from a `histogram` object, but the code never calls `histogram`.\n3. **The logic is not complete.** The code calculates `threshold` two times (lines 22 and 29) and does not use the first value. The code also calculates `lower_thresh`, `upper_thresh`, `lower_cutoff`, `im_data_sorted` and `bin_locs` (lines 16 to 25) and does not use them. Line 29 gives the minimum *count* of the histogram (`bin_vals(min_loc)`) as the threshold. It should give the *location* of the histogram minimum (`bin_locs`). If more than one bin has the minimum count, `min_loc` is a vector and `brain_im > threshold` fails or gives a wrong result.\n4. **The nifti input that the docstring describes is not supported.** The code uses `brain_im(:)` directly.\n\nThe idea seems to come from nilearn's `compute_epi_mask`: normalise the image, keep the intensities between the 20% and 85% quantiles, find the minimum of the histogram and use it as the threshold. `brain_extraction.m` is in the same folder and works, but it needs a threshold from the user. `brain_extraction2` was probably intended to calculate the threshold automatically. `brain_extraction2.asv` is an older autosave of the same draft, with the old docstring.\n\nYou can complete it with the nilearn method (about 10 lines), or move it to `Deprecated/`. What do you want to do?",
+        "timestamp": "2026-11-10T15:34:22.137Z"
+      },
+      {
+        "role": "user",
+        "content": "is there a brain_extraction function currently in the package?",
+        "timestamp": "2026-11-10T15:36:58.088Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes. `Statistics_Functions/FirstLevel/brain_extraction.m` declares `brain_extraction( brain_im, threshold, skull_erosion )`. It thresholds the image at the `threshold` that the user gives and erodes the mask by `skull_erosion` voxels (default 2). Then it keeps the largest connected component. No other function in the package calls it.\n\nThere are three related files in the same folder:\n- **`brain_extraction3.m`** also declares `function ... = brain_extraction(...)`. MATLAB uses the file name, so you call it as `brain_extraction3`, and the two do not clash. It is a later version with a default erosion of 3. It also makes a second mask with a fixed lower threshold of 25 and fills the holes. It returns `mask` and `filled_mask`.\n- **`brain_extraction2.m`** is the draft that does not parse. It tries to find the threshold automatically.\n- **`extract_brain.m`** is a different method. It runs the external HD-BET tool on a NIfTI file.\n\nSo the package has a working `brain_extraction`, but the threshold must come from the user. Only `brain_extraction2` tries to find the threshold automatically.",
+        "timestamp": "2026-11-10T15:37:05.965Z"
+      },
+      {
+        "role": "user",
+        "content": "so is your nilearn proposal different than the existing brain_extraction function/",
+        "timestamp": "2026-11-10T15:37:46.851Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The difference is only the threshold. `brain_extraction` already does the second half of nilearn's `compute_epi_mask`: it erodes the mask, keeps the largest connected component, and then dilates and erodes again. But the user must give `threshold`. My proposal adds the first half, which calculates the threshold from the image. That half is what `brain_extraction2` tries to do. Its variable names (`sorted_input`, `lower_cutoff`, 0.2 and 0.85) come from nilearn.\n\nI must correct what I said before. Nilearn does not use the minimum of the histogram. It sorts the intensities, takes the values between the 20% and 85% quantiles, and finds the largest gap between two values that follow each other. The threshold is the midpoint of that gap. The histogram minimum in `brain_extraction2` is a different method. So the simplest way to complete it is to calculate that threshold and then call `brain_extraction(brain_im, threshold)`. That is about 6 lines, and no code is copied. Alternatively, you can make `threshold` optional in `brain_extraction` and use the nilearn threshold when the user does not give one. Then you can move `brain_extraction2` to `Deprecated/`.\n\nI also found a small bug in `brain_extraction.m` line 31: `I` has no semicolon, so it prints each loop index to the command window.",
+        "timestamp": "2026-11-10T15:37:59.345Z"
+      },
+      {
+        "role": "user",
+        "content": "yes I want to do this: make threshold optional in\n  brain_extraction and use the nilearn threshold when the user does not\n  give one.",
+        "timestamp": "2026-11-10T15:38:26.466Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Now the tests and the example. I keep the existing sections and add new ones for the default.",
+        "timestamp": "2026-11-10T15:38:49.507Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The default threshold gives a mask on the MNI image that overlaps 99% with the MNI brain mask. I will change that print into an assert and then update the example.",
+        "timestamp": "2026-11-10T15:39:10.282Z"
+      },
+      {
+        "role": "assistant",
+        "content": "`threshold` in `brain_extraction` is now optional. If you do not give it, or give `[]`, the function calculates the nilearn `compute_epi_mask` threshold. It sorts the intensities, finds the largest gap between two values that follow each other in the 20% to 85% quantile range, and uses the midpoint of that gap. I added `[]` so that you can use the default threshold and still set `skull_erosion`, for example `brain_extraction(im, [], 1)`. Calls that give a threshold work as before.\n\nThe test now has 4 new sections: a two-level synthetic image, `[]` gives the same result as the default, a known gap with the threshold at 15, and the MNI T1 image. All the tests pass in the clone, and the example runs to the end. On the MNI image, the default threshold gives 228771 voxels, and 99.2% of the MNI mask is in this mask. With the threshold 3000 that you set by hand before, the mask has 227764 voxels. I did not fix the `I` without a semicolon on line 31. Do you want me to move `brain_extraction2` to `Deprecated/` now, or shall I fix the semicolon first?",
+        "timestamp": "2026-11-10T15:39:27.125Z"
+      },
+      {
+        "role": "user",
+        "content": "yes move brain_extraction2 to deprecated - qq: did you add the deprecated folder to gitignore?. and for the brain_extraction function did you update the tests and examples?",
+        "timestamp": "2026-11-10T15:40:13.976Z"
+      },
+      {
+        "role": "assistant",
+        "content": "You have renamed `Statistics_Functions` to `StatisticsFunctions` and `Brain Functions` to `BrainFunctions` on disk. I will check where the files are now, before I move anything.",
+        "timestamp": "2026-11-10T15:40:24.872Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I moved `brain_extraction2.m` to `Statbrainz/Deprecated/`, its test to `Tests/Deprecated/` and its example to `Examples/Deprecated/`, and I updated `KNOWN_BUGS.md`. Its source now came from the renamed `StatisticsFunctions/FirstLevel`. Git does not track that folder yet, so I used `mv` for the function. `brain_extraction2.asv` is still in `StatisticsFunctions/FirstLevel`.\n\nYour questions:\n- **.gitignore:** No. The repo has no `.gitignore`, and I did not add one. I think that you do not want to ignore `Deprecated/`, because then git would not track the deprecated functions and their history. Do you want them to be ignored?\n- **brain_extraction tests and examples:** Yes. I added 4 sections to `test_brain_extraction.m` and changed `ex_brain_extraction.m`, so the first example now uses the default threshold. I ran both in the clone before you renamed the folders, and they passed.\n\nYou renamed the package folders, but `Tests/` and `Examples/` still use `Statistics_Functions` and `Brain Functions`. So they do not mirror the package now, which `CLAUDE.md` requires. Do you want me to rename those folders too?",
+        "timestamp": "2026-11-10T15:40:35.212Z"
+      },
+      {
+        "role": "user",
+        "content": "yes I want to ignore the deprecated functions please add to gitignore. fix the package folders rename issue",
+        "timestamp": "2026-11-10T15:41:45.854Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The folders now mirror the package. `dilmask` and `fullLMcalc` had no tests before, so that is not new. Now the `.gitignore`.",
+        "timestamp": "2026-11-10T15:42:10.405Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. These are the changes:\n\n- **`.gitignore`:** This new file ignores `Statbrainz/Deprecated/`, `Tests/Deprecated/` and `Examples/Deprecated/`. Because I had staged the moves with `git mv`, I also removed those files from the index with `git rm --cached`. So git now shows the deprecated functions only as deleted from their old folders. The files are still on disk in the three `Deprecated/` folders.\n- **Folder rename:** I renamed `Tests/` and `Examples/` to `StatisticsFunctions` and `BrainFunctions` with `git mv`. They mirror the package again. I updated the old names in `test_statbrainz_maindir.m`, `KNOWN_BUGS.md` and lines 11 and 12 of `CLAUDE.md`. `test_brain_extraction` passes in the new folder.\n\n`test_statbrainz_maindir` fails, but the rename did not cause this. The failure comes from your earlier move of the package into `Statbrainz/`. `statbrainz_maindir` goes up 4 folders from its own file, so now it returns `/workspace/Statbrainz/` and not the repo root. `BrainImages/` is in `Statbrainz/`, so the callers that load images still work. But the test expects `addSB2path.m` in that folder, and it is at the repo root. Should \"main directory\" mean `Statbrainz/`, so that I change the test? Or should it mean the repo root, so that I change the function to go up 5 folders and the callers to use `Statbrainz/BrainImages`?",
+        "timestamp": "2026-11-10T15:42:30.902Z"
+      },
+      {
+        "role": "user",
+        "content": "yes change the test",
+        "timestamp": "2026-11-10T15:42:50.407Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I changed the test. It now checks that `statbrainz_maindir` returns the `Statbrainz/` package folder, with `addSB2path.m` one folder above it. The checks for `StatisticsFunctions/.../statbrainz_maindir.m` and `BrainImages/` in that folder stay as they were. The test passes in the clone.\n\nThe docstring of `statbrainz_maindir` still says that it returns the main StatBrainz directory. Now that directory is `Statbrainz/` and not the repo root. Do you want me to change the wording? The next function in `KNOWN_BUGS.md` is `bayespw`, which I described above. Shall I continue with it?",
+        "timestamp": "2026-11-10T15:42:57.310Z"
+      },
+      {
+        "role": "user",
+        "content": "yes",
+        "timestamp": "2026-11-10T15:44:14.436Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I updated the docstring of `statbrainz_maindir`. It now says that the function returns the `Statbrainz/` package folder, with a file separator at the end. The function still has `if ~exist( 'opt1', 'var' )` from the template, but it has no argument `opt1`. That code does nothing, and I did not remove it.\n\nI described `bayespw` above. It is the Bayesian GLM prewhitening draft. Its function name is `GLM_est_resid_var_pw`, and its helpers are placeholders. The only branch that works is `do_pw = 0`, and `do_pw = 1` fails at line 76. What do you want to do with `bayespw`: move it to `Deprecated/`, or fix it?",
+        "timestamp": "2026-11-10T15:44:27.313Z"
+      },
+      {
+        "role": "user",
+        "content": "please describe it again",
+        "timestamp": "2026-11-10T15:44:48.860Z"
+      },
+      {
+        "role": "assistant",
+        "content": "`bayespw` (`Statbrainz/Inference/BayesGLM/bayespw.m`)\n\n```matlab\nfunction results = GLM_est_resid_var_pw(BOLD, design, spatial, session_names, ...\n    field_names, design_type, valid_cols, nT, ar_order, ar_smooth, aic, ...\n    n_threads, do_pw)\n% GLM_est_resid_var_pw estimates residual variance and prewhitening\n% (AR) parameters for a Bayesian GLM, averaging across sessions and\n% optionally smoothing the parameters spatially.\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  BOLD          cell array (one per session) of T by V BOLD data matrices\n%  design        cell array (one per session) of design matrices\n%  spatial       an nX by nV_D array giving the spatial structure; nV_D is\n%                the number of data locations\n%  session_names cell array of session name strings; its length sets nS\n%  field_names   cell array of field (task) name strings\n%  design_type   'regular' (one design per session) or 'per_location' (a\n%                separate design at each data location)\n%  valid_cols    nS by p logical array selecting the valid design columns\n%                for each session\n%  nT            vector of time-series lengths to build prewhitening\n%                matrices for\n%  ar_order      order of the autoregressive prewhitening model\n%  ar_smooth     spatial smoothing parameter for the AR parameters; no\n%                smoothing is applied when ar_smooth <= 0\n%  aic           0/1 whether to select the AR order by AIC\n%  n_threads     number of parallel threads; serial when empty or < 2\n%  do_pw         0/1 whether to perform prewhitening\n%--------------------------------------------------------------------------\n% OUTPUT\n%  results       a struct with fields:\n%                 var_resid    - nV_D by nS residual variances per session\n%                 sqrtInv_all  - cell array of square-root inverse\n%                                covariance matrices, one per entry of nT\n%                 AR_coefs_avg - session-averaged AR coefficients\n%                 var_avg      - session-averaged residual variance\n%                 max_AIC      - per-location maximum AIC (empty unless aic)\n%--------------------------------------------------------------------------\n% Copyright (C) - 2025 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**What it does:** For each session, the function removes the design from the BOLD data with a regression and estimates the residual variance at each location. When `do_pw = 1`, it also estimates AR coefficients for prewhitening. It then averages over the sessions, can smooth the AR parameters spatially, and makes the square-root inverse covariance matrices for each time-series length in `nT`.\n\n**Bugs**\n\n1. **The function name is not the file name.** The file is `bayespw.m`, but it declares `GLM_est_resid_var_pw`. MATLAB uses the file name, so you call it as `bayespw(...)`, but the docstring uses the other name.\n2. **The helpers are placeholders, so the results are not correct:**\n   - `getSqrtInvCpp` (line 151) always returns `eye(nTime)`, so no prewhitening occurs.\n   - `pw_estimate` (lines 163 to 165) returns `var(resid)` and AR coefficients of `zeros(ar_order, 1)`. It does not fit an AR model, and `aic` is always `[]`.\n   - `pw_smooth` (line 168) does not assign its outputs, so a call with `do_pw = 1` and `ar_smooth > 0` gives an error.\n3. **`do_pw = 1` fails at line 76.** `pw_est.phi` is ar_order by 1, but `AR_coefs(:, :, ss)` is nV by ar_order. Also, with `aic = 1`, line 78 puts `[]` into `AR_AIC(:, ss)`, which also gives an error.\n4. **Some code is not used.** The code calculates `template_pw` (line 116) and does not use it. The argument `field_names` is also not used.\n5. **The docstring does not follow the house style.** The first line is not the function name in capitals, and the docstring does not say that the function is a draft with placeholder helpers.\n\nThe only branch that works is `do_pw = 0`. That branch gives the residual variance after a nuisance regression and a diagonal `sqrtInv_all`. Like `fit_bayesglm`, this function is a part of the Bayesian GLM port that is not complete, and no other function calls it. I recommend that you move it to `Deprecated/`. To fix it, you must write a real AR fit, the smoothing and the prewhitening matrices.",
+        "timestamp": "2026-11-10T15:45:01.400Z"
+      },
+      {
+        "role": "user",
+        "content": "okay move to deprecated please",
+        "timestamp": "2026-11-10T15:45:17.591Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I moved `bayespw.m` to `Statbrainz/Deprecated/`, its test to `Tests/Deprecated/` and its example to `Examples/Deprecated/`. All three are now ignored by git, and I updated `KNOWN_BUGS.md`. The `Inference/BayesGLM` folders in `Tests/` and `Examples/` are now empty.\n\nThe next function is `fs_smooth` (`Statbrainz/Surface/ReadSurfaceFiles/fs_smooth.m`).\n\n```matlab\nfunction [ out ] = fs_smooth( data )\n% FS_SMOOTH FreeSurfer-style surface smoothing (stub).\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  data  surface data to smooth\n%--------------------------------------------------------------------------\n% OUTPUT\n%  out  smoothed surface data\n%--------------------------------------------------------------------------\n% Copyright (C) - 2024 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**Bugs**\n\n1. **The function is an empty template.** The main loop (lines 24 to 26) has no code, so the function does nothing.\n2. **The output `out` is never assigned.** A call such as `out = fs_smooth(data)` gives the error \"Output argument out not assigned\".\n3. **Lines 19 to 22 set `opt1`, which is not an argument.** This code comes from the house template and does nothing.\n4. **The function cannot smooth surface data.** It takes only `data` and has no surface mesh and no amount of smoothing (FWHM or number of iterations). These are necessary to smooth on a surface.\n\nNo other function calls it. The package already has `Surface/smooth_surface.m`, which smooths data on a surface, and `srf_fwhm2niters.m`, which converts an FWHM to a number of iterations. So `fs_smooth` adds nothing. I recommend that you move it to `Deprecated/`. Do you agree?",
+        "timestamp": "2026-11-10T15:45:32.601Z"
+      },
+      {
+        "role": "user",
+        "content": "yes",
+        "timestamp": "2026-11-10T15:46:10.026Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I moved `fs_smooth.m` and its test and example to the `Deprecated/` folders, and I updated `KNOWN_BUGS.md`.\n\nThe next function is `srfgui` (`Statbrainz/Surface/Plotting/srfgui.m`).\n\n```matlab\nfunction [ out ] = srfgui( srf, surface_data )\n% SRFGUI Interactive GUI for surface data visualisation (stub).\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  srf           surface structure\n%  surface_data  surface data to display\n%--------------------------------------------------------------------------\n% OUTPUT\n%  out  (unused)\n%--------------------------------------------------------------------------\n% Copyright (C) - 2023 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**Bugs**\n\n1. **The function is an empty template.** The only thing that it does is call `fullscreen` (line 28), which makes the current figure fill the screen. It does not use `srf` or `surface_data`, and it makes no GUI.\n2. **The output `out` is never assigned.** A call such as `out = srfgui(srf, data)` gives the error \"Output argument out not assigned\". The docstring says \"(unused)\", but the signature still declares it.\n3. **Lines 20 to 23 set `opt1`, which is not an argument.** This code comes from the template and does nothing.\n\nNo other function calls it. To plot surface data, the package has `srfplot`, `srfplot2` and `srf_colour` in the same folder. I recommend that you move it to `Deprecated/`.\n\nAlso, `Surface/Plotting/newfun.m` is in the same folder. From its name, it is probably another template that you did not complete. Do you want me to look at it after `srfgui`?",
+        "timestamp": "2026-11-10T15:46:23.903Z"
+      },
+      {
+        "role": "user",
+        "content": "can you find the srfgui in the relevant tutorial?",
+        "timestamp": "2026-11-10T15:47:14.112Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The tutorials do not call `srfgui`. I will look at which functions the surface tutorial uses.",
+        "timestamp": "2026-11-10T15:47:30.205Z"
+      },
+      {
+        "role": "assistant",
+        "content": "No tutorial uses `srfgui`. I searched the two `.m` tutorials and the text of all 8 `.mlx` live scripts. The only surface tutorial is `surface_tutorial.mlx`, and it plots with `srfplot` and uses `loadsrf`, `smooth_surface`, `srf_noise` and `spintest`. It has no GUI.\n\nThe git history shows that `srfgui` was always a stub. When it was first committed (`f02815b`, 2025-07-15), its header was still the template name `% NEWFUN`, and its body was the same single `fullscreen` call as now. The later commits that touch it changed only the docstring. So no working GUI was ever written for it, and I still recommend that you move it to `Deprecated/`. Shall I do that?",
+        "timestamp": "2026-11-10T15:47:54.245Z"
+      },
+      {
+        "role": "user",
+        "content": "okay move it to depcrated for now!",
+        "timestamp": "2026-11-10T15:49:37.949Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I moved `srfgui.m` and its test and example to the `Deprecated/` folders, and I updated `KNOWN_BUGS.md`.\n\n`newfun` is not in `KNOWN_BUGS.md`, but I found it next to `srfgui`. It is `Statbrainz/Surface/Plotting/newfun.m`:\n\n```matlab\nfunction [ out ] = surf4( in )\n% SURF4 Plots surface data in a 2x2 grid (both hemispheres, front and back).\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  in   input argument (unused in current implementation)\n%--------------------------------------------------------------------------\n% OUTPUT\n%  out  output argument (unused in current implementation)\n%--------------------------------------------------------------------------\n% Copyright (C) - 2025 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**Bugs**\n\n1. **The function name is not the file name.** The file is `newfun.m`, but it declares `surf4`, so you must call it as `newfun`.\n2. **`srf` and `surface_data` are not defined (line 31).** The function takes `in` but uses `srf` and `surface_data`, so every call fails.\n3. **`out` is never assigned, and lines 19 to 22 set `opt1`.** Both come from the template.\n4. **There is no test.** There is only `Examples/Surface/Plotting/ex_newfun.m`.\n\nThis function is not empty like `srfgui`. The loop (lines 26 to 33) is a working idea: it plots the left and right hemispheres from the front and from the back in a 2 by 2 grid, with `plot_compact` and `srfplot`. To fix it, I must change the signature to `surf4( srf, surface_data )` and remove `out` and `opt1`. I must also rename the file to `surf4.m`, which `CLAUDE.md` permits only if you ask for it, and write a test. Or you can move it to `Deprecated/`. What do you want to do?",
+        "timestamp": "2026-11-10T15:49:51.999Z"
+      },
+      {
+        "role": "user",
+        "content": "remove it",
+        "timestamp": "2026-11-10T15:54:36.633Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I removed `newfun.m` and its example with `git rm`.\n\nThe next entry in `KNOWN_BUGS.md` is the list of files where the function name is not the file name. The first one is `expand2mask` (`Statbrainz/StatisticsFunctions/Mask_functions/expand2mask.m`).\n\n```matlab\nfunction [ out ] = expand2MNI( im, mask, padding )\n% EXPAND2MNI( im, mask, padding ) places a sub-image im back into a full\n% [91,109] MNI-sized image at the bounds defined by mask.\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  im      a 2D numeric array to expand into the MNI template space.\n%  mask    a 3D (or 2D) binary mask defining the bounds of im.\n% Optional\n%  padding   additional padding (in voxels) passed to mask_bounds.\n%            Default is 0.\n%--------------------------------------------------------------------------\n% OUTPUT\n%  out   a [91,109] image with im inserted at the appropriate bounds.\n\n%--------------------------------------------------------------------------\n% Copyright (C) - 2025 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**Bugs**\n\n1. **The function name is not the file name.** The file is `expand2mask.m`, but it declares `expand2MNI`. MATLAB uses the file name, so the test and the example call `expand2mask`. The example also has a note about this.\n2. **The output size is fixed at `[91,109]` (line 38).** The function works only for a 2D slice of the 2mm MNI image. The size of `mask` is not used. If you give a 3D `im` and a 3D mask, MATLAB makes `out` bigger, but only up to the largest bound, so the size of `out` is not the size of the mask.\n3. **The docstring has a blank line (line 15).** MATLAB ends the help text at the first line that is not a comment, so `help expand2mask` does not show the Copyright line. The house style also has no blank line there.\n\nNo package function calls it. The fix for bugs 1 and 2 depends on what you want:\n- **(a)** Rename the function in the file to `expand2mask` and use `size(mask)` in place of `[91,109]`. Then it works for any mask size and dimension.\n- **(b)** Rename the file to `expand2MNI.m` and keep the fixed MNI size.\n- **(c)** Move it to `Deprecated/`.\n\nI recommend (a), because the name `expand2mask` matches what the function does. In all three cases, I will remove the blank line in the docstring.",
+        "timestamp": "2026-11-10T15:54:54.499Z"
+      },
+      {
+        "role": "user",
+        "content": "what do you mean by: The file is expand2mask.m? is there another expand2mask function?",
+        "timestamp": "2026-11-10T15:55:42.356Z"
+      },
+      {
+        "role": "assistant",
+        "content": "No, there is only one function. \"The file is `expand2mask.m`\" refers to the name of the file on disk. Inside that file, the first line declares a different name:\n\n```matlab\nfunction [ out ] = expand2MNI( im, mask, padding )\n```\n\nThere is only one file, and it has two names. MATLAB ignores the name in the `function` line and uses the file name, so you must call it as `expand2mask(...)`. A call to `expand2MNI(...)` gives an \"undefined function\" error, but the docstring tells you to use `expand2MNI`. I searched the repo and the mounts, and no other file is named `expand2mask` or `expand2MNI`.",
+        "timestamp": "2026-11-10T15:55:48.595Z"
+      },
+      {
+        "role": "user",
+        "content": "okay yeah let's go with option a",
+        "timestamp": "2026-11-10T15:56:13.663Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Now the test and the example.",
+        "timestamp": "2026-11-10T15:56:30.491Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I changed `expand2mask` with option (a). The function line now declares `expand2mask`, and the output has the size of the mask (the first D dimensions), not `[91,109]`. The docstring has no blank line now, and it explains that a 2D `im` with a 3D mask gives a 2D output. Calls that worked before give the same result. I added 3 test sections: a mask that is not MNI-sized, a 3D image with a 3D mask, and cropping the MNI brain and expanding it back. I also rewrote the example and removed the note about the name. The test passes and the example runs to the end in the clone. I removed `expand2mask` from the list in `KNOWN_BUGS.md`.\n\nThe next function is `Xgen2` (`Statbrainz/Inference/FirstLevel/Xgen2.m`).\n\n```matlab\nfunction X = Xgen( n, m, rho, method )\n%XGEN Generate a matrix of size n-by-m according to specified method.\n%   X = XGEN(n, m, rho, method) generates a matrix X of size n-by-m according\n%   to the specified method.\n%--------------------------------------------------------------------------\n%   ARGUMENTS:\n%   - n: Number of rows of the matrix.\n%   - m: Number of columns of the matrix.\n%   - rho: Autoregressive parameter for 'ar1' method. For 'equi' methods,\n%          it specifies the correlation coefficient and for Gaussian the\n%          FWHM of the smoothing kernel.\n%   - method: Method of generation. Available options are:\n%             - 'ar1': Generates an AR(1) process matrix.\n%             - 'equi': Generates a matrix with equicorrelated noise.\n%             - 'Gaussian': Generates a matrix with Gaussian noise.\n%--------------------------------------------------------------------------\n%   OUTPUT:\n%   - X: n by m generated matrix according to the specified method.\n%--------------------------------------------------------------------------\n% Copyright (C) - 2023 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**Bugs**\n\n1. **The function name is not the file name.** The file is `Xgen2.m`, but it declares `Xgen`, and no file `Xgen.m` exists. Because of this, the `'012equi'` method (lines 101 and 102) calls `Xgen(...)` recursively by the declared name. In the clone this works, but I expect that real MATLAB gives \"Undefined function 'Xgen'\". Please check this in MATLAB.\n2. **`rho = 0` always returns `randn(n,m)` (lines 25 to 28), for all methods.** For `'012'` and `'012equi'`, the output must contain only the values 0, 1 and 2, but with `rho = 0` it is Gaussian.\n3. **An unknown `method` does not give an error.** No branch assigns `X`, so the error is \"Output argument X not assigned\", which does not help the user.\n4. **The scaling is not consistent:**\n   - `'ar1'` (line 45): the first column has variance 1 − rho², but the later columns approach variance 1, so the first column is not standardised.\n   - `'ar1mix'` scales by `1/sqrt(1/(1-rho^2))`, which is the same thing as the `'ar1'` scaling but written differently.\n   - `'012'` is demeaned and standardised, but `'012equi'` is not. `'012equi'` gives the raw counts 0, 1 and 2.\n5. **`'ar1mix'` needs an even `m`.** With an odd `m`, `zeros(n, m/2)` fails.\n6. **The docstring is not complete.** It lists 3 methods, but the code has 6 (`'ar1mix'`, `'012'` and `'012equi'` are not documented). It does not say that `rho` is a 1 by 2 vector for `'ar1mix'`. It also does not follow the house style: the first line is `XGEN` and not `XGEN2`, and there are no Mandatory or Optional headings.\n7. **Lines 107 to 146 are about 40 lines of old code in comments after the `end`.**\n\nThe fix for bug 1 is the same choice as for `expand2mask`. (a) Rename the function in the file to `Xgen2`. This also fixes the recursive call. (b) Rename the file to `Xgen.m`. I recommend (a), because the tests and the example already call `Xgen2`. Shall I fix bugs 1 to 6 like this? For bug 4, I would make `'ar1'` stationary by scaling the first column by 1/sqrt(1 − rho²) before the loop, so that all the columns have variance 1. For bug 7, I would remove the code in comments.",
+        "timestamp": "2026-11-10T15:57:12.822Z"
+      },
+      {
+        "role": "user",
+        "content": "is this function used in any other function?",
+        "timestamp": "2026-11-10T15:57:30.298Z"
+      },
+      {
+        "role": "assistant",
+        "content": "No other package function uses `Xgen2`. The only calls outside its own test and example are in the test and the example of `prewhiten`:\n\n- `Tests/Inference/FirstLevel/test_prewhiten.m:4`: `data = Xgen2(3, 50, 0.5, 'ar1');`\n- `Examples/Inference/FirstLevel/ex_prewhiten.m:7`: `data = Xgen2( 10000, 176, 0.7, 'ar1' );`\n\nBoth use it to make AR(1) data for the prewhitening. No tutorial calls it. My search found \"Xgen\" in two `.mlx` files, but those matches were inside base64-encoded figure data and not in code. The mounts also have no `Xgen` or `Xgen2`.\n\nSo if you move `Xgen2` to `Deprecated/`, you must change those two scripts so that they make AR(1) data in some other way, for example with a short loop or with `filter(1, [1, -rho], randn(n, m), [], 2)`. If you fix it with option (a), they continue to work. With my fix for bug 4, the variance of the first column changes a little.",
+        "timestamp": "2026-11-10T15:57:43.166Z"
+      },
+      {
+        "role": "user",
+        "content": "okay move it to deprecated and get those two scripts to make ar(1) data another way",
+        "timestamp": "2026-11-10T15:58:58.095Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The prewhiten test fails one assert. `KNOWN_BUGS.md` already lists a `prewhiten` bug, so I will check whether the test also failed before my change.",
+        "timestamp": "2026-11-10T15:59:14.247Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I moved `Xgen2.m` and its test and example to the `Deprecated/` folders, and I removed it from the list in `KNOWN_BUGS.md`. The two scripts now make AR(1) data with base MATLAB:\n\n```matlab\ndata = filter(1, [1, -0.5], randn(3, 50), [], 2);\n```\n\nThis is the same recursion along each row as `Xgen2(..., 'ar1')`: data(:,t) = ρ·data(:,t−1) + noise. The difference is that `Xgen2` also multiplied the result by √(1 − ρ²). The scaling does not matter here, because `prewhiten` divides each row by its standard deviation.\n\nThe prewhiten example runs to the end. The prewhiten test fails one assert (\"each row is divided by its standard deviation\"). It failed in the same way before my change, with `Xgen2`. The cause is the known `prewhiten` bug in `KNOWN_BUGS.md` line 80: `data_pw` is overwritten in each loop, so only the last row is correct. We will get to that bug later in the list.",
+        "timestamp": "2026-11-10T15:59:21.370Z"
+      },
+      {
+        "role": "user",
+        "content": "okay let's move on",
+        "timestamp": "2026-11-10T16:00:07.716Z"
+      },
+      {
+        "role": "assistant",
+        "content": "The next function in the list is `brain_extraction3` (`Statbrainz/StatisticsFunctions/FirstLevel/brain_extraction3.m`).\n\n```matlab\nfunction [ mask, filled_mask ] = brain_extraction( brain_im, threshold, skull_erosion )\n% BRAIN_EXTRACTION3 thresholds a brain image to create a mask with\n% hole-filling.\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  brain_im       A 3D or 4D brain image (matrix or nifti object)\n%  threshold      Scalar value to use as the threshold for creating the mask\n% Optional\n%  skull_erosion  Number of erosion steps to remove skull. Default is 3.\n%--------------------------------------------------------------------------\n% OUTPUT\n%  mask           A binary mask restricted to the largest connected component\n%  filled_mask    A hole-filled version of the lower-threshold binary mask\n%--------------------------------------------------------------------------\n% Copyright (C) - 2023 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**What it does:** It thresholds the image at `threshold`. It also makes a second mask at a fixed lower threshold, fills the holes in each axial slice of that mask, and erodes it by `skull_erosion`. The output `mask` is the first mask inside the eroded filled mask, reduced to the largest connected component.\n\n**Bugs**\n\n1. **The function name is not the file name.** The file is `brain_extraction3.m`, but it declares `brain_extraction`, which is the same name as the real `brain_extraction.m`. MATLAB uses the file name, so the calls work, but this is confusing.\n2. **The lower threshold is fixed at 25 (line 23).** It is not an argument, and the docstring does not give it. The value 25 is correct only for images with a particular intensity scale. On an image scaled to [0, 1], `lowerthreshmask` is empty, so `mask` is always empty.\n3. **4D and nifti input do not work, but the docstring says they do.** The slice loop `lowerthreshmask(:,:,I)` with `I = 1:size(mask,3)` fills only the first volume of a 4D image. The code also uses `brain_im` directly as a numeric array.\n4. **The largest-component loop (lines 34 to 38) has no `break`.** If two components have the same largest size, `mask` becomes the last one. `brain_extraction` stops at the first one.\n5. **`filled_mask` is a double array (line 25), not logical.** The docstring calls it a \"binary mask\".\n\nNo package function calls it. Only its test and example do. These are the options:\n- **(a)** Rename the function in the file to `brain_extraction3`, make the lower threshold an optional argument with default 25, and correct the docstring about 4D and nifti input.\n- **(b)** Move it to `Deprecated/`, because `brain_extraction` now does almost the same thing and can find the threshold automatically. The only feature that `brain_extraction` does not have is the hole filling.\n\nI recommend (b) if you do not need the hole filling. If you need it, I recommend (a).",
+        "timestamp": "2026-11-10T16:00:27.296Z"
+      },
+      {
+        "role": "user",
+        "content": "what is the hole filling exactly",
+        "timestamp": "2026-11-10T16:00:52.877Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Hole filling works on one 2D slice at a time. It uses `fill_holes.m`, which does the same thing as `imfill(BW, 'holes')` without the Image Processing Toolbox. A \"hole\" is a region of background pixels (0) that you cannot reach from the edge of the slice by moving through background pixels up, down, left or right. The function sets those pixels to 1. Background that touches the edge stays 0. For example, a ring of 1s becomes a filled disc. In a brain slice, a dark region that is fully inside the head, such as the ventricles, becomes part of the mask.\n\nIn `brain_extraction3`, the filling does not put the holes into the output `mask`. It is applied only to the second mask (`brain_im > 25`), to make a solid outline of the head. That outline is eroded, and line 31 uses it only to limit the main mask: `mask = mask.*filled_mask_eroded`. So voxels below `threshold` inside the brain are still 0 in `mask`. The test shows this: a hollow cube keeps its hole in `mask`, and only `filled_mask` is solid. The filled outline is useful only as the second output `filled_mask`. Also, the erosion cuts away bright tissue outside the head outline. `brain_extraction` gets almost the same effect with its own erosion and the largest connected component.",
+        "timestamp": "2026-11-10T16:01:02.624Z"
+      },
+      {
+        "role": "user",
+        "content": "I'm confused is that a good thing/",
+        "timestamp": "2026-11-10T16:13:50.485Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Mostly no. For a brain mask, you usually want a solid mask that includes the dark regions inside the brain, such as the ventricles. In `brain_extraction3`, the filling does not reach the main output `mask`, so `mask` still has those holes. In this respect it is no better than `brain_extraction`. The only solid result is the second output `filled_mask`, but it has two problems. It uses the fixed threshold 25, which works only on some images. Also, it fills only within each axial slice, so a hole that is open in the slice above or below is still filled. So the hole filling is a good idea that the function does not complete.\n\nI recommend that you move `brain_extraction3` to `Deprecated/`. If you want solid masks, the better way is to add an optional `fill` argument to `brain_extraction`. That argument would apply `fill_holes` to each slice of the final mask, so that the threshold, the erosion and the largest component stay the same. This is a change of about 5 lines. Do you want me to do both, or only the move?",
+        "timestamp": "2026-11-10T16:13:58.251Z"
+      },
+      {
+        "role": "user",
+        "content": "yes okay ake the move please!",
+        "timestamp": "2026-11-10T16:15:23.117Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I moved `brain_extraction3.m` and its test and example to the `Deprecated/` folders, and I updated `KNOWN_BUGS.md`.\n\nThe next function is `slidergui3` (`Statbrainz/StatisticsFunctions/Aux_functions/Plotting/slidergui3.m`).\n\n```matlab\nfunction sliderGUI3(f2plot, lowerbounds, upperbounds, label1, label2, label3)\n% SLIDERGUI3 creates an interactive figure with three sliders and text boxes\n% to explore a function over three scalar parameters simultaneously.\n%--------------------------------------------------------------------------\n% ARGUMENTS\n% Mandatory\n%  f2plot        a function handle accepting a 1x3 vector of parameter values\n%  lowerbounds   a 1x3 vector of minimum values for each slider\n%  upperbounds   a 1x3 vector of maximum values for each slider\n%  label1        string label for the first slider\n%  label2        string label for the second slider\n%  label3        string label for the third slider\n%--------------------------------------------------------------------------\n% OUTPUT\n% None\n%--------------------------------------------------------------------------\n% Copyright (C) - 2023 - Samuel Davenport\n%--------------------------------------------------------------------------\n```\n\n**Bugs**\n\n1. **The case of the name does not match.** The file is `slidergui3.m`, but the function is `sliderGUI3`. The 1-slider version is `sliderGUI.m`, and its function is `sliderGUI`, so the two names are consistent. MATLAB function names are case-sensitive, so `sliderGUI3(...)` fails and you must call `slidergui3(...)`.\n2. **There are small problems that are not errors.** `monitorPositions = fullscreen;` (line 21) stores a value that is not used. The figure is created at a fixed size and then made full screen.\n\nApart from the name, the code works. It makes 3 sliders with text boxes, and it plots again when the user moves a slider or types a valid value. No package function calls it. To fix bug 1, you can rename the function to `slidergui3`, which is a one-line change, or rename the file to `sliderGUI3.m` to match `sliderGUI.m`. Both are renames, so you must decide. I recommend that you rename the file to `sliderGUI3.m`, so that it is consistent with `sliderGUI`. Then I would also rename its test and example and update the calls in them.\n\nI also found a problem that my earlier change to the `statbrainz_maindir` docstring did not cause, but that comes from the package move. 9 example scripts save figures to `[statbrainz_maindir, 'Examples/Figures/...']`. `statbrainz_maindir` now returns `Statbrainz/`, so these paths point to `Statbrainz/Examples/Figures/`, which does not exist, and those examples now fail when they save. I can change them to use `[statbrainz_maindir, '../Examples/Figures/...']`.",
+        "timestamp": "2026-11-10T16:15:47.081Z"
+      },
+      {
+        "role": "user",
+        "content": "what's the difference between sliderGui3 and slider gui?",
+        "timestamp": "2026-11-10T16:17:54.148Z"
+      },
+      {
+        "role": "assistant",
+        "content": "`sliderGUI` controls one parameter, and `slidergui3` (declared as `sliderGUI3`) controls three. The other differences follow from that:\n\n- **Inputs:** `sliderGUI(f2plot, minval, maxval, label)` takes a scalar range and one label, and calls `f2plot(value)` with a scalar. `slidergui3(f2plot, lowerbounds, upperbounds, label1, label2, label3)` takes 1 by 3 vectors of bounds and three labels, and calls `f2plot([v1, v2, v3])` with a 1 by 3 vector.\n- **Layout:** `sliderGUI` makes a 600 by 400 figure with one slider and one text box. `slidergui3` makes an 800 by 600 figure with three rows of slider, label and text box. Both are then made full screen.\n- **Slider step:** `sliderGUI` sets a step size (`stepsize = 1/50`, so one click moves 1/50 of the range). `slidergui3` uses the MATLAB default step.\n\nApart from that, they work in the same way. The plot starts at the midpoint of each range, a valid value in a text box moves its slider and plots again, and an invalid value resets the text box. `slidergui3` is a copy of `sliderGUI` with three of everything. You could replace both with one function that takes N parameters, but that is a bigger change than fixing the name.",
+        "timestamp": "2026-11-10T16:17:59.933Z"
       }
     ],
-    "updatedAt": "2026-11-10T13:54:21.261Z"
+    "updatedAt": "2026-11-10T16:18:00.317Z"
   }
 ]

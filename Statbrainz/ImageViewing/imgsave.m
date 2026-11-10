@@ -21,12 +21,6 @@ function imgsave( array, filename, directory, header )
 % OUTPUT
 % A saved image at <directory>/<filename>.nii
 %--------------------------------------------------------------------------
-% EXAMPLES
-% % Save an example image to a temporary directory
-% imgsave( zeros(91,109,91), 'examplesave', tempdir )
-% % reload it to check
-% im = niftiread( fullfile(tempdir, 'examplesave.nii') );
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

@@ -18,17 +18,6 @@ function smooth_data = smooth_surface(srf, data, FWHM, metric, niters )
 % OUTPUT
 %   smooth_data - Smoothed surface data.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% srf = loadsrf('fs5', 'pial')
-% data = randn(srf.lh.nvertices,1);
-% smooth_data = smooth_surface(srf.lh, data, 10)
-% srfplot(srf.lh, smooth_data);
-%
-% srf = loadsrf('fs5', 'pial')
-% data = randn(srf.lh.nvertices,1);
-% smooth_data = smooth_surface(srf.lh, data, 0, 'ones', 1)
-% srfplot(srf.lh, smooth_data);
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

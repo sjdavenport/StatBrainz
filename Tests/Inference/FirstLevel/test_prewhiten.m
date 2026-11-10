@@ -1,7 +1,8 @@
 % Tests for prewhiten
 
 rng(17)
-data = Xgen2(3, 50, 0.5, 'ar1');
+% AR(1) data along each row: data(:,t) = 0.5*data(:,t-1) + noise
+data = filter(1, [1, -0.5], randn(3, 50), [], 2);
 
 %% The output has the same size as the input
 data_pw = prewhiten(data);

@@ -17,9 +17,6 @@ function [ number_of_clusters, occurences, cluster_sizes, index_locations ]  = .
 %   cluster_sizes      - Unique sizes of the connected clusters.
 %   index_locations    - Cell array containing the indices of each cluster.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

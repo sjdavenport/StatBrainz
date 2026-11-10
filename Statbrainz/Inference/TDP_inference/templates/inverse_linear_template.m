@@ -11,9 +11,6 @@ function [ out ] = inverse_linear_template( y, k, m )
 % OUTPUT
 % out   array of the same size as y with the inverse template applied
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 % Copyright (C) - 2021 - Pierre Neuvial
 %--------------------------------------------------------------------------

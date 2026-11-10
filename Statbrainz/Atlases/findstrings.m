@@ -14,10 +14,6 @@ function [ indices, matches ] = findstrings( strings, target )
 %             contain target
 %   matches - a cell array of the entries of strings that contain target
 %--------------------------------------------------------------------------
-% EXAMPLES
-%   names = {'Left Amygdala', 'Right Amygdala', 'Left Hippocampus'};
-%   [indices, matches] = findstrings(lower(names), 'amygdala')
-%--------------------------------------------------------------------------
 % Copyright (C) - 2026 - Samuel Davenport
 %--------------------------------------------------------------------------
 

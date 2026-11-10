@@ -23,23 +23,23 @@ Line numbers are from the working tree on 2026-11-10.
 
 ## 2. Files that do not parse or cannot be called
 
-- `Inference/BayesGLM/fit_bayesglm.m:120-122`: unbalanced brackets in
+- `Deprecated/fit_bayesglm.m:120-122` (moved from `Inference/BayesGLM`): unbalanced brackets in
   `diff(range(find(any(mask_r, 2))) * res(1)`. With the brackets fixed (in a
   copy), the test asserts pass. Also line 45 checks `nargin < 5` but must check
   `< 6`, and all outputs are empty because the INLA fit is not implemented.
-- `Inference/CopeSets/fdr_simul_cs.m:66`: a bare `for`. Also line 44 uses
+- `Deprecated/fdr_simul_cs.m:52` (moved from `Inference/CopeSets`): a bare `for`. Also lines 30 and 55 use
   `thresh` but the argument is `thresh_vec`, `pvals = [..]` must be `zeros(..)`,
   and `data_tstat` and `data_std` are not defined.
-- `Statistics_Functions/FirstLevel/brain_extraction2.m:22`: an extra `)`. Also
+- `Deprecated/brain_extraction2.m:19` (moved from `StatisticsFunctions/FirstLevel`): an extra `)`. Also
   `sorted_input`, `vec_of_max_cluster_sizes`, `alpha` and `h` are not defined.
-- `Inference/BayesGLM/bayespw.m`: the function in the file is named
+- `Deprecated/bayespw.m` (moved from `Inference/BayesGLM`): the function in the file is named
   `GLM_est_resid_var_pw`. With `do_pw = 1`, line 76 fails: the placeholder `phi`
   (line 164) is ar_order x 1 but goes into an nV x ar_order slice.
-- `Surface/ReadSurfaceFiles/fs_smooth.m`, `Surface/Plotting/srfgui.m`: stubs.
+- `Deprecated/fs_smooth.m` (moved from `Surface/ReadSurfaceFiles`), `Deprecated/srfgui.m` (moved from `Surface/Plotting`): stubs.
   `fs_smooth` never assigns its output `out`.
 - Function name is not the file name (MATLAB uses the file name, so these work,
-  but they are confusing): `expand2mask.m` (`expand2MNI`), `Xgen2.m` (`Xgen`),
-  `brain_extraction3.m` (`brain_extraction`), `slidergui3.m` (`sliderGUI3`),
+  but they are confusing):
+  `slidergui3.m` (`sliderGUI3`),
   `bayespw.m` (see above), `overlay_brain3_dep.m` (`overlay_brain3`).
 
 ## 3. Wrong results
@@ -95,7 +95,7 @@ Line numbers are from the working tree on 2026-11-10.
   wrong order: 0.05 goes to `dointerp` and `'top'` to `dofullscreen`.
 - `srf_color_crs.m:61-62`: the `'red'` scheme has the same colours as `'blue'`.
 
-### Statistics_Functions
+### StatisticsFunctions
 - `convind.m:56`: tests `size_of_array(1) == 1` two times. The second must be
   `size_of_array(2) == 1`. `convind(3,[5,1])` gives `[3,1]`, not `3`.
 - `ImageOperations/Kernels/GkerMV2.m:38`: the exponent uses only `x(1,:)` and
@@ -171,8 +171,8 @@ Line numbers are from the working tree on 2026-11-10.
   - `srf_dilate_mask` erosion returns a double, the help says logical.
   - `loadmask` has an unused hard-coded `sbdir`.
 
-### Brain Functions, Atlases, root
-- `Brain Functions/gen_mask.m:35`: `ones(prod(stdsize))` makes an n x n matrix,
+### BrainFunctions, Atlases, root
+- `BrainFunctions/gen_mask.m:35`: `ones(prod(stdsize))` makes an n x n matrix,
   not an n x 1 vector. It also uses a global `stdsize`, which usually has no
   value. The test passes in the clone only because of a clone global bug; it
   must fail in MATLAB.

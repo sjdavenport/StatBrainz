@@ -24,9 +24,6 @@ function [ true_tfce_cluster_im, true_tfce_clusters, cluster_pvals ] = ...
 % cluster_pvals            p-values for each cluster (only if vec_of_maxima
 %                          is provided)
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

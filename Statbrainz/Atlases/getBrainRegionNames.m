@@ -10,14 +10,6 @@ function names = getBrainRegionNames(xml_file)
 %  names      a cell array of strings, where each element contains the name
 %             of a brain region
 %--------------------------------------------------------------------------
-% EXAMPLES
-%       names = getBrainRegionNames('C:\Users\12SDa\davenpor\davenpor\Toolboxes\BrainStat\Atlases\HarvardOxford\HarvardOxford-Cortical.xml');
-%       for name = names
-%           disp(name)
-%       end
-%       getBrainRegionNames('C:\Users\12SDa\davenpor\davenpor\Toolboxes\StatBrainz\Atlases\HarvardOxford\HarvardOxford-Cortical.xml');
-%   See also PARSEXML, REGEXP
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

@@ -18,20 +18,6 @@ function [number_of_clusters, occurences, cluster_sizes, index_locations] = ...
 %   cluster_sizes      - Unique sizes of the connected clusters.
 %   index_locations    - Cell array containing the indices of each cluster.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% thresh = 1;
-% sims = randn(10,10)
-% [number_of_clusters, occurences, sizes, index_locations] = numOfConComps(sims, thresh);
-% sims > thresh
-% sizes
-%
-% dim = [25,25]; noise = randn(dim); FWHM = 4;
-% [smooth_noise, ss] = fast_conv(noise, FWHM, 2);
-% smooth_noise = smooth_noise./sqrt(ss);
-% [number_of_clusters, occurences, sizes, index_locations] = numOfConComps(smooth_noise, 1);
-% surviving_cluster_im = cluster_im( dim, index_locations, 25 )
-% imagesc(surviving_cluster_im)
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 % Copyright (C) - 2019 - Thomas Maullin
 %--------------------------------------------------------------------------

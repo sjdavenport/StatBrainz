@@ -9,10 +9,6 @@ function img = imgload( filename )
 % OUTPUT
 % img       an array of the numbers in the image
 %--------------------------------------------------------------------------
-% EXAMPLES
-% im = imgload('MNImask');
-% pan3(im, [30,40,50])
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 sb_dir = statbrainz_maindir;

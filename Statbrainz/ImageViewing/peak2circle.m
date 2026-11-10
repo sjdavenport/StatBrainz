@@ -12,10 +12,6 @@ function [ circlemask ] = peak2circle( point_coordinates )
 % circlemask   a logical 182x218x182 array with a hollow shell around the
 %              specified point
 %--------------------------------------------------------------------------
-% EXAMPLES
-% [ circlemask ] = peak2circle( [49,50,49] );
-% imagesc(circlemask(:,:,98))
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

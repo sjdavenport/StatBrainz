@@ -12,9 +12,6 @@ function [maxsumlocs, totalinslice] = bestclusterslice( slice_no, surviving_clus
 %   - maxsumlocs: Indices of the maximum sum locations within the slice.
 %   - totalinslice: Total values for each position in the specified slice.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

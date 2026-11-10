@@ -19,13 +19,6 @@ function [ im ] = viewthresh( map, frontgroundcolor, backgroundcolor )
 %   im - A 3D matrix representing the RGB image where the foreground and 
 %        background are colored according to the specified colors.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% dim = [50,50]; radii = 5;
-% signal = square_signal(dim, radii )
-% imagesc(signal)
-% signal = square_signal(dim, 4, {[25,20], [25,30]} )
-% viewthresh(signal, [1,0,0])
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

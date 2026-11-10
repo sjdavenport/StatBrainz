@@ -21,12 +21,6 @@ function CC = conncomp_bw( BW, connectivity, use_flood_fill )
 %        .PixelIdxList  1 x NumObjects cell array, each cell a column vector
 %                       of the linear indices of the voxels in that component
 %--------------------------------------------------------------------------
-% EXAMPLES
-% mask = zeros(10,10); mask(2,2) = 1; mask(5:8,5:8) = 1;
-% CC = conncomp_bw( mask );
-% CC.NumObjects
-% cellfun(@numel, CC.PixelIdxList)
-%--------------------------------------------------------------------------
 % Copyright (C) - 2026 - Samuel Davenport
 %--------------------------------------------------------------------------
 

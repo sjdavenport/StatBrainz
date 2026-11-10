@@ -11,15 +11,6 @@ function [ out ] = mgzwrite( voldata, filename )
 % OUTPUT
 %  (none)  writes the file to disk
 %--------------------------------------------------------------------------
-% EXAMPLES
-% mask = MRIread('/Users/sdavenport/Documents/Data/Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/mri/brainmask.mgz');
-% subplot(1,2,1)
-% imagesc(mask.vol(:,:,50))
-% mgzwrite(mask.vol, './test.mgz')
-% testim = MRIread('./test.mgz')
-% subplot(1,2,2)
-% imagesc(testim.vol(:,:,50))
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

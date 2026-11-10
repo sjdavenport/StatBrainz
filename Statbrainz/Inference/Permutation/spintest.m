@@ -20,9 +20,6 @@ function [threshold, rho_store] = spintest( X, Y, srf_sphere, nperm, alpha, show
 %   threshold: Threshold value computed from the spin test.
 %   rho_store: Correlation values stored during the spin test.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

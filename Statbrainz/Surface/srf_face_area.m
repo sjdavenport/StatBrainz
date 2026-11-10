@@ -11,9 +11,6 @@ function [face_areas, vertex_areas] = srf_face_area( srf )
 %  vertex_areas  a vector giving the area associated with each vertex
 %                (sum of one-third of each adjacent face area)
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

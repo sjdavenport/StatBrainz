@@ -14,9 +14,6 @@ function color_map = srf_redblue_crs( srf, lower_band, upper_band, xbar, c, addl
 % OUTPUT
 %  color_map   an nvertices-by-3 RGB colour map for the surface
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

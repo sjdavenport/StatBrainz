@@ -10,10 +10,6 @@ function [ data_pw ] = prewhiten( data )
 % OUTPUT
 % data_pw   a matrix of the same size as data with pre-whitened rows
 %--------------------------------------------------------------------------
-% EXAMPLES
-% data = Xgen2( 10000, 176, 0.7, 'ar1' );
-% data_pw = prewhiten( data );
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

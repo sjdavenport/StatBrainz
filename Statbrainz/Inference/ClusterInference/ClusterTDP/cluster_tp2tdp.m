@@ -11,9 +11,6 @@ function [ tdp_bounds ] = cluster_tp2tdp( tp_bounds, clusters )
 % OUTPUT:
 %   - tdp_bounds: True discovery proportion bounds.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

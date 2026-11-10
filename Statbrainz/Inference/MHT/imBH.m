@@ -13,11 +13,6 @@ function [rejection_ind, n_rejections] = imBH( pvals, mask )
 %                 given entry is 1 if that hypothesis is rejected
 % n_rejections    the total number of rejections
 %--------------------------------------------------------------------------
-% EXAMPLES
-% data = wnoise([10,10,20]);
-% mask = peakgen( 1, 5, 3, [10,10]) > 0.5;
-% rejection_ind = imBH( data, mask )
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

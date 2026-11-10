@@ -10,9 +10,6 @@ function [ mask ] = loadmask( srf, maskname )
 % OUTPUT
 %  mask  struct with .lh and .rh logical mask vectors for the region
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

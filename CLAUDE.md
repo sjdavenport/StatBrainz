@@ -8,8 +8,8 @@ of, brain imaging data. It provides functions for:
 - clustersize inference, TFCE and cluster TDP (`Inference/ClusterInference`)
 - CoPE / confidence sets, single and simultaneous (`Inference/CopeSets`)
 - first level and Bayesian GLMs, ICA (`Inference/FirstLevel`, `Inference/BayesGLM`, `Inference/ICA`)
-- statistics, signal and noise generation, smoothing and masks (`Statistics_Functions/...`)
-- reading, viewing and plotting volumes (`ImageViewing`, `Brain Functions`, `Atlases`)
+- statistics, signal and noise generation, smoothing and masks (`StatisticsFunctions/...`)
+- reading, viewing and plotting volumes (`ImageViewing`, `BrainFunctions`, `Atlases`)
 - reading, smoothing and plotting surfaces (`Surface/...`)
 
 Data used by the functions and examples (MNI templates, fsaverage surfaces,
@@ -74,9 +74,6 @@ function [ out1, out2 ] = function_name( arg1, arg2, opt_arg )
 %  out1      a description of out1
 %  out2      a description of out2
 %--------------------------------------------------------------------------
-% EXAMPLES
-% See ex_function_name.m
-%--------------------------------------------------------------------------
 % Copyright (C) - 2026 - Samuel Davenport
 %--------------------------------------------------------------------------
 
@@ -103,7 +100,6 @@ end
   are none, write `% None`.
 - Optional arguments state their default as `Default is <value>.`
 - Set defaults for optional arguments with `if ~exist( 'arg', 'var' )`.
-- The EXAMPLES block may hold a few short lines of code, or `See ex_<name>.m`.
 - The Copyright line gives the year the function was written.
 - Spaces inside the brackets of the signature and of `exist( ... )` calls.
 - Don't use classes unless it is unavoidable.

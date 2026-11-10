@@ -12,10 +12,6 @@ function colored_region_mask = colorRegion(region_mask, color)
 % OUTPUT
 %  colored_region_mask   colored region mask of size [r,c,3]
 %--------------------------------------------------------------------------
-% EXAMPLES
-%    color = 'red';
-%    colored_region_mask = colorRegion(region_mask, color);
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 [r,c] = size(region_mask);

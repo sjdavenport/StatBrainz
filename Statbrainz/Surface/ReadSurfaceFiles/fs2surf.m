@@ -12,9 +12,6 @@ function srf = fs2surf( path4fs, path4fsright)
 %  srf  surface structure with .faces, .vertices, .nfaces, .nvertices
 %       fields; bilateral struct with .lh/.rh if path4fsright is supplied
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 %--------------------------------------------------------------------------
 

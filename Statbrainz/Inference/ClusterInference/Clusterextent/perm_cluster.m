@@ -22,12 +22,6 @@ function [ threshold, vec_of_max_cluster_sizes, permuted_tstat_store ] = ...
 % permuted_tstat_store    matrix of permuted t-statistics (if store_perms=1,
 %                         otherwise NaN)
 %--------------------------------------------------------------------------
-% EXAMPLES
-% dim = [50,50]; nsubj = 50; FWHM = 0;
-% Sig = 0.25*peakgen(1, 10, 8, dim);
-% data = wnoise(dim, nsubj) + Sig;
-% threshold = perm_tfce(data, ones(dim))
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

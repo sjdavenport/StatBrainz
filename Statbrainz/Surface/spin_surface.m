@@ -23,9 +23,6 @@ function [ left_rotations,  right_rotations] = ...
 %   left_rotations - Rotated data from the left hemisphere.
 %   right_rotations - Rotated data from the right hemisphere.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2023 - Samuel Davenport
 % Copyright (C) - 2018 - Alexander-Bloch 
 %--------------------------------------------------------------------------

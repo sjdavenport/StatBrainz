@@ -15,12 +15,6 @@ function [ rejection_ind, nrejections, rejection_locs, maxp ] = fdrBH( pvalues, 
 % rejection_locs  the locations of the rejections
 % maxp            the maximum p-value that is still rejected
 %--------------------------------------------------------------------------
-% EXAMPLES
-% nvals = 100; normal_rvs = normrnd(0,1,1,nvals);
-% normal_rvs(1:20) = normal_rvs(1:20) + 2;
-% pvalues = 1 - normcdf(normal_rvs);
-% [ rejection_ind, nrejections, sig_locs ] = fdrBH(pvalues)
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 if ~exist('alpha', 'var')

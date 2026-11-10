@@ -24,9 +24,6 @@ function [pvals, max_cluster_within_region] = localized_csi( ...
 % max_cluster_within_region  a vector of the maximum cluster size within
 %                            each region
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2024 - Samuel Davenport
 %--------------------------------------------------------------------------
 

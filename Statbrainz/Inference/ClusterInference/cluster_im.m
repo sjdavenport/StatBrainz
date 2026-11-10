@@ -16,9 +16,6 @@ function [ surviving_cluster_im, surviving_clusters, surviving_clusters_vec] = .
 %   - surviving_clusters: Cell array containing surviving clusters as subscript indices.
 %   - surviving_clusters_vec: Cell array containing surviving clusters as linear indices.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% 
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 

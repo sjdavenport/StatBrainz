@@ -15,39 +15,6 @@ function [ mask, indices, areas ] = get_mask( atlas_name, region_name, together 
 %   indices - indices of the found areas
 %   areas - names of the found areas
 %--------------------------------------------------------------------------
-% EXAMPLES
-% mask = get_mask('HOsc', 'amygdala');
-% slice = bestclusterslice(0, mask);
-% overlay_brain(slice, {mask}, {'red'})
-%
-% mask = get_mask('HOc', 'fusiform');
-% slice = bestclusterslice(0, mask);
-% overlay_brain(slice, {mask}, {'red'})
-% 
-% mask = get_mask('HOsc', 'Hippocampus', 0);
-% slice = bestclusterslice(0, mask);
-% overlay_brain(slice, {mask}, {'red'})
-%
-% mask = get_mask('HOc', 'Middle Frontal Gyrus');
-% slice = bestclusterslice(0, mask);
-% overlay_brain(slice, {mask}, {'red'})
-%
-% mask = get_mask('HOc', 'all');
-% slice = bestclusterslice(0, mask);
-% overlay_brain(slice, {mask}, {'red'})
-%
-% mask = get_mask('HOsc', 'all');
-% slice = bestclusterslice(0, mask);
-% overlay_brain(slice, {mask}, {'red'})
-%
-% mask = get_mask('Juelich', 'all');
-% slice = bestclusterslice(0, mask);
-% overlay_brain(slice, {mask}, {'red'})
-%
-% mask = get_mask('Talairach', 'all');
-% slice = bestclusterslice(0, mask);
-% overlay_brain(slice, {mask}, {'red'})
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 if ~exist('together', 'var')

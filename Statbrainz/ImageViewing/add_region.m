@@ -11,14 +11,6 @@ function add_region( region_masks, colors2use, transparent )
 % OUTPUT
 %  None, the function plots an image.
 %--------------------------------------------------------------------------
-% EXAMPLES
-% [noise, ss] = fast_conv(randn([50,50]), 10, 2);
-% noise = noise./sqrt(ss)
-% mask1 = noise > 1;
-% mask2 = noise > 1.5;
-% imagesc(noise); hold on
-% add_region({mask1, mask2}, {'blue', 'red'}); axis off square
-%--------------------------------------------------------------------------
 % Copyright (C) - 2025 - Samuel Davenport
 %--------------------------------------------------------------------------
 
