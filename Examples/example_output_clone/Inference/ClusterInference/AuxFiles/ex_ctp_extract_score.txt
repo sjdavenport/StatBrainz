@@ -1,0 +1,33 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+minscore_min =
+
+     []
+
+
+time_taken =
+
+    3.7500
+
+
+has_finished =
+
+     1
+
+
+minscore_min =
+
+     []
+
+
+time_taken =
+
+    0.5000
+
+
+has_finished =
+
+     0
+
+cluster 1: TP lower bound cluster 2: TP lower bound 
+STATUS: PASS

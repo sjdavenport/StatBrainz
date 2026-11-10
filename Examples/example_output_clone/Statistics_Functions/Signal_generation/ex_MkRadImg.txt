@@ -1,0 +1,15 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+ans(:,:,1) =
+
+    1.7321    2.4495
+    2.4495    3.0000
+
+ans(:,:,2) =
+
+    2.4495    3.0000
+    3.0000    3.4641
+
+
+
+STATUS: PASS

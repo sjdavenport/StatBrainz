@@ -69,6 +69,26 @@ conncomp_bw 3D conn=26 trial 7           PASS
 conncomp_bw 3D conn=26 trial 8           PASS
 conncomp_bw 3D conn=26 trial 9           PASS
 conncomp_bw 3D conn=26 trial 10          PASS
+conncomp_bw 1D trial 1                   PASS
+conncomp_bw 1D trial 2                   PASS
+conncomp_bw 1D trial 3                   PASS
+conncomp_bw 1D trial 4                   PASS
+conncomp_bw 1D trial 5                   PASS
+conncomp_bw 1D trial 6                   PASS
+conncomp_bw 1D trial 7                   PASS
+conncomp_bw 1D trial 8                   PASS
+conncomp_bw 1D trial 9                   PASS
+conncomp_bw 1D trial 10                  PASS
+conncomp_bw 1D trial 11                  PASS
+conncomp_bw 1D trial 12                  PASS
+conncomp_bw 1D trial 13                  PASS
+conncomp_bw 1D trial 14                  PASS
+conncomp_bw 1D trial 15                  PASS
+conncomp_bw 1D trial 16                  PASS
+conncomp_bw 1D trial 17                  PASS
+conncomp_bw 1D trial 18                  PASS
+conncomp_bw 1D trial 19                  PASS
+conncomp_bw 1D trial 20                  PASS
 box_dilate D=2 r=1 dilate                PASS
 box_dilate D=2 r=1 erode                 PASS
 box_dilate D=2 r=2 dilate                PASS

@@ -1,11 +1,15 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the spherescreen function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% test_spherescreen
+% Tests of the spherescreen function (figures off).
+%--------------------------------------------------------------------------
+set(0, 'DefaultFigureVisible', 'off')
 
-% TODO: example inputs are placeholders — verify against intended usage.
-% spherescreen requires an open figure and a GUI environment.
-% figure; surf(peaks);
-% spherescreen
-% spherescreen(1)
+%% Default: no colorbar
+figure; surf(peaks(10));
+spherescreen;
+assert(max(abs(get(gcf, 'Position') - [360, 41.6667, 533.6667, 599.3333])) < 1e-3)
+
+%% With a colorbar
+figure; surf(peaks(10));
+spherescreen(1);
+assert(max(abs(get(gcf, 'Position') - [250, 41.6667, 600, 600])) < 1e-3)
+close all

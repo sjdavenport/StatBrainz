@@ -1,10 +1,25 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the screenshape function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% test_screenshape
+% Tests of the screenshape function (figures off).
+%--------------------------------------------------------------------------
+set(0, 'DefaultFigureVisible', 'off')
+shape = [10, 20, 300, 400];
 
-% TODO: example inputs are placeholders — verify against intended usage.
-% screenshape requires an open figure and a GUI environment.
-% figure; imagesc(rand(50,50));
-% screenshape([0, 0, 800, 600])
+%% Sets the figure position
+figure; imagesc(rand(5));
+screenshape( shape );
+assert(isequal(get(gcf, 'Position'), shape))
+
+%% A second input sets the background to white
+% Only checked when the graphics system returns the colour.
+figure; imagesc(rand(5));
+screenshape( shape, 1 );
+assert(isequal(get(gcf, 'Position'), shape))
+col = get(gcf, 'Color');
+if numel(col) == 3
+    assert(isequal(col, [1, 1, 1]))
+end
+
+%% Returns the screen size
+figure; screen_size = screenshape( shape );
+assert(isequal(screen_size, get(0, 'ScreenSize')))
+close all

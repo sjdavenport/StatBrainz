@@ -1,44 +1,26 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the get_mask function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% test_get_mask
+% Tests of the get_mask function.
+%--------------------------------------------------------------------------
+HOdir = [statbrainz_maindir, 'Atlases/HarvardOxford/'];
+HOsc = imgload([HOdir, 'HarvardOxford-sub-maxprob-thr25-2mm.nii.gz']);
+HOc = imgload([HOdir, 'HarvardOxford-cort-maxprob-thr25-2mm.nii.gz']);
 
-mask = get_mask('HOsc', 'amygdala');
-slice = bestclusterslice(0, mask);
-overlay_brain(slice, {mask}, {'red'})
+%% Amygdala: the union of the left (10) and right (20) amygdala
+[mask, indices, areas] = get_mask('HOsc', 'amygdala');
+assert(isequal(indices, [10, 20]))
+assert(length(areas) == 2)
+assert(isequal(size(mask), [91, 109, 91]))
+assert(isequal(mask, double(HOsc == 10 | HOsc == 20)))
 
-%% Fusiform
-mask = get_mask('HOc', 'fusiform');
-slice = bestclusterslice(0, mask);
-overlay_brain(slice, {mask}, {'red'})
+%% The search is not case sensitive
+mask2 = get_mask('HOsc', 'AMYGDALA');
+assert(isequal(mask2, mask))
 
-%% Hippocampus (separate hemispheres)
-mask = get_mask('HOsc', 'Hippocampus', 0);
-slice = bestclusterslice(0, mask);
-overlay_brain(slice, {mask}, {'red'})
+%% together = 0 labels the areas 1, 2, ...
+mask = get_mask('HOsc', 'amygdala', 0);
+assert(isequal(mask, 1*(HOsc == 10) + 2*(HOsc == 20)))
 
-%% Middle Frontal Gyrus
-mask = get_mask('HOc', 'Middle Frontal Gyrus');
-slice = bestclusterslice(0, mask);
-overlay_brain(slice, {mask}, {'red'})
-
-%% All HOc regions
-mask = get_mask('HOc', 'all');
-slice = bestclusterslice(0, mask);
-overlay_brain(slice, {mask}, {'red'})
-
-%% All HOsc regions
-mask = get_mask('HOsc', 'all');
-slice = bestclusterslice(0, mask);
-overlay_brain(slice, {mask}, {'red'})
-
-%% All Juelich regions
-mask = get_mask('Juelich', 'all');
-slice = bestclusterslice(0, mask);
-overlay_brain(slice, {mask}, {'red'})
-
-%% All Talairach regions
-mask = get_mask('Talairach', 'all');
-slice = bestclusterslice(0, mask);
-overlay_brain(slice, {mask}, {'red'})
+%% 'all' gives every region of the atlas
+[mask, indices] = get_mask('HOc', 'all');
+assert(isequal(indices, 1:48))
+assert(isequal(mask > 0, HOc > 0))

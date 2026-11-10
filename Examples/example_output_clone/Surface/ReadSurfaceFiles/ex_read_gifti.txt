@@ -1,0 +1,41 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+ans =
+
+       10242           3
+
+
+ans =
+
+       20480           3
+
+
+ans =
+
+   -36.7855   -18.6004    64.8213
+
+
+ans =
+
+           1        2565        2563
+
+
+ans =
+
+  logical
+
+   1
+
+
+ans =
+
+       32492           3
+
+
+ans =
+
+       64980           3
+
+read_gifti: all checks passed
+
+STATUS: PASS

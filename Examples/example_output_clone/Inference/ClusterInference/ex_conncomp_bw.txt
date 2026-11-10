@@ -1,0 +1,15 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+ans =
+
+     2
+
+
+ans =
+
+     1    16
+
+Diagonal voxels: 1 component(s) with connectivity 8, 3 with connectivity 4
+20 clusters above 2, the largest has 212 voxels
+
+STATUS: PASS

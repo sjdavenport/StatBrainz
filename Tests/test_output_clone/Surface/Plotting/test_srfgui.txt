@@ -1,5 +1,9 @@
 Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
-srf_noise returned struct with fields: lh, rh
-lh noise size [10242  1], rh noise size [10242  1]
+
+ans =
+
+           1           1        1920        1080
+
+test_srfgui: all tests passed
 
 STATUS: PASS

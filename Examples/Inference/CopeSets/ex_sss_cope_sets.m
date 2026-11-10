@@ -1,0 +1,19 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%    This script gives examples of the sss_cope_sets function
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+dim = [100, 100]; D = length(dim);
+mu = repmat(linspace(1, 3), dim(2), 1);
+nsubj = 60;
+FWHM = 3;
+mask = ones(dim);
+c = 2;
+
+lat_data = wnoise( dim, nsubj, 'L', 1);
+noise = fast_conv(lat_data, FWHM, D);
+data = noise + mu;
+
+[lower_set, upper_set] = sss_cope_sets(data, mask, c, 1000);
+cope_display(lower_set, upper_set)

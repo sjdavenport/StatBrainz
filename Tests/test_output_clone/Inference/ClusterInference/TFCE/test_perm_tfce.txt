@@ -1000,9 +1000,6 @@ tfce perm progress:   0.1
 99.9
 100.0
 
-threshold =
+ERROR: perm_tfce stores the TFCE image, not the t-statistic, for permutations 2:nperm
 
-    31.3695
-
-
-STATUS: PASS
+STATUS: FAIL

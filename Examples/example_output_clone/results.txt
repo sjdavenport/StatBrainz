@@ -1,0 +1,178 @@
+FAIL | Atlases/ex_get_mask.m | 0s | Undefined function 'capstr'.
+FAIL | ImageViewing/ex_brainmove.m | 2s | Undefined function 'sbasis'.
+FAIL | ImageViewing/ex_overlay_brain3_dep.m | 1s | Undefined function 'overlay_brain3'.
+FAIL | ImageViewing/ex_pan3.m | 2s | Array indices must be positive integers.
+FAIL | Inference/BayesGLM/ex_bayespw.m | 0s | Undefined function 'bayespw'.
+FAIL | Inference/BayesGLM/ex_fit_bayesglm.m | 0s | Undefined function 'fit_bayesglm'.
+FAIL | Inference/ClusterInference/ClusterTDP/ex_ctp_scores.m | 1s | Matrix index is out of range for deletion.
+FAIL | Inference/CopeSets/ex_fdr_crs_dep.m | 0s | Undefined function 'fdr_cope_sets'.
+FAIL | Inference/CopeSets/ex_fdr_simul_cs.m | 0s | Undefined function 'fdr_simul_cs'.
+FAIL | Inference/CopeSets/ex_scopes.m | 1s | Undefined function 'fastperm'.
+FAIL | Inference/CopeSets/ex_scopes_lm.m | 1s | Undefined function 'fastlmperm'.
+FAIL | Inference/CopeSets/ex_srf_scopes.m | 0s | Undefined function 'fastperm'.
+FAIL | Inference/Permutation/ex_spintest.m | 1s | Undefined function 'knnsearch'.
+FAIL | Statistics_Functions/Mask_functions/ex_mask_bndry.m | 0s | Undefined function 'capstr'.
+FAIL | Surfaces/Reading_surface_data/ex_mgzwrite.m | 0s | Undefined function 'save_mgh2'.
+FAIL | Surfaces/ex_SurfStatEdge.m | 1s | File not found: C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_white.surf.gii
+FAIL | Surfaces/ex_scopes.m | 1s | Undefined function or variable 'data'.
+FAIL | Surfaces/ex_spin_surface.m | 1s | Undefined function 'knnsearch'.
+FAIL | Surfaces/ex_srf_noise.m | 2s | Dot indexing requires a struct.
+FAIL | Surfaces/ex_srfplot.m | 4s | Dot indexing requires a struct.
+OK | Atlases/ex_atlas_masks.m | 29s | 
+OK | Atlases/ex_findstrings.m | 0s | 
+OK | Atlases/ex_getBrainRegionNames.m | 0s | 
+OK | Atlases/ex_getregion.m | 2s | 
+OK | Aux_Functions/ex_fast_conv.m | 0s | 
+OK | Brain Functions/ex_gen_mask.m | 1s | 
+OK | Brain Functions/ex_getMNImask.m | 0s | 
+OK | Brain Functions/ex_mvtstat_dep.m | 2s | 
+OK | Brain Functions/ex_nifti_type.m | 0s | 
+OK | Brain Functions/ex_plane2index.m | 0s | 
+OK | Brain Functions/ex_sigma2FWHM.m | 0s | 
+OK | Brain Functions/ex_unwrap.m | 1s | 
+OK | Brain Functions/ex_vec_data.m | 0s | 
+OK | Brain Functions/ex_voxinMNI.m | 1s | 
+OK | ImageViewing/Shape_screen/ex_fullscreen.m | 0s | 
+OK | ImageViewing/Shape_screen/ex_fullscreen2.m | 0s | 
+OK | ImageViewing/Shape_screen/ex_screenshape.m | 0s | 
+OK | ImageViewing/Shape_screen/ex_spherescreen.m | 1s | 
+OK | ImageViewing/Shape_screen/ex_squarescreen.m | 1s | 
+OK | ImageViewing/Shape_screen/ex_surfscreen.m | 1s | 
+OK | ImageViewing/ex_add_region.m | 1s | 
+OK | ImageViewing/ex_colorRegion.m | 1s | 
+OK | ImageViewing/ex_combine_brains.m | 5s | 
+OK | ImageViewing/ex_imgload.m | 0s | 
+OK | ImageViewing/ex_imgsave.m | 0s | 
+OK | ImageViewing/ex_loadbrains.m | 3s | 
+OK | ImageViewing/ex_loadsubs.m | 2s | 
+OK | ImageViewing/ex_overlay_brain.m | 13s | 
+OK | ImageViewing/ex_overlay_brainslice.m | 10s | 
+OK | ImageViewing/ex_peak2circle.m | 1s | 
+OK | ImageViewing/ex_plot_compact.m | 0s | 
+OK | ImageViewing/ex_upsample3_nn.m | 1s | 
+OK | ImageViewing/ex_viewbrain.m | 2s | 
+OK | ImageViewing/ex_viewdata.m | 1s | 
+OK | ImageViewing/ex_viewdata2.m | 0s | 
+OK | ImageViewing/ex_viewthresh.m | 1s | 
+OK | Inference/BayesGLM/ex_Copy_of_fit_bayesglm.m | 1s | 
+OK | Inference/ClusterInference/AuxFiles/ex_cluster2csv.m | 0s | 
+OK | Inference/ClusterInference/AuxFiles/ex_ctp_extract_score.m | 0s | 
+OK | Inference/ClusterInference/AuxFiles/ex_rkval.m | 0s | 
+OK | Inference/ClusterInference/ClusterTDP/ex_cluster_tp2tdp.m | 0s | 
+OK | Inference/ClusterInference/ClusterTDP/ex_fgreedy.m | 1s | 
+OK | Inference/ClusterInference/Clusterextent/ex_index2mask.m | 1s | 
+OK | Inference/ClusterInference/Clusterextent/ex_localized_csi.m | 1s | 
+OK | Inference/ClusterInference/TFCE/ex_perm_tfce.m | 25s | 
+OK | Inference/ClusterInference/TFCE/ex_real_tfce_clusters.m | 2s | 
+OK | Inference/ClusterInference/TFCE/ex_voxLCE.m | 0s | 
+OK | Inference/ClusterInference/ex_LCE.m | 56s | 
+OK | Inference/ClusterInference/ex_bestclusterslice.m | 0s | 
+OK | Inference/ClusterInference/ex_cluster_im.m | 0s | 
+OK | Inference/ClusterInference/ex_clustertdp.m | 54s | 
+OK | Inference/ClusterInference/ex_clustertp_lowerbound.m | 0s | 
+OK | Inference/ClusterInference/ex_conncomp_bw.m | 1s | 
+OK | Inference/ClusterInference/ex_getlargestcluster.m | 1s | 
+OK | Inference/ClusterInference/ex_numOfConComps.m | 1s | 
+OK | Inference/ClusterInference/ex_pc.m | 14s | 
+OK | Inference/ClusterInference/ex_perm_cluster.m | 30s | 
+OK | Inference/ClusterInference/ex_tfce.m | 9s | 
+OK | Inference/CopeSets/ex_cope_display.m | 2s | 
+OK | Inference/CopeSets/ex_fdr_crs.m | 1s | 
+OK | Inference/CopeSets/ex_srf_blue_crs.m | 0s | 
+OK | Inference/CopeSets/ex_srf_color_crs.m | 0s | 
+OK | Inference/CopeSets/ex_srf_cope_display.m | 1s | 
+OK | Inference/CopeSets/ex_srf_cope_display2.m | 1s | 
+OK | Inference/CopeSets/ex_srf_fdr_crs.m | 1s | 
+OK | Inference/CopeSets/ex_srf_redblue_crs.m | 0s | 
+OK | Inference/CopeSets/ex_srf_scb2cope.m | 0s | 
+OK | Inference/CopeSets/ex_sss_cope_sets.m | 2s | 
+OK | Inference/FirstLevel/ex_Xgen2.m | 1s | 
+OK | Inference/FirstLevel/ex_prewhiten.m | 6s | 
+OK | Inference/MHT/ex_fdp_calc.m | 0s | 
+OK | Inference/MHT/ex_fdrBH.m | 0s | 
+OK | Inference/MHT/ex_fdrthresh.m | 1s | 
+OK | Inference/MHT/ex_imBH.m | 0s | 
+OK | Inference/MHT/ex_imBH_data.m | 0s | 
+OK | Inference/MHT/ex_localized_vi.m | 0s | 
+OK | Inference/MHT/ex_spatialBH.m | 1s | 
+OK | Inference/Resampling/ex_perm_thresh.m | 1s | 
+OK | Inference/TDP_inference/templates/ex_get_pivotal_stats.m | 1s | 
+OK | Inference/TDP_inference/templates/ex_inverse_linear_template.m | 1s | 
+OK | Inference/TDP_inference/templates/ex_linear_template.m | 0s | 
+OK | Statistics_Functions/Aux_functions/Plotting/ex_BigFont.m | 0s | 
+OK | Statistics_Functions/Aux_functions/Plotting/ex_animatefun.m | 0s | 
+OK | Statistics_Functions/Aux_functions/Plotting/ex_custom_colormap.m | 1s | 
+OK | Statistics_Functions/Aux_functions/Plotting/ex_histpdf.m | 1s | 
+OK | Statistics_Functions/Aux_functions/Plotting/ex_mytiles.m | 1s | 
+OK | Statistics_Functions/Aux_functions/Plotting/ex_plotImagesInTile.m | 0s | 
+OK | Statistics_Functions/Aux_functions/Plotting/ex_sliderGUI.m | 0s | 
+OK | Statistics_Functions/Aux_functions/Plotting/ex_slidergui3.m | 1s | 
+OK | Statistics_Functions/Aux_functions/SystemFunctions/ex_filesindir.m | 0s | 
+OK | Statistics_Functions/Aux_functions/SystemFunctions/ex_loader.m | 21s | 
+OK | Statistics_Functions/Aux_functions/SystemFunctions/ex_modul.m | 1s | 
+OK | Statistics_Functions/Aux_functions/SystemFunctions/ex_statbrainz_maindir.m | 0s | 
+OK | Statistics_Functions/Aux_functions/ex_pearsrnd.m | 0s | 
+OK | Statistics_Functions/Aux_functions/ex_trnd.m | 0s | 
+OK | Statistics_Functions/FirstLevel/ex_brain_extraction.m | 3s | 
+OK | Statistics_Functions/FirstLevel/ex_brain_extraction2.m | 0s | 
+OK | Statistics_Functions/FirstLevel/ex_brain_extraction3.m | 17s | 
+OK | Statistics_Functions/FirstLevel/ex_extract_brain.m | 1s | 
+OK | Statistics_Functions/ImageOperations/Kernels/ex_Gker.m | 0s | 
+OK | Statistics_Functions/ImageOperations/Kernels/ex_GkerMV.m | 0s | 
+OK | Statistics_Functions/ImageOperations/Kernels/ex_GkerMV2.m | 1s | 
+OK | Statistics_Functions/ImageOperations/Kernels/ex_Gkerderiv.m | 1s | 
+OK | Statistics_Functions/ImageOperations/Kernels/ex_Gkerderiv2.m | 0s | 
+OK | Statistics_Functions/ImageOperations/ex_FWHM2sigma.m | 0s | 
+OK | Statistics_Functions/ImageOperations/ex_doubleim.m | 1s | 
+OK | Statistics_Functions/Mask_functions/ex_box_dilate.m | 0s | 
+OK | Statistics_Functions/Mask_functions/ex_dilate_mask.m | 0s | 
+OK | Statistics_Functions/Mask_functions/ex_expand2mask.m | 1s | 
+OK | Statistics_Functions/Mask_functions/ex_fill_holes.m | 1s | 
+OK | Statistics_Functions/Mask_functions/ex_mask_bounds.m | 0s | 
+OK | Statistics_Functions/Mask_functions/ex_nan2zero.m | 0s | 
+OK | Statistics_Functions/Mask_functions/ex_pad_im.m | 0s | 
+OK | Statistics_Functions/Mask_functions/ex_region_bndry2D.m | 2s | 
+OK | Statistics_Functions/Mask_functions/ex_zero2nan.m | 1s | 
+OK | Statistics_Functions/Signal_generation/ex_MkRadImg.m | 1s | 
+OK | Statistics_Functions/Signal_generation/ex_MySmooth.m | 0s | 
+OK | Statistics_Functions/Signal_generation/ex_SpheroidSignal.m | 0s | 
+OK | Statistics_Functions/Signal_generation/ex_peakgen.m | 0s | 
+OK | Statistics_Functions/Signal_generation/ex_square_signal.m | 0s | 
+OK | Statistics_Functions/Signal_generation/ex_wnoise.m | 1s | 
+OK | Statistics_Functions/Stats_functions/ex_bernstd.m | 1s | 
+OK | Statistics_Functions/Stats_functions/ex_distbn2pval.m | 1s | 
+OK | Statistics_Functions/Stats_functions/ex_gmcdf.m | 0s | 
+OK | Statistics_Functions/Stats_functions/ex_gmrnd.m | 0s | 
+OK | Statistics_Functions/Stats_functions/ex_lcdf.m | 0s | 
+OK | Statistics_Functions/Stats_functions/ex_mvtstat.m | 2s | 
+OK | Statistics_Functions/Stats_functions/ex_pval2tstat.m | 0s | 
+OK | Statistics_Functions/Stats_functions/ex_tstat2pval.m | 1s | 
+OK | Statistics_Functions/ex_apower.m | 1s | 
+OK | Statistics_Functions/ex_asinh_data_trans.m | 1s | 
+OK | Statistics_Functions/ex_asinh_trans.m | 1s | 
+OK | Statistics_Functions/ex_convind.m | 0s | 
+OK | Statistics_Functions/ex_convindall.m | 0s | 
+OK | Statistics_Functions/ex_gen_noise.m | 0s | 
+OK | Surface/Plotting/ex_newfun.m | 0s | 
+OK | Surface/Plotting/ex_srf_colour.m | 1s | 
+OK | Surface/Plotting/ex_srfgui.m | 1s | 
+OK | Surface/Plotting/ex_srfplot2.m | 3s | 
+OK | Surface/Plotting/ex_surf4.m | 1s | 
+OK | Surface/ReadSurfaceFiles/ex_dpvread.m | 0s | 
+OK | Surface/ReadSurfaceFiles/ex_fs2surf.m | 0s | 
+OK | Surface/ReadSurfaceFiles/ex_fs_smooth.m | 0s | 
+OK | Surface/ReadSurfaceFiles/ex_fsannot2mask.m | 1s | 
+OK | Surface/ReadSurfaceFiles/ex_gifti2surf.m | 1s | 
+OK | Surface/ReadSurfaceFiles/ex_read_gifti.m | 1s | 
+OK | Surface/ex_loadsrf.m | 1s | 
+OK | Surface/ex_srf_contour.m | 1s | 
+OK | Surface/ex_srf_dilate_mask.m | 1s | 
+OK | Surface/ex_srf_fwhm2niters.m | 1s | 
+OK | Surfaces/ex_adjacency_matrix.m | 4s | 
+OK | Surfaces/ex_graph_cc.m | 7s | 
+OK | Surfaces/ex_loadmask.m | 0s | 
+OK | Surfaces/ex_resample_srf.m | 5s | 
+OK | Surfaces/ex_resample_srf_nn.m | 4s | 
+OK | Surfaces/ex_smooth_surface.m | 7s | 
+OK | Surfaces/ex_srf_face_area.m | 0s | 
+OK | ex_addSB2path.m | 0s | 

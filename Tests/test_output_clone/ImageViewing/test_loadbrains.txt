@@ -1,5 +1,12 @@
 Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+Loaded subject 1
+Loaded subject 2
+Loaded subject 3
+Loaded subject 1
+Loaded subject 2
+Loaded subject 3
+Loaded subject 1
+Loaded subject 2
+Loaded subject 1
 
-ERROR: Cell index exceeds dimensions.
-
-STATUS: FAIL
+STATUS: PASS

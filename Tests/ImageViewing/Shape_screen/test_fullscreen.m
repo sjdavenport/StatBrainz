@@ -1,10 +1,14 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the fullscreen function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% test_fullscreen
+% Tests of the fullscreen function (figures off).
+%--------------------------------------------------------------------------
+set(0, 'DefaultFigureVisible', 'off')
 
-% TODO: example inputs are placeholders — verify against intended usage.
-% fullscreen requires an open figure and a GUI environment.
-% figure; imagesc(rand(50,50));
-% screen_size = fullscreen;
+%% Returns the screen size
+figure; imagesc(rand(5));
+screen_size = fullscreen;
+assert(isequal(screen_size, get(0, 'ScreenSize')))
+assert(numel(screen_size) == 4)
+
+%% Runs with no output
+figure; fullscreen;
+close all

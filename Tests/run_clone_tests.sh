@@ -1,7 +1,6 @@
 #!/bin/bash
 # Runs every test_*.m in the matlab_clone engine, one process per script, in
-# parallel with a hard timeout. Output mirrors Tests/test_output/ (the MATLAB
-# run) into Tests/test_output_clone/ so the two can be compared file by file.
+# parallel with a hard timeout. Results go to Tests/test_output_clone/results.txt.
 
 SB="/workspace"
 CLONE="/mounts/matlab_clone/build-arm/matlab_clone"

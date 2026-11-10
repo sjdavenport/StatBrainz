@@ -1,0 +1,4 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+gmcdf: cdf range [0.118763, 0.881237] (expect ~[0, 1])
+
+STATUS: PASS

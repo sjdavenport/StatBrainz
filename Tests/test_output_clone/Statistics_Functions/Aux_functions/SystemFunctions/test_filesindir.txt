@@ -1,46 +1,5 @@
 Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
 
-ans =
+ERROR: Assertion failed.
 
-  1x16 cell array
-
-  Columns 1 through 3
-
-    {'Atlases'}    {'Brain Functions'}    {'BrainImages'}
-
-  Columns 4 through 6
-
-    {'ImageViewing'}    {'Inference'}    {'LICENSE'}
-
-  Columns 7 through 9
-
-    {'NOTICE'}    {'README.md'}    {'Statistics_Fun...'}
-
-  Columns 10 through 12
-
-    {'Surface'}    {'Tests'}    {'Tutorials'}
-
-  Columns 13 through 15
-
-    {'addSB2path.m'}    {'conversation-l...'}    {'output_cluster...'}
-
-  Column 16
-
-    {'output_cluster...'}
-
-
-ans =
-
-  1x1 cell array
-
-    {0x0 double}
-
-
-ans =
-
-  1x1 cell array
-
-    {0x0 double}
-
-
-STATUS: PASS
+STATUS: FAIL

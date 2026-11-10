@@ -1,0 +1,25 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+out =
+
+         0    1.1228   -1.4223   -0.1731    1.0000
+    1.0000    0.3028    1.5201   -1.7617    2.0000
+    2.0000    0.0709   -0.2914   -0.0877    3.0000
+    3.0000    0.0730   -0.1331    1.3669    4.0000
+
+
+values =
+
+     1
+     2
+     3
+     4
+
+
+out2 =
+
+         0    1.1228   -1.4223   -0.1731    1.0000
+    1.0000    0.3028    1.5201   -1.7617    2.0000
+
+
+STATUS: PASS

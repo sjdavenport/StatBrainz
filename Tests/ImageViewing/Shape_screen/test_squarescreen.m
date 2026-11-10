@@ -1,10 +1,10 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the squarescreen function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% test_squarescreen
+% Tests of the squarescreen function (figures off).
+%--------------------------------------------------------------------------
+set(0, 'DefaultFigureVisible', 'off')
 
-% TODO: example inputs are placeholders — verify against intended usage.
-% squarescreen requires an open figure and a GUI environment.
-% figure; imagesc(rand(50,50));
-% squarescreen
+%% Sets the figure position
+figure; imagesc(rand(5));
+squarescreen;
+assert(isequal(get(gcf, 'Position'), [0, 35, 650, 607]))
+close all

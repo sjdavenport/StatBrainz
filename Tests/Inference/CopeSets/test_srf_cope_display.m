@@ -1,14 +1,28 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the srf_cope_display function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tests for srf_cope_display (a plotting function: smoke tests)
 
-% TODO: example inputs are placeholders — verify against intended usage.
-% srf = loadsrf(...);
-% nv = length(srf.vertices);
-% lower_set = rand(nv, 1) > 0.5;
-% upper_set = rand(nv, 1) > 0.7;
-% muhat = randn(nv, 1);
-% c = 0;
-% srf_cope_display( srf, lower_set, upper_set, muhat, c );
+srf = loadsrf('fs4', 'white');
+rng(38)
+muhat = srf_noise(srf, 4);
+c = 0;
+
+%% One hemisphere runs
+figure;
+srf_cope_display(srf.lh, muhat.lh + 0.5 > c, muhat.lh - 0.5 > c, muhat.lh, c);
+close all
+
+%% Contour and the alternative colours run
+figure;
+srf_cope_display(srf.lh, muhat.lh + 0.5 > c, muhat.lh - 0.5 > c, muhat.lh, c, 0, 1, 0, 0);
+close all
+
+%% Both hemispheres run
+lower_set.lh = muhat.lh + 0.5 > c; lower_set.rh = muhat.rh + 0.5 > c;
+upper_set.lh = muhat.lh - 0.5 > c; upper_set.rh = muhat.rh - 0.5 > c;
+figure;
+srf_cope_display(srf, lower_set, upper_set, muhat, c);
+close all
+
+%% The output out can be requested
+figure;
+out = srf_cope_display(srf.lh, lower_set.lh, upper_set.lh, muhat.lh, c);
+close all

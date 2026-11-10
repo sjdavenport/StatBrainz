@@ -1,4 +1,3 @@
 Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
-plot_compact(2, 3) completed without error
 
 STATUS: PASS

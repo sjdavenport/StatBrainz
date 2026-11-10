@@ -1,0 +1,23 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+ans =
+
+       10242
+
+
+ans =
+
+       20480
+
+
+ans =
+
+       10242
+
+
+ans =
+
+       10242
+
+
+STATUS: PASS

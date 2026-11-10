@@ -1,0 +1,13 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+ans =
+
+  1x2 cell array
+
+    {2x3 double}    {[22 15 37]}
+
+    32    15    37
+    31    15    37
+
+
+STATUS: PASS

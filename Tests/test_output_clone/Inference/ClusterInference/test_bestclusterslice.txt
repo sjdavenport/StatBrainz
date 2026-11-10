@@ -1,13 +1,5 @@
 Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
 
-maxsumlocs =
+ERROR: bestclusterslice fails for a cell array input
 
-    40    41    42    43    44    45    46    47    48    49    50
-
-
-ans =
-
-        1331
-
-
-STATUS: PASS
+STATUS: FAIL

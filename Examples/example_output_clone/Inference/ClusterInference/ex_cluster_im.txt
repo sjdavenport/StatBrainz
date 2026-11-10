@@ -1,0 +1,25 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+surviving_cluster_im =
+
+     1     0     0     0     0     0     0     0     0     0
+     1     0     0     0     0     0     0     0     0     0
+     1     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     1     0     0     0     0     0
+     0     0     0     0     0     1     0     0     0     0
+     0     0     0     0     0     0     1     0     0     0
+     0     0     0     0     0     0     0     1     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+
+
+ans =
+
+     5     5
+     6     6
+     7     7
+     8     8
+
+
+STATUS: PASS

@@ -1,0 +1,6 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+3 x 1 surfaces to smooth, % remaining: 100 Done
+
+ERROR: Assertion failed.
+
+STATUS: FAIL

@@ -1,31 +1,19 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the srf_scopes function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tests for srf_scopes (calls scopes, which needs fastperm)
 
-%%
-FWHM_sig = 5;
-dim = [50,50];
-nsubj = 100;
-Sig = fast_conv(wnoise(dim, 1), FWHM_sig, 2);
+srf = loadsrf('fs4', 'white');
+nvl = srf.lh.nvertices; nvr = srf.rh.nvertices;
+rng(36)
+nsubj = 20;
+data.lh = randn(nvl, nsubj); data.rh = randn(nvr, nsubj) + 1;
+mask.lh = true(nvl, 1); mask.rh = srf.rh.vertices(:, 2) > 0;
 
-data = wnoise(dim, nsubj) + Sig;
-FWHM_applied = 5;
+%% Same as scopes on the stacked data in the mask
+rng(37); [lower_band, upper_band, threshold] = srf_scopes(data, mask, 100, 0.05, 0);
+rng(37); [l, u, t] = scopes([data.lh; data.rh(mask.rh, :)], nsubj, 100, 0.05, 0);
+assert(threshold == t)
+assert(isequal(lower_band.lh, l(1:nvl)) && isequal(upper_band.rh(mask.rh), u(nvl+1:end)))
 
-mask = ones(dim) > 0;
-smoothed_data = fast_conv(data, FWHM_applied, 2);
-c_vec = 0:0.1:0.2;
-[ lower_band, upper_band ] = scopes( smoothed_data, mask, 1000, 0.05, 1 );
-
-smooth_Sig = fast_conv(Sig, FWHM_applied, 2);
-
-%%
-figure
-c_vec = 0.05:0.05:0.2;
-for I = 1:length(c_vec)
-    subplot(2,2,I)
-    cope_display( upper_band > c_vec(I), lower_band > c_vec(I), mean(smoothed_data,3), c_vec(I), smooth_Sig, 1, 0, 1.5);
-    title(['SCOPES, c = ', num2str(c_vec(I))])
-end
-fullscreen
+%% Sizes and zero outside the mask
+assert(isequal(size(lower_band.rh), [nvr, 1]))
+assert(~any(lower_band.rh(~mask.rh)) && ~any(upper_band.rh(~mask.rh)))
+assert(all(lower_band.lh <= upper_band.lh))

@@ -1,0 +1,11 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%    This script gives examples of the imBH function
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+data = wnoise([10,10,20]);
+tstat = mvtstat(data);
+pvals = 1 - tcdf(tstat, 19);
+mask = peakgen( 1, 5, 3, [10,10]) > 0.5;
+rejection_ind = imBH( pvals, mask )

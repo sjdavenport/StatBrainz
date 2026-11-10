@@ -1,0 +1,127 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+conncomp_bw 2D conn=4 trial 1            PASS
+conncomp_bw 2D conn=4 trial 2            PASS
+conncomp_bw 2D conn=4 trial 3            PASS
+conncomp_bw 2D conn=4 trial 4            PASS
+conncomp_bw 2D conn=4 trial 5            PASS
+conncomp_bw 2D conn=4 trial 6            PASS
+conncomp_bw 2D conn=4 trial 7            PASS
+conncomp_bw 2D conn=4 trial 8            PASS
+conncomp_bw 2D conn=4 trial 9            PASS
+conncomp_bw 2D conn=4 trial 10           PASS
+conncomp_bw 2D conn=4 trial 11           PASS
+conncomp_bw 2D conn=4 trial 12           PASS
+conncomp_bw 2D conn=4 trial 13           PASS
+conncomp_bw 2D conn=4 trial 14           PASS
+conncomp_bw 2D conn=4 trial 15           PASS
+conncomp_bw 2D conn=4 trial 16           PASS
+conncomp_bw 2D conn=4 trial 17           PASS
+conncomp_bw 2D conn=4 trial 18           PASS
+conncomp_bw 2D conn=4 trial 19           PASS
+conncomp_bw 2D conn=4 trial 20           PASS
+conncomp_bw 2D conn=8 trial 1            PASS
+conncomp_bw 2D conn=8 trial 2            PASS
+conncomp_bw 2D conn=8 trial 3            PASS
+conncomp_bw 2D conn=8 trial 4            PASS
+conncomp_bw 2D conn=8 trial 5            PASS
+conncomp_bw 2D conn=8 trial 6            PASS
+conncomp_bw 2D conn=8 trial 7            PASS
+conncomp_bw 2D conn=8 trial 8            PASS
+conncomp_bw 2D conn=8 trial 9            PASS
+conncomp_bw 2D conn=8 trial 10           PASS
+conncomp_bw 2D conn=8 trial 11           PASS
+conncomp_bw 2D conn=8 trial 12           PASS
+conncomp_bw 2D conn=8 trial 13           PASS
+conncomp_bw 2D conn=8 trial 14           PASS
+conncomp_bw 2D conn=8 trial 15           PASS
+conncomp_bw 2D conn=8 trial 16           PASS
+conncomp_bw 2D conn=8 trial 17           PASS
+conncomp_bw 2D conn=8 trial 18           PASS
+conncomp_bw 2D conn=8 trial 19           PASS
+conncomp_bw 2D conn=8 trial 20           PASS
+conncomp_bw 3D conn=6 trial 1            PASS
+conncomp_bw 3D conn=6 trial 2            PASS
+conncomp_bw 3D conn=6 trial 3            PASS
+conncomp_bw 3D conn=6 trial 4            PASS
+conncomp_bw 3D conn=6 trial 5            PASS
+conncomp_bw 3D conn=6 trial 6            PASS
+conncomp_bw 3D conn=6 trial 7            PASS
+conncomp_bw 3D conn=6 trial 8            PASS
+conncomp_bw 3D conn=6 trial 9            PASS
+conncomp_bw 3D conn=6 trial 10           PASS
+conncomp_bw 3D conn=18 trial 1           PASS
+conncomp_bw 3D conn=18 trial 2           PASS
+conncomp_bw 3D conn=18 trial 3           PASS
+conncomp_bw 3D conn=18 trial 4           PASS
+conncomp_bw 3D conn=18 trial 5           PASS
+conncomp_bw 3D conn=18 trial 6           PASS
+conncomp_bw 3D conn=18 trial 7           PASS
+conncomp_bw 3D conn=18 trial 8           PASS
+conncomp_bw 3D conn=18 trial 9           PASS
+conncomp_bw 3D conn=18 trial 10          PASS
+conncomp_bw 3D conn=26 trial 1           PASS
+conncomp_bw 3D conn=26 trial 2           PASS
+conncomp_bw 3D conn=26 trial 3           PASS
+conncomp_bw 3D conn=26 trial 4           PASS
+conncomp_bw 3D conn=26 trial 5           PASS
+conncomp_bw 3D conn=26 trial 6           PASS
+conncomp_bw 3D conn=26 trial 7           PASS
+conncomp_bw 3D conn=26 trial 8           PASS
+conncomp_bw 3D conn=26 trial 9           PASS
+conncomp_bw 3D conn=26 trial 10          PASS
+box_dilate D=2 r=1 dilate                PASS
+box_dilate D=2 r=1 erode                 PASS
+box_dilate D=2 r=2 dilate                PASS
+box_dilate D=2 r=2 erode                 PASS
+box_dilate D=2 r=3 dilate                PASS
+box_dilate D=2 r=3 erode                 PASS
+box_dilate D=3 r=1 dilate                PASS
+box_dilate D=3 r=1 erode                 PASS
+box_dilate D=3 r=2 dilate                PASS
+box_dilate D=3 r=2 erode                 PASS
+box_dilate D=3 r=3 dilate                PASS
+box_dilate D=3 r=3 erode                 PASS
+fill_holes trial 1                       PASS
+fill_holes trial 2                       PASS
+fill_holes trial 3                       PASS
+fill_holes trial 4                       PASS
+fill_holes trial 5                       PASS
+fill_holes trial 6                       PASS
+fill_holes trial 7                       PASS
+fill_holes trial 8                       PASS
+fill_holes trial 9                       PASS
+fill_holes trial 10                      PASS
+fill_holes trial 11                      PASS
+fill_holes trial 12                      PASS
+fill_holes trial 13                      PASS
+fill_holes trial 14                      PASS
+fill_holes trial 15                      PASS
+fill_holes trial 16                      PASS
+fill_holes trial 17                      PASS
+fill_holes trial 18                      PASS
+fill_holes trial 19                      PASS
+fill_holes trial 20                      PASS
+fill_holes trial 21                      PASS
+fill_holes trial 22                      PASS
+fill_holes trial 23                      PASS
+fill_holes trial 24                      PASS
+fill_holes trial 25                      PASS
+fill_holes trial 26                      PASS
+fill_holes trial 27                      PASS
+fill_holes trial 28                      PASS
+fill_holes trial 29                      PASS
+fill_holes trial 30                      PASS
+upsample3_nn trial 1                     PASS
+upsample3_nn trial 2                     PASS
+upsample3_nn trial 3                     PASS
+upsample3_nn trial 4                     PASS
+upsample3_nn trial 5                     PASS
+upsample3_nn trial 6                     PASS
+upsample3_nn trial 7                     PASS
+upsample3_nn trial 8                     PASS
+upsample3_nn trial 9                     PASS
+upsample3_nn trial 10                    PASS
+
+All IPT-free replacement tests passed.
+
+STATUS: PASS

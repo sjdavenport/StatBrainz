@@ -9,7 +9,7 @@
 %   * RFTtoolbox  -- for convfield
 % These are needed ONLY to reproduce the comparison. fast_conv itself is
 % self-contained and depends on NEITHER SPM nor RFTtoolbox -- see
-% Tests/Aux_Functions/test_fast_conv.m for standalone fast_conv examples that
+% Examples/Aux_Functions/ex_fast_conv.m for standalone fast_conv examples that
 % run with no external dependencies.
 %
 % To run this tutorial you first need to add all functions in the StatBrainz

@@ -29,9 +29,12 @@ and run the function addSB2path.m
 StatBrainz runs in base MATLAB, but some functions require the following MATLAB toolboxes:
 
 - **Statistics and Machine Learning Toolbox** — used throughout the inference and statistics code (e.g. `normcdf`, `norminv`, `tcdf`, `tinv`, `normrnd`, `binornd`, `randsample`, `prctile`, `corr`, `pdist`, `mvnpdf`, `skewness`, `kurtosis`).
-- **Image Processing Toolbox** — used by `dilmask.m` (`imresize`, `strel`, `imdilate`, `imshow`).
+- **Image Processing Toolbox** — used by `dilmask.m` (`imresize`, `strel`, `imdilate`, `imshow`) and `lmindices.m` (`imregionalmax`).
 
-SPM is no longer required.
+The CoPE set functions `scopes.m`, `srf_scopes.m` and `scopes_lm.m` require the
+[fastperm](https://github.com/sjdavenport/fastperm) package (`fastperm`,
+`fastperm_mean`, `fastlmperm`, `lmthresh2scb`). Add its `matperm` folder and
+subfolders to the MATLAB path to use them.
 
 ## Illustrations
 ### Simultaneous bounds on excursion sets

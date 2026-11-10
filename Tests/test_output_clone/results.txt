@@ -1,168 +1,169 @@
-FAIL | Atlases/test_get_mask.m | 0s | Undefined function 'capstr'.
-FAIL | ImageViewing/test_brainmove.m | 1s | Undefined function 'sbasis'.
-FAIL | ImageViewing/test_loadbrains.m | 1s | Cell index exceeds dimensions.
-FAIL | ImageViewing/test_loadsubs.m | 0s | Cell index exceeds dimensions.
-FAIL | ImageViewing/test_overlay_brain3_dep.m | 1s | Undefined function 'overlay_brain3'.
-FAIL | Inference/ClusterInference/test_LCE.m | 258s | In 2D connectivity must be 4 or 8.
-FAIL | Inference/ClusterInference/test_clustertdp.m | 12s | Index exceeds matrix dimensions.
-FAIL | Inference/ClusterInference/test_perm_cluster.m | 19s | Expression returned no value where one was required.
-FAIL | Inference/CopeSets/test_cope_display.m | 0s | Undefined function 'fdr_cope_sets'.
-FAIL | Inference/CopeSets/test_fdr_crs_dep.m | 0s | Undefined function 'fdr_cope_sets'.
-FAIL | Inference/CopeSets/test_fdr_simul_cs.m | 1s | Undefined function 'fdr_cope_sets'.
-FAIL | Inference/CopeSets/test_scopes.m | 1s | Undefined function or variable 'show_loader'.
-FAIL | Inference/CopeSets/test_scopes_lm.m | 1s | Undefined function 'contrast_tstats'.
+FAIL | Atlases/test_get_mask.m | 2s | Undefined function 'capstr'.
+FAIL | ImageViewing/Shape_screen/test_fullscreen2.m | 0s | Assertion failed.
+FAIL | ImageViewing/Shape_screen/test_screenshape.m | 0s | Expression returned no value where one was required.
+FAIL | ImageViewing/test_brainmove.m | 1s | Assertion failed.
+FAIL | ImageViewing/test_combine_brains.m | 8s | Operator '>' not supported for these types.
+FAIL | ImageViewing/test_overlay_brain.m | 16s | A null assignment can have only one non-colon index.
+FAIL | ImageViewing/test_pan3.m | 1s | Array indices must be positive integers.
+FAIL | Inference/BayesGLM/test_bayespw.m | 1s | Undefined function 'bayespw'.
+FAIL | Inference/BayesGLM/test_fit_bayesglm.m | 1s | Undefined function 'fit_bayesglm'.
+FAIL | Inference/ClusterInference/AuxFiles/test_ctp_extract_score.m | 1s | Assertion failed.
+FAIL | Inference/ClusterInference/ClusterTDP/test_ctp_scores.m | 0s | Matrix index is out of range for deletion.
+FAIL | Inference/ClusterInference/Clusterextent/test_localized_csi.m | 0s | localized_csi gives the wrong cluster size for a region with one cluster
+FAIL | Inference/ClusterInference/Clusterextent/test_perm_cluster.m | 2s | perm_cluster: the maximum cluster sizes are not integers
+FAIL | Inference/ClusterInference/TFCE/test_perm_tfce.m | 5s | perm_tfce stores the TFCE image, not the t-statistic, for permutations 2:nperm
+FAIL | Inference/ClusterInference/test_bestclusterslice.m | 0s | bestclusterslice fails for a cell array input
+FAIL | Inference/ClusterInference/test_numOfConComps.m | 0s | numOfConComps gives the wrong sizes when all clusters have the same size
+FAIL | Inference/CopeSets/test_cope_display.m | 1s | Undefined function 'plot_contour'.
+FAIL | Inference/CopeSets/test_fdr_simul_cs.m | 1s | Undefined function 'fdr_simul_cs'.
+FAIL | Inference/CopeSets/test_scopes.m | 1s | Undefined function 'fastperm'.
+FAIL | Inference/CopeSets/test_scopes_lm.m | 0s | Undefined function 'fastlmperm'.
+FAIL | Inference/CopeSets/test_srf_color_crs.m | 0s | Assertion failed.
+FAIL | Inference/CopeSets/test_srf_cope_display.m | 1s | Expression returned no value where one was required.
+FAIL | Inference/CopeSets/test_srf_cope_display2.m | 1s | Expression returned no value where one was required.
+FAIL | Inference/CopeSets/test_srf_scb2cope.m | 1s | Dot indexing requires a struct.
 FAIL | Inference/CopeSets/test_srf_scopes.m | 1s | Undefined function 'fastperm'.
-FAIL | Inference/MHT/test_imBH.m | 0s | Matrix dimensions must agree for '~=' (1x3 vs 1x2).
-FAIL | Inference/Permutation/test_spintest.m | 0s | Undefined function or variable 'X'.
-FAIL | Statistics_Functions/Aux_functions/Plotting/test_histpdf.m | 1s | Undefined function 'histpdf'.
-FAIL | Statistics_Functions/Mask_functions/test_mask_bndry.m | 0s | Undefined function 'capstr'.
-FAIL | Surface/ReadSurfaceFiles/test_fs_smooth.m | 1s | Expression returned no value where one was required.
-FAIL | Surface/ReadSurfaceFiles/test_fsannot2mask.m | 0s | Output argument 'vertices' is not assigned.
-FAIL | Surface/ReadSurfaceFiles/test_gifti2surf.m | 0s | Undefined function 'javaObject'.
-FAIL | Surface/ReadSurfaceFiles/test_read_gifti.m | 0s | Undefined function 'javaObject'.
-FAIL | Surfaces/Reading_surface_data/test_mgzwrite.m | 0s | MRIread: cannot open '/Users/sdavenport/Documents/Data/Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/mri/brainmask.mgz'.
-FAIL | Surfaces/test_SurfStatEdge.m | 1s | File not found: C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_white.surf.gii
-FAIL | Surfaces/test_adjacency_matrix.m | 0s | File not found: C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_white.surf.gii
-FAIL | Surfaces/test_graph_cc.m | 5s | Undefined function 'graph'.
-FAIL | Surfaces/test_loadmask.m | 1s | Dimensions of arrays being concatenated are not consistent.
-FAIL | Surfaces/test_scopes.m | 0s | Undefined function or variable 'data'.
-FAIL | Surfaces/test_smooth_surface.m | 3s | Undefined function 'javaObject'.
-FAIL | Surfaces/test_spin_surface.m | 0s | Undefined function or variable 'srf'.
-FAIL | Surfaces/test_srf_noise.m | 3s | Dimensions of arrays being concatenated are not consistent.
-FAIL | Surfaces/test_srfplot.m | 25s | Undefined function or variable 'g'.
-OK | Atlases/test_atlas_masks.m | 28s | 
-OK | Atlases/test_getBrainRegionNames.m | 0s | 
-OK | Atlases/test_getregion.m | 1s | 
-OK | Aux_Functions/test_fast_conv.m | 0s | 
+FAIL | Inference/CopeSets/test_sss_cope_sets.m | 1s | Matrix index is out of range for deletion.
+FAIL | Inference/FirstLevel/test_Xgen2.m | 1s | Assertion failed.
+FAIL | Inference/FirstLevel/test_prewhiten.m | 0s | Assertion failed.
+FAIL | Inference/MHT/test_fdp_calc.m | 0s | Assertion failed.
+FAIL | Inference/MHT/test_fdrthresh.m | 0s | Assertion failed.
+FAIL | Inference/MHT/test_imBH.m | 0s | Assertion failed.
+FAIL | Inference/MHT/test_imBH_data.m | 1s | Assertion failed.
+FAIL | Inference/MHT/test_localized_vi.m | 1s | Assertion failed.
+FAIL | Inference/MHT/test_spatialBH.m | 1s | Undefined function or variable 'FWHM'.
+FAIL | Inference/Permutation/test_spintest.m | 1s | Undefined function 'knnsearch'.
+FAIL | Inference/Resampling/test_perm_thresh.m | 4s | Assertion failed.
+FAIL | Inference/TDP_inference/templates/test_get_pivotal_stats.m | 1s | get_pivotal_stats does not match min_k p0_(k)*m/k for K = 1
+FAIL | Statistics_Functions/Aux_functions/SystemFunctions/test_filesindir.m | 1s | Assertion failed.
+FAIL | Statistics_Functions/Aux_functions/test_pearsrnd.m | 5s | Assertion failed.
+FAIL | Statistics_Functions/FirstLevel/test_brain_extraction2.m | 0s | Undefined function 'brain_extraction2'.
+FAIL | Statistics_Functions/ImageOperations/Kernels/test_GkerMV2.m | 1s | Assertion failed.
+FAIL | Statistics_Functions/ImageOperations/test_fast_conv.m | 1s | Assertion failed.
+FAIL | Statistics_Functions/Mask_functions/test_pad_im.m | 0s | Expression returned no value where one was required.
+FAIL | Statistics_Functions/Mask_functions/test_region_bndry2D.m | 2s | Assertion failed.
+FAIL | Statistics_Functions/Stats_functions/test_gmrnd.m | 0s | Assertion failed.
+FAIL | Statistics_Functions/Stats_functions/test_tstat2pval.m | 1s | Assertion failed.
+FAIL | Statistics_Functions/test_convind.m | 0s | Assertion failed.
+FAIL | Surface/Plotting/test_srf_colour.m | 1s | Assertion failed.
+FAIL | Surface/Plotting/test_srfplot.m | 1s | Dot indexing requires a struct.
+FAIL | Surface/Plotting/test_srfplot2.m | 1s | Reference to non-existent field 'nfaces'.
+FAIL | Surface/ReadSurfaceFiles/test_fs_smooth.m | 0s | Expression returned no value where one was required.
+FAIL | Surface/ReadSurfaceFiles/test_mgzwrite.m | 1s | Undefined function 'save_mgh2'.
+FAIL | Surface/test_resample_srf.m | 0s | Assertion failed.
+FAIL | Surface/test_resample_srf_nn.m | 1s | Reference to non-existent field 'rh'.
+FAIL | Surface/test_smooth_surface.m | 1s | Assertion failed.
+FAIL | Surface/test_spin_surface.m | 1s | Undefined function 'knnsearch'.
+FAIL | Surface/test_srf_face_area.m | 1s | Reference to non-existent field 'nvertices'.
+FAIL | Surface/test_srf_noise.m | 0s | Dot indexing requires a struct.
+OK | Atlases/test_atlas_masks.m | 18s | 
+OK | Atlases/test_findstrings.m | 1s | 
+OK | Atlases/test_getBrainRegionNames.m | 1s | 
+OK | Atlases/test_getregion.m | 4s | 
 OK | Aux_Functions/test_ipt_free_functions.m | 2s | 
-OK | Brain Functions/test_gen_mask.m | 1s | 
-OK | Brain Functions/test_getMNImask.m | 0s | 
-OK | Brain Functions/test_mvtstat_dep.m | 2s | 
-OK | Brain Functions/test_nifti_type.m | 0s | 
-OK | Brain Functions/test_plane2index.m | 0s | 
-OK | Brain Functions/test_sigma2FWHM.m | 0s | 
+OK | Brain Functions/test_gen_mask.m | 2s | 
+OK | Brain Functions/test_getMNImask.m | 2s | 
+OK | Brain Functions/test_nifti_type.m | 1s | 
+OK | Brain Functions/test_plane2index.m | 1s | 
+OK | Brain Functions/test_sigma2FWHM.m | 1s | 
 OK | Brain Functions/test_unwrap.m | 1s | 
-OK | Brain Functions/test_vec_data.m | 1s | 
-OK | Brain Functions/test_voxinMNI.m | 1s | 
-OK | ImageViewing/Shape_screen/test_fullscreen.m | 1s | 
-OK | ImageViewing/Shape_screen/test_fullscreen2.m | 1s | 
-OK | ImageViewing/Shape_screen/test_screenshape.m | 1s | 
+OK | Brain Functions/test_vec_data.m | 0s | 
+OK | Brain Functions/test_voxinMNI.m | 6s | 
+OK | ImageViewing/Shape_screen/test_fullscreen.m | 0s | 
 OK | ImageViewing/Shape_screen/test_spherescreen.m | 1s | 
-OK | ImageViewing/Shape_screen/test_squarescreen.m | 0s | 
-OK | ImageViewing/Shape_screen/test_surfscreen.m | 0s | 
-OK | ImageViewing/test_add_region.m | 0s | 
+OK | ImageViewing/Shape_screen/test_squarescreen.m | 1s | 
+OK | ImageViewing/Shape_screen/test_surfscreen.m | 1s | 
+OK | ImageViewing/test_add_region.m | 1s | 
 OK | ImageViewing/test_colorRegion.m | 0s | 
-OK | ImageViewing/test_combine_brains.m | 3s | 
-OK | ImageViewing/test_imgload.m | 0s | 
-OK | ImageViewing/test_imgsave.m | 0s | 
-OK | ImageViewing/test_overlay_brain.m | 0s | 
-OK | ImageViewing/test_overlay_brainslice.m | 5s | 
-OK | ImageViewing/test_pan3.m | 1s | 
-OK | ImageViewing/test_peak2circle.m | 1s | 
-OK | ImageViewing/test_plot_compact.m | 1s | 
-OK | ImageViewing/test_viewbrain.m | 1s | 
+OK | ImageViewing/test_imgload.m | 2s | 
+OK | ImageViewing/test_imgsave.m | 1s | 
+OK | ImageViewing/test_loadbrains.m | 2s | 
+OK | ImageViewing/test_loadsubs.m | 2s | 
+OK | ImageViewing/test_overlay_brainslice.m | 15s | 
+OK | ImageViewing/test_peak2circle.m | 2s | 
+OK | ImageViewing/test_plot_compact.m | 0s | 
+OK | ImageViewing/test_upsample3_nn.m | 1s | 
+OK | ImageViewing/test_viewbrain.m | 3s | 
 OK | ImageViewing/test_viewdata.m | 0s | 
 OK | ImageViewing/test_viewdata2.m | 0s | 
 OK | ImageViewing/test_viewthresh.m | 0s | 
-OK | Inference/BayesGLM/test_Copy_of_fit_bayesglm.m | 0s | 
-OK | Inference/BayesGLM/test_bayespw.m | 0s | 
-OK | Inference/BayesGLM/test_fit_bayesglm.m | 0s | 
-OK | Inference/ClusterInference/AuxFiles/test_cluster2csv.m | 0s | 
-OK | Inference/ClusterInference/AuxFiles/test_ctp_extract_score.m | 0s | 
-OK | Inference/ClusterInference/AuxFiles/test_rkval.m | 0s | 
-OK | Inference/ClusterInference/ClusterTDP/test_cluster_tp2tdp.m | 0s | 
-OK | Inference/ClusterInference/ClusterTDP/test_ctp_scores.m | 0s | 
-OK | Inference/ClusterInference/ClusterTDP/test_fgreedy.m | 1s | 
+OK | Inference/ClusterInference/AuxFiles/test_cluster2csv.m | 1s | 
+OK | Inference/ClusterInference/AuxFiles/test_rkval.m | 1s | 
+OK | Inference/ClusterInference/ClusterTDP/test_cluster_tp2tdp.m | 1s | 
+OK | Inference/ClusterInference/ClusterTDP/test_clustertdp.m | 0s | 
+OK | Inference/ClusterInference/ClusterTDP/test_clustertp_lowerbound.m | 0s | 
+OK | Inference/ClusterInference/ClusterTDP/test_fgreedy.m | 0s | 
 OK | Inference/ClusterInference/Clusterextent/test_index2mask.m | 0s | 
-OK | Inference/ClusterInference/Clusterextent/test_localized_csi.m | 1s | 
-OK | Inference/ClusterInference/TFCE/test_perm_tfce.m | 235s | 
+OK | Inference/ClusterInference/TFCE/test_LCE.m | 1s | 
 OK | Inference/ClusterInference/TFCE/test_real_tfce_clusters.m | 1s | 
+OK | Inference/ClusterInference/TFCE/test_tfce.m | 1s | 
 OK | Inference/ClusterInference/TFCE/test_voxLCE.m | 1s | 
-OK | Inference/ClusterInference/test_bestclusterslice.m | 1s | 
 OK | Inference/ClusterInference/test_cluster_im.m | 0s | 
-OK | Inference/ClusterInference/test_clustertp_lowerbound.m | 0s | 
-OK | Inference/ClusterInference/test_getlargestcluster.m | 0s | 
-OK | Inference/ClusterInference/test_numOfConComps.m | 0s | 
-OK | Inference/ClusterInference/test_pc.m | 14s | 
-OK | Inference/ClusterInference/test_tfce.m | 236s | 
-OK | Inference/CopeSets/test_fdr_crs.m | 0s | 
+OK | Inference/ClusterInference/test_conncomp_bw.m | 0s | 
+OK | Inference/ClusterInference/test_getlargestcluster.m | 1s | 
+OK | Inference/CopeSets/test_fdr_crs.m | 1s | 
 OK | Inference/CopeSets/test_srf_blue_crs.m | 0s | 
-OK | Inference/CopeSets/test_srf_color_crs.m | 0s | 
-OK | Inference/CopeSets/test_srf_cope_display.m | 0s | 
-OK | Inference/CopeSets/test_srf_cope_display2.m | 0s | 
 OK | Inference/CopeSets/test_srf_fdr_crs.m | 0s | 
-OK | Inference/CopeSets/test_srf_redblue_crs.m | 0s | 
-OK | Inference/CopeSets/test_srf_scb2cope.m | 0s | 
-OK | Inference/CopeSets/test_sss_cope_sets.m | 2s | 
-OK | Inference/FirstLevel/test_Xgen2.m | 1s | 
-OK | Inference/FirstLevel/test_prewhiten.m | 14s | 
-OK | Inference/MHT/test_fdp_calc.m | 0s | 
+OK | Inference/CopeSets/test_srf_redblue_crs.m | 1s | 
 OK | Inference/MHT/test_fdrBH.m | 0s | 
-OK | Inference/MHT/test_fdrthresh.m | 0s | 
-OK | Inference/MHT/test_imBH_data.m | 1s | 
-OK | Inference/MHT/test_localized_vi.m | 0s | 
-OK | Inference/MHT/test_spatialBH.m | 1s | 
-OK | Inference/Resampling/test_perm_thresh.m | 2s | 
-OK | Inference/TDP_inference/templates/test_get_pivotal_stats.m | 0s | 
-OK | Inference/TDP_inference/templates/test_inverse_linear_template.m | 0s | 
+OK | Inference/TDP_inference/templates/test_inverse_linear_template.m | 1s | 
 OK | Inference/TDP_inference/templates/test_linear_template.m | 0s | 
 OK | Statistics_Functions/Aux_functions/Plotting/test_BigFont.m | 0s | 
-OK | Statistics_Functions/Aux_functions/Plotting/test_animatefun.m | 1s | 
-OK | Statistics_Functions/Aux_functions/Plotting/test_custom_colormap.m | 1s | 
+OK | Statistics_Functions/Aux_functions/Plotting/test_animatefun.m | 0s | 
+OK | Statistics_Functions/Aux_functions/Plotting/test_custom_colormap.m | 0s | 
+OK | Statistics_Functions/Aux_functions/Plotting/test_histpdf.m | 1s | 
 OK | Statistics_Functions/Aux_functions/Plotting/test_mytiles.m | 0s | 
 OK | Statistics_Functions/Aux_functions/Plotting/test_plotImagesInTile.m | 0s | 
-OK | Statistics_Functions/Aux_functions/Plotting/test_sliderGUI.m | 0s | 
-OK | Statistics_Functions/Aux_functions/Plotting/test_slidergui3.m | 0s | 
-OK | Statistics_Functions/Aux_functions/SystemFunctions/test_filesindir.m | 0s | 
-OK | Statistics_Functions/Aux_functions/SystemFunctions/test_loader.m | 16s | 
-OK | Statistics_Functions/Aux_functions/SystemFunctions/test_modul.m | 0s | 
+OK | Statistics_Functions/Aux_functions/Plotting/test_sliderGUI.m | 1s | 
+OK | Statistics_Functions/Aux_functions/Plotting/test_slidergui3.m | 1s | 
+OK | Statistics_Functions/Aux_functions/SystemFunctions/test_loader.m | 1s | 
+OK | Statistics_Functions/Aux_functions/SystemFunctions/test_modul.m | 1s | 
 OK | Statistics_Functions/Aux_functions/SystemFunctions/test_statbrainz_maindir.m | 0s | 
-OK | Statistics_Functions/FirstLevel/test_brain_extraction.m | 1s | 
-OK | Statistics_Functions/FirstLevel/test_brain_extraction2.m | 1s | 
-OK | Statistics_Functions/FirstLevel/test_brain_extraction3.m | 0s | 
-OK | Statistics_Functions/FirstLevel/test_extract_brain.m | 0s | 
-OK | Statistics_Functions/ImageOperations/Kernels/test_Gker.m | 0s | 
-OK | Statistics_Functions/ImageOperations/Kernels/test_GkerMV.m | 0s | 
-OK | Statistics_Functions/ImageOperations/Kernels/test_GkerMV2.m | 0s | 
+OK | Statistics_Functions/Aux_functions/test_trnd.m | 1s | 
+OK | Statistics_Functions/FirstLevel/test_brain_extraction.m | 4s | 
+OK | Statistics_Functions/FirstLevel/test_brain_extraction3.m | 17s | 
+OK | Statistics_Functions/FirstLevel/test_extract_brain.m | 1s | 
+OK | Statistics_Functions/ImageOperations/Kernels/test_Gker.m | 1s | 
+OK | Statistics_Functions/ImageOperations/Kernels/test_GkerMV.m | 1s | 
 OK | Statistics_Functions/ImageOperations/Kernels/test_Gkerderiv.m | 0s | 
-OK | Statistics_Functions/ImageOperations/Kernels/test_Gkerderiv2.m | 1s | 
-OK | Statistics_Functions/ImageOperations/test_FWHM2sigma.m | 1s | 
+OK | Statistics_Functions/ImageOperations/Kernels/test_Gkerderiv2.m | 0s | 
+OK | Statistics_Functions/ImageOperations/test_FWHM2sigma.m | 0s | 
 OK | Statistics_Functions/ImageOperations/test_doubleim.m | 1s | 
-OK | Statistics_Functions/Mask_functions/test_dilate_mask.m | 0s | 
-OK | Statistics_Functions/Mask_functions/test_expand2mask.m | 0s | 
+OK | Statistics_Functions/Mask_functions/test_box_dilate.m | 1s | 
+OK | Statistics_Functions/Mask_functions/test_dilate_mask.m | 1s | 
+OK | Statistics_Functions/Mask_functions/test_expand2mask.m | 1s | 
+OK | Statistics_Functions/Mask_functions/test_fill_holes.m | 0s | 
+OK | Statistics_Functions/Mask_functions/test_mask_bndry.m | 0s | 
 OK | Statistics_Functions/Mask_functions/test_mask_bounds.m | 0s | 
 OK | Statistics_Functions/Mask_functions/test_nan2zero.m | 0s | 
-OK | Statistics_Functions/Mask_functions/test_pad_im.m | 0s | 
-OK | Statistics_Functions/Mask_functions/test_region_bndry2D.m | 2s | 
-OK | Statistics_Functions/Mask_functions/test_zero2nan.m | 1s | 
-OK | Statistics_Functions/Signal_generation/test_peakgen.m | 0s | 
-OK | Statistics_Functions/Signal_generation/test_square_signal.m | 0s | 
+OK | Statistics_Functions/Mask_functions/test_zero2nan.m | 0s | 
+OK | Statistics_Functions/Signal_generation/test_MkRadImg.m | 0s | 
+OK | Statistics_Functions/Signal_generation/test_MySmooth.m | 1s | 
+OK | Statistics_Functions/Signal_generation/test_SpheroidSignal.m | 1s | 
+OK | Statistics_Functions/Signal_generation/test_peakgen.m | 1s | 
+OK | Statistics_Functions/Signal_generation/test_square_signal.m | 1s | 
+OK | Statistics_Functions/Signal_generation/test_wnoise.m | 2s | 
 OK | Statistics_Functions/Stats_functions/test_bernstd.m | 0s | 
 OK | Statistics_Functions/Stats_functions/test_distbn2pval.m | 0s | 
 OK | Statistics_Functions/Stats_functions/test_gmcdf.m | 0s | 
-OK | Statistics_Functions/Stats_functions/test_gmrnd.m | 0s | 
-OK | Statistics_Functions/Stats_functions/test_lcdf.m | 1s | 
-OK | Statistics_Functions/Stats_functions/test_mvtstat.m | 2s | 
-OK | Statistics_Functions/Stats_functions/test_pval2tstat.m | 0s | 
-OK | Statistics_Functions/Stats_functions/test_tstat2pval.m | 0s | 
-OK | Statistics_Functions/test_apower.m | 0s | 
+OK | Statistics_Functions/Stats_functions/test_lcdf.m | 0s | 
+OK | Statistics_Functions/Stats_functions/test_mvtstat.m | 1s | 
+OK | Statistics_Functions/Stats_functions/test_pval2tstat.m | 1s | 
+OK | Statistics_Functions/test_apower.m | 1s | 
 OK | Statistics_Functions/test_asinh_data_trans.m | 0s | 
 OK | Statistics_Functions/test_asinh_trans.m | 0s | 
-OK | Statistics_Functions/test_convind.m | 0s | 
 OK | Statistics_Functions/test_convindall.m | 0s | 
-OK | Statistics_Functions/test_gen_noise.m | 1s | 
-OK | Surface/Plotting/test_newfun.m | 1s | 
-OK | Surface/Plotting/test_srf_colour.m | 2s | 
-OK | Surface/Plotting/test_srfgui.m | 2s | 
-OK | Surface/Plotting/test_srfplot2.m | 2s | 
-OK | Surface/Plotting/test_surf4.m | 0s | 
-OK | Surface/ReadSurfaceFiles/test_dpvread.m | 0s | 
+OK | Statistics_Functions/test_gen_noise.m | 4s | 
+OK | Surface/Plotting/test_srfgui.m | 1s | 
+OK | Surface/ReadSurfaceFiles/test_dpvread.m | 1s | 
 OK | Surface/ReadSurfaceFiles/test_fs2surf.m | 1s | 
-OK | Surface/test_loadsrf.m | 0s | 
-OK | Surface/test_srf_contour.m | 2s | 
-OK | Surface/test_srf_dilate_mask.m | 3s | 
+OK | Surface/ReadSurfaceFiles/test_fsannot2mask.m | 1s | 
+OK | Surface/ReadSurfaceFiles/test_gifti2surf.m | 1s | 
+OK | Surface/ReadSurfaceFiles/test_loadmask.m | 1s | 
+OK | Surface/test_adjacency_matrix.m | 1s | 
+OK | Surface/test_graph_cc.m | 1s | 
+OK | Surface/test_loadsrf.m | 2s | 
+OK | Surface/test_srf_contour.m | 1s | 
+OK | Surface/test_srf_dilate_mask.m | 1s | 
 OK | Surface/test_srf_fwhm2niters.m | 1s | 
-OK | Surfaces/test_resample_srf.m | 31s | 
-OK | Surfaces/test_resample_srf_nn.m | 30s | 
-OK | Surfaces/test_srf_face_area.m | 2s | 
 OK | test_addSB2path.m | 0s | 

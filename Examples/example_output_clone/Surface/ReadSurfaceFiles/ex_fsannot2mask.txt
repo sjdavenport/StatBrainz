@@ -1,0 +1,25 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+Reading from version 2
+colortable with 36 entries read (originally /autofs/space/amaebi_026/users/buckner_cortical_atlas/scripts/colortable_final.txt)
+
+srf =
+
+  struct with fields:
+
+    lh: [1x1 struct]
+    rh: [1x1 struct]
+
+
+Reading from version 2
+colortable with 36 entries read (originally /autofs/space/amaebi_026/users/buckner_cortical_atlas/scripts/colortable_final.txt)
+
+srf =
+
+  struct with fields:
+
+    lh: [1x1 struct]
+    rh: [1x1 struct]
+
+
+
+STATUS: PASS

@@ -1,18 +1,22 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the fdr_simul_cs function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tests for fdr_simul_cs
 
-dim = [100, 100]; D = length(dim);
-mu = repmat(linspace(1, 3), dim(2), 1);
-nsubj = 30;
-FWHM = 3;
+rng(33)
+dim = [10, 12]; nsubj = 30;
+mu = repmat(linspace(-2, 4, dim(2)), dim(1), 1);
+data = mu + randn([dim, nsubj]);
 mask = ones(dim);
-c = 2;
 
-lat_data = wnoise( dim, nsubj, 'L', 1);
-noise = fast_conv(lat_data, FWHM, D);
-data = noise + mu;
+%% Output sizes and the upper set is inside the lower set
+[lower_set, upper_set] = fdr_simul_cs(data, mask, [0, 1, 2]);
+assert(isequal(size(lower_set), dim) && isequal(size(upper_set), dim))
+assert(all(lower_set(:) >= upper_set(:)))
 
-[lower_fdr, upper_fdr] = fdr_cope_sets( data, c );
+%% One threshold: far above it is in the upper set, far below is not in the lower set
+[lower_set, upper_set] = fdr_simul_cs(data, mask, 1);
+assert(all(upper_set(:, end)))
+assert(~any(lower_set(:, 1)))
+
+%% Default alpha is 0.05
+[l1, u1] = fdr_simul_cs(data, mask, 1);
+[l2, u2] = fdr_simul_cs(data, mask, 1, 0.05);
+assert(isequal(l1, l2) && isequal(u1, u2))

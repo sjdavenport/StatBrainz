@@ -1,15 +1,13 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the srfgui function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% test_srfgui
+% Smoke test of the srfgui function (at the moment it is a stub)
+%--------------------------------------------------------------------------
+rng(1)
+srf = loadsrf('fs3', 'white');
+data = srf_noise(srf.lh, 10);
 
-% TODO: example inputs are placeholders — verify against intended usage.
-srf = loadsrf('fs5', 'white');
-noise = srf_noise( srf, 10, 1 );
-% srfgui(srf.lh, noise.lh)
+%% The call runs
+figure;
+srfgui(srf.lh, data);
+close all
 
-% Echo a summary of the result so the test produces visible output.
-fprintf('srf_noise returned struct with fields: %s\n', strjoin(fieldnames(noise), ', '));
-fprintf('lh noise size [%s], rh noise size [%s]\n', ...
-    num2str(size(noise.lh)), num2str(size(noise.rh)));
+disp('test_srfgui: all tests passed')

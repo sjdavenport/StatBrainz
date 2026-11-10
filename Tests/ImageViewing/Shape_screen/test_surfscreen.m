@@ -1,10 +1,10 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the surfscreen function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% test_surfscreen
+% Tests of the surfscreen function (figures off).
+%--------------------------------------------------------------------------
+set(0, 'DefaultFigureVisible', 'off')
 
-% TODO: example inputs are placeholders — verify against intended usage.
-% surfscreen requires an open figure and a GUI environment.
-% figure; imagesc(rand(50,200));
-% surfscreen
+%% Sets the figure position
+figure; imagesc(rand(5, 20));
+surfscreen;
+assert(isequal(get(gcf, 'Position'), [150, 1, 1200, 865]))
+close all

@@ -1,0 +1,15 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+r =
+
+   -0.3730
+
+
+r =
+
+    0.7001   -0.7047    0.1008   -0.4860
+    0.3879   -0.7608    1.2258    1.8325
+   -0.0102   -0.3780    1.8310    0.4122
+
+
+STATUS: PASS

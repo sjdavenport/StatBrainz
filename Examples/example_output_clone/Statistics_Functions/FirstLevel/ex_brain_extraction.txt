@@ -1,0 +1,15 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+I =
+
+     1
+
+Voxels in the mask: 227764, in the MNI mask: 228483, in both: 225900
+
+I =
+
+     1
+
+Voxels in the mask: 3375
+
+STATUS: PASS

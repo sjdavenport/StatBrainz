@@ -1,13 +1,5 @@
 Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
 
-ans =
+ERROR: get_pivotal_stats does not match min_k p0_(k)*m/k for K = 1
 
-   100     1
-
-
-ans =
-
-    0.0018
-
-
-STATUS: PASS
+STATUS: FAIL

@@ -1,12 +1,21 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%    This script tests the BigFont function
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% test_BigFont
+% Smoke tests of the BigFont function.
+%--------------------------------------------------------------------------
+set(0, 'DefaultFigureVisible', 'off')
 
-% TODO: example inputs are placeholders — verify against intended usage.
-figure; plot(1:10, rand(1,10)); title('Test BigFont');
-BigFont(24)
-figpath = [statbrainz_maindir, 'tests/Figures/BigFont.png'];
-exportgraphics(gcf, figpath)
-fprintf('BigFont: figure written, file exists: %d\n', isfile(figpath));
+%% Runs with the default size and returns the figure children
+figure; plot(1:10, rand(1, 10)); title('BigFont')
+h = BigFont;
+assert(isequal(h, get(gcf, 'Children')))
+close all
+
+%% Runs with a given size
+figure; plot(1:10)
+h = BigFont(30);
+assert(~isempty(h))
+close all
+
+%% Runs with no output
+figure; plot(1:10)
+BigFont(12)
+close all

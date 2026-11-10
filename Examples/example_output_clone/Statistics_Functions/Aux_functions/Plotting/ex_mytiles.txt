@@ -1,0 +1,33 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+ans =
+
+           1           1        1920        1080
+
+
+ans =
+
+    95   200     3
+
+
+ans =
+
+           1           1        1920        1080
+
+
+ans =
+
+   120   120     3
+
+
+ans =
+
+           1           1        1920        1080
+
+
+ans =
+
+    60   150     3
+
+
+STATUS: PASS

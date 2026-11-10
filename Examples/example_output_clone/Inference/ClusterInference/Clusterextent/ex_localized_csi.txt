@@ -1,0 +1,18 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+pvals =
+
+    0.1000    0.8000
+
+
+max_cluster_within_region =
+
+    25.9800     2.7500
+
+
+pvals =
+
+    0.0100    0.9000    0.9700    0.0100
+
+
+STATUS: PASS

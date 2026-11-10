@@ -1,3 +1,13 @@
 Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+-------------------------------------------------------
+Progress:   100.0
+-------------------------------------------------------
+Progress:   100.0
+-------------------------------------------------------
+Progress:   100.0
+-------------------------------------------------------
+Progress:   100.0
 
-STATUS: PASS
+ERROR: localized_csi gives the wrong cluster size for a region with one cluster
+
+STATUS: FAIL
