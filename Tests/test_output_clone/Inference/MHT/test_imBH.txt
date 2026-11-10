@@ -1,0 +1,5 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+ERROR: Matrix dimensions must agree for '~=' (1x3 vs 1x2).
+
+STATUS: FAIL

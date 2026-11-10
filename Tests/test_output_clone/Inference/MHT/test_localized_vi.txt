@@ -1,0 +1,13 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+pvals =
+
+    0.7830    1.0000
+
+
+max_tstat_within_region =
+
+    2.8127         0
+
+
+STATUS: PASS

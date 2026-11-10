@@ -1,0 +1,48 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+val =
+
+    0.1566    0.0913
+
+
+val =
+
+    0.0210
+
+
+valplushx =
+
+    0.0210
+
+
+ans =
+
+   -0.0129
+
+
+ans =
+
+   -0.0259
+
+
+val =
+
+    0.0210
+
+
+val =
+
+    0.0210    0.0000
+
+
+ans =
+
+    4.0000
+
+
+ans =
+
+     3
+
+
+STATUS: PASS

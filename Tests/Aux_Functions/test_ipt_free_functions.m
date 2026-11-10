@@ -18,7 +18,7 @@ for conn = [4 8]
     for t = 1:20
         BW = rand(15,18) > 0.55;
         A = bwconncomp(BW, conn);
-        B = conncomp_bw(BW, conn);
+        B = conncomp_bw(BW, conn, 1);
         ok = A.NumObjects == B.NumObjects && ...
              isequal(sort(cellfun(@numel,A.PixelIdxList)), ...
                      sort(cellfun(@numel,B.PixelIdxList))) && ...
@@ -34,13 +34,26 @@ for conn = [6 18 26]
     for t = 1:10
         BW = rand(8,9,7) > 0.5;
         A = bwconncomp(BW, conn);
-        B = conncomp_bw(BW, conn);
+        B = conncomp_bw(BW, conn, 1);
         ok = A.NumObjects == B.NumObjects && ...
              isequal(sort(cellfun(@numel,A.PixelIdxList)), ...
                      sort(cellfun(@numel,B.PixelIdxList)));
         tol_report(sprintf('conncomp_bw 3D conn=%d trial %d', conn, t), ok);
         assert(ok)
     end
+end
+
+%% conncomp_bw vs bwconncomp -- 1D (row and column vectors)
+for t = 1:20
+    BW = rand(1,30) > 0.5;
+    if mod(t,2) == 0, BW = BW'; end
+    A = bwconncomp(BW);
+    B = conncomp_bw(BW, 8, 1);
+    ok = A.NumObjects == B.NumObjects && ...
+         isequal(sort(cell2mat(A.PixelIdxList(:))), ...
+                 sort(cell2mat(B.PixelIdxList(:))));
+    tol_report(sprintf('conncomp_bw 1D trial %d', t), ok);
+    assert(ok)
 end
 
 %% box_dilate vs imdilate (dilation and erosion, 2D and 3D)

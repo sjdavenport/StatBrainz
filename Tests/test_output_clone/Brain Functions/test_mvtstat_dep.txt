@@ -1,0 +1,23 @@
+Warning: Make sure that you run addSB2path from the main directory of StatBrainz in order to load the package, if you have renamed the folder containing StatBrainz please ignore this message.
+
+muuuu =
+
+    0.2123
+
+
+sigmatilde =
+
+    1.1214
+
+
+ans =
+
+    0.8465
+
+
+ans =
+
+    0.8465
+
+
+STATUS: PASS

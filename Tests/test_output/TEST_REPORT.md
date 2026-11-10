@@ -22,6 +22,36 @@ erroring, not that outputs were checked for correctness.
 
 ---
 
+## Status update (2026-09-27)
+
+The sections below record the 2026-07-07 run. Since then the code has been
+checked against those conclusions (tests not rerun):
+
+| Report item | Status now |
+|-------------|------------|
+| P1 `findstrings` missing (`get_mask`, `mask_bndry`) | **Fixed** — `Atlases/findstrings.m` added |
+| Group 1: SPM (`fast_conv`, both `test_scopes`) | **Fixed** — `fast_conv` no longer calls `spm_smooth` (only `Tutorials/fast_conv_vs_spm_tutorial.m` uses SPM, deliberately) |
+| Group 1: `gifti` (3 surface tests) | **Probably fixed** — no live `gifti` calls remain |
+| Group 1: `MRIread` (`test_mgzwrite`) | **Open** — needs FreeSurfer; hard-coded `/Users/sdavenport/...` path |
+| P2 / Group 2: `fdr_cope_sets` (3 tests) | **Open** — function renamed to `fdr_crs`; `fdr_crs_dep.m` also declares `fdr_crs` (duplicate definition) |
+| Group 2: `overlay_brain3` | **Open** — `overlay_brain3_dep.m` declares `overlay_brain3` (file/function name mismatch) |
+| Group 2: `contrast_tstats` (`test_scopes_lm`) | **Open** — not in repo |
+| Group 2: `fastperm` | **Open, by design** — `scopes` depends on matperm's `fastperm` |
+| P3 `loadbrains`/`loadsubs`, Group 3, other Group 4/5 bugs | **Unknown** — needs code review or a rerun |
+
+Other known open issues: matperm shadowing StatBrainz functions on the path,
+and the `fgreedy` binary being Linux-only.
+
+Fixed in commit `b7c02fb` (not covered by the original run):
+- `voxLCE` — used the TFCE image instead of the original t-statistic; H=2 / h0=0 defaults now implemented
+- `numOfConComps` — errored (Octave) calling `hist` on empty input when no cluster forms
+- `fgreedy` — WSL support dropped; binary run from the CSV's folder without changing MATLAB's working directory
+- `clustertdp` — no longer forces WSL; fixed savedir check, `monitor_cTDP` → `ctp_scores`, method name in error
+- `ctp_scores` — clusters read in numeric order (alphabetical misassigned bounds with 10+ clusters)
+- `srf_scopes` — `nblocks` now passed to `scopes` (arguments were shifted); `sigmahat` masked/stacked correctly
+
+---
+
 ## Failures by root cause
 
 ### 1. Missing external toolboxes (not shipped with StatBrainz) — 7 scripts
@@ -90,7 +120,7 @@ necessarily the underlying function.
 
 ## Recommended priorities
 
-1. **Fix `findstrings`** — it breaks `get_mask` and `mask_bndry`, both core
+1. ~~**Fix `findstrings`**~~ (done, see status update) — it breaks `get_mask` and `mask_bndry`, both core
    functions (not just their tests). Either restore the helper or replace its
    call sites.
 2. **CopeSets deprecated group** — `fdr_cope_sets`, `contrast_tstats`, `fastperm`,

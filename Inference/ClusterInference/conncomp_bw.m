@@ -1,6 +1,7 @@
-function CC = conncomp_bw( BW, connectivity )
+function CC = conncomp_bw( BW, connectivity, use_flood_fill )
 % CONNCOMP_BW finds connected components in a 2D or 3D binary array without
-% the Image Processing Toolbox (a drop-in replacement for bwconncomp).
+% the Image Processing Toolbox (a drop-in replacement for bwconncomp). If
+% bwconncomp is available it is used instead, as it is much faster.
 %--------------------------------------------------------------------------
 % ARGUMENTS
 % Mandatory
@@ -8,6 +9,8 @@ function CC = conncomp_bw( BW, connectivity )
 % Optional
 %  connectivity  the neighbourhood connectivity. In 2D one of 4 or 8
 %                (default 8); in 3D one of 6, 18 or 26 (default 26).
+%  use_flood_fill  0/1: if 1, always use the toolbox-free flood fill, even
+%                when bwconncomp is available (for testing). Default is 0.
 %--------------------------------------------------------------------------
 % OUTPUT
 %  CC   a struct mirroring the fields of bwconncomp's output that are used
@@ -42,6 +45,21 @@ if ~exist( 'connectivity', 'var' )
         connectivity = 26;
     else
         connectivity = 8;
+    end
+end
+
+if ~exist( 'use_flood_fill', 'var' )
+    use_flood_fill = 0;
+end
+
+%%  Use bwconncomp when the Image Processing Toolbox is available
+%--------------------------------------------------------------------------
+if ~use_flood_fill
+    try
+        CC = bwconncomp( BW ~= 0, connectivity );
+        return
+    catch
+        % No toolbox (or no licence): fall back to the flood fill below
     end
 end
 
@@ -88,7 +106,7 @@ CC.ImageSize    = Dim;
 CC.NumObjects   = nextlabel;
 CC.PixelIdxList = cell( 1, nextlabel );
 for l = 1:nextlabel
-    CC.PixelIdxList{l} = find( labels == l );
+    CC.PixelIdxList{l} = find( labels(:) == l );
 end
 
 end
@@ -139,6 +157,13 @@ end
 function nbrs = neighbours( idx, Dim, offsets )
 % Given a linear index into an array of size Dim, return the linear indices
 % of its in-bounds neighbours defined by the subscript offsets.
+
+if size( offsets, 2 ) == 1
+    % 1D (row or column vector): neighbours are the adjacent linear indices
+    nbrs = idx + offsets;
+    nbrs = nbrs( nbrs >= 1 & nbrs <= prod(Dim) );
+    return
+end
 
 D = numel( Dim );
 subs = cell( 1, D );

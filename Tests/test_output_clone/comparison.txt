@@ -1,0 +1,169 @@
+test | MATLAB | clone | comparison
+Atlases/test_atlas_masks.txt | OK | OK | output differs (322 vs 308 numbers)
+Atlases/test_getBrainRegionNames.txt | OK | OK | identical
+Atlases/test_get_mask.txt | FAIL | FAIL | 
+Atlases/test_getregion.txt | OK | OK | identical
+Aux_Functions/test_fast_conv.txt | FAIL | OK | 
+Aux_Functions/test_ipt_free_functions.txt | - | OK | no MATLAB reference
+Brain Functions/test_gen_mask.txt | OK | OK | identical
+Brain Functions/test_getMNImask.txt | OK | OK | identical
+Brain Functions/test_mvtstat_dep.txt | OK | OK | values differ (4 numbers)
+Brain Functions/test_nifti_type.txt | OK | OK | identical
+Brain Functions/test_plane2index.txt | OK | OK | identical
+Brain Functions/test_sigma2FWHM.txt | OK | OK | identical
+Brain Functions/test_unwrap.txt | OK | OK | identical
+Brain Functions/test_vec_data.txt | OK | OK | values differ (10000 numbers)
+Brain Functions/test_voxinMNI.txt | OK | OK | identical
+ImageViewing/Shape_screen/test_fullscreen.txt | OK | OK | identical
+ImageViewing/Shape_screen/test_fullscreen2.txt | OK | OK | identical
+ImageViewing/Shape_screen/test_screenshape.txt | OK | OK | identical
+ImageViewing/Shape_screen/test_spherescreen.txt | OK | OK | identical
+ImageViewing/Shape_screen/test_squarescreen.txt | OK | OK | identical
+ImageViewing/Shape_screen/test_surfscreen.txt | OK | OK | identical
+ImageViewing/test_add_region.txt | OK | OK | values differ (2500 numbers)
+ImageViewing/test_brainmove.txt | FAIL | FAIL | 
+ImageViewing/test_colorRegion.txt | OK | OK | output differs (0 vs 3 numbers)
+ImageViewing/test_combine_brains.txt | OK | OK | output differs (0 vs 5 numbers)
+ImageViewing/test_imgload.txt | OK | OK | identical
+ImageViewing/test_imgsave.txt | FAIL | OK | 
+ImageViewing/test_loadbrains.txt | FAIL | FAIL | 
+ImageViewing/test_loadsubs.txt | FAIL | FAIL | 
+ImageViewing/test_overlay_brain.txt | OK | OK | identical
+ImageViewing/test_overlay_brain3_dep.txt | FAIL | FAIL | 
+ImageViewing/test_overlay_brainslice.txt | OK | OK | output differs (24 vs 3 numbers)
+ImageViewing/test_pan3.txt | OK | OK | identical
+ImageViewing/test_peak2circle.txt | OK | OK | output differs (0 vs 5 numbers)
+ImageViewing/test_plot_compact.txt | OK | OK | output differs (0 vs 2 numbers)
+ImageViewing/test_viewbrain.txt | OK | OK | output differs (0 vs 3 numbers)
+ImageViewing/test_viewdata.txt | OK | OK | output differs (6 vs 2 numbers)
+ImageViewing/test_viewdata2.txt | OK | OK | output differs (0 vs 5 numbers)
+ImageViewing/test_viewthresh.txt | OK | OK | identical
+Inference/BayesGLM/test_Copy_of_fit_bayesglm.txt | OK | OK | identical
+Inference/BayesGLM/test_bayespw.txt | OK | OK | identical
+Inference/BayesGLM/test_fit_bayesglm.txt | OK | OK | identical
+Inference/ClusterInference/AuxFiles/test_cluster2csv.txt | OK | OK | output differs (0 vs 7 numbers)
+Inference/ClusterInference/AuxFiles/test_ctp_extract_score.txt | OK | OK | identical
+Inference/ClusterInference/AuxFiles/test_rkval.txt | OK | OK | output differs (0 vs 5 numbers)
+Inference/ClusterInference/ClusterTDP/test_cluster_tp2tdp.txt | OK | OK | output differs (0 vs 3 numbers)
+Inference/ClusterInference/ClusterTDP/test_ctp_scores.txt | OK | OK | identical
+Inference/ClusterInference/ClusterTDP/test_fgreedy.txt | FAIL | OK | 
+Inference/ClusterInference/Clusterextent/test_index2mask.txt | OK | OK | output differs (0 vs 5 numbers)
+Inference/ClusterInference/Clusterextent/test_localized_csi.txt | OK | OK | identical
+Inference/ClusterInference/TFCE/test_perm_tfce.txt | FAIL | OK | 
+Inference/ClusterInference/TFCE/test_real_tfce_clusters.txt | OK | OK | identical
+Inference/ClusterInference/TFCE/test_voxLCE.txt | OK | OK | output differs (0 vs 1 numbers)
+Inference/ClusterInference/test_LCE.txt | OK | FAIL | 
+Inference/ClusterInference/test_bestclusterslice.txt | OK | OK | output differs (0 vs 12 numbers)
+Inference/ClusterInference/test_cluster_im.txt | OK | OK | identical
+Inference/ClusterInference/test_clustertdp.txt | FAIL | FAIL | 
+Inference/ClusterInference/test_clustertp_lowerbound.txt | OK | OK | identical
+Inference/ClusterInference/test_getlargestcluster.txt | OK | OK | output differs (0 vs 2 numbers)
+Inference/ClusterInference/test_numOfConComps.txt | OK | OK | output differs (830 vs 831 numbers)
+Inference/ClusterInference/test_pc.txt | FAIL | OK | 
+Inference/ClusterInference/test_perm_cluster.txt | FAIL | FAIL | 
+Inference/ClusterInference/test_tfce.txt | OK | OK | identical
+Inference/CopeSets/test_cope_display.txt | FAIL | FAIL | 
+Inference/CopeSets/test_fdr_crs.txt | OK | OK | values differ (4 numbers)
+Inference/CopeSets/test_fdr_crs_dep.txt | FAIL | FAIL | 
+Inference/CopeSets/test_fdr_simul_cs.txt | FAIL | FAIL | 
+Inference/CopeSets/test_scopes.txt | FAIL | FAIL | 
+Inference/CopeSets/test_scopes_lm.txt | FAIL | FAIL | 
+Inference/CopeSets/test_srf_blue_crs.txt | OK | OK | output differs (0 vs 2 numbers)
+Inference/CopeSets/test_srf_color_crs.txt | OK | OK | output differs (0 vs 2 numbers)
+Inference/CopeSets/test_srf_cope_display.txt | OK | OK | identical
+Inference/CopeSets/test_srf_cope_display2.txt | OK | OK | identical
+Inference/CopeSets/test_srf_fdr_crs.txt | OK | OK | values differ (4 numbers)
+Inference/CopeSets/test_srf_redblue_crs.txt | OK | OK | output differs (0 vs 2 numbers)
+Inference/CopeSets/test_srf_scb2cope.txt | OK | OK | output differs (0 vs 4 numbers)
+Inference/CopeSets/test_srf_scopes.txt | FAIL | FAIL | 
+Inference/CopeSets/test_sss_cope_sets.txt | FAIL | OK | 
+Inference/FirstLevel/test_Xgen2.txt | OK | OK | values differ (2 numbers)
+Inference/FirstLevel/test_prewhiten.txt | OK | OK | identical
+Inference/MHT/test_fdp_calc.txt | OK | OK | values differ (1 numbers)
+Inference/MHT/test_fdrBH.txt | OK | OK | output differs (115 vs 109 numbers)
+Inference/MHT/test_fdrthresh.txt | OK | OK | values differ (1 numbers)
+Inference/MHT/test_imBH.txt | FAIL | FAIL | 
+Inference/MHT/test_imBH_data.txt | FAIL | OK | 
+Inference/MHT/test_localized_vi.txt | OK | OK | values differ (4 numbers)
+Inference/MHT/test_spatialBH.txt | OK | OK | identical
+Inference/Permutation/test_spintest.txt | FAIL | FAIL | 
+Inference/Resampling/test_perm_thresh.txt | FAIL | OK | 
+Inference/TDP_inference/templates/test_get_pivotal_stats.txt | OK | OK | output differs (0 vs 3 numbers)
+Inference/TDP_inference/templates/test_inverse_linear_template.txt | OK | OK | output differs (0 vs 4 numbers)
+Inference/TDP_inference/templates/test_linear_template.txt | OK | OK | identical
+Statistics_Functions/Aux_functions/Plotting/test_BigFont.txt | OK | OK | output differs (0 vs 1 numbers)
+Statistics_Functions/Aux_functions/Plotting/test_animatefun.txt | OK | OK | output differs (0 vs 1 numbers)
+Statistics_Functions/Aux_functions/Plotting/test_custom_colormap.txt | OK | OK | output differs (0 vs 2 numbers)
+Statistics_Functions/Aux_functions/Plotting/test_histpdf.txt | OK | FAIL | 
+Statistics_Functions/Aux_functions/Plotting/test_mytiles.txt | OK | OK | identical
+Statistics_Functions/Aux_functions/Plotting/test_plotImagesInTile.txt | OK | OK | identical
+Statistics_Functions/Aux_functions/Plotting/test_sliderGUI.txt | OK | OK | numbers match (format differs)
+Statistics_Functions/Aux_functions/Plotting/test_slidergui3.txt | OK | OK | numbers match (format differs)
+Statistics_Functions/Aux_functions/SystemFunctions/test_filesindir.txt | OK | OK | output differs (10 vs 12 numbers)
+Statistics_Functions/Aux_functions/SystemFunctions/test_loader.txt | OK | OK | identical
+Statistics_Functions/Aux_functions/SystemFunctions/test_modul.txt | OK | OK | identical
+Statistics_Functions/Aux_functions/SystemFunctions/test_statbrainz_maindir.txt | OK | OK | numbers match (format differs)
+Statistics_Functions/FirstLevel/test_brain_extraction.txt | OK | OK | identical
+Statistics_Functions/FirstLevel/test_brain_extraction2.txt | OK | OK | identical
+Statistics_Functions/FirstLevel/test_brain_extraction3.txt | OK | OK | identical
+Statistics_Functions/FirstLevel/test_extract_brain.txt | OK | OK | numbers match (format differs)
+Statistics_Functions/ImageOperations/Kernels/test_Gker.txt | OK | OK | identical
+Statistics_Functions/ImageOperations/Kernels/test_GkerMV.txt | OK | OK | identical
+Statistics_Functions/ImageOperations/Kernels/test_GkerMV2.txt | OK | OK | identical
+Statistics_Functions/ImageOperations/Kernels/test_Gkerderiv.txt | OK | OK | identical
+Statistics_Functions/ImageOperations/Kernels/test_Gkerderiv2.txt | OK | OK | output differs (0 vs 4 numbers)
+Statistics_Functions/ImageOperations/test_FWHM2sigma.txt | OK | OK | identical
+Statistics_Functions/ImageOperations/test_doubleim.txt | OK | OK | output differs (0 vs 6 numbers)
+Statistics_Functions/Mask_functions/test_dilate_mask.txt | OK | OK | identical
+Statistics_Functions/Mask_functions/test_expand2mask.txt | OK | OK | output differs (0 vs 2 numbers)
+Statistics_Functions/Mask_functions/test_mask_bndry.txt | FAIL | FAIL | 
+Statistics_Functions/Mask_functions/test_mask_bounds.txt | OK | OK | identical
+Statistics_Functions/Mask_functions/test_nan2zero.txt | OK | OK | identical
+Statistics_Functions/Mask_functions/test_pad_im.txt | OK | OK | values differ (2758 numbers)
+Statistics_Functions/Mask_functions/test_region_bndry2D.txt | OK | OK | output differs (0 vs 1 numbers)
+Statistics_Functions/Mask_functions/test_zero2nan.txt | OK | OK | identical
+Statistics_Functions/Signal_generation/test_peakgen.txt | FAIL | OK | 
+Statistics_Functions/Signal_generation/test_square_signal.txt | OK | OK | identical
+Statistics_Functions/Stats_functions/test_bernstd.txt | OK | OK | identical
+Statistics_Functions/Stats_functions/test_distbn2pval.txt | OK | OK | values differ (3 numbers)
+Statistics_Functions/Stats_functions/test_gmcdf.txt | OK | OK | output differs (0 vs 4 numbers)
+Statistics_Functions/Stats_functions/test_gmrnd.txt | OK | OK | values differ (10000 numbers)
+Statistics_Functions/Stats_functions/test_lcdf.txt | OK | OK | output differs (0 vs 4 numbers)
+Statistics_Functions/Stats_functions/test_mvtstat.txt | OK | OK | values differ (29 numbers)
+Statistics_Functions/Stats_functions/test_pval2tstat.txt | OK | OK | identical
+Statistics_Functions/Stats_functions/test_tstat2pval.txt | OK | OK | identical
+Statistics_Functions/test_apower.txt | OK | OK | output differs (0 vs 3 numbers)
+Statistics_Functions/test_asinh_data_trans.txt | OK | OK | values differ (20050 numbers)
+Statistics_Functions/test_asinh_trans.txt | OK | OK | values differ (20050 numbers)
+Statistics_Functions/test_convind.txt | OK | OK | identical
+Statistics_Functions/test_convindall.txt | OK | OK | identical
+Statistics_Functions/test_gen_noise.txt | OK | OK | values differ (50020 numbers)
+Surface/Plotting/test_newfun.txt | OK | OK | identical
+Surface/Plotting/test_srf_colour.txt | OK | OK | identical
+Surface/Plotting/test_srfgui.txt | OK | OK | output differs (0 vs 4 numbers)
+Surface/Plotting/test_srfplot2.txt | OK | OK | output differs (0 vs 2 numbers)
+Surface/Plotting/test_surf4.txt | OK | OK | identical
+Surface/ReadSurfaceFiles/test_dpvread.txt | OK | OK | identical
+Surface/ReadSurfaceFiles/test_fs2surf.txt | OK | OK | output differs (0 vs 4 numbers)
+Surface/ReadSurfaceFiles/test_fs_smooth.txt | FAIL | FAIL | 
+Surface/ReadSurfaceFiles/test_fsannot2mask.txt | FAIL | FAIL | 
+Surface/ReadSurfaceFiles/test_gifti2surf.txt | OK | FAIL | 
+Surface/ReadSurfaceFiles/test_read_gifti.txt | - | FAIL | no MATLAB reference
+Surface/test_loadsrf.txt | OK | OK | output differs (0 vs 4 numbers)
+Surface/test_srf_contour.txt | OK | OK | identical
+Surface/test_srf_dilate_mask.txt | OK | OK | identical
+Surface/test_srf_fwhm2niters.txt | OK | OK | identical
+Surfaces/Reading_surface_data/test_mgzwrite.txt | FAIL | FAIL | 
+Surfaces/test_SurfStatEdge.txt | FAIL | FAIL | 
+Surfaces/test_adjacency_matrix.txt | FAIL | FAIL | 
+Surfaces/test_graph_cc.txt | FAIL | FAIL | 
+Surfaces/test_loadmask.txt | OK | FAIL | 
+Surfaces/test_resample_srf.txt | OK | OK | values differ (2 numbers)
+Surfaces/test_resample_srf_nn.txt | OK | OK | output differs (0 vs 3 numbers)
+Surfaces/test_scopes.txt | FAIL | FAIL | 
+Surfaces/test_smooth_surface.txt | FAIL | FAIL | 
+Surfaces/test_spin_surface.txt | FAIL | FAIL | 
+Surfaces/test_srf_face_area.txt | FAIL | OK | 
+Surfaces/test_srf_noise.txt | FAIL | FAIL | 
+Surfaces/test_srfplot.txt | FAIL | FAIL | 
+test_addSB2path.txt | OK | OK | output differs (0 vs 1 numbers)
